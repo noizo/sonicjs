@@ -66,6 +66,7 @@ export interface FieldConfig {
 
   // Array/Object fields
   items?: FieldConfig
+  itemTitle?: string
   properties?: Record<string, FieldConfig>
   blocks?: BlockDefinitions
   discriminator?: string
