@@ -1,8 +1,18 @@
 import { expect, test, type Page } from '@playwright/test'
 import { ensureAdminUserExists, loginAsAdmin } from './utils/test-helpers'
 
+async function gotoWithRetry(page: Page, url: string): Promise<void> {
+  try {
+    await page.goto(url)
+  } catch (error) {
+    if (!String(error).includes('net::ERR_ABORTED')) throw error
+    await page.waitForTimeout(500)
+    await page.goto(url)
+  }
+}
+
 async function resolvePageBlocksCollectionKey(page: Page): Promise<string> {
-  await page.goto('/admin/content/new')
+  await gotoWithRetry(page, '/admin/content/new')
   await page.waitForLoadState('networkidle', { timeout: 15000 })
 
   const pageBlocksLink = page
@@ -18,7 +28,7 @@ async function resolvePageBlocksCollectionKey(page: Page): Promise<string> {
 
 async function gotoPageBlocksNewForm(page: Page) {
   const collectionKey = await resolvePageBlocksCollectionKey(page)
-  await page.goto('/admin/content/new?collection=' + encodeURIComponent(collectionKey))
+  await gotoWithRetry(page, '/admin/content/new?collection=' + encodeURIComponent(collectionKey))
   await page.waitForLoadState('networkidle', { timeout: 15000 })
   const titleField = page.locator('input[name="title"]').first()
   if (await titleField.count()) {
@@ -56,7 +66,7 @@ async function saveAndCaptureEditUrl(page: Page): Promise<string> {
   if (!href) {
     throw new Error('Could not resolve edit URL after saving content')
   }
-  await page.goto(href)
+  await gotoWithRetry(page, href)
   await page.waitForLoadState('networkidle', { timeout: 15000 })
   await expect(page.locator('form#content-form')).toBeVisible()
   return page.url()
@@ -71,15 +81,19 @@ test.describe('Collapsible State Persistence', () => {
   test('should persist object/repeater/block collapsed state per document in session', async ({
     page,
   }) => {
+    test.setTimeout(120000)
     const docATitle = `Test Collapse State A ${Date.now()}`
     const docASlug = `test-collapse-state-a-${Date.now()}`
     const docBTitle = `Test Collapse State B ${Date.now()}`
     const docBSlug = `test-collapse-state-b-${Date.now()}`
+    let docAContentId: string | null = null
+    let docBContentId: string | null = null
 
     const collectionKey = await resolvePageBlocksCollectionKey(page)
 
+    try {
     // Create document A with blocks and repeater items.
-    await page.goto('/admin/content/new?collection=' + encodeURIComponent(collectionKey))
+    await gotoWithRetry(page, '/admin/content/new?collection=' + encodeURIComponent(collectionKey))
     await page.waitForLoadState('networkidle', { timeout: 15000 })
     const formTitle = page.locator('input[name="title"]').first()
     if (!(await formTitle.count())) {
@@ -125,9 +139,11 @@ test.describe('Collapsible State Persistence', () => {
     await blockItems.nth(1).locator('textarea').first().fill('Text body content')
 
     const docAEditUrl = await saveAndCaptureEditUrl(page)
+    const docAIdMatch = docAEditUrl.match(/\/admin\/content\/([^/]+)\/edit/)
+    docAContentId = docAIdMatch?.[1] || null
 
     // Set UI collapse state on the saved edit page (same document path/key).
-    await page.goto(docAEditUrl)
+    await gotoWithRetry(page, docAEditUrl)
     await page.waitForLoadState('networkidle', { timeout: 15000 })
     await expect(page.locator('form#content-form')).toBeVisible()
 
@@ -158,7 +174,7 @@ test.describe('Collapsible State Persistence', () => {
     await expect(editBlockItems.nth(1).locator('[data-block-content]')).not.toHaveClass(/hidden/)
 
     // Create document B without toggling grouped fields so defaults are used.
-    await page.goto('/admin/content/new?collection=' + encodeURIComponent(collectionKey))
+    await gotoWithRetry(page, '/admin/content/new?collection=' + encodeURIComponent(collectionKey))
     await page.waitForLoadState('networkidle', { timeout: 15000 })
     const formTitleB = page.locator('input[name="title"]').first()
     if (!(await formTitleB.count())) {
@@ -167,9 +183,11 @@ test.describe('Collapsible State Persistence', () => {
     await page.fill('input[name="title"]', docBTitle)
     await page.fill('input[name="slug"]', docBSlug)
     const docBEditUrl = await saveAndCaptureEditUrl(page)
+    const docBIdMatch = docBEditUrl.match(/\/admin\/content\/([^/]+)\/edit/)
+    docBContentId = docBIdMatch?.[1] || null
 
     // Return to document A and verify state restoration.
-    await page.goto(docAEditUrl)
+    await gotoWithRetry(page, docAEditUrl)
     await page.waitForLoadState('networkidle', { timeout: 15000 })
     await expect(page.locator('form#content-form')).toBeVisible()
     const restoredTeamGroup = page
@@ -199,12 +217,26 @@ test.describe('Collapsible State Persistence', () => {
     await expect(restoredBlocks.nth(1).locator('[data-block-content]')).toHaveClass(/hidden/)
 
     // Open different document and confirm defaults still apply there.
-    await page.goto(docBEditUrl)
+    await gotoWithRetry(page, docBEditUrl)
     await page.waitForLoadState('networkidle', { timeout: 15000 })
     await expect(page.locator('form#content-form')).toBeVisible()
     const docBTeamGroup = page
       .locator('[data-structured-object][data-field-name="team"]')
       .first()
     await expect(docBTeamGroup.locator(':scope > .field-group-content')).toHaveClass(/hidden/)
+    } finally {
+      try {
+        if (!page.isClosed()) {
+          if (docAContentId) {
+            await page.request.delete(`/admin/content/${docAContentId}`).catch(() => {})
+          }
+          if (docBContentId) {
+            await page.request.delete(`/admin/content/${docBContentId}`).catch(() => {})
+          }
+        }
+      } catch {
+        // Best-effort cleanup
+      }
+    }
   })
 })

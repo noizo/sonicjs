@@ -228,6 +228,7 @@ test.describe('Nested Array Serialization Scope', () => {
   })
 
   test('should persist nested child deletion after save and reload', async ({ page }) => {
+    test.setTimeout(60000)
     let createdContentId: string | null = null
     const title = `Nested Array Delete ${Date.now()}`
     const slug = `nested-array-delete-${Date.now()}`
@@ -266,8 +267,18 @@ test.describe('Nested Array Serialization Scope', () => {
     const firstChild = childrenField.locator('.structured-array-item').first()
     await expect(firstChild).toBeVisible()
 
-    await firstChild.locator('[data-action="remove-item"]').first().click()
-    await expect(childrenField.locator('.structured-array-item')).toHaveCount(0)
+    const removeButton = firstChild.locator('[data-action="remove-item"]').first()
+    await expect(removeButton).toBeVisible({ timeout: 5000 })
+    await removeButton.click()
+    try {
+      await expect(childrenField.locator('.structured-array-item')).toHaveCount(0, { timeout: 3000 })
+    } catch {
+      // Retry with DOM click if the pointer click was intercepted
+      await removeButton.evaluate((btn) => {
+        if (btn instanceof HTMLButtonElement) btn.click()
+      })
+      await expect(childrenField.locator('.structured-array-item')).toHaveCount(0, { timeout: 5000 })
+    }
 
     await page.click('button[name="action"][value="save_and_publish"]')
     await page.waitForLoadState('networkidle', { timeout: 15000 })

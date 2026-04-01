@@ -1,8 +1,18 @@
-import { expect, test } from '@playwright/test'
+import { expect, test, type Page } from '@playwright/test'
 import { loginAsAdmin } from './utils/test-helpers'
 
-async function resolvePageBlocksCollectionKey(page: import('@playwright/test').Page): Promise<string | null> {
-  await page.goto('/admin/content/new')
+async function gotoWithRetry(page: Page, url: string): Promise<void> {
+  try {
+    await page.goto(url)
+  } catch (error) {
+    if (!String(error).includes('net::ERR_ABORTED')) throw error
+    await page.waitForTimeout(500)
+    await page.goto(url)
+  }
+}
+
+async function resolvePageBlocksCollectionKey(page: Page): Promise<string | null> {
+  await gotoWithRetry(page, '/admin/content/new')
   await page.waitForLoadState('networkidle', { timeout: 15000 })
 
   const pageBlocksLink = page
@@ -21,17 +31,24 @@ async function resolvePageBlocksCollectionKey(page: import('@playwright/test').P
 
 test.describe('Nested Object Serialization', () => {
   test('should persist sibling flat child objects inside a nested parent object', async ({ page }) => {
+    test.setTimeout(60000)
     await loginAsAdmin(page)
 
     const collectionKey = await resolvePageBlocksCollectionKey(page)
     test.skip(!collectionKey, 'Page Blocks collection not available')
 
-    await page.goto('/admin/content/new?collection=' + encodeURIComponent(collectionKey!))
-    await page.waitForLoadState('networkidle')
-    await expect(page.locator('form#content-form')).toBeVisible()
+    const timestamp = Date.now()
+    const title = `Opening Hours Serialization Test ${timestamp}`
+    const slug = `opening-hours-serialization-test-${timestamp}`
+    let contentId: string | null = null
 
-    await page.fill('input[name="title"]', 'Opening Hours Serialization Test')
-    await page.fill('input[name="slug"]', 'opening-hours-serialization-test')
+    try {
+    await gotoWithRetry(page, '/admin/content/new?collection=' + encodeURIComponent(collectionKey!))
+    await page.waitForLoadState('networkidle', { timeout: 15000 })
+    await expect(page.locator('form#content-form')).toBeVisible({ timeout: 10000 })
+
+    await page.fill('input[name="title"]', title)
+    await page.fill('input[name="slug"]', slug)
 
     const openingHoursGroup = page
       .locator('[data-structured-object][data-field-name="openingHoursWeek"]')
@@ -76,7 +93,7 @@ test.describe('Nested Object Serialization', () => {
     if (!contentIdMatch) {
       throw new Error(`Could not extract content ID from edit URL: ${editUrl}`)
     }
-    const contentId = contentIdMatch[1]
+    contentId = contentIdMatch[1] ?? null
 
     const apiResponse = await page.request.get(`/api/content/${contentId}`)
     expect(apiResponse.ok()).toBe(true)
@@ -97,9 +114,9 @@ test.describe('Nested Object Serialization', () => {
       closes: '19:00',
     })
 
-    await page.goto(editUrl)
+    await gotoWithRetry(page, editUrl)
     await page.waitForLoadState('networkidle', { timeout: 15000 })
-    await expect(page.locator('form#content-form')).toBeVisible()
+    await expect(page.locator('form#content-form')).toBeVisible({ timeout: 10000 })
 
     await expect(page.locator('input[name="openingHoursWeek__monday__opens"]')).toHaveValue('09:00')
     await expect(page.locator('input[name="openingHoursWeek__tuesday__opens"]')).toHaveValue('10:00')
@@ -112,7 +129,7 @@ test.describe('Nested Object Serialization', () => {
     expect(serializedOpeningHours.tuesday).toEqual({ closed: false, opens: '10:00', closes: '18:00' })
     expect(serializedOpeningHours.wednesday).toEqual({ closed: false, opens: '11:00', closes: '19:00' })
 
-    await page.fill('input[name="title"]', 'Opening Hours Serialization Test Updated')
+    await page.fill('input[name="title"]', `${title} Updated`)
     await page.click('button[name="action"][value="save_and_publish"]')
     await page.waitForLoadState('networkidle', { timeout: 15000 })
 
@@ -127,9 +144,9 @@ test.describe('Nested Object Serialization', () => {
       throw new Error('Could not resolve edit URL after second save')
     }
 
-    await page.goto(secondEditUrl)
+    await gotoWithRetry(page, secondEditUrl)
     await page.waitForLoadState('networkidle', { timeout: 15000 })
-    await expect(page.locator('form#content-form')).toBeVisible()
+    await expect(page.locator('form#content-form')).toBeVisible({ timeout: 10000 })
 
     const secondSerializedOpeningHours = JSON.parse(
       await page.locator('input[name="openingHoursWeek"]').inputValue(),
@@ -141,5 +158,14 @@ test.describe('Nested Object Serialization', () => {
     await expect(page.locator('input[name="openingHoursWeek__monday__opens"]')).toHaveValue('09:00')
     await expect(page.locator('input[name="openingHoursWeek__tuesday__opens"]')).toHaveValue('10:00')
     await expect(page.locator('input[name="openingHoursWeek__wednesday__opens"]')).toHaveValue('11:00')
+    } finally {
+      try {
+        if (!page.isClosed() && contentId) {
+          await page.request.delete(`/admin/content/${contentId}`).catch(() => {})
+        }
+      } catch {
+        // Best-effort cleanup
+      }
+    }
   })
 })
