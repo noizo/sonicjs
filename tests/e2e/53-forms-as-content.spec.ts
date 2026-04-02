@@ -208,11 +208,11 @@ test.describe('Forms as Content', () => {
     const response = await page.request.get('/admin/api/stats');
     if (response.ok()) {
       const body = await response.json();
-      console.log(`Dashboard stats: collections=${body.collections}, content=${body.content}`);
+      console.log(`Dashboard stats: collections=${body.collections}, contentItems=${body.contentItems}`);
       // Counts should be stable — form shadow collections/content excluded
       // We just verify the endpoint works without errors
       expect(body.collections).toBeDefined();
-      expect(body.content).toBeDefined();
+      expect(body.contentItems).toBeDefined();
     }
   });
 });
