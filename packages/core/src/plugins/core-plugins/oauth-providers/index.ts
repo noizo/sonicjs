@@ -15,7 +15,7 @@
 import { Hono } from 'hono'
 import { setCookie, getCookie } from 'hono/cookie'
 import { PluginBuilder } from '../../sdk/plugin-builder'
-import type { Plugin } from '@sonicjs-cms/core'
+import type { Plugin } from '../../types'
 import {
   OAuthService,
   BUILT_IN_PROVIDERS,
