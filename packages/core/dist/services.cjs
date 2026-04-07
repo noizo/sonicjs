@@ -1,8 +1,8 @@
 'use strict';
 
-var chunkLFAQUR7P_cjs = require('./chunk-LFAQUR7P.cjs');
+var chunkNZWFCUDA_cjs = require('./chunk-NZWFCUDA.cjs');
 var chunk6BVLPACH_cjs = require('./chunk-6BVLPACH.cjs');
-var chunkZ55HVUBO_cjs = require('./chunk-Z55HVUBO.cjs');
+var chunkWTMIPCNR_cjs = require('./chunk-WTMIPCNR.cjs');
 require('./chunk-P3XDZL6Q.cjs');
 require('./chunk-IGJUBJBW.cjs');
 
@@ -10,63 +10,63 @@ require('./chunk-IGJUBJBW.cjs');
 
 Object.defineProperty(exports, "CACHE_CONFIGS", {
   enumerable: true,
-  get: function () { return chunkLFAQUR7P_cjs.CACHE_CONFIGS; }
+  get: function () { return chunkNZWFCUDA_cjs.CACHE_CONFIGS; }
 });
 Object.defineProperty(exports, "CATEGORY_INFO", {
   enumerable: true,
-  get: function () { return chunkLFAQUR7P_cjs.CATEGORY_INFO; }
+  get: function () { return chunkNZWFCUDA_cjs.CATEGORY_INFO; }
 });
 Object.defineProperty(exports, "CacheService", {
   enumerable: true,
-  get: function () { return chunkLFAQUR7P_cjs.CacheService; }
+  get: function () { return chunkNZWFCUDA_cjs.CacheService; }
 });
 Object.defineProperty(exports, "Logger", {
   enumerable: true,
-  get: function () { return chunkLFAQUR7P_cjs.Logger; }
+  get: function () { return chunkNZWFCUDA_cjs.Logger; }
 });
 Object.defineProperty(exports, "SettingsService", {
   enumerable: true,
-  get: function () { return chunkLFAQUR7P_cjs.SettingsService; }
+  get: function () { return chunkNZWFCUDA_cjs.SettingsService; }
 });
 Object.defineProperty(exports, "TelemetryService", {
   enumerable: true,
-  get: function () { return chunkLFAQUR7P_cjs.TelemetryService; }
+  get: function () { return chunkNZWFCUDA_cjs.TelemetryService; }
 });
 Object.defineProperty(exports, "buildRouteList", {
   enumerable: true,
-  get: function () { return chunkLFAQUR7P_cjs.buildRouteList; }
+  get: function () { return chunkNZWFCUDA_cjs.buildRouteList; }
 });
 Object.defineProperty(exports, "createInstallationIdentity", {
   enumerable: true,
-  get: function () { return chunkLFAQUR7P_cjs.createInstallationIdentity; }
+  get: function () { return chunkNZWFCUDA_cjs.createInstallationIdentity; }
 });
 Object.defineProperty(exports, "getAppInstance", {
   enumerable: true,
-  get: function () { return chunkLFAQUR7P_cjs.getAppInstance; }
+  get: function () { return chunkNZWFCUDA_cjs.getAppInstance; }
 });
 Object.defineProperty(exports, "getCacheService", {
   enumerable: true,
-  get: function () { return chunkLFAQUR7P_cjs.getCacheService; }
+  get: function () { return chunkNZWFCUDA_cjs.getCacheService; }
 });
 Object.defineProperty(exports, "getLogger", {
   enumerable: true,
-  get: function () { return chunkLFAQUR7P_cjs.getLogger; }
+  get: function () { return chunkNZWFCUDA_cjs.getLogger; }
 });
 Object.defineProperty(exports, "getTelemetryService", {
   enumerable: true,
-  get: function () { return chunkLFAQUR7P_cjs.getTelemetryService; }
+  get: function () { return chunkNZWFCUDA_cjs.getTelemetryService; }
 });
 Object.defineProperty(exports, "initLogger", {
   enumerable: true,
-  get: function () { return chunkLFAQUR7P_cjs.initLogger; }
+  get: function () { return chunkNZWFCUDA_cjs.initLogger; }
 });
 Object.defineProperty(exports, "initTelemetry", {
   enumerable: true,
-  get: function () { return chunkLFAQUR7P_cjs.initTelemetry; }
+  get: function () { return chunkNZWFCUDA_cjs.initTelemetry; }
 });
 Object.defineProperty(exports, "setAppInstance", {
   enumerable: true,
-  get: function () { return chunkLFAQUR7P_cjs.setAppInstance; }
+  get: function () { return chunkNZWFCUDA_cjs.setAppInstance; }
 });
 Object.defineProperty(exports, "PluginBootstrapService", {
   enumerable: true,
@@ -150,7 +150,7 @@ Object.defineProperty(exports, "validateCollectionConfig", {
 });
 Object.defineProperty(exports, "MigrationService", {
   enumerable: true,
-  get: function () { return chunkZ55HVUBO_cjs.MigrationService; }
+  get: function () { return chunkWTMIPCNR_cjs.MigrationService; }
 });
 //# sourceMappingURL=services.cjs.map
 //# sourceMappingURL=services.cjs.map

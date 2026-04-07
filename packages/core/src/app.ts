@@ -38,6 +38,9 @@ import { otpLoginPlugin } from './plugins/core-plugins/otp-login-plugin'
 import { oauthProvidersPlugin } from './plugins/core-plugins/oauth-providers'
 import { aiSearchPlugin } from './plugins/core-plugins/ai-search-plugin'
 import { createMagicLinkAuthPlugin } from './plugins/available/magic-link-auth'
+import { securityAuditPlugin } from './plugins/core-plugins/security-audit-plugin'
+import { securityAuditMiddleware } from './plugins/core-plugins/security-audit-plugin'
+import { pluginMenuMiddleware } from './middleware/plugin-menu'
 import cachePlugin from './plugins/cache'
 import { faviconSvg } from './assets/favicon'
 import { setAppInstance } from './services/route-metadata'
@@ -75,6 +78,7 @@ export interface Variables {
   startTime?: number
   appVersion?: string
   csrfToken?: string
+  pluginMenuItems?: Array<{ label: string; path: string; icon: string }>
 }
 
 export interface SonicJSConfig {
@@ -183,6 +187,9 @@ export function createSonicJSApp(config: SonicJSConfig = {}): SonicJSApp {
     }
   }
 
+  // Plugin dynamic menu items for admin sidebar
+  app.use('/admin/*', pluginMenuMiddleware())
+
   // Core routes
   // Routes are being imported incrementally from routes/*
   // Each route is tested and migrated one-by-one
@@ -201,6 +208,16 @@ export function createSonicJSApp(config: SonicJSConfig = {}): SonicJSApp {
   app.route('/admin/seed-data', createSeedDataAdminRoutes())
   app.route('/admin/content', adminContentRoutes)
   app.route('/admin/media', adminMediaRoutes)
+  // Security audit middleware - logs auth events (login, register, logout)
+  app.use('/auth/*', securityAuditMiddleware())
+
+  // Plugin routes - Security Audit (MUST be registered BEFORE admin/plugins to avoid route conflict)
+  if (securityAuditPlugin.routes && securityAuditPlugin.routes.length > 0) {
+    for (const route of securityAuditPlugin.routes) {
+      app.route(route.path, route.handler as any)
+    }
+  }
+
   // Plugin routes - AI Search (MUST be registered BEFORE admin/plugins to avoid route conflict)
   // Register AI Search routes first so they take precedence over the generic /:id handler
   if (aiSearchPlugin.routes && aiSearchPlugin.routes.length > 0) {

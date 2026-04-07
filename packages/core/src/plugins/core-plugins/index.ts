@@ -28,6 +28,8 @@ export { oauthProvidersPlugin, createOAuthProvidersPlugin } from './oauth-provid
 export { OAuthService, BUILT_IN_PROVIDERS } from './oauth-providers/oauth-service'
 export { globalVariablesPlugin, createGlobalVariablesPlugin } from './global-variables-plugin'
 export { resolveVariables, resolveVariablesInObject } from './global-variables-plugin'
+export { securityAuditPlugin, createSecurityAuditPlugin } from './security-audit-plugin'
+export { SecurityAuditService, BruteForceDetector, securityAuditMiddleware } from './security-audit-plugin'
 
 // Core plugins list - now imported from auto-generated registry
 export const CORE_PLUGIN_IDS = [
@@ -47,7 +49,8 @@ export const CORE_PLUGIN_IDS = [
   'turnstile',
   'ai-search',
   'oauth-providers',
-  'global-variables'
+  'global-variables',
+  'security-audit'
 ] as const
 
 export type CorePluginNames = (typeof CORE_PLUGIN_IDS)[number]
