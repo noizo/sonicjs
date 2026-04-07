@@ -98,7 +98,7 @@ const loginSchema = z.object({
 
 // Register new user
 authRoutes.post('/register',
-  rateLimit({ max: 3, windowMs: 60 * 1000, keyPrefix: 'register' }),
+  rateLimit({ max: 10, windowMs: 60 * 1000, keyPrefix: 'register' }),
   async (c) => {
     try {
       const db = c.env.DB
@@ -218,7 +218,7 @@ authRoutes.post('/register',
 
 // Login user
 authRoutes.post('/login',
-  rateLimit({ max: 5, windowMs: 60 * 1000, keyPrefix: 'login' }),
+  rateLimit({ max: 20, windowMs: 60 * 1000, keyPrefix: 'login' }),
   async (c) => {
     try {
       const body = await c.req.json()
@@ -395,7 +395,7 @@ authRoutes.post('/refresh', requireAuth(), async (c) => {
 
 // Form-based registration handler (for HTML forms)
 authRoutes.post('/register/form',
-  rateLimit({ max: 3, windowMs: 60 * 1000, keyPrefix: 'register' }),
+  rateLimit({ max: 10, windowMs: 60 * 1000, keyPrefix: 'register' }),
   async (c) => {
   try {
     const db = c.env.DB
@@ -529,7 +529,7 @@ authRoutes.post('/register/form',
 
 // Form-based login handler (for HTML forms)
 authRoutes.post('/login/form',
-  rateLimit({ max: 5, windowMs: 60 * 1000, keyPrefix: 'login' }),
+  rateLimit({ max: 20, windowMs: 60 * 1000, keyPrefix: 'login' }),
   async (c) => {
   try {
     const formData = await c.req.formData()
@@ -637,7 +637,7 @@ authRoutes.post('/login/form',
 
 // Test seeding endpoint (only for development/testing)
 authRoutes.post('/seed-admin',
-  rateLimit({ max: 2, windowMs: 60 * 1000, keyPrefix: 'seed-admin' }),
+  rateLimit({ max: 10, windowMs: 60 * 1000, keyPrefix: 'seed-admin' }),
   async (c) => {
   try {
     const db = c.env.DB
