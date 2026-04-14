@@ -1745,5 +1745,5 @@ var PluginBootstrapService = class {
 };
 
 export { PLUGIN_REGISTRY, PluginBootstrapService, PluginService, backfillFormSubmissions, cleanupRemovedCollections, createContentFromSubmission, deriveCollectionSchemaFromFormio, deriveSubmissionTitle, findPluginByCodeName, fullCollectionSync, getAvailableCollectionNames, getManagedCollections, isCollectionManaged, loadCollectionConfig, loadCollectionConfigs, mapFormStatusToContentStatus, registerCollections, syncAllFormCollections, syncCollection, syncCollections, syncFormCollection, validateCollectionConfig };
-//# sourceMappingURL=chunk-TPEGKW45.js.map
-//# sourceMappingURL=chunk-TPEGKW45.js.map
+//# sourceMappingURL=chunk-G7XSN72O.js.map
+//# sourceMappingURL=chunk-G7XSN72O.js.map
