@@ -31,6 +31,8 @@ SonicJS enforces role-based permissions across all routes:
 | **Author** | Own content | Read only | — | — | — |
 | **Viewer** | Read only | Read only | — | — | — |
 
+- The entire `/admin` panel requires the `admin` role by default
+- Customizable via `adminAccessRoles` in `createSonicJSApp()` config
 - User management routes require `admin` role
 - Content CRUD requires `admin`, `editor`, or `author`
 - Collection schema changes require `admin`
@@ -140,6 +142,7 @@ All security audit data is available via authenticated admin API endpoints:
 
 | Version | Date | Changes |
 |---------|------|---------|
+| v2.16.1 | Apr 2026 | Admin panel restricted to admin role by default, configurable `adminAccessRoles` |
 | v2.16.0 | Apr 2026 | BruteForceDetector KV resilience, CSRF exempt path expansion, Authorization header bypass for API clients |
 | v2.9.0 | Apr 2026 | RBAC enforcement on all admin routes |
 | v2.8.3 | Mar 2026 | SQL injection fix, XSS fixes (reflected + stored), PBKDF2 hashing, CSRF protection, rate limiting, CORS restrictions, security headers, JWT secret to env var |
