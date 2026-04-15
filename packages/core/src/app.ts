@@ -42,6 +42,7 @@ import { createMagicLinkAuthPlugin } from './plugins/available/magic-link-auth'
 import { securityAuditPlugin } from './plugins/core-plugins/security-audit-plugin'
 import { securityAuditMiddleware } from './plugins/core-plugins/security-audit-plugin'
 import { stripePlugin } from './plugins/core-plugins/stripe-plugin'
+import { requireAuth, requireRole } from './middleware/auth'
 import { pluginMenuMiddleware } from './middleware/plugin-menu'
 import { analyticsPlugin } from './plugins/core-plugins/analytics'
 import { eventsApiRoutes } from './plugins/core-plugins/analytics/routes/api'
@@ -110,6 +111,10 @@ export interface SonicJSConfig {
     beforeAuth?: Array<(c: Context, next: () => Promise<void>) => Promise<void>>
     afterAuth?: Array<(c: Context, next: () => Promise<void>) => Promise<void>>
   }
+
+  // Admin access control
+  // Roles allowed to access the /admin panel. Defaults to ['admin'].
+  adminAccessRoles?: string[]
 
   // App metadata
   version?: string
@@ -190,6 +195,11 @@ export function createSonicJSApp(config: SonicJSConfig = {}): SonicJSApp {
       app.use('*', middleware)
     }
   }
+
+  // Admin panel access control: require authentication and admin role by default
+  const adminRoles = config.adminAccessRoles || ['admin']
+  app.use('/admin/*', requireAuth())
+  app.use('/admin/*', requireRole(adminRoles))
 
   // Plugin dynamic menu items for admin sidebar
   app.use('/admin/*', pluginMenuMiddleware())
