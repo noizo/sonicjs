@@ -1,20 +1,21 @@
-import { renderConfirmationDialog, getConfirmationDialogScript, api_default, api_media_default, api_system_default, admin_api_default, router, adminCollectionsRoutes, adminFormsRoutes, adminSettingsRoutes, public_forms_default, router2, admin_content_default, adminMediaRoutes, userProfilesPlugin, adminPluginRoutes, adminLogsRoutes, userRoutes, auth_default, test_cleanup_default } from './chunk-MKI7BU5J.js';
-export { ROUTES_INFO, admin_api_default as adminApiRoutes, adminCheckboxRoutes, admin_code_examples_default as adminCodeExamplesRoutes, adminCollectionsRoutes, admin_content_default as adminContentRoutes, router as adminDashboardRoutes, adminDesignRoutes, adminLogsRoutes, adminMediaRoutes, adminPluginRoutes, adminSettingsRoutes, admin_testimonials_default as adminTestimonialsRoutes, userRoutes as adminUsersRoutes, api_content_crud_default as apiContentCrudRoutes, api_media_default as apiMediaRoutes, api_default as apiRoutes, api_system_default as apiSystemRoutes, auth_default as authRoutes, createUserProfilesPlugin, defineUserProfile, getUserProfileConfig, userProfilesPlugin } from './chunk-MKI7BU5J.js';
-import { SettingsService, setAppInstance, schema_exports } from './chunk-3P36UZXJ.js';
-export { Logger, apiTokens, collections, content, contentVersions, getLogger, initLogger, insertCollectionSchema, insertContentSchema, insertLogConfigSchema, insertMediaSchema, insertPluginActivityLogSchema, insertPluginAssetSchema, insertPluginHookSchema, insertPluginRouteSchema, insertPluginSchema, insertSystemLogSchema, insertUserSchema, insertWorkflowHistorySchema, logConfig, media, pluginActivityLog, pluginAssets, pluginHooks, pluginRoutes, plugins, selectCollectionSchema, selectContentSchema, selectLogConfigSchema, selectMediaSchema, selectPluginActivityLogSchema, selectPluginAssetSchema, selectPluginHookSchema, selectPluginRouteSchema, selectPluginSchema, selectSystemLogSchema, selectUserSchema, selectWorkflowHistorySchema, systemLogs, users, workflowHistory } from './chunk-3P36UZXJ.js';
-import { requireAuth, AuthManager, metricsMiddleware, bootstrapMiddleware, securityHeadersMiddleware, csrfProtection } from './chunk-RUWQ3LU6.js';
-export { AuthManager, PermissionManager, bootstrapMiddleware, cacheHeaders, compressionMiddleware, detailedLoggingMiddleware, getActivePlugins, isPluginActive, logActivity, loggingMiddleware, optionalAuth, performanceLoggingMiddleware, requireActivePlugin, requireActivePlugins, requireAnyPermission, requireAuth, requirePermission, requireRole, securityHeadersMiddleware as securityHeaders, securityLoggingMiddleware } from './chunk-RUWQ3LU6.js';
-import { PluginService } from './chunk-H3XXBAMO.js';
-export { PluginBootstrapService, PluginService as PluginServiceClass, backfillFormSubmissions, cleanupRemovedCollections, createContentFromSubmission, deriveCollectionSchemaFromFormio, deriveSubmissionTitle, fullCollectionSync, getAvailableCollectionNames, getManagedCollections, isCollectionManaged, loadCollectionConfig, loadCollectionConfigs, mapFormStatusToContentStatus, registerCollections, syncAllFormCollections, syncCollection, syncCollections, syncFormCollection, validateCollectionConfig } from './chunk-H3XXBAMO.js';
-export { MigrationService } from './chunk-K6PNASZC.js';
-export { renderFilterBar } from './chunk-CB7ONLGB.js';
-import { init_admin_layout_catalyst_template, renderAdminLayout, renderAdminLayoutCatalyst } from './chunk-JTUCC6WZ.js';
-export { getConfirmationDialogScript, renderAlert, renderConfirmationDialog, renderForm, renderFormField, renderPagination, renderTable } from './chunk-JTUCC6WZ.js';
-export { HookSystemImpl, HookUtils, PluginManager as PluginManagerClass, PluginRegistryImpl, PluginValidator as PluginValidatorClass, ScopedHookSystem as ScopedHookSystemClass } from './chunk-E4CZHXMZ.js';
-import { PluginBuilder } from './chunk-J5WGMRSU.js';
-export { PluginBuilder, PluginHelpers } from './chunk-J5WGMRSU.js';
-import { package_default, getCoreVersion } from './chunk-YWS36ULL.js';
-export { QueryFilterBuilder, SONICJS_VERSION, TemplateRenderer, buildQuery, getCoreVersion, renderTemplate, templateRenderer } from './chunk-YWS36ULL.js';
+import { renderConfirmationDialog, getConfirmationDialogScript, api_default, api_media_default, api_system_default, admin_api_default, router, adminCollectionsRoutes, adminFormsRoutes, adminSettingsRoutes, public_forms_default, router2, admin_content_default, adminMediaRoutes, userProfilesPlugin, adminPluginRoutes, adminLogsRoutes, userRoutes, auth_default, test_cleanup_default } from './chunk-CNX4TXSR.js';
+export { ROUTES_INFO, admin_api_default as adminApiRoutes, adminCheckboxRoutes, admin_code_examples_default as adminCodeExamplesRoutes, adminCollectionsRoutes, admin_content_default as adminContentRoutes, router as adminDashboardRoutes, adminDesignRoutes, adminLogsRoutes, adminMediaRoutes, adminPluginRoutes, adminSettingsRoutes, admin_testimonials_default as adminTestimonialsRoutes, userRoutes as adminUsersRoutes, api_content_crud_default as apiContentCrudRoutes, api_media_default as apiMediaRoutes, api_default as apiRoutes, api_system_default as apiSystemRoutes, auth_default as authRoutes, createUserProfilesPlugin, defineUserProfile, getUserProfileConfig, userProfilesPlugin } from './chunk-CNX4TXSR.js';
+import { SettingsService, setAppInstance, schema_exports } from './chunk-TBJY2FF7.js';
+export { Logger, apiTokens, collections, content, contentVersions, getLogger, initLogger, insertCollectionSchema, insertContentSchema, insertLogConfigSchema, insertMediaSchema, insertPluginActivityLogSchema, insertPluginAssetSchema, insertPluginHookSchema, insertPluginRouteSchema, insertPluginSchema, insertSystemLogSchema, insertUserSchema, insertWorkflowHistorySchema, logConfig, media, pluginActivityLog, pluginAssets, pluginHooks, pluginRoutes, plugins, selectCollectionSchema, selectContentSchema, selectLogConfigSchema, selectMediaSchema, selectPluginActivityLogSchema, selectPluginAssetSchema, selectPluginHookSchema, selectPluginRouteSchema, selectPluginSchema, selectSystemLogSchema, selectUserSchema, selectWorkflowHistorySchema, systemLogs, users, workflowHistory } from './chunk-TBJY2FF7.js';
+import { requireAuth, AuthManager, metricsMiddleware, bootstrapMiddleware, securityHeadersMiddleware, csrfProtection, requireRole } from './chunk-WXVH75BR.js';
+export { AuthManager, PermissionManager, bootstrapMiddleware, cacheHeaders, compressionMiddleware, detailedLoggingMiddleware, getActivePlugins, isPluginActive, logActivity, loggingMiddleware, optionalAuth, performanceLoggingMiddleware, requireActivePlugin, requireActivePlugins, requireAnyPermission, requireAuth, requirePermission, requireRole, securityHeadersMiddleware as securityHeaders, securityLoggingMiddleware } from './chunk-WXVH75BR.js';
+import { PluginService, PLUGIN_REGISTRY } from './chunk-B5YTIKWK.js';
+export { PluginBootstrapService, PluginService as PluginServiceClass, backfillFormSubmissions, cleanupRemovedCollections, createContentFromSubmission, deriveCollectionSchemaFromFormio, deriveSubmissionTitle, fullCollectionSync, getAvailableCollectionNames, getManagedCollections, isCollectionManaged, loadCollectionConfig, loadCollectionConfigs, mapFormStatusToContentStatus, registerCollections, syncAllFormCollections, syncCollection, syncCollections, syncFormCollection, validateCollectionConfig } from './chunk-B5YTIKWK.js';
+export { MigrationService } from './chunk-SEMH3REK.js';
+export { renderFilterBar } from './chunk-ON5ZMSU4.js';
+import { renderAdminLayout } from './chunk-XWIA3HVX.js';
+export { getConfirmationDialogScript, renderAlert, renderConfirmationDialog, renderForm, renderFormField, renderPagination, renderTable } from './chunk-XWIA3HVX.js';
+import { init_admin_layout_catalyst_template, renderAdminLayoutCatalyst } from './chunk-55RDMDOP.js';
+export { HookSystemImpl, HookUtils, PluginManager as PluginManagerClass, PluginRegistryImpl, PluginValidator as PluginValidatorClass, ScopedHookSystem as ScopedHookSystemClass } from './chunk-TFNTM3OA.js';
+import { PluginBuilder, PluginHelpers } from './chunk-EXNEW5US.js';
+export { PluginBuilder, PluginHelpers } from './chunk-EXNEW5US.js';
+import { package_default, getCoreVersion } from './chunk-JF5RQXPN.js';
+export { QueryFilterBuilder, SONICJS_VERSION, TemplateRenderer, buildQuery, getCoreVersion, renderTemplate, templateRenderer } from './chunk-JF5RQXPN.js';
 import './chunk-X7ZAEI5S.js';
 export { metricsTracker } from './chunk-FICTAGD4.js';
 export { escapeHtml, sanitizeInput, sanitizeObject } from './chunk-TQABQWOP.js';
@@ -3901,7 +3902,7 @@ function renderSettingsPage(data) {
     const indexStatusMap = data.indexStatus || {};
     const status = indexStatusMap[collectionId];
     const isNew = collection.is_new === true && !isDismissed && !status;
-    const statusBadge = status && isChecked ? `<span class="ml-2 px-2 py-1 text-xs rounded-full ${status.status === "completed" ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300" : status.status === "indexing" ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300" : status.status === "error" ? "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300" : "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300"}">${status.status}</span>` : "";
+    const statusBadge2 = status && isChecked ? `<span class="ml-2 px-2 py-1 text-xs rounded-full ${status.status === "completed" ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300" : status.status === "indexing" ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300" : status.status === "error" ? "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300" : "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300"}">${status.status}</span>` : "";
     return `<div class="flex items-start gap-3 p-3 rounded-lg border border-zinc-200 dark:border-zinc-700 ${isNew ? "bg-blue-50 dark:bg-blue-900/10 border-blue-200 dark:border-blue-800" : "hover:bg-zinc-50 dark:hover:bg-zinc-800"}">
                       <input
                         type="checkbox"
@@ -3916,7 +3917,7 @@ function renderSettingsPage(data) {
                         <label for="collection_${collectionId}" class="text-sm font-medium text-zinc-950 dark:text-white select-none cursor-pointer flex items-center">
                           ${collection.display_name || collection.name || "Unnamed Collection"}
                           ${isNew ? '<span class="ml-2 px-2 py-0.5 text-xs rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">NEW</span>' : ""}
-                          ${statusBadge}
+                          ${statusBadge2}
                         </label>
                         <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
                           ${collection.description || collection.name || "No description"} \u2022 ${collection.item_count || 0} items
@@ -5704,7 +5705,7 @@ var BruteForceDetector = class {
   }
   settings;
   async recordFailedAttempt(ip, email) {
-    if (!this.settings.enabled) {
+    if (!this.settings.enabled || !this.kv) {
       return { ipCount: 0, emailCount: 0, shouldLockIP: false, shouldLockEmail: false, isSuspicious: false };
     }
     const windowMs = this.settings.windowMinutes * 60 * 1e3;
@@ -5721,7 +5722,7 @@ var BruteForceDetector = class {
     return { ipCount, emailCount, shouldLockIP, shouldLockEmail, isSuspicious };
   }
   async isLocked(ip, email) {
-    if (!this.settings.enabled) {
+    if (!this.settings.enabled || !this.kv) {
       return { locked: false };
     }
     const ipLocked = await this.kv.get(`${LOCK_PREFIX}ip:${ip}`);
@@ -5735,6 +5736,7 @@ var BruteForceDetector = class {
     return { locked: false };
   }
   async lockIP(ip) {
+    if (!this.kv) return;
     const ttl = this.settings.lockoutDurationMinutes * 60;
     await this.kv.put(`${LOCK_PREFIX}ip:${ip}`, JSON.stringify({
       lockedAt: Date.now(),
@@ -5742,6 +5744,7 @@ var BruteForceDetector = class {
     }), { expirationTtl: ttl });
   }
   async lockEmail(email) {
+    if (!this.kv) return;
     const ttl = this.settings.lockoutDurationMinutes * 60;
     await this.kv.put(`${LOCK_PREFIX}email:${email}`, JSON.stringify({
       lockedAt: Date.now(),
@@ -5749,12 +5752,15 @@ var BruteForceDetector = class {
     }), { expirationTtl: ttl });
   }
   async unlockIP(ip) {
+    if (!this.kv) return;
     await this.kv.delete(`${LOCK_PREFIX}ip:${ip}`);
   }
   async unlockEmail(email) {
+    if (!this.kv) return;
     await this.kv.delete(`${LOCK_PREFIX}email:${email}`);
   }
   async getActiveLockouts() {
+    if (!this.kv) return [];
     const ipLocks = await this.kv.list({ prefix: `${LOCK_PREFIX}ip:` });
     const emailLocks = await this.kv.list({ prefix: `${LOCK_PREFIX}email:` });
     const lockouts = [];
@@ -5785,6 +5791,7 @@ var BruteForceDetector = class {
     return lockouts;
   }
   async releaseLockout(key) {
+    if (!this.kv) return;
     await this.kv.delete(key);
   }
   isAboveAlertThreshold(count) {
@@ -6271,14 +6278,1447 @@ function createSecurityAuditPlugin() {
 }
 var securityAuditPlugin = createSecurityAuditPlugin();
 
-// src/middleware/plugin-menu.ts
-var MENU_PLUGINS = [
-  securityAuditPlugin
+// src/plugins/core-plugins/stripe-plugin/services/subscription-service.ts
+var SubscriptionService = class {
+  constructor(db) {
+    this.db = db;
+  }
+  /**
+   * Ensure the subscriptions table exists
+   */
+  async ensureTable() {
+    await this.db.prepare(`
+      CREATE TABLE IF NOT EXISTS subscriptions (
+        id TEXT PRIMARY KEY DEFAULT (lower(hex(randomblob(16)))),
+        user_id TEXT NOT NULL,
+        stripe_customer_id TEXT NOT NULL,
+        stripe_subscription_id TEXT NOT NULL UNIQUE,
+        stripe_price_id TEXT NOT NULL,
+        status TEXT NOT NULL DEFAULT 'incomplete',
+        current_period_start INTEGER NOT NULL DEFAULT 0,
+        current_period_end INTEGER NOT NULL DEFAULT 0,
+        cancel_at_period_end INTEGER NOT NULL DEFAULT 0,
+        created_at INTEGER NOT NULL DEFAULT (unixepoch()),
+        updated_at INTEGER NOT NULL DEFAULT (unixepoch())
+      )
+    `).run();
+    await this.db.prepare(`
+      CREATE INDEX IF NOT EXISTS idx_subscriptions_user_id ON subscriptions(user_id)
+    `).run();
+    await this.db.prepare(`
+      CREATE INDEX IF NOT EXISTS idx_subscriptions_stripe_customer_id ON subscriptions(stripe_customer_id)
+    `).run();
+    await this.db.prepare(`
+      CREATE INDEX IF NOT EXISTS idx_subscriptions_stripe_subscription_id ON subscriptions(stripe_subscription_id)
+    `).run();
+    await this.db.prepare(`
+      CREATE INDEX IF NOT EXISTS idx_subscriptions_status ON subscriptions(status)
+    `).run();
+  }
+  /**
+   * Create a new subscription record
+   */
+  async create(data) {
+    const result = await this.db.prepare(`
+      INSERT INTO subscriptions (user_id, stripe_customer_id, stripe_subscription_id, stripe_price_id, status, current_period_start, current_period_end, cancel_at_period_end)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      RETURNING *
+    `).bind(
+      data.userId,
+      data.stripeCustomerId,
+      data.stripeSubscriptionId,
+      data.stripePriceId,
+      data.status,
+      data.currentPeriodStart,
+      data.currentPeriodEnd,
+      data.cancelAtPeriodEnd ? 1 : 0
+    ).first();
+    return this.mapRow(result);
+  }
+  /**
+   * Upsert a subscription by stripe_subscription_id (INSERT or UPDATE on conflict)
+   */
+  async upsert(data) {
+    const result = await this.db.prepare(`
+      INSERT INTO subscriptions (user_id, stripe_customer_id, stripe_subscription_id, stripe_price_id, status, current_period_start, current_period_end, cancel_at_period_end)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      ON CONFLICT(stripe_subscription_id) DO UPDATE SET
+        status = excluded.status,
+        stripe_price_id = excluded.stripe_price_id,
+        current_period_start = excluded.current_period_start,
+        current_period_end = excluded.current_period_end,
+        cancel_at_period_end = excluded.cancel_at_period_end,
+        updated_at = unixepoch()
+      RETURNING *
+    `).bind(
+      data.userId,
+      data.stripeCustomerId,
+      data.stripeSubscriptionId,
+      data.stripePriceId,
+      data.status,
+      data.currentPeriodStart,
+      data.currentPeriodEnd,
+      data.cancelAtPeriodEnd ? 1 : 0
+    ).first();
+    return this.mapRow(result);
+  }
+  /**
+   * Update a subscription by its Stripe subscription ID
+   */
+  async updateByStripeId(stripeSubscriptionId, data) {
+    const sets = [];
+    const values = [];
+    if (data.status !== void 0) {
+      sets.push("status = ?");
+      values.push(data.status);
+    }
+    if (data.stripePriceId !== void 0) {
+      sets.push("stripe_price_id = ?");
+      values.push(data.stripePriceId);
+    }
+    if (data.currentPeriodStart !== void 0) {
+      sets.push("current_period_start = ?");
+      values.push(data.currentPeriodStart);
+    }
+    if (data.currentPeriodEnd !== void 0) {
+      sets.push("current_period_end = ?");
+      values.push(data.currentPeriodEnd);
+    }
+    if (data.cancelAtPeriodEnd !== void 0) {
+      sets.push("cancel_at_period_end = ?");
+      values.push(data.cancelAtPeriodEnd ? 1 : 0);
+    }
+    if (sets.length === 0) return this.getByStripeSubscriptionId(stripeSubscriptionId);
+    sets.push("updated_at = unixepoch()");
+    values.push(stripeSubscriptionId);
+    const result = await this.db.prepare(`
+      UPDATE subscriptions SET ${sets.join(", ")} WHERE stripe_subscription_id = ? RETURNING *
+    `).bind(...values).first();
+    return result ? this.mapRow(result) : null;
+  }
+  /**
+   * Get subscription by Stripe subscription ID
+   */
+  async getByStripeSubscriptionId(stripeSubscriptionId) {
+    const result = await this.db.prepare(
+      "SELECT * FROM subscriptions WHERE stripe_subscription_id = ?"
+    ).bind(stripeSubscriptionId).first();
+    return result ? this.mapRow(result) : null;
+  }
+  /**
+   * Get the active subscription for a user
+   */
+  async getByUserId(userId) {
+    const result = await this.db.prepare(
+      "SELECT * FROM subscriptions WHERE user_id = ? ORDER BY CASE WHEN status = 'active' THEN 0 WHEN status = 'trialing' THEN 1 ELSE 2 END, updated_at DESC LIMIT 1"
+    ).bind(userId).first();
+    return result ? this.mapRow(result) : null;
+  }
+  /**
+   * Get subscription by Stripe customer ID
+   */
+  async getByStripeCustomerId(stripeCustomerId) {
+    const result = await this.db.prepare(
+      "SELECT * FROM subscriptions WHERE stripe_customer_id = ? ORDER BY updated_at DESC LIMIT 1"
+    ).bind(stripeCustomerId).first();
+    return result ? this.mapRow(result) : null;
+  }
+  /**
+   * Find the userId linked to a Stripe customer ID
+   */
+  async getUserIdByStripeCustomer(stripeCustomerId) {
+    const result = await this.db.prepare(
+      "SELECT user_id FROM subscriptions WHERE stripe_customer_id = ? LIMIT 1"
+    ).bind(stripeCustomerId).first();
+    return result?.user_id ?? null;
+  }
+  /**
+   * List subscriptions with filters and pagination
+   */
+  async list(filters = {}) {
+    const where = [];
+    const values = [];
+    if (filters.status) {
+      where.push("status = ?");
+      values.push(filters.status);
+    }
+    if (filters.userId) {
+      where.push("user_id = ?");
+      values.push(filters.userId);
+    }
+    if (filters.stripeCustomerId) {
+      where.push("stripe_customer_id = ?");
+      values.push(filters.stripeCustomerId);
+    }
+    const whereClause = where.length > 0 ? `WHERE ${where.join(" AND ")}` : "";
+    const sortBy = filters.sortBy || "created_at";
+    const sortOrder = filters.sortOrder || "desc";
+    const limit = Math.min(filters.limit || 50, 100);
+    const page = filters.page || 1;
+    const offset = (page - 1) * limit;
+    const countResult = await this.db.prepare(
+      `SELECT COUNT(*) as count FROM subscriptions ${whereClause}`
+    ).bind(...values).first();
+    const results = await this.db.prepare(
+      `SELECT s.*, u.email as user_email FROM subscriptions s LEFT JOIN users u ON s.user_id = u.id ${whereClause} ORDER BY ${sortBy} ${sortOrder} LIMIT ? OFFSET ?`
+    ).bind(...values, limit, offset).all();
+    return {
+      subscriptions: (results.results || []).map((r) => this.mapRow(r)),
+      total: countResult?.count || 0
+    };
+  }
+  /**
+   * Get subscription stats
+   */
+  async getStats() {
+    const result = await this.db.prepare(`
+      SELECT
+        COUNT(*) as total,
+        SUM(CASE WHEN status = 'active' THEN 1 ELSE 0 END) as active,
+        SUM(CASE WHEN status = 'canceled' THEN 1 ELSE 0 END) as canceled,
+        SUM(CASE WHEN status = 'past_due' THEN 1 ELSE 0 END) as past_due,
+        SUM(CASE WHEN status = 'trialing' THEN 1 ELSE 0 END) as trialing
+      FROM subscriptions
+    `).first();
+    return {
+      total: result?.total || 0,
+      active: result?.active || 0,
+      canceled: result?.canceled || 0,
+      pastDue: result?.past_due || 0,
+      trialing: result?.trialing || 0
+    };
+  }
+  /**
+   * Delete a subscription record by Stripe subscription ID
+   */
+  async deleteByStripeId(stripeSubscriptionId) {
+    const result = await this.db.prepare(
+      "DELETE FROM subscriptions WHERE stripe_subscription_id = ?"
+    ).bind(stripeSubscriptionId).run();
+    return (result.meta?.changes || 0) > 0;
+  }
+  mapRow(row) {
+    return {
+      id: row.id,
+      userId: row.user_id,
+      stripeCustomerId: row.stripe_customer_id,
+      stripeSubscriptionId: row.stripe_subscription_id,
+      stripePriceId: row.stripe_price_id,
+      status: row.status,
+      currentPeriodStart: row.current_period_start,
+      currentPeriodEnd: row.current_period_end,
+      cancelAtPeriodEnd: !!row.cancel_at_period_end,
+      createdAt: row.created_at,
+      updatedAt: row.updated_at,
+      // Attach email if joined
+      ...row.user_email ? { userEmail: row.user_email } : {}
+    };
+  }
+};
+
+// src/plugins/core-plugins/stripe-plugin/services/stripe-event-service.ts
+var StripeEventService = class {
+  constructor(db) {
+    this.db = db;
+  }
+  async ensureTable() {
+    await this.db.prepare(`
+      CREATE TABLE IF NOT EXISTS stripe_events (
+        id TEXT PRIMARY KEY DEFAULT (lower(hex(randomblob(16)))),
+        stripe_event_id TEXT NOT NULL UNIQUE,
+        type TEXT NOT NULL,
+        object_id TEXT NOT NULL DEFAULT '',
+        object_type TEXT NOT NULL DEFAULT '',
+        data TEXT NOT NULL DEFAULT '{}',
+        processed_at INTEGER NOT NULL DEFAULT (unixepoch()),
+        status TEXT NOT NULL DEFAULT 'processed',
+        error TEXT
+      )
+    `).run();
+    await this.db.prepare(`
+      CREATE INDEX IF NOT EXISTS idx_stripe_events_type ON stripe_events(type)
+    `).run();
+    await this.db.prepare(`
+      CREATE INDEX IF NOT EXISTS idx_stripe_events_status ON stripe_events(status)
+    `).run();
+    await this.db.prepare(`
+      CREATE INDEX IF NOT EXISTS idx_stripe_events_processed_at ON stripe_events(processed_at DESC)
+    `).run();
+  }
+  async log(event) {
+    await this.db.prepare(`
+      INSERT INTO stripe_events (stripe_event_id, type, object_id, object_type, data, status, error)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
+      ON CONFLICT(stripe_event_id) DO UPDATE SET
+        status = excluded.status,
+        error = excluded.error,
+        processed_at = unixepoch()
+    `).bind(
+      event.stripeEventId,
+      event.type,
+      event.objectId,
+      event.objectType,
+      JSON.stringify(event.data),
+      event.status,
+      event.error || null
+    ).run();
+  }
+  async list(filters = {}) {
+    const where = [];
+    const values = [];
+    if (filters.type) {
+      where.push("type = ?");
+      values.push(filters.type);
+    }
+    if (filters.status) {
+      where.push("status = ?");
+      values.push(filters.status);
+    }
+    if (filters.objectId) {
+      where.push("object_id = ?");
+      values.push(filters.objectId);
+    }
+    const whereClause = where.length > 0 ? `WHERE ${where.join(" AND ")}` : "";
+    const limit = Math.min(filters.limit || 50, 100);
+    const page = filters.page || 1;
+    const offset = (page - 1) * limit;
+    const countResult = await this.db.prepare(
+      `SELECT COUNT(*) as count FROM stripe_events ${whereClause}`
+    ).bind(...values).first();
+    const results = await this.db.prepare(
+      `SELECT * FROM stripe_events ${whereClause} ORDER BY processed_at DESC LIMIT ? OFFSET ?`
+    ).bind(...values, limit, offset).all();
+    return {
+      events: (results.results || []).map((r) => this.mapRow(r)),
+      total: countResult?.count || 0
+    };
+  }
+  async getStats() {
+    const result = await this.db.prepare(`
+      SELECT
+        COUNT(*) as total,
+        SUM(CASE WHEN status = 'processed' THEN 1 ELSE 0 END) as processed,
+        SUM(CASE WHEN status = 'failed' THEN 1 ELSE 0 END) as failed,
+        SUM(CASE WHEN status = 'ignored' THEN 1 ELSE 0 END) as ignored
+      FROM stripe_events
+    `).first();
+    return {
+      total: result?.total || 0,
+      processed: result?.processed || 0,
+      failed: result?.failed || 0,
+      ignored: result?.ignored || 0
+    };
+  }
+  async getDistinctTypes() {
+    const results = await this.db.prepare(
+      "SELECT DISTINCT type FROM stripe_events ORDER BY type"
+    ).all();
+    return (results.results || []).map((r) => r.type);
+  }
+  mapRow(row) {
+    return {
+      id: row.id,
+      stripeEventId: row.stripe_event_id,
+      type: row.type,
+      objectId: row.object_id,
+      objectType: row.object_type,
+      data: row.data,
+      processedAt: row.processed_at,
+      status: row.status,
+      error: row.error || void 0
+    };
+  }
+};
+
+// src/plugins/core-plugins/stripe-plugin/components/subscriptions-page.ts
+init_admin_layout_catalyst_template();
+
+// src/plugins/core-plugins/stripe-plugin/components/tab-bar.ts
+var TABS = [
+  { label: "Subscriptions", path: "/admin/plugins/stripe" },
+  { label: "Events", path: "/admin/plugins/stripe/events" },
+  { label: "Settings", path: "/admin/plugins/stripe/settings" }
 ];
+function renderStripeTabBar(currentPath) {
+  const tabs = TABS.map((tab) => {
+    const isActive = currentPath === tab.path || tab.path === "/admin/plugins/stripe" && currentPath === "/admin/plugins/stripe/";
+    return `
+      <a href="${tab.path}"
+        class="${isActive ? "border-cyan-500 text-zinc-950 dark:text-white" : "border-transparent text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300 hover:border-zinc-300 dark:hover:border-zinc-600"} whitespace-nowrap border-b-2 px-4 py-3 text-sm font-medium transition-colors">
+        ${tab.label}
+      </a>`;
+  }).join("");
+  return `
+    <div class="border-b border-zinc-950/5 dark:border-white/10 mb-6">
+      <nav class="-mb-px flex gap-x-2" aria-label="Stripe tabs">
+        ${tabs}
+      </nav>
+    </div>
+  `;
+}
+
+// src/plugins/core-plugins/stripe-plugin/components/subscriptions-page.ts
+function renderSubscriptionsPage(data) {
+  const { subscriptions, stats, filters, user, version, dynamicMenuItems } = data;
+  const content2 = `
+    <div>
+      <div class="sm:flex sm:items-center sm:justify-between mb-6">
+        <div class="sm:flex-auto">
+          <h1 class="text-2xl/8 font-semibold text-zinc-950 dark:text-white sm:text-xl/8">Stripe</h1>
+          <p class="mt-2 text-sm/6 text-zinc-500 dark:text-zinc-400">
+            Manage subscriptions, view billing status, and monitor payment events.
+          </p>
+        </div>
+        <div class="mt-4 sm:mt-0 sm:ml-16">
+          <button id="sync-btn" onclick="syncSubscriptions()"
+            class="inline-flex items-center justify-center rounded-lg bg-zinc-950 dark:bg-white px-3.5 py-2.5 text-sm font-semibold text-white dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors shadow-sm">
+            Sync from Stripe
+          </button>
+        </div>
+      </div>
+
+      ${renderStripeTabBar("/admin/plugins/stripe")}
+
+      <!-- Stats Cards -->
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5 mb-6">
+        ${statsCard("Total", stats.total, "text-zinc-950 dark:text-white")}
+        ${statsCard("Active", stats.active, "text-emerald-600 dark:text-emerald-400")}
+        ${statsCard("Trialing", stats.trialing, "text-blue-600 dark:text-blue-400")}
+        ${statsCard("Past Due", stats.pastDue, "text-amber-600 dark:text-amber-400")}
+        ${statsCard("Canceled", stats.canceled, "text-red-600 dark:text-red-400")}
+      </div>
+
+      <!-- Filters -->
+      <div class="rounded-xl bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl p-4 ring-1 ring-zinc-950/5 dark:ring-white/10 shadow-sm mb-6">
+        <form method="GET" class="flex items-center gap-4">
+          <label class="text-sm font-medium text-zinc-500 dark:text-zinc-400">Status:</label>
+          <select name="status" class="rounded-lg border-0 bg-white dark:bg-zinc-800 px-3 py-1.5 text-sm text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10" onchange="this.form.submit()">
+            <option value="">All</option>
+            ${statusOption("active", filters.status)}
+            ${statusOption("trialing", filters.status)}
+            ${statusOption("past_due", filters.status)}
+            ${statusOption("canceled", filters.status)}
+            ${statusOption("unpaid", filters.status)}
+            ${statusOption("paused", filters.status)}
+          </select>
+        </form>
+      </div>
+
+      <!-- Subscriptions Table -->
+      <div class="rounded-xl bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl ring-1 ring-zinc-950/5 dark:ring-white/10 shadow-sm overflow-hidden">
+        <table class="min-w-full divide-y divide-zinc-950/5 dark:divide-white/5">
+          <thead>
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">User</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Status</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Price ID</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Current Period</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Cancel at End</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Stripe</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-zinc-950/5 dark:divide-white/5">
+            ${subscriptions.length === 0 ? '<tr><td colspan="6" class="px-6 py-8 text-center text-zinc-500 dark:text-zinc-400">No subscriptions found</td></tr>' : subscriptions.map(renderRow).join("")}
+          </tbody>
+        </table>
+
+        ${renderPagination2(filters.page, filters.totalPages, filters.status)}
+      </div>
+
+      <div id="sync-message" class="hidden mt-4 rounded-lg p-4 text-sm"></div>
+    </div>
+
+    <script>
+      async function syncSubscriptions() {
+        const btn = document.getElementById('sync-btn')
+        const msg = document.getElementById('sync-message')
+        btn.disabled = true
+        btn.textContent = 'Syncing...'
+        msg.className = 'hidden mt-4 rounded-lg p-4 text-sm'
+        try {
+          const res = await fetch('/api/stripe/sync-subscriptions', { method: 'POST' })
+          const result = await res.json()
+          if (result.success) {
+            msg.className = 'mt-4 rounded-lg p-4 text-sm bg-emerald-400/10 text-emerald-500 dark:text-emerald-400 ring-1 ring-inset ring-emerald-400/20'
+            msg.textContent = 'Synced ' + result.synced + ' of ' + result.total + ' subscriptions from Stripe.' + (result.errors > 0 ? ' (' + result.errors + ' errors)' : '')
+            setTimeout(() => location.reload(), 1500)
+          } else {
+            msg.className = 'mt-4 rounded-lg p-4 text-sm bg-red-400/10 text-red-500 dark:text-red-400 ring-1 ring-inset ring-red-400/20'
+            msg.textContent = result.error || 'Sync failed.'
+          }
+        } catch {
+          msg.className = 'mt-4 rounded-lg p-4 text-sm bg-red-400/10 text-red-500 dark:text-red-400 ring-1 ring-inset ring-red-400/20'
+          msg.textContent = 'Network error. Please try again.'
+        }
+        btn.disabled = false
+        btn.textContent = 'Sync from Stripe'
+      }
+    </script>
+  `;
+  const layoutData = {
+    title: "Stripe Subscriptions",
+    pageTitle: "Stripe Subscriptions",
+    currentPath: "/admin/plugins/stripe",
+    user,
+    content: content2,
+    version,
+    dynamicMenuItems
+  };
+  return renderAdminLayoutCatalyst(layoutData);
+}
+function statsCard(label, value, colorClass) {
+  return `
+    <div class="rounded-xl bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl p-5 ring-1 ring-zinc-950/5 dark:ring-white/10 shadow-sm">
+      <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400">${label}</p>
+      <p class="mt-2 text-3xl font-bold ${colorClass}">${value}</p>
+    </div>
+  `;
+}
+function statusOption(value, current) {
+  const selected = value === current ? "selected" : "";
+  const label = value.replace("_", " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  return `<option value="${value}" ${selected}>${label}</option>`;
+}
+function statusBadge(status) {
+  const colors = {
+    active: "bg-emerald-400/10 text-emerald-500 dark:text-emerald-400 ring-emerald-400/20",
+    trialing: "bg-blue-400/10 text-blue-500 dark:text-blue-400 ring-blue-400/20",
+    past_due: "bg-amber-400/10 text-amber-500 dark:text-amber-400 ring-amber-400/20",
+    canceled: "bg-red-400/10 text-red-500 dark:text-red-400 ring-red-400/20",
+    unpaid: "bg-orange-400/10 text-orange-500 dark:text-orange-400 ring-orange-400/20",
+    paused: "bg-zinc-400/10 text-zinc-500 dark:text-zinc-400 ring-zinc-400/20",
+    incomplete: "bg-zinc-400/10 text-zinc-500 dark:text-zinc-400 ring-zinc-400/20",
+    incomplete_expired: "bg-red-400/10 text-red-500 dark:text-red-400 ring-red-400/20"
+  };
+  const color = colors[status] || "bg-zinc-400/10 text-zinc-500 ring-zinc-400/20";
+  const label = status.replace("_", " ");
+  return `<span class="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset ${color}">${label}</span>`;
+}
+function formatDate(timestamp) {
+  if (!timestamp) return "-";
+  return new Date(timestamp * 1e3).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  });
+}
+function renderRow(sub) {
+  return `
+    <tr class="hover:bg-zinc-950/[0.025] dark:hover:bg-white/[0.025]">
+      <td class="px-6 py-4 whitespace-nowrap">
+        <div class="text-sm font-medium text-zinc-950 dark:text-white">${sub.userEmail || sub.userId}</div>
+        <div class="text-xs text-zinc-500 dark:text-zinc-400">${sub.stripeCustomerId}</div>
+      </td>
+      <td class="px-6 py-4 whitespace-nowrap">${statusBadge(sub.status)}</td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm text-zinc-500 dark:text-zinc-400">${sub.stripePriceId}</td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm text-zinc-500 dark:text-zinc-400">
+        ${formatDate(sub.currentPeriodStart)} - ${formatDate(sub.currentPeriodEnd)}
+      </td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm">
+        ${sub.cancelAtPeriodEnd ? '<span class="text-amber-500 dark:text-amber-400 font-medium">Yes</span>' : '<span class="text-zinc-400 dark:text-zinc-500">No</span>'}
+      </td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm">
+        <a href="https://dashboard.stripe.com/subscriptions/${sub.stripeSubscriptionId}"
+           target="_blank" rel="noopener noreferrer"
+           class="text-cyan-600 dark:text-cyan-400 hover:text-cyan-500 dark:hover:text-cyan-300">
+          View in Stripe
+        </a>
+      </td>
+    </tr>
+  `;
+}
+function renderPagination2(page, totalPages, status) {
+  if (totalPages <= 1) return "";
+  const params = status ? `&status=${status}` : "";
+  return `
+    <div class="px-6 py-3 flex items-center justify-between border-t border-zinc-950/5 dark:border-white/5">
+      <div class="text-sm text-zinc-500 dark:text-zinc-400">
+        Page ${page} of ${totalPages}
+      </div>
+      <div class="flex gap-2">
+        ${page > 1 ? `<a href="?page=${page - 1}${params}" class="px-3 py-1 rounded-lg text-sm text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 hover:bg-zinc-50 dark:hover:bg-zinc-800">Previous</a>` : ""}
+        ${page < totalPages ? `<a href="?page=${page + 1}${params}" class="px-3 py-1 rounded-lg text-sm text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 hover:bg-zinc-50 dark:hover:bg-zinc-800">Next</a>` : ""}
+      </div>
+    </div>
+  `;
+}
+
+// src/plugins/core-plugins/stripe-plugin/components/events-page.ts
+init_admin_layout_catalyst_template();
+function renderEventsPage(data) {
+  const { events, stats, types, filters, user, version, dynamicMenuItems } = data;
+  const content2 = `
+    <div>
+      <div class="sm:flex sm:items-center sm:justify-between mb-6">
+        <div class="sm:flex-auto">
+          <h1 class="text-2xl/8 font-semibold text-zinc-950 dark:text-white sm:text-xl/8">Stripe</h1>
+          <p class="mt-2 text-sm/6 text-zinc-500 dark:text-zinc-400">
+            Webhook event log showing all processed, failed, and ignored Stripe events.
+          </p>
+        </div>
+      </div>
+
+      ${renderStripeTabBar("/admin/plugins/stripe/events")}
+
+      <!-- Stats Cards -->
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-6">
+        ${eventStatsCard("Total Events", stats.total, "text-zinc-950 dark:text-white")}
+        ${eventStatsCard("Processed", stats.processed, "text-emerald-600 dark:text-emerald-400")}
+        ${eventStatsCard("Failed", stats.failed, "text-red-600 dark:text-red-400")}
+        ${eventStatsCard("Ignored", stats.ignored, "text-zinc-500 dark:text-zinc-400")}
+      </div>
+
+      <!-- Filters -->
+      <div class="rounded-xl bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl p-4 ring-1 ring-zinc-950/5 dark:ring-white/10 shadow-sm mb-6">
+        <form method="GET" class="flex items-center gap-4 flex-wrap">
+          <label class="text-sm font-medium text-zinc-500 dark:text-zinc-400">Type:</label>
+          <select name="type" class="rounded-lg border-0 bg-white dark:bg-zinc-800 px-3 py-1.5 text-sm text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10" onchange="this.form.submit()">
+            <option value="">All</option>
+            ${types.map((t) => `<option value="${t}" ${t === filters.type ? "selected" : ""}>${t}</option>`).join("")}
+          </select>
+
+          <label class="text-sm font-medium text-zinc-500 dark:text-zinc-400">Status:</label>
+          <select name="status" class="rounded-lg border-0 bg-white dark:bg-zinc-800 px-3 py-1.5 text-sm text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10" onchange="this.form.submit()">
+            <option value="">All</option>
+            ${eventStatusOption("processed", filters.status)}
+            ${eventStatusOption("failed", filters.status)}
+            ${eventStatusOption("ignored", filters.status)}
+          </select>
+        </form>
+      </div>
+
+      <!-- Events Table -->
+      <div class="rounded-xl bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl ring-1 ring-zinc-950/5 dark:ring-white/10 shadow-sm overflow-hidden">
+        <table class="min-w-full divide-y divide-zinc-950/5 dark:divide-white/5">
+          <thead>
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Time</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Type</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Object / User</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Status</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Event ID</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-zinc-950/5 dark:divide-white/5">
+            ${events.length === 0 ? '<tr><td colspan="5" class="px-6 py-8 text-center text-zinc-500 dark:text-zinc-400">No events recorded yet</td></tr>' : events.map(renderEventRow).join("")}
+          </tbody>
+        </table>
+
+        ${renderEventPagination(filters.page, filters.totalPages, filters.type, filters.status)}
+      </div>
+    </div>
+  `;
+  const layoutData = {
+    title: "Stripe Events",
+    pageTitle: "Stripe Events",
+    currentPath: "/admin/plugins/stripe",
+    user,
+    content: content2,
+    version,
+    dynamicMenuItems
+  };
+  return renderAdminLayoutCatalyst(layoutData);
+}
+function eventStatsCard(label, value, colorClass) {
+  return `
+    <div class="rounded-xl bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl p-5 ring-1 ring-zinc-950/5 dark:ring-white/10 shadow-sm">
+      <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400">${label}</p>
+      <p class="mt-2 text-3xl font-bold ${colorClass}">${value}</p>
+    </div>
+  `;
+}
+function eventStatusOption(value, current) {
+  const selected = value === current ? "selected" : "";
+  const label = value.charAt(0).toUpperCase() + value.slice(1);
+  return `<option value="${value}" ${selected}>${label}</option>`;
+}
+function eventStatusBadge(status) {
+  const colors = {
+    processed: "bg-emerald-400/10 text-emerald-500 dark:text-emerald-400 ring-emerald-400/20",
+    failed: "bg-red-400/10 text-red-500 dark:text-red-400 ring-red-400/20",
+    ignored: "bg-zinc-400/10 text-zinc-500 dark:text-zinc-400 ring-zinc-400/20"
+  };
+  const color = colors[status] || "bg-zinc-400/10 text-zinc-500 ring-zinc-400/20";
+  return `<span class="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset ${color}">${status}</span>`;
+}
+function formatTimestamp3(timestamp) {
+  if (!timestamp) return "-";
+  const d = new Date(timestamp * 1e3);
+  return d.toLocaleString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit"
+  });
+}
+function extractUserInfo(event) {
+  try {
+    const data = typeof event.data === "string" ? JSON.parse(event.data) : event.data;
+    const userId = data?.metadata?.sonicjs_user_id || data?.sonicjs_user_id;
+    const email = data?.customer_email || data?.customerEmail || data?.receipt_email;
+    return { userId: userId || void 0, email: email || void 0 };
+  } catch {
+    return {};
+  }
+}
+function renderEventRow(event) {
+  const errorTooltip = event.error ? ` title="${event.error.replace(/"/g, "&quot;")}"` : "";
+  const userInfo = extractUserInfo(event);
+  const userLink = userInfo.userId ? `<a href="/admin/users/${userInfo.userId}" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">${userInfo.email || userInfo.userId}</a>` : userInfo.email ? `<span class="text-sm text-zinc-500 dark:text-zinc-400">${userInfo.email}</span>` : "";
+  return `
+    <tr class="hover:bg-zinc-950/[0.025] dark:hover:bg-white/[0.025]"${errorTooltip}>
+      <td class="px-6 py-4 whitespace-nowrap text-sm text-zinc-500 dark:text-zinc-400">
+        ${formatTimestamp3(event.processedAt)}
+      </td>
+      <td class="px-6 py-4 whitespace-nowrap">
+        <span class="text-sm font-mono text-zinc-950 dark:text-white">${event.type}</span>
+      </td>
+      <td class="px-6 py-4 whitespace-nowrap">
+        <div class="text-sm font-mono text-zinc-500 dark:text-zinc-400">${event.objectId || "-"}</div>
+        <div class="text-xs text-zinc-400 dark:text-zinc-500">${event.objectType}</div>
+        ${userLink ? `<div class="mt-1">${userLink}</div>` : ""}
+      </td>
+      <td class="px-6 py-4 whitespace-nowrap">${eventStatusBadge(event.status)}</td>
+      <td class="px-6 py-4 whitespace-nowrap text-xs font-mono text-zinc-400 dark:text-zinc-500">${event.stripeEventId}</td>
+    </tr>
+  `;
+}
+function renderEventPagination(page, totalPages, type, status) {
+  if (totalPages <= 1) return "";
+  const params = [];
+  if (type) params.push(`type=${type}`);
+  if (status) params.push(`status=${status}`);
+  const extra = params.length > 0 ? `&${params.join("&")}` : "";
+  return `
+    <div class="px-6 py-3 flex items-center justify-between border-t border-zinc-950/5 dark:border-white/5">
+      <div class="text-sm text-zinc-500 dark:text-zinc-400">
+        Page ${page} of ${totalPages}
+      </div>
+      <div class="flex gap-2">
+        ${page > 1 ? `<a href="?page=${page - 1}${extra}" class="px-3 py-1 rounded-lg text-sm text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 hover:bg-zinc-50 dark:hover:bg-zinc-800">Previous</a>` : ""}
+        ${page < totalPages ? `<a href="?page=${page + 1}${extra}" class="px-3 py-1 rounded-lg text-sm text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 hover:bg-zinc-50 dark:hover:bg-zinc-800">Next</a>` : ""}
+      </div>
+    </div>
+  `;
+}
+
+// src/plugins/core-plugins/stripe-plugin/types.ts
+var DEFAULT_SETTINGS3 = {
+  stripePublishableKey: "",
+  stripeSecretKey: "",
+  stripeWebhookSecret: "",
+  stripePriceId: "",
+  successUrl: "/admin/dashboard",
+  cancelUrl: "/admin/dashboard"
+};
+
+// src/plugins/core-plugins/stripe-plugin/routes/admin.ts
+var adminRoutes3 = new Hono();
+adminRoutes3.use("*", requireAuth());
+adminRoutes3.use("*", async (c, next) => {
+  const user = c.get("user");
+  if (user?.role !== "admin") {
+    return c.text("Access denied", 403);
+  }
+  return next();
+});
+async function getSettings3(db) {
+  try {
+    const pluginService = new PluginService(db);
+    const plugin2 = await pluginService.getPlugin("stripe");
+    if (plugin2?.settings) {
+      const settings = typeof plugin2.settings === "string" ? JSON.parse(plugin2.settings) : plugin2.settings;
+      return { ...DEFAULT_SETTINGS3, ...settings };
+    }
+  } catch {
+  }
+  return DEFAULT_SETTINGS3;
+}
+adminRoutes3.get("/", async (c) => {
+  const db = c.env.DB;
+  const user = c.get("user");
+  const subscriptionService = new SubscriptionService(db);
+  await subscriptionService.ensureTable();
+  const page = parseInt(c.req.query("page") || "1");
+  const limit = 50;
+  const statusFilter = c.req.query("status");
+  const [{ subscriptions, total }, stats] = await Promise.all([
+    subscriptionService.list({ status: statusFilter, page, limit }),
+    subscriptionService.getStats()
+  ]);
+  const totalPages = Math.ceil(total / limit);
+  const html = renderSubscriptionsPage({
+    subscriptions,
+    stats,
+    filters: { status: statusFilter, page, totalPages },
+    user: user ? { name: user.email, email: user.email, role: user.role } : void 0,
+    version: c.get("appVersion"),
+    dynamicMenuItems: c.get("pluginMenuItems")
+  });
+  return c.html(html);
+});
+adminRoutes3.get("/events", async (c) => {
+  const db = c.env.DB;
+  const user = c.get("user");
+  const eventService = new StripeEventService(db);
+  await eventService.ensureTable();
+  const page = parseInt(c.req.query("page") || "1");
+  const limit = 50;
+  const typeFilter = c.req.query("type") || void 0;
+  const statusFilter = c.req.query("status");
+  const [{ events, total }, stats, types] = await Promise.all([
+    eventService.list({ type: typeFilter, status: statusFilter, page, limit }),
+    eventService.getStats(),
+    eventService.getDistinctTypes()
+  ]);
+  const totalPages = Math.ceil(total / limit);
+  const html = renderEventsPage({
+    events,
+    stats,
+    types,
+    filters: { type: typeFilter, status: statusFilter, page, totalPages },
+    user: user ? { name: user.email, email: user.email, role: user.role } : void 0,
+    version: c.get("appVersion"),
+    dynamicMenuItems: c.get("pluginMenuItems")
+  });
+  return c.html(html);
+});
+adminRoutes3.get("/settings", async (c) => {
+  const db = c.env.DB;
+  const user = c.get("user");
+  const settings = await getSettings3(db);
+  const { renderAdminLayoutCatalyst: renderAdminLayoutCatalyst2 } = await import('./admin-layout-catalyst.template-UMTIN66R.js');
+  const content2 = `
+    <div>
+      <div class="mb-6">
+        <h1 class="text-2xl/8 font-semibold text-zinc-950 dark:text-white sm:text-xl/8">Stripe</h1>
+        <p class="mt-2 text-sm/6 text-zinc-500 dark:text-zinc-400">
+          Configure your Stripe API keys and checkout options.
+        </p>
+      </div>
+
+      ${renderStripeTabBar("/admin/plugins/stripe/settings")}
+
+      <div id="settings-message" class="hidden mb-4 rounded-lg p-4 text-sm"></div>
+
+      <form id="stripe-settings-form" class="rounded-xl bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl ring-1 ring-zinc-950/5 dark:ring-white/10 shadow-sm divide-y divide-zinc-950/5 dark:divide-white/5">
+        <div class="p-6 space-y-5">
+          <div>
+            <label class="block text-sm font-medium text-zinc-950 dark:text-white mb-1.5">Publishable Key</label>
+            <input type="text" name="stripePublishableKey" value="${settings.stripePublishableKey}"
+              placeholder="pk_..."
+              class="w-full rounded-lg border-0 bg-white dark:bg-zinc-800 px-3.5 py-2 text-sm text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:ring-2 focus:ring-cyan-500" />
+            <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">Your Stripe publishable key (starts with pk_)</p>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-zinc-950 dark:text-white mb-1.5">Secret Key</label>
+            <input type="password" name="stripeSecretKey" value="${settings.stripeSecretKey}"
+              placeholder="sk_..."
+              class="w-full rounded-lg border-0 bg-white dark:bg-zinc-800 px-3.5 py-2 text-sm text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:ring-2 focus:ring-cyan-500" />
+            <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">Your Stripe secret API key (starts with sk_)</p>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-zinc-950 dark:text-white mb-1.5">Webhook Signing Secret</label>
+            <input type="password" name="stripeWebhookSecret" value="${settings.stripeWebhookSecret}"
+              placeholder="whsec_..."
+              class="w-full rounded-lg border-0 bg-white dark:bg-zinc-800 px-3.5 py-2 text-sm text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:ring-2 focus:ring-cyan-500" />
+            <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">Stripe webhook endpoint signing secret (starts with whsec_)</p>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-zinc-950 dark:text-white mb-1.5">Default Price ID</label>
+            <input type="text" name="stripePriceId" value="${settings.stripePriceId || ""}"
+              placeholder="price_..."
+              class="w-full rounded-lg border-0 bg-white dark:bg-zinc-800 px-3.5 py-2 text-sm text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:ring-2 focus:ring-cyan-500" />
+            <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">Default Stripe Price ID for checkout sessions (optional)</p>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-zinc-950 dark:text-white mb-1.5">Checkout Success URL</label>
+            <input type="text" name="successUrl" value="${settings.successUrl}"
+              class="w-full rounded-lg border-0 bg-white dark:bg-zinc-800 px-3.5 py-2 text-sm text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:ring-2 focus:ring-cyan-500" />
+            <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">Redirect URL after successful checkout</p>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-zinc-950 dark:text-white mb-1.5">Checkout Cancel URL</label>
+            <input type="text" name="cancelUrl" value="${settings.cancelUrl}"
+              class="w-full rounded-lg border-0 bg-white dark:bg-zinc-800 px-3.5 py-2 text-sm text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:ring-2 focus:ring-cyan-500" />
+            <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">Redirect URL if checkout is cancelled</p>
+          </div>
+        </div>
+
+        <div class="px-6 py-4 flex justify-end">
+          <button type="submit"
+            class="inline-flex items-center justify-center rounded-lg bg-zinc-950 dark:bg-white px-3.5 py-2.5 text-sm font-semibold text-white dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors shadow-sm">
+            Save Settings
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      document.getElementById('stripe-settings-form').addEventListener('submit', async (e) => {
+        e.preventDefault()
+        const form = e.target
+        const data = Object.fromEntries(new FormData(form))
+        const msg = document.getElementById('settings-message')
+        try {
+          const res = await fetch('/admin/plugins/stripe/settings', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          })
+          const result = await res.json()
+          msg.className = result.success
+            ? 'mb-4 rounded-lg p-4 text-sm bg-emerald-400/10 text-emerald-500 dark:text-emerald-400 ring-1 ring-inset ring-emerald-400/20'
+            : 'mb-4 rounded-lg p-4 text-sm bg-red-400/10 text-red-500 dark:text-red-400 ring-1 ring-inset ring-red-400/20'
+          msg.textContent = result.success ? 'Settings saved successfully.' : (result.error || 'Failed to save settings.')
+        } catch {
+          msg.className = 'mb-4 rounded-lg p-4 text-sm bg-red-400/10 text-red-500 dark:text-red-400 ring-1 ring-inset ring-red-400/20'
+          msg.textContent = 'Network error. Please try again.'
+        }
+      })
+    </script>
+  `;
+  return c.html(renderAdminLayoutCatalyst2({
+    title: "Stripe Settings",
+    pageTitle: "Stripe Settings",
+    currentPath: "/admin/plugins/stripe",
+    user: user ? { name: user.email, email: user.email, role: user.role } : void 0,
+    content: content2,
+    version: c.get("appVersion"),
+    dynamicMenuItems: c.get("pluginMenuItems")
+  }));
+});
+adminRoutes3.post("/settings", async (c) => {
+  try {
+    const body = await c.req.json();
+    const db = c.env.DB;
+    await db.prepare(`
+      UPDATE plugins
+      SET settings = ?,
+          updated_at = unixepoch()
+      WHERE id = 'stripe'
+    `).bind(JSON.stringify(body)).run();
+    return c.json({ success: true });
+  } catch (error) {
+    console.error("Error saving Stripe settings:", error);
+    return c.json({ success: false, error: "Failed to save settings" }, 500);
+  }
+});
+
+// src/plugins/core-plugins/stripe-plugin/services/stripe-api.ts
+var StripeAPI = class {
+  constructor(secretKey) {
+    this.secretKey = secretKey;
+  }
+  baseUrl = "https://api.stripe.com/v1";
+  /**
+   * Verify a webhook signature
+   * Implements Stripe's v1 signature scheme using Web Crypto API
+   */
+  async verifyWebhookSignature(payload, sigHeader, secret) {
+    const parts = sigHeader.split(",");
+    const timestamp = parts.find((p) => p.startsWith("t="))?.split("=")[1];
+    const signatures = parts.filter((p) => p.startsWith("v1=")).map((p) => p.substring(3));
+    if (!timestamp || signatures.length === 0) return false;
+    const now = Math.floor(Date.now() / 1e3);
+    if (Math.abs(now - parseInt(timestamp)) > 300) return false;
+    const signedPayload = `${timestamp}.${payload}`;
+    const encoder = new TextEncoder();
+    const key = await crypto.subtle.importKey(
+      "raw",
+      encoder.encode(secret),
+      { name: "HMAC", hash: "SHA-256" },
+      false,
+      ["sign"]
+    );
+    const signatureBuffer = await crypto.subtle.sign("HMAC", key, encoder.encode(signedPayload));
+    const expectedSignature = Array.from(new Uint8Array(signatureBuffer)).map((b) => b.toString(16).padStart(2, "0")).join("");
+    return signatures.some((sig) => timingSafeEqual(sig, expectedSignature));
+  }
+  /**
+   * Create a Checkout Session
+   */
+  async createCheckoutSession(params) {
+    const body = new URLSearchParams();
+    body.append("mode", "subscription");
+    body.append("line_items[0][price]", params.priceId);
+    body.append("line_items[0][quantity]", "1");
+    body.append("success_url", params.successUrl);
+    body.append("cancel_url", params.cancelUrl);
+    if (params.customerId) {
+      body.append("customer", params.customerId);
+    } else if (params.customerEmail) {
+      body.append("customer_email", params.customerEmail);
+    }
+    if (params.metadata) {
+      for (const [key, value] of Object.entries(params.metadata)) {
+        body.append(`metadata[${key}]`, value);
+      }
+    }
+    const response = await this.request("POST", "/checkout/sessions", body);
+    return { id: response.id, url: response.url };
+  }
+  /**
+   * Retrieve a Stripe subscription
+   */
+  async getSubscription(subscriptionId) {
+    return this.request("GET", `/subscriptions/${subscriptionId}`);
+  }
+  /**
+   * Create a Stripe customer
+   */
+  async createCustomer(params) {
+    const body = new URLSearchParams();
+    body.append("email", params.email);
+    if (params.metadata) {
+      for (const [key, value] of Object.entries(params.metadata)) {
+        body.append(`metadata[${key}]`, value);
+      }
+    }
+    return this.request("POST", "/customers", body);
+  }
+  /**
+   * List subscriptions with pagination (auto-expands across pages)
+   */
+  async listSubscriptions(params) {
+    const qs = new URLSearchParams();
+    qs.append("limit", String(params?.limit || 100));
+    if (params?.status) qs.append("status", params.status);
+    if (params?.startingAfter) qs.append("starting_after", params.startingAfter);
+    return this.request("GET", `/subscriptions?${qs.toString()}`);
+  }
+  /**
+   * Fetch ALL subscriptions from Stripe (handles pagination automatically)
+   */
+  async listAllSubscriptions() {
+    const all = [];
+    let startingAfter;
+    while (true) {
+      const result = await this.listSubscriptions({ limit: 100, startingAfter });
+      all.push(...result.data);
+      if (!result.has_more || result.data.length === 0) break;
+      startingAfter = result.data[result.data.length - 1].id;
+    }
+    return all;
+  }
+  /**
+   * Search for a customer by email
+   */
+  async findCustomerByEmail(email) {
+    const params = new URLSearchParams();
+    params.append("query", `email:'${email}'`);
+    params.append("limit", "1");
+    const result = await this.request("GET", `/customers/search?${params.toString()}`);
+    return result.data?.[0] || null;
+  }
+  async request(method, path, body) {
+    const url = path.startsWith("http") ? path : `${this.baseUrl}${path}`;
+    const response = await fetch(url, {
+      method,
+      headers: {
+        "Authorization": `Bearer ${this.secretKey}`,
+        ...body ? { "Content-Type": "application/x-www-form-urlencoded" } : {}
+      },
+      ...body ? { body: body.toString() } : {}
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(`Stripe API error: ${data.error?.message || response.statusText}`);
+    }
+    return data;
+  }
+};
+function timingSafeEqual(a, b) {
+  if (a.length !== b.length) return false;
+  let result = 0;
+  for (let i = 0; i < a.length; i++) {
+    result |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  }
+  return result === 0;
+}
+
+// src/plugins/core-plugins/stripe-plugin/routes/api.ts
+var apiRoutes3 = new Hono();
+async function getSettings4(db) {
+  try {
+    const pluginService = new PluginService(db);
+    const plugin2 = await pluginService.getPlugin("stripe");
+    if (plugin2?.settings) {
+      const settings = typeof plugin2.settings === "string" ? JSON.parse(plugin2.settings) : plugin2.settings;
+      return { ...DEFAULT_SETTINGS3, ...settings };
+    }
+  } catch {
+  }
+  return DEFAULT_SETTINGS3;
+}
+function mapStripeStatus(status) {
+  const map = {
+    active: "active",
+    canceled: "canceled",
+    past_due: "past_due",
+    trialing: "trialing",
+    unpaid: "unpaid",
+    paused: "paused",
+    incomplete: "incomplete",
+    incomplete_expired: "incomplete_expired"
+  };
+  return map[status] || "incomplete";
+}
+apiRoutes3.post("/webhook", async (c) => {
+  const db = c.env.DB;
+  const settings = await getSettings4(db);
+  if (!settings.stripeWebhookSecret) {
+    return c.json({ error: "Webhook secret not configured" }, 500);
+  }
+  const rawBody = await c.req.text();
+  const sigHeader = c.req.header("stripe-signature") || "";
+  const stripeApi = new StripeAPI(settings.stripeSecretKey);
+  const isValid = await stripeApi.verifyWebhookSignature(rawBody, sigHeader, settings.stripeWebhookSecret);
+  if (!isValid) {
+    return c.json({ error: "Invalid signature" }, 400);
+  }
+  const event = JSON.parse(rawBody);
+  const subscriptionService = new SubscriptionService(db);
+  const eventService = new StripeEventService(db);
+  await Promise.all([subscriptionService.ensureTable(), eventService.ensureTable()]);
+  const obj = event.data.object;
+  const objectId = obj?.id || "";
+  const objectType = obj?.object || event.type.split(".")[0] || "";
+  try {
+    switch (event.type) {
+      case "customer.subscription.created": {
+        const sub = event.data.object;
+        const userId = sub.metadata?.sonicjs_user_id || await subscriptionService.getUserIdByStripeCustomer(sub.customer) || "";
+        await subscriptionService.create({
+          userId,
+          stripeCustomerId: sub.customer,
+          stripeSubscriptionId: sub.id,
+          stripePriceId: sub.items.data[0]?.price.id || "",
+          status: mapStripeStatus(sub.status),
+          currentPeriodStart: sub.current_period_start,
+          currentPeriodEnd: sub.current_period_end,
+          cancelAtPeriodEnd: sub.cancel_at_period_end
+        });
+        console.log(`[Stripe] Subscription created: ${sub.id}`);
+        break;
+      }
+      case "customer.subscription.updated": {
+        const sub = event.data.object;
+        await subscriptionService.updateByStripeId(sub.id, {
+          status: mapStripeStatus(sub.status),
+          stripePriceId: sub.items.data[0]?.price.id || void 0,
+          currentPeriodStart: sub.current_period_start,
+          currentPeriodEnd: sub.current_period_end,
+          cancelAtPeriodEnd: sub.cancel_at_period_end
+        });
+        console.log(`[Stripe] Subscription updated: ${sub.id} -> ${sub.status}`);
+        break;
+      }
+      case "customer.subscription.deleted": {
+        const sub = event.data.object;
+        await subscriptionService.updateByStripeId(sub.id, {
+          status: "canceled"
+        });
+        console.log(`[Stripe] Subscription deleted: ${sub.id}`);
+        break;
+      }
+      case "checkout.session.completed": {
+        const session = event.data.object;
+        const userId = session.metadata?.sonicjs_user_id;
+        if (userId && session.subscription) {
+          const existing = await subscriptionService.getByStripeSubscriptionId(session.subscription);
+          if (existing && !existing.userId) {
+            await subscriptionService.updateByStripeId(session.subscription, {
+              userId
+            });
+          }
+        }
+        console.log(`[Stripe] Checkout completed: ${session.id}`);
+        break;
+      }
+      case "invoice.payment_succeeded": {
+        const invoice = event.data.object;
+        if (invoice.subscription) {
+          await subscriptionService.updateByStripeId(invoice.subscription, {
+            status: "active"
+          });
+        }
+        console.log(`[Stripe] Payment succeeded for invoice: ${invoice.id}`);
+        break;
+      }
+      case "invoice.payment_failed": {
+        const invoice = event.data.object;
+        if (invoice.subscription) {
+          await subscriptionService.updateByStripeId(invoice.subscription, {
+            status: "past_due"
+          });
+        }
+        console.log(`[Stripe] Payment failed for invoice: ${invoice.id}`);
+        break;
+      }
+      default:
+        console.log(`[Stripe] Unhandled event type: ${event.type}`);
+        await eventService.log({
+          stripeEventId: event.id,
+          type: event.type,
+          objectId,
+          objectType,
+          data: event.data.object,
+          status: "ignored"
+        });
+        return c.json({ received: true });
+    }
+    await eventService.log({
+      stripeEventId: event.id,
+      type: event.type,
+      objectId,
+      objectType,
+      data: event.data.object,
+      status: "processed"
+    });
+  } catch (error) {
+    await eventService.log({
+      stripeEventId: event.id,
+      type: event.type,
+      objectId,
+      objectType,
+      data: event.data.object,
+      status: "failed",
+      error: error instanceof Error ? error.message : String(error)
+    }).catch(() => {
+    });
+    console.error(`[Stripe] Error processing webhook event ${event.type}:`, error);
+    return c.json({ error: "Webhook processing failed" }, 500);
+  }
+  return c.json({ received: true });
+});
+apiRoutes3.post("/create-checkout-session", requireAuth(), async (c) => {
+  const db = c.env.DB;
+  const user = c.get("user");
+  if (!user) return c.json({ error: "Unauthorized" }, 401);
+  const settings = await getSettings4(db);
+  if (!settings.stripeSecretKey) {
+    return c.json({ error: "Stripe not configured" }, 500);
+  }
+  const body = await c.req.json().catch(() => ({}));
+  const priceId = body.priceId || settings.stripePriceId;
+  if (!priceId) {
+    return c.json({ error: "No price ID specified" }, 400);
+  }
+  const stripeApi = new StripeAPI(settings.stripeSecretKey);
+  const subscriptionService = new SubscriptionService(db);
+  await subscriptionService.ensureTable();
+  const existingSub = await subscriptionService.getByUserId(user.userId);
+  let customerId = existingSub?.stripeCustomerId;
+  if (!customerId) {
+    const existing = await stripeApi.findCustomerByEmail(user.email);
+    if (existing) {
+      customerId = existing.id;
+    } else {
+      const customer = await stripeApi.createCustomer({
+        email: user.email,
+        metadata: { sonicjs_user_id: user.userId }
+      });
+      customerId = customer.id;
+    }
+  }
+  const origin = new URL(c.req.url).origin;
+  const session = await stripeApi.createCheckoutSession({
+    priceId,
+    customerId,
+    successUrl: `${origin}${settings.successUrl}?session_id={CHECKOUT_SESSION_ID}`,
+    cancelUrl: `${origin}${settings.cancelUrl}`,
+    metadata: { sonicjs_user_id: user.userId }
+  });
+  return c.json({ sessionId: session.id, url: session.url });
+});
+apiRoutes3.get("/subscription", requireAuth(), async (c) => {
+  const user = c.get("user");
+  if (!user) return c.json({ error: "Unauthorized" }, 401);
+  const db = c.env.DB;
+  const subscriptionService = new SubscriptionService(db);
+  await subscriptionService.ensureTable();
+  const subscription = await subscriptionService.getByUserId(user.userId);
+  if (!subscription) {
+    return c.json({ subscription: null });
+  }
+  return c.json({ subscription });
+});
+apiRoutes3.get("/subscriptions", requireAuth(), async (c) => {
+  const user = c.get("user");
+  if (user?.role !== "admin") return c.json({ error: "Access denied" }, 403);
+  const db = c.env.DB;
+  const subscriptionService = new SubscriptionService(db);
+  await subscriptionService.ensureTable();
+  const filters = {
+    status: c.req.query("status"),
+    page: c.req.query("page") ? parseInt(c.req.query("page")) : 1,
+    limit: c.req.query("limit") ? parseInt(c.req.query("limit")) : 50,
+    sortBy: c.req.query("sortBy") || "created_at",
+    sortOrder: c.req.query("sortOrder") || "desc"
+  };
+  const result = await subscriptionService.list(filters);
+  return c.json(result);
+});
+apiRoutes3.get("/stats", requireAuth(), async (c) => {
+  const user = c.get("user");
+  if (user?.role !== "admin") return c.json({ error: "Access denied" }, 403);
+  const db = c.env.DB;
+  const subscriptionService = new SubscriptionService(db);
+  await subscriptionService.ensureTable();
+  const stats = await subscriptionService.getStats();
+  return c.json(stats);
+});
+apiRoutes3.post("/sync-subscriptions", requireAuth(), async (c) => {
+  const user = c.get("user");
+  if (user?.role !== "admin") return c.json({ error: "Access denied" }, 403);
+  const db = c.env.DB;
+  const settings = await getSettings4(db);
+  if (!settings.stripeSecretKey) {
+    return c.json({ error: "Stripe secret key not configured" }, 400);
+  }
+  const stripeApi = new StripeAPI(settings.stripeSecretKey);
+  const subscriptionService = new SubscriptionService(db);
+  await subscriptionService.ensureTable();
+  try {
+    const allSubs = await stripeApi.listAllSubscriptions();
+    let synced = 0;
+    let errors = 0;
+    for (const sub of allSubs) {
+      try {
+        const userId = sub.metadata?.sonicjs_user_id || await subscriptionService.getUserIdByStripeCustomer(sub.customer) || "";
+        await subscriptionService.upsert({
+          userId,
+          stripeCustomerId: typeof sub.customer === "string" ? sub.customer : sub.customer.id,
+          stripeSubscriptionId: sub.id,
+          stripePriceId: sub.items?.data?.[0]?.price?.id || "",
+          status: mapStripeStatus(sub.status),
+          currentPeriodStart: sub.current_period_start,
+          currentPeriodEnd: sub.current_period_end,
+          cancelAtPeriodEnd: sub.cancel_at_period_end
+        });
+        synced++;
+      } catch (err) {
+        console.error(`[Stripe Sync] Failed to upsert subscription ${sub.id}:`, err);
+        errors++;
+      }
+    }
+    return c.json({
+      success: true,
+      total: allSubs.length,
+      synced,
+      errors
+    });
+  } catch (error) {
+    console.error("[Stripe Sync] Error:", error);
+    return c.json({
+      success: false,
+      error: error instanceof Error ? error.message : "Sync failed"
+    }, 500);
+  }
+});
+apiRoutes3.get("/events", requireAuth(), async (c) => {
+  const user = c.get("user");
+  if (user?.role !== "admin") return c.json({ error: "Access denied" }, 403);
+  const db = c.env.DB;
+  const eventService = new StripeEventService(db);
+  await eventService.ensureTable();
+  const filters = {
+    type: c.req.query("type") || void 0,
+    status: c.req.query("status") || void 0,
+    objectId: c.req.query("objectId") || void 0,
+    page: c.req.query("page") ? parseInt(c.req.query("page")) : 1,
+    limit: c.req.query("limit") ? parseInt(c.req.query("limit")) : 50
+  };
+  const [result, stats, types] = await Promise.all([
+    eventService.list(filters),
+    eventService.getStats(),
+    eventService.getDistinctTypes()
+  ]);
+  return c.json({ ...result, stats, types });
+});
+
+// src/plugins/core-plugins/stripe-plugin/index.ts
+function createStripePlugin() {
+  const builder = PluginBuilder.create({
+    name: "stripe",
+    version: "1.0.0-beta.1",
+    description: "Stripe subscription management with webhook handling, checkout sessions, and subscription gating"
+  });
+  builder.metadata({
+    author: { name: "SonicJS Team" },
+    license: "MIT"
+  });
+  builder.addRoute("/admin/plugins/stripe", adminRoutes3, {
+    description: "Stripe subscriptions admin dashboard",
+    requiresAuth: true,
+    priority: 50
+  });
+  builder.addRoute("/api/stripe", apiRoutes3, {
+    description: "Stripe API endpoints (webhook, checkout, subscription)",
+    requiresAuth: false,
+    // Webhook route handles its own auth via signature
+    priority: 50
+  });
+  builder.addMenuItem("Stripe", "/admin/plugins/stripe", {
+    icon: `<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>`,
+    order: 75
+  });
+  builder.lifecycle({
+    install: async () => {
+      console.log("[Stripe] Plugin installed");
+    },
+    activate: async () => {
+      console.log("[Stripe] Plugin activated");
+    },
+    deactivate: async () => {
+      console.log("[Stripe] Plugin deactivated");
+    },
+    uninstall: async () => {
+      console.log("[Stripe] Plugin uninstalled");
+    }
+  });
+  return builder.build();
+}
+var stripePlugin = createStripePlugin();
+
+// src/middleware/plugin-menu.ts
+var REGISTRY_MENU_PLUGINS = Object.values(PLUGIN_REGISTRY).filter((p) => p.adminMenu !== null).map((p) => ({
+  codeName: p.codeName,
+  label: p.adminMenu.label,
+  path: p.adminMenu.path,
+  icon: p.adminMenu.icon,
+  order: p.adminMenu.order
+}));
+var ICON_SVG = {
+  "magnifying-glass": '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg>',
+  "chart-bar": '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>',
+  "image": '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/></svg>',
+  "palette": '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.098 19.902a3.75 3.75 0 0 0 5.304 0l6.401-6.402M6.75 21A3.75 3.75 0 0 1 3 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 0 0 3.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008Z"/></svg>',
+  "envelope": '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>',
+  "hand-raised": '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.05 4.575a1.575 1.575 0 1 0-3.15 0v3m3.15-3v-1.5a1.575 1.575 0 0 1 3.15 0v1.5m-3.15 0 .075 5.925m3.075-5.925v2.925m0-2.925a1.575 1.575 0 0 1 3.15 0V9.9m-3.15-2.4v5.325M16.5 9.9a1.575 1.575 0 0 1 3.15 0V15a6.15 6.15 0 0 1-6.15 6.15H12A6.15 6.15 0 0 1 5.85 15V9.525"/></svg>',
+  "key": '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z"/></svg>',
+  "arrow-right": '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>',
+  "shield-check": '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>',
+  "credit-card": '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z"/></svg>'
+};
+function resolveIcon(iconName) {
+  if (!iconName) return "";
+  if (iconName.startsWith("<svg") || iconName.startsWith("<")) return iconName;
+  return ICON_SVG[iconName] || "";
+}
 var MARKER = "<!-- DYNAMIC_PLUGIN_MENU -->";
 function renderMenuItem(item, currentPath) {
   const isActive = currentPath === item.path || currentPath.startsWith(item.path);
   const fallbackIcon = `<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`;
+  const resolvedIcon = resolveIcon(item.icon) || fallbackIcon;
   return `
     <span class="relative">
       ${isActive ? '<span class="absolute inset-y-2 -left-4 w-0.5 rounded-full bg-cyan-500 dark:bg-cyan-400"></span>' : ""}
@@ -6288,7 +7728,7 @@ function renderMenuItem(item, currentPath) {
         ${isActive ? 'data-current="true"' : ""}
       >
         <span class="shrink-0 ${isActive ? "fill-zinc-950 dark:fill-white" : "fill-zinc-500 dark:fill-zinc-400"}">
-          ${item.icon || fallbackIcon}
+          ${resolvedIcon}
         </span>
         <span class="truncate">${item.label}</span>
       </a>
@@ -6303,23 +7743,28 @@ function pluginMenuMiddleware() {
     let activeMenuItems = [];
     try {
       const db = c.env.DB;
-      const pluginNames = MENU_PLUGINS.map((p) => p.name);
-      if (pluginNames.length > 0) {
-        const placeholders = pluginNames.map(() => "?").join(",");
+      const pluginCodeNames = REGISTRY_MENU_PLUGINS.map((p) => p.codeName);
+      if (pluginCodeNames.length > 0) {
+        const placeholders = pluginCodeNames.map(() => "?").join(",");
         const result = await db.prepare(
           `SELECT name FROM plugins WHERE name IN (${placeholders}) AND status = 'active'`
-        ).bind(...pluginNames).all();
+        ).bind(...pluginCodeNames).all();
         const activeNames = new Set((result.results || []).map((r) => r.name));
-        for (const plugin2 of MENU_PLUGINS) {
-          if (activeNames.has(plugin2.name) && plugin2.menuItems) {
-            activeMenuItems.push(...plugin2.menuItems);
+        for (const plugin2 of REGISTRY_MENU_PLUGINS) {
+          if (activeNames.has(plugin2.codeName)) {
+            activeMenuItems.push({
+              label: plugin2.label,
+              path: plugin2.path,
+              icon: plugin2.icon,
+              order: plugin2.order
+            });
           }
         }
-        activeMenuItems.sort((a, b) => (a.order || 0) - (b.order || 0));
+        activeMenuItems.sort((a, b) => a.order - b.order);
       }
     } catch {
     }
-    c.set("pluginMenuItems", activeMenuItems.map((m) => ({ label: m.label, path: m.path, icon: m.icon || "" })));
+    c.set("pluginMenuItems", activeMenuItems.map((m) => ({ label: m.label, path: m.path, icon: resolveIcon(m.icon) || "" })));
     await next();
     if (activeMenuItems.length > 0 && c.res.headers.get("content-type")?.includes("text/html")) {
       const status = c.res.status;
@@ -6335,6 +7780,672 @@ function pluginMenuMiddleware() {
     }
   };
 }
+
+// src/plugins/types.ts
+var HOOKS2 = {
+  // Request lifecycle
+  REQUEST_START: "request:start",
+  REQUEST_END: "request:end",
+  USER_LOGIN: "user:login"};
+init_admin_layout_catalyst_template();
+var adminRoutes4 = new Hono();
+adminRoutes4.use("*", requireAuth());
+adminRoutes4.use("*", async (c, next) => {
+  const user = c.get("user");
+  if (user?.role !== "admin") {
+    return c.text("Access denied", 403);
+  }
+  return next();
+});
+adminRoutes4.get("/", async (c) => {
+  const user = c.get("user");
+  const db = c.env.DB;
+  let totalRequests = 0;
+  let uniqueIPs = 0;
+  let avgDuration = 0;
+  let errorCount = 0;
+  let topPages = [];
+  let recentActivity = [];
+  try {
+    const now = Math.floor(Date.now() / 1e3);
+    const dayAgo = now - 86400;
+    const [requestsResult, ipsResult, durationResult, errorsResult, pagesResult, activityResult] = await Promise.all([
+      db.prepare("SELECT COUNT(*) as count FROM system_logs WHERE category = ? AND created_at > ?").bind("api", dayAgo).first(),
+      db.prepare("SELECT COUNT(DISTINCT ip_address) as count FROM system_logs WHERE category = ? AND created_at > ?").bind("api", dayAgo).first(),
+      db.prepare("SELECT AVG(duration) as avg FROM system_logs WHERE category = ? AND created_at > ? AND duration IS NOT NULL").bind("api", dayAgo).first(),
+      db.prepare("SELECT COUNT(*) as count FROM system_logs WHERE level IN (?, ?) AND created_at > ?").bind("error", "fatal", dayAgo).first(),
+      db.prepare("SELECT url, COUNT(*) as views FROM system_logs WHERE category = ? AND created_at > ? AND url IS NOT NULL GROUP BY url ORDER BY views DESC LIMIT 10").bind("api", dayAgo).all(),
+      db.prepare("SELECT url, method, status_code, duration, created_at FROM system_logs WHERE category = ? ORDER BY created_at DESC LIMIT 20").bind("api").all()
+    ]);
+    totalRequests = requestsResult?.count || 0;
+    uniqueIPs = ipsResult?.count || 0;
+    avgDuration = Math.round(durationResult?.avg || 0);
+    errorCount = errorsResult?.count || 0;
+    topPages = (pagesResult.results || []).map((r) => ({ path: r.url, views: r.views }));
+    recentActivity = activityResult.results || [];
+  } catch {
+  }
+  const content2 = `
+    <div class="space-y-8">
+      <div>
+        <h1 class="text-2xl font-semibold text-zinc-950 dark:text-white">Analytics Dashboard</h1>
+        <p class="mt-1 text-sm text-zinc-500 dark:text-zinc-400">Last 24 hours overview from system logs</p>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-lg bg-white dark:bg-zinc-800 p-6 ring-1 ring-zinc-950/5 dark:ring-white/10">
+          <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400">Total Requests</p>
+          <p class="mt-2 text-3xl font-semibold text-zinc-950 dark:text-white">${totalRequests.toLocaleString()}</p>
+        </div>
+        <div class="rounded-lg bg-white dark:bg-zinc-800 p-6 ring-1 ring-zinc-950/5 dark:ring-white/10">
+          <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400">Unique Visitors</p>
+          <p class="mt-2 text-3xl font-semibold text-zinc-950 dark:text-white">${uniqueIPs.toLocaleString()}</p>
+        </div>
+        <div class="rounded-lg bg-white dark:bg-zinc-800 p-6 ring-1 ring-zinc-950/5 dark:ring-white/10">
+          <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400">Avg Response Time</p>
+          <p class="mt-2 text-3xl font-semibold text-zinc-950 dark:text-white">${avgDuration}ms</p>
+        </div>
+        <div class="rounded-lg bg-white dark:bg-zinc-800 p-6 ring-1 ring-zinc-950/5 dark:ring-white/10">
+          <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400">Errors</p>
+          <p class="mt-2 text-3xl font-semibold ${errorCount > 0 ? "text-red-600 dark:text-red-400" : "text-zinc-950 dark:text-white"}">${errorCount.toLocaleString()}</p>
+        </div>
+      </div>
+
+      <!-- Top Pages -->
+      <div class="rounded-lg bg-white dark:bg-zinc-800 ring-1 ring-zinc-950/5 dark:ring-white/10">
+        <div class="px-6 py-4 border-b border-zinc-950/5 dark:border-white/10">
+          <h2 class="text-lg font-semibold text-zinc-950 dark:text-white">Top Pages</h2>
+        </div>
+        <div class="divide-y divide-zinc-950/5 dark:divide-white/10">
+          ${topPages.length > 0 ? topPages.map((p) => `
+            <div class="flex items-center justify-between px-6 py-3">
+              <span class="text-sm text-zinc-700 dark:text-zinc-300 font-mono truncate">${escapeHtml3(p.path)}</span>
+              <span class="text-sm font-medium text-zinc-500 dark:text-zinc-400">${p.views}</span>
+            </div>
+          `).join("") : `
+            <div class="px-6 py-8 text-center text-sm text-zinc-500 dark:text-zinc-400">
+              No page views recorded yet. Analytics data will appear once requests are logged.
+            </div>
+          `}
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="rounded-lg bg-white dark:bg-zinc-800 ring-1 ring-zinc-950/5 dark:ring-white/10">
+        <div class="px-6 py-4 border-b border-zinc-950/5 dark:border-white/10">
+          <h2 class="text-lg font-semibold text-zinc-950 dark:text-white">Recent Activity</h2>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead class="bg-zinc-50 dark:bg-zinc-800/50">
+              <tr>
+                <th class="px-6 py-2 text-left font-medium text-zinc-500 dark:text-zinc-400">Path</th>
+                <th class="px-6 py-2 text-left font-medium text-zinc-500 dark:text-zinc-400">Method</th>
+                <th class="px-6 py-2 text-left font-medium text-zinc-500 dark:text-zinc-400">Status</th>
+                <th class="px-6 py-2 text-left font-medium text-zinc-500 dark:text-zinc-400">Duration</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-zinc-950/5 dark:divide-white/10">
+              ${recentActivity.length > 0 ? recentActivity.map((a) => `
+                <tr>
+                  <td class="px-6 py-2 font-mono text-zinc-700 dark:text-zinc-300 truncate max-w-xs">${escapeHtml3(a.url || "")}</td>
+                  <td class="px-6 py-2"><span class="inline-flex items-center rounded px-1.5 py-0.5 text-xs font-medium ${a.method === "GET" ? "bg-green-50 text-green-700 dark:bg-green-900/30 dark:text-green-400" : "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"}">${a.method || ""}</span></td>
+                  <td class="px-6 py-2"><span class="inline-flex items-center rounded px-1.5 py-0.5 text-xs font-medium ${(a.status_code || 0) >= 400 ? "bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-400" : "bg-green-50 text-green-700 dark:bg-green-900/30 dark:text-green-400"}">${a.status_code || ""}</span></td>
+                  <td class="px-6 py-2 text-zinc-500 dark:text-zinc-400">${a.duration || 0}ms</td>
+                </tr>
+              `).join("") : `
+                <tr>
+                  <td colspan="4" class="px-6 py-8 text-center text-zinc-500 dark:text-zinc-400">No activity recorded yet.</td>
+                </tr>
+              `}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  `;
+  return c.html(renderAdminLayoutCatalyst({
+    title: "Analytics",
+    pageTitle: "Analytics Dashboard",
+    currentPath: "/admin/analytics",
+    version: c.get("appVersion"),
+    user: user ? {
+      name: user.email.split("@")[0] || "Admin",
+      email: user.email,
+      role: user.role
+    } : void 0,
+    content: content2,
+    dynamicMenuItems: c.get("pluginMenuItems")
+  }));
+});
+function escapeHtml3(str) {
+  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+// src/plugins/core-plugins/analytics/index.ts
+function createAnalyticsPlugin() {
+  const builder = PluginBuilder.create({
+    name: "core-analytics",
+    version: "1.0.0-beta.1",
+    description: "Core analytics tracking and reporting plugin"
+  });
+  builder.metadata({
+    author: {
+      name: "SonicJS Team",
+      email: "team@sonicjs.com"
+    },
+    license: "MIT",
+    compatibility: "^0.1.0",
+    dependencies: ["core-auth"]
+    // Requires auth for admin access
+  });
+  const analyticsAPI = new Hono();
+  analyticsAPI.get("/stats", async (c) => {
+    const timeRange = c.req.query("range") || "7d";
+    c.req.query("metric") || "all";
+    return c.json({
+      message: "Analytics stats",
+      data: {
+        pageviews: 12500,
+        uniqueVisitors: 3200,
+        sessions: 4800,
+        avgSessionDuration: 245,
+        bounceRate: 0.35,
+        topPages: [
+          { path: "/", views: 3200 },
+          { path: "/about", views: 1800 },
+          { path: "/contact", views: 950 }
+        ],
+        timeRange
+      }
+    });
+  });
+  analyticsAPI.post("/track", async (c) => {
+    const event = await c.req.json();
+    console.info("Analytics event tracked:", event);
+    return c.json({
+      message: "Event tracked successfully",
+      eventId: `event-${Date.now()}`
+    });
+  });
+  analyticsAPI.get("/reports", async (c) => {
+    const reportType = c.req.query("type") || "traffic";
+    const startDate = c.req.query("start");
+    const endDate = c.req.query("end");
+    return c.json({
+      message: "Analytics report",
+      data: {
+        reportType,
+        dateRange: { start: startDate, end: endDate },
+        data: []
+      }
+    });
+  });
+  analyticsAPI.get("/realtime", async (c) => {
+    return c.json({
+      message: "Real-time analytics",
+      data: {
+        activeUsers: 23,
+        activePages: [
+          { path: "/", users: 8 },
+          { path: "/blog", users: 5 },
+          { path: "/products", users: 4 }
+        ],
+        recentEvents: []
+      }
+    });
+  });
+  builder.addRoute("/api/analytics", analyticsAPI, {
+    description: "Analytics tracking and reporting API",
+    requiresAuth: true,
+    roles: ["admin", "analytics:read"],
+    priority: 3
+  });
+  builder.addRoute("/admin/analytics", adminRoutes4, {
+    description: "Analytics admin dashboard",
+    requiresAuth: true,
+    priority: 50
+  });
+  builder.addSingleMiddleware("analytics-tracker", async (c, next) => {
+    const start = Date.now();
+    const path = c.req.path;
+    const method = c.req.method;
+    const userAgent = c.req.header("user-agent");
+    const referer = c.req.header("referer");
+    const ip = c.req.header("CF-Connecting-IP") || c.req.header("x-forwarded-for");
+    await next();
+    const duration = Date.now() - start;
+    const status = c.res.status;
+    const analyticsData = {
+      timestamp: (/* @__PURE__ */ new Date()).toISOString(),
+      path,
+      method,
+      status,
+      duration,
+      userAgent,
+      referer,
+      ip,
+      responseSize: c.res.headers.get("content-length") || 0
+    };
+    console.debug("Analytics tracking:", analyticsData);
+  }, {
+    description: "Track page views and request analytics",
+    global: true,
+    priority: 99
+    // Run last to capture response data
+  });
+  builder.addService("analyticsService", {
+    trackEvent: async (event) => {
+      console.info("Tracking event:", event);
+      return { eventId: `event-${Date.now()}` };
+    },
+    trackPageView: async (data) => {
+      console.info("Tracking pageview:", data.path);
+      return { viewId: `view-${Date.now()}` };
+    },
+    getStats: async (_timeRange) => {
+      return {
+        pageviews: 12500,
+        sessions: 4800,
+        uniqueVisitors: 3200
+      };
+    },
+    generateReport: async (type, options) => {
+      console.info(`Generating ${type} report with options:`, options);
+      return { reportId: `report-${Date.now()}` };
+    }
+  }, {
+    description: "Core analytics tracking service",
+    singleton: true
+  });
+  const pageViewSchema = PluginHelpers.createSchema([
+    { name: "path", type: "string", optional: false },
+    { name: "title", type: "string", optional: true },
+    { name: "referrer", type: "string", optional: true },
+    { name: "userAgent", type: "string", optional: true },
+    { name: "ipAddress", type: "string", optional: true },
+    { name: "sessionId", type: "string", optional: true },
+    { name: "userId", type: "number", optional: true },
+    { name: "duration", type: "number", optional: true }
+  ]);
+  const eventSchema = PluginHelpers.createSchema([
+    { name: "eventType", type: "string", optional: false },
+    { name: "eventName", type: "string", optional: false },
+    { name: "eventData", type: "object", optional: true },
+    { name: "path", type: "string", optional: true },
+    { name: "sessionId", type: "string", optional: true },
+    { name: "userId", type: "number", optional: true }
+  ]);
+  const pageViewMigration = PluginHelpers.createMigration("analytics_pageviews", [
+    { name: "id", type: "INTEGER", primaryKey: true },
+    { name: "path", type: "TEXT", nullable: false },
+    { name: "title", type: "TEXT", nullable: true },
+    { name: "referrer", type: "TEXT", nullable: true },
+    { name: "user_agent", type: "TEXT", nullable: true },
+    { name: "ip_address", type: "TEXT", nullable: true },
+    { name: "session_id", type: "TEXT", nullable: true },
+    { name: "user_id", type: "INTEGER", nullable: true },
+    { name: "duration", type: "INTEGER", nullable: true }
+  ]);
+  const eventMigration = PluginHelpers.createMigration("analytics_events", [
+    { name: "id", type: "INTEGER", primaryKey: true },
+    { name: "event_type", type: "TEXT", nullable: false },
+    { name: "event_name", type: "TEXT", nullable: false },
+    { name: "event_data", type: "TEXT", nullable: true },
+    { name: "path", type: "TEXT", nullable: true },
+    { name: "session_id", type: "TEXT", nullable: true },
+    { name: "user_id", type: "INTEGER", nullable: true }
+  ]);
+  builder.addModel("PageView", {
+    tableName: "analytics_pageviews",
+    schema: pageViewSchema,
+    migrations: [pageViewMigration]
+  });
+  builder.addModel("AnalyticsEvent", {
+    tableName: "analytics_events",
+    schema: eventSchema,
+    migrations: [eventMigration]
+  });
+  builder.addHook(HOOKS2.REQUEST_START, async (data, _context) => {
+    data.analytics = {
+      startTime: Date.now(),
+      sessionId: `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+    };
+    return data;
+  }, {
+    priority: 1,
+    description: "Initialize analytics tracking for requests"
+  });
+  builder.addHook(HOOKS2.REQUEST_END, async (data, _context) => {
+    if (data.analytics) {
+      const duration = Date.now() - data.analytics.startTime;
+      console.debug(`Request completed in ${duration}ms`);
+    }
+    return data;
+  }, {
+    priority: 1,
+    description: "Complete analytics tracking for requests"
+  });
+  builder.addHook(HOOKS2.USER_LOGIN, async (data, context) => {
+    await context.services?.analyticsService?.trackEvent({
+      eventType: "auth",
+      eventName: "user_login",
+      userId: data.userId,
+      eventData: { loginMethod: data.method }
+    });
+    return data;
+  }, {
+    priority: 8,
+    description: "Track user login events"
+  });
+  builder.addHook("content:view", async (data, context) => {
+    await context.services?.analyticsService?.trackEvent({
+      eventType: "content",
+      eventName: "content_view",
+      eventData: {
+        contentId: data.id,
+        contentType: data.type,
+        title: data.title
+      }
+    });
+    return data;
+  }, {
+    priority: 8,
+    description: "Track content view events"
+  });
+  builder.addAdminPage(
+    "/analytics",
+    "Analytics Dashboard",
+    "AnalyticsDashboardView",
+    {
+      description: "View analytics overview and key metrics",
+      permissions: ["admin", "analytics:read"],
+      icon: "chart-bar"
+    }
+  );
+  builder.addAdminPage(
+    "/analytics/reports",
+    "Analytics Reports",
+    "AnalyticsReportsView",
+    {
+      description: "Generate and view detailed analytics reports",
+      permissions: ["admin", "analytics:read"],
+      icon: "document-report"
+    }
+  );
+  builder.addAdminPage(
+    "/analytics/realtime",
+    "Real-time Analytics",
+    "AnalyticsRealtimeView",
+    {
+      description: "View real-time visitor activity",
+      permissions: ["admin", "analytics:read"],
+      icon: "lightning-bolt"
+    }
+  );
+  builder.addAdminPage(
+    "/analytics/settings",
+    "Analytics Settings",
+    "AnalyticsSettingsView",
+    {
+      description: "Configure analytics tracking and data collection",
+      permissions: ["admin", "analytics:configure"],
+      icon: "cog"
+    }
+  );
+  builder.addMenuItem("Analytics", "/admin/analytics", {
+    icon: "chart-bar",
+    order: 40,
+    permissions: ["admin", "analytics:read"]
+  });
+  builder.addMenuItem("Dashboard", "/admin/analytics", {
+    icon: "chart-bar",
+    parent: "Analytics",
+    order: 1,
+    permissions: ["admin", "analytics:read"]
+  });
+  builder.addMenuItem("Reports", "/admin/analytics/reports", {
+    icon: "document-report",
+    parent: "Analytics",
+    order: 2,
+    permissions: ["admin", "analytics:read"]
+  });
+  builder.addMenuItem("Real-time", "/admin/analytics/realtime", {
+    icon: "lightning-bolt",
+    parent: "Analytics",
+    order: 3,
+    permissions: ["admin", "analytics:read"]
+  });
+  builder.addMenuItem("Settings", "/admin/analytics/settings", {
+    icon: "cog",
+    parent: "Analytics",
+    order: 4,
+    permissions: ["admin", "analytics:configure"]
+  });
+  builder.lifecycle({
+    install: async () => {
+      console.info("Installing analytics plugin...");
+    },
+    activate: async () => {
+      console.info("Activating analytics plugin...");
+    },
+    deactivate: async () => {
+      console.info("Deactivating analytics plugin...");
+    },
+    configure: async (config) => {
+      console.info("Configuring analytics plugin...", config);
+    }
+  });
+  return builder.build();
+}
+var analyticsPlugin = createAnalyticsPlugin();
+
+// src/plugins/core-plugins/analytics/services/event-tracking-service.ts
+var EventTrackingService = class {
+  constructor(db) {
+    this.db = db;
+  }
+  async trackEvent(input) {
+    const id = crypto.randomUUID();
+    const category = input.category || "user-activity";
+    await this.db.prepare(`
+      INSERT INTO analytics_events (id, event, category, properties, user_id, session_id, ip_address, user_agent, path)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `).bind(
+      id,
+      input.event,
+      category,
+      input.properties ? JSON.stringify(input.properties) : null,
+      input.userId || null,
+      input.sessionId || null,
+      input.ipAddress || null,
+      input.userAgent || null,
+      input.path || null
+    ).run();
+    return id;
+  }
+  async trackBatch(events) {
+    const ids = [];
+    const stmts = events.map((input) => {
+      const id = crypto.randomUUID();
+      ids.push(id);
+      const category = input.category || "user-activity";
+      return this.db.prepare(`
+        INSERT INTO analytics_events (id, event, category, properties, user_id, session_id, ip_address, user_agent, path)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `).bind(
+        id,
+        input.event,
+        category,
+        input.properties ? JSON.stringify(input.properties) : null,
+        input.userId || null,
+        input.sessionId || null,
+        input.ipAddress || null,
+        input.userAgent || null,
+        input.path || null
+      );
+    });
+    await this.db.batch(stmts);
+    return ids;
+  }
+  async queryEvents(filters = {}) {
+    const conditions = [];
+    const params = [];
+    if (filters.event) {
+      conditions.push("event = ?");
+      params.push(filters.event);
+    }
+    if (filters.category) {
+      conditions.push("category = ?");
+      params.push(filters.category);
+    }
+    if (filters.userId) {
+      conditions.push("user_id = ?");
+      params.push(filters.userId);
+    }
+    if (filters.sessionId) {
+      conditions.push("session_id = ?");
+      params.push(filters.sessionId);
+    }
+    if (filters.startDate) {
+      conditions.push("created_at >= ?");
+      params.push(filters.startDate);
+    }
+    if (filters.endDate) {
+      conditions.push("created_at <= ?");
+      params.push(filters.endDate);
+    }
+    const where = conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
+    const limit = filters.limit || 50;
+    const offset = filters.offset || 0;
+    const [countResult, eventsResult] = await Promise.all([
+      this.db.prepare(`SELECT COUNT(*) as total FROM analytics_events ${where}`).bind(...params).first(),
+      this.db.prepare(`SELECT * FROM analytics_events ${where} ORDER BY created_at DESC LIMIT ? OFFSET ?`).bind(...params, limit, offset).all()
+    ]);
+    const events = (eventsResult.results || []).map((e) => ({
+      ...e,
+      properties: e.properties ? JSON.parse(e.properties) : null
+    }));
+    return { events, total: countResult?.total || 0 };
+  }
+  async getStats(startDate, endDate) {
+    const conditions = [];
+    const params = [];
+    if (startDate) {
+      conditions.push("created_at >= ?");
+      params.push(startDate);
+    }
+    if (endDate) {
+      conditions.push("created_at <= ?");
+      params.push(endDate);
+    }
+    const where = conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
+    const [totals, topEvents] = await Promise.all([
+      this.db.prepare(`
+        SELECT
+          COUNT(*) as total_events,
+          COUNT(DISTINCT user_id) as unique_users,
+          COUNT(DISTINCT session_id) as unique_sessions
+        FROM analytics_events ${where}
+      `).bind(...params).first(),
+      this.db.prepare(`
+        SELECT event, COUNT(*) as count
+        FROM analytics_events ${where}
+        GROUP BY event ORDER BY count DESC LIMIT 20
+      `).bind(...params).all()
+    ]);
+    return {
+      totalEvents: totals?.total_events || 0,
+      uniqueUsers: totals?.unique_users || 0,
+      uniqueSessions: totals?.unique_sessions || 0,
+      topEvents: (topEvents.results || []).map((r) => ({ event: r.event, count: r.count }))
+    };
+  }
+};
+
+// src/plugins/core-plugins/analytics/routes/api.ts
+var apiRoutes4 = new Hono();
+apiRoutes4.post("/", async (c) => {
+  const db = c.env.DB;
+  const service = new EventTrackingService(db);
+  const ip = c.req.header("cf-connecting-ip") || c.req.header("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  const userAgent = c.req.header("user-agent") || "";
+  const user = c.get("user");
+  let body;
+  try {
+    body = await c.req.json();
+  } catch {
+    return c.json({ error: "Invalid JSON body" }, 400);
+  }
+  if (Array.isArray(body)) {
+    if (body.length > 100) {
+      return c.json({ error: "Batch size limit is 100 events" }, 400);
+    }
+    const events = body.map((e) => ({
+      event: e.event,
+      category: e.category || "user-activity",
+      properties: e.properties,
+      userId: user?.userId || e.userId,
+      sessionId: e.sessionId,
+      ipAddress: ip,
+      userAgent,
+      path: e.path
+    }));
+    const invalid = events.find((e) => !e.event || typeof e.event !== "string");
+    if (invalid) {
+      return c.json({ error: 'Each event must have an "event" string field' }, 400);
+    }
+    const ids = await service.trackBatch(events);
+    return c.json({ success: true, eventIds: ids, count: ids.length });
+  }
+  if (!body.event || typeof body.event !== "string") {
+    return c.json({ error: '"event" field is required and must be a string' }, 400);
+  }
+  const eventId = await service.trackEvent({
+    event: body.event,
+    category: body.category || "user-activity",
+    properties: body.properties,
+    userId: user?.userId || body.userId,
+    sessionId: body.sessionId,
+    ipAddress: ip,
+    userAgent,
+    path: body.path
+  });
+  return c.json({ success: true, eventId });
+});
+apiRoutes4.get("/", async (c) => {
+  const user = c.get("user");
+  if (!user || user.role !== "admin") {
+    return c.json({ error: "Admin access required" }, 403);
+  }
+  const db = c.env.DB;
+  const service = new EventTrackingService(db);
+  const filters = {
+    event: c.req.query("event") || void 0,
+    category: c.req.query("category") || void 0,
+    userId: c.req.query("userId") || void 0,
+    sessionId: c.req.query("sessionId") || void 0,
+    startDate: c.req.query("startDate") ? parseInt(c.req.query("startDate")) : void 0,
+    endDate: c.req.query("endDate") ? parseInt(c.req.query("endDate")) : void 0,
+    limit: c.req.query("limit") ? parseInt(c.req.query("limit")) : 50,
+    offset: c.req.query("offset") ? parseInt(c.req.query("offset")) : 0
+  };
+  const result = await service.queryEvents(filters);
+  return c.json(result);
+});
+apiRoutes4.get("/stats", async (c) => {
+  const user = c.get("user");
+  if (!user || user.role !== "admin") {
+    return c.json({ error: "Admin access required" }, 403);
+  }
+  const db = c.env.DB;
+  const service = new EventTrackingService(db);
+  const startDate = c.req.query("startDate") ? parseInt(c.req.query("startDate")) : void 0;
+  const endDate = c.req.query("endDate") ? parseInt(c.req.query("endDate")) : void 0;
+  const stats = await service.getStats(startDate, endDate);
+  return c.json(stats);
+});
 
 // src/plugins/cache/services/cache-config.ts
 var CACHE_CONFIGS = {
@@ -8208,6 +10319,9 @@ function createSonicJSApp(config = {}) {
       app2.use("*", middleware);
     }
   }
+  const adminRoles = config.adminAccessRoles || ["admin"];
+  app2.use("/admin/*", requireAuth());
+  app2.use("/admin/*", requireRole(adminRoles));
   app2.use("/admin/*", pluginMenuMiddleware());
   app2.route("/api", api_default);
   app2.route("/api/media", api_media_default);
@@ -8248,6 +10362,17 @@ function createSonicJSApp(config = {}) {
   }
   if (otpLoginPlugin.routes && otpLoginPlugin.routes.length > 0) {
     for (const route of otpLoginPlugin.routes) {
+      app2.route(route.path, route.handler);
+    }
+  }
+  if (analyticsPlugin.routes && analyticsPlugin.routes.length > 0) {
+    for (const route of analyticsPlugin.routes) {
+      app2.route(route.path, route.handler);
+    }
+  }
+  app2.route("/api/events", apiRoutes4);
+  if (stripePlugin.routes && stripePlugin.routes.length > 0) {
+    for (const route of stripePlugin.routes) {
       app2.route(route.path, route.handler);
     }
   }

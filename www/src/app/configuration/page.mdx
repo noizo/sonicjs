@@ -59,6 +59,9 @@ interface SonicJSConfig {
     afterAuth?: Middleware[]    // Run after authentication
   }
 
+  // Admin access control
+  adminAccessRoles?: string[]  // Roles that can access /admin (default: ['admin'])
+
   // App metadata
   version?: string         // Application version
   name?: string            // Application name
@@ -88,6 +91,21 @@ const app = createSonicJSApp({
 })
 
 export default app
+```
+
+</CodeGroup>
+
+### Admin Access Control
+
+By default, only users with the `admin` role can access the `/admin` panel. To allow additional roles, use `adminAccessRoles`:
+
+<CodeGroup title="Admin Access Roles">
+
+```typescript
+const app = createSonicJSApp({
+  // Allow both admin and editor roles to access the admin panel
+  adminAccessRoles: ['admin', 'editor']
+})
 ```
 
 </CodeGroup>

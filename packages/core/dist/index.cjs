@@ -1,15 +1,16 @@
 'use strict';
 
-var chunkR33KR5P6_cjs = require('./chunk-R33KR5P6.cjs');
-var chunkXV6CY3IV_cjs = require('./chunk-XV6CY3IV.cjs');
-var chunkCMDLULU2_cjs = require('./chunk-CMDLULU2.cjs');
-var chunkI6FFGQIT_cjs = require('./chunk-I6FFGQIT.cjs');
-var chunkJUJ7XHGM_cjs = require('./chunk-JUJ7XHGM.cjs');
-var chunk3QCEYJLK_cjs = require('./chunk-3QCEYJLK.cjs');
-var chunkQP3OHHON_cjs = require('./chunk-QP3OHHON.cjs');
-var chunkNJ2J53RY_cjs = require('./chunk-NJ2J53RY.cjs');
-var chunk6FHNRRJ3_cjs = require('./chunk-6FHNRRJ3.cjs');
-var chunkFNEL5LER_cjs = require('./chunk-FNEL5LER.cjs');
+var chunkUOZP2H5X_cjs = require('./chunk-UOZP2H5X.cjs');
+var chunkNZWFCUDA_cjs = require('./chunk-NZWFCUDA.cjs');
+var chunk63NHQEG3_cjs = require('./chunk-63NHQEG3.cjs');
+var chunkQZ2VT2OE_cjs = require('./chunk-QZ2VT2OE.cjs');
+var chunkHLOJ4N7Q_cjs = require('./chunk-HLOJ4N7Q.cjs');
+var chunk4ZSNJDLS_cjs = require('./chunk-4ZSNJDLS.cjs');
+var chunkOHYBNCVL_cjs = require('./chunk-OHYBNCVL.cjs');
+var chunkUYJ6TJHX_cjs = require('./chunk-UYJ6TJHX.cjs');
+var chunkABB34XUS_cjs = require('./chunk-ABB34XUS.cjs');
+var chunk635JAMSE_cjs = require('./chunk-635JAMSE.cjs');
+var chunkV76ERLX6_cjs = require('./chunk-V76ERLX6.cjs');
 require('./chunk-P3XDZL6Q.cjs');
 var chunkRCQ2HIQD_cjs = require('./chunk-RCQ2HIQD.cjs');
 var chunkMNWKYY5E_cjs = require('./chunk-MNWKYY5E.cjs');
@@ -235,7 +236,7 @@ var DatabaseToolsService = class {
 };
 
 // src/templates/pages/admin-database-table.template.ts
-chunkQP3OHHON_cjs.init_admin_layout_catalyst_template();
+chunkUYJ6TJHX_cjs.init_admin_layout_catalyst_template();
 function renderDatabaseTablePage(data) {
   const totalPages = Math.ceil(data.totalRows / data.pageSize);
   const startRow = (data.currentPage - 1) * data.pageSize + 1;
@@ -484,7 +485,7 @@ function renderDatabaseTablePage(data) {
     user: data.user,
     content: pageContent
   };
-  return chunkQP3OHHON_cjs.renderAdminLayoutCatalyst(layoutData);
+  return chunkUYJ6TJHX_cjs.renderAdminLayoutCatalyst(layoutData);
 }
 function generatePageNumbers(currentPage, totalPages) {
   const pages = [];
@@ -559,7 +560,7 @@ function formatCellValue(value) {
 // src/plugins/core-plugins/database-tools-plugin/admin-routes.ts
 function createDatabaseToolsAdminRoutes() {
   const router3 = new hono.Hono();
-  router3.use("*", chunkCMDLULU2_cjs.requireAuth());
+  router3.use("*", chunk63NHQEG3_cjs.requireAuth());
   router3.get("/api/stats", async (c) => {
     try {
       const user = c.get("user");
@@ -1307,7 +1308,7 @@ function createSeedDataAdminRoutes() {
   return routes;
 }
 function createEmailPlugin() {
-  const builder = chunk6FHNRRJ3_cjs.PluginBuilder.create({
+  const builder = chunk635JAMSE_cjs.PluginBuilder.create({
     name: "email",
     version: "1.0.0-beta.1",
     description: "Send transactional emails using Resend"
@@ -1736,7 +1737,7 @@ var DEFAULT_SETTINGS = {
   allowNewUserRegistration: false
 };
 function createOTPLoginPlugin() {
-  const builder = chunk6FHNRRJ3_cjs.PluginBuilder.create({
+  const builder = chunk635JAMSE_cjs.PluginBuilder.create({
     name: "otp-login",
     version: "1.0.0-beta.1",
     description: "Passwordless authentication via email one-time codes"
@@ -1776,7 +1777,7 @@ function createOTPLoginPlugin() {
           console.warn("Failed to parse OTP plugin settings, using defaults");
         }
       }
-      const settingsService = new chunkXV6CY3IV_cjs.SettingsService(db);
+      const settingsService = new chunkNZWFCUDA_cjs.SettingsService(db);
       const generalSettings = await settingsService.getGeneralSettings();
       const siteName = generalSettings.siteName;
       const canRequest = await otpService.checkRateLimit(normalizedEmail, settings);
@@ -1938,7 +1939,7 @@ function createOTPLoginPlugin() {
           error: "Account is deactivated"
         }, 403);
       }
-      const token = await chunkCMDLULU2_cjs.AuthManager.generateToken(user.id, user.email, user.role, c.env.JWT_SECRET);
+      const token = await chunk63NHQEG3_cjs.AuthManager.generateToken(user.id, user.email, user.role, c.env.JWT_SECRET);
       cookie.setCookie(c, "auth_token", token, {
         httpOnly: true,
         secure: true,
@@ -2272,7 +2273,7 @@ var OAuthService = class {
 var STATE_COOKIE_NAME = "oauth_state";
 var STATE_COOKIE_MAX_AGE = 600;
 function createOAuthProvidersPlugin() {
-  const builder = chunk6FHNRRJ3_cjs.PluginBuilder.create({
+  const builder = chunk635JAMSE_cjs.PluginBuilder.create({
     name: "oauth-providers",
     version: "1.0.0-beta.1",
     description: "OAuth2/OIDC social login with GitHub, Google, and more"
@@ -2408,13 +2409,13 @@ function createOAuthProvidersPlugin() {
         if (!user || !user.is_active) {
           return c.redirect("/auth/login?error=Account is deactivated");
         }
-        const jwt2 = await chunkCMDLULU2_cjs.AuthManager.generateToken(
+        const jwt2 = await chunk63NHQEG3_cjs.AuthManager.generateToken(
           user.id,
           user.email,
           user.role,
           c.env.JWT_SECRET
         );
-        chunkCMDLULU2_cjs.AuthManager.setAuthCookie(c, jwt2, { sameSite: "Lax" });
+        chunk63NHQEG3_cjs.AuthManager.setAuthCookie(c, jwt2, { sameSite: "Lax" });
         return c.redirect("/admin");
       }
       const existingUser = await oauthService.findUserByEmail(profile.email);
@@ -2431,13 +2432,13 @@ function createOAuthProvidersPlugin() {
           tokenExpiresAt: tokenExpiresAt ?? void 0,
           profileData: JSON.stringify(profile)
         });
-        const jwt2 = await chunkCMDLULU2_cjs.AuthManager.generateToken(
+        const jwt2 = await chunk63NHQEG3_cjs.AuthManager.generateToken(
           existingUser.id,
           existingUser.email,
           existingUser.role,
           c.env.JWT_SECRET
         );
-        chunkCMDLULU2_cjs.AuthManager.setAuthCookie(c, jwt2, { sameSite: "Lax" });
+        chunk63NHQEG3_cjs.AuthManager.setAuthCookie(c, jwt2, { sameSite: "Lax" });
         return c.redirect("/admin");
       }
       const newUserId = await oauthService.createUserFromOAuth(profile);
@@ -2450,13 +2451,13 @@ function createOAuthProvidersPlugin() {
         tokenExpiresAt: tokenExpiresAt ?? void 0,
         profileData: JSON.stringify(profile)
       });
-      const jwt = await chunkCMDLULU2_cjs.AuthManager.generateToken(
+      const jwt = await chunk63NHQEG3_cjs.AuthManager.generateToken(
         newUserId,
         profile.email.toLowerCase(),
         "viewer",
         c.env.JWT_SECRET
       );
-      chunkCMDLULU2_cjs.AuthManager.setAuthCookie(c, jwt, { sameSite: "Lax" });
+      chunk63NHQEG3_cjs.AuthManager.setAuthCookie(c, jwt, { sameSite: "Lax" });
       return c.redirect("/admin");
     } catch (error) {
       console.error("OAuth callback error:", error);
@@ -3896,7 +3897,7 @@ function renderSettingsPage(data) {
     const indexStatusMap = data.indexStatus || {};
     const status = indexStatusMap[collectionId];
     const isNew = collection.is_new === true && !isDismissed && !status;
-    const statusBadge = status && isChecked ? `<span class="ml-2 px-2 py-1 text-xs rounded-full ${status.status === "completed" ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300" : status.status === "indexing" ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300" : status.status === "error" ? "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300" : "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300"}">${status.status}</span>` : "";
+    const statusBadge2 = status && isChecked ? `<span class="ml-2 px-2 py-1 text-xs rounded-full ${status.status === "completed" ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300" : status.status === "indexing" ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300" : status.status === "error" ? "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300" : "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300"}">${status.status}</span>` : "";
     return `<div class="flex items-start gap-3 p-3 rounded-lg border border-zinc-200 dark:border-zinc-700 ${isNew ? "bg-blue-50 dark:bg-blue-900/10 border-blue-200 dark:border-blue-800" : "hover:bg-zinc-50 dark:hover:bg-zinc-800"}">
                       <input
                         type="checkbox"
@@ -3911,7 +3912,7 @@ function renderSettingsPage(data) {
                         <label for="collection_${collectionId}" class="text-sm font-medium text-zinc-950 dark:text-white select-none cursor-pointer flex items-center">
                           ${collection.display_name || collection.name || "Unnamed Collection"}
                           ${isNew ? '<span class="ml-2 px-2 py-0.5 text-xs rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">NEW</span>' : ""}
-                          ${statusBadge}
+                          ${statusBadge2}
                         </label>
                         <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
                           ${collection.description || collection.name || "No description"} \u2022 ${collection.item_count || 0} items
@@ -4138,7 +4139,7 @@ function renderSettingsPage(data) {
       }, 30000);
     </script>
   `;
-  return chunkQP3OHHON_cjs.renderAdminLayout({
+  return chunkOHYBNCVL_cjs.renderAdminLayout({
     title: "AI Search Settings",
     pageTitle: "AI Search Settings",
     currentPath: "/admin/plugins/ai-search/settings",
@@ -4149,7 +4150,7 @@ function renderSettingsPage(data) {
 
 // src/plugins/core-plugins/ai-search-plugin/routes/admin.ts
 var adminRoutes = new hono.Hono();
-adminRoutes.use("*", chunkCMDLULU2_cjs.requireAuth());
+adminRoutes.use("*", chunk63NHQEG3_cjs.requireAuth());
 adminRoutes.get("/", async (c) => {
   try {
     const user = c.get("user");
@@ -4395,7 +4396,7 @@ var manifest_default = {
   author: "SonicJS"};
 
 // src/plugins/core-plugins/ai-search-plugin/index.ts
-var aiSearchPlugin = new chunk6FHNRRJ3_cjs.PluginBuilder({
+var aiSearchPlugin = new chunk635JAMSE_cjs.PluginBuilder({
   name: manifest_default.name,
   version: manifest_default.version,
   description: manifest_default.description,
@@ -4550,13 +4551,13 @@ function createMagicLinkAuthPlugin() {
         SET used = 1, used_at = ?
         WHERE id = ?
       `).bind(Date.now(), magicLink.id).run();
-      const jwtToken = await chunkCMDLULU2_cjs.AuthManager.generateToken(
+      const jwtToken = await chunk63NHQEG3_cjs.AuthManager.generateToken(
         user.id,
         user.email,
         user.role,
         c.env.JWT_SECRET
       );
-      chunkCMDLULU2_cjs.AuthManager.setAuthCookie(c, jwtToken);
+      chunk63NHQEG3_cjs.AuthManager.setAuthCookie(c, jwtToken);
       await db.prepare(`
         UPDATE users SET last_login_at = ? WHERE id = ?
       `).bind(Date.now(), user.id).run();
@@ -4994,7 +4995,7 @@ var SecurityAuditService = class {
 };
 
 // src/plugins/core-plugins/security-audit-plugin/components/dashboard-page.ts
-chunkQP3OHHON_cjs.init_admin_layout_catalyst_template();
+chunkUYJ6TJHX_cjs.init_admin_layout_catalyst_template();
 function formatTimestamp(ts) {
   const date = new Date(ts);
   const now = Date.now();
@@ -5193,11 +5194,11 @@ function renderSecurityDashboard(data) {
     version,
     dynamicMenuItems
   };
-  return chunkQP3OHHON_cjs.renderAdminLayoutCatalyst(layoutData);
+  return chunkUYJ6TJHX_cjs.renderAdminLayoutCatalyst(layoutData);
 }
 
 // src/plugins/core-plugins/security-audit-plugin/components/event-log-page.ts
-chunkQP3OHHON_cjs.init_admin_layout_catalyst_template();
+chunkUYJ6TJHX_cjs.init_admin_layout_catalyst_template();
 function formatTimestamp2(ts) {
   const date = new Date(ts);
   return date.toLocaleDateString("en-US", {
@@ -5404,11 +5405,11 @@ function renderEventLogPage(data) {
     version,
     dynamicMenuItems
   };
-  return chunkQP3OHHON_cjs.renderAdminLayoutCatalyst(layoutData);
+  return chunkUYJ6TJHX_cjs.renderAdminLayoutCatalyst(layoutData);
 }
 
 // src/plugins/core-plugins/security-audit-plugin/components/settings-page.ts
-chunkQP3OHHON_cjs.init_admin_layout_catalyst_template();
+chunkUYJ6TJHX_cjs.init_admin_layout_catalyst_template();
 function renderSecuritySettingsPage(data) {
   const { settings, user, version, message, dynamicMenuItems } = data;
   const content2 = `
@@ -5561,12 +5562,12 @@ function renderSecuritySettingsPage(data) {
     version,
     dynamicMenuItems
   };
-  return chunkQP3OHHON_cjs.renderAdminLayoutCatalyst(layoutData);
+  return chunkUYJ6TJHX_cjs.renderAdminLayoutCatalyst(layoutData);
 }
 
 // src/plugins/core-plugins/security-audit-plugin/routes/admin.ts
 var adminRoutes2 = new hono.Hono();
-adminRoutes2.use("*", chunkCMDLULU2_cjs.requireAuth());
+adminRoutes2.use("*", chunk63NHQEG3_cjs.requireAuth());
 adminRoutes2.use("*", async (c, next) => {
   const user = c.get("user");
   if (user?.role !== "admin") {
@@ -5576,7 +5577,7 @@ adminRoutes2.use("*", async (c, next) => {
 });
 async function getSettings(db) {
   try {
-    const pluginService = new chunkI6FFGQIT_cjs.PluginService(db);
+    const pluginService = new chunkQZ2VT2OE_cjs.PluginService(db);
     const plugin2 = await pluginService.getPlugin("security-audit");
     if (plugin2?.settings) {
       const settings = typeof plugin2.settings === "string" ? JSON.parse(plugin2.settings) : plugin2.settings;
@@ -5681,7 +5682,7 @@ adminRoutes2.post("/settings", async (c) => {
       autoPurge: body["retention.autoPurge"] === "true"
     }
   };
-  const pluginService = new chunkI6FFGQIT_cjs.PluginService(db);
+  const pluginService = new chunkQZ2VT2OE_cjs.PluginService(db);
   await pluginService.updatePluginSettings("security-audit", settings);
   if (c.req.header("HX-Request")) {
     return c.json({ success: true });
@@ -5699,7 +5700,7 @@ var BruteForceDetector = class {
   }
   settings;
   async recordFailedAttempt(ip, email) {
-    if (!this.settings.enabled) {
+    if (!this.settings.enabled || !this.kv) {
       return { ipCount: 0, emailCount: 0, shouldLockIP: false, shouldLockEmail: false, isSuspicious: false };
     }
     const windowMs = this.settings.windowMinutes * 60 * 1e3;
@@ -5716,7 +5717,7 @@ var BruteForceDetector = class {
     return { ipCount, emailCount, shouldLockIP, shouldLockEmail, isSuspicious };
   }
   async isLocked(ip, email) {
-    if (!this.settings.enabled) {
+    if (!this.settings.enabled || !this.kv) {
       return { locked: false };
     }
     const ipLocked = await this.kv.get(`${LOCK_PREFIX}ip:${ip}`);
@@ -5730,6 +5731,7 @@ var BruteForceDetector = class {
     return { locked: false };
   }
   async lockIP(ip) {
+    if (!this.kv) return;
     const ttl = this.settings.lockoutDurationMinutes * 60;
     await this.kv.put(`${LOCK_PREFIX}ip:${ip}`, JSON.stringify({
       lockedAt: Date.now(),
@@ -5737,6 +5739,7 @@ var BruteForceDetector = class {
     }), { expirationTtl: ttl });
   }
   async lockEmail(email) {
+    if (!this.kv) return;
     const ttl = this.settings.lockoutDurationMinutes * 60;
     await this.kv.put(`${LOCK_PREFIX}email:${email}`, JSON.stringify({
       lockedAt: Date.now(),
@@ -5744,12 +5747,15 @@ var BruteForceDetector = class {
     }), { expirationTtl: ttl });
   }
   async unlockIP(ip) {
+    if (!this.kv) return;
     await this.kv.delete(`${LOCK_PREFIX}ip:${ip}`);
   }
   async unlockEmail(email) {
+    if (!this.kv) return;
     await this.kv.delete(`${LOCK_PREFIX}email:${email}`);
   }
   async getActiveLockouts() {
+    if (!this.kv) return [];
     const ipLocks = await this.kv.list({ prefix: `${LOCK_PREFIX}ip:` });
     const emailLocks = await this.kv.list({ prefix: `${LOCK_PREFIX}email:` });
     const lockouts = [];
@@ -5780,6 +5786,7 @@ var BruteForceDetector = class {
     return lockouts;
   }
   async releaseLockout(key) {
+    if (!this.kv) return;
     await this.kv.delete(key);
   }
   isAboveAlertThreshold(count) {
@@ -5836,7 +5843,7 @@ var BruteForceDetector = class {
 
 // src/plugins/core-plugins/security-audit-plugin/routes/api.ts
 var apiRoutes2 = new hono.Hono();
-apiRoutes2.use("*", chunkCMDLULU2_cjs.requireAuth());
+apiRoutes2.use("*", chunk63NHQEG3_cjs.requireAuth());
 apiRoutes2.use("*", async (c, next) => {
   const user = c.get("user");
   if (user?.role !== "admin") {
@@ -5846,7 +5853,7 @@ apiRoutes2.use("*", async (c, next) => {
 });
 async function getSettings2(db) {
   try {
-    const pluginService = new chunkI6FFGQIT_cjs.PluginService(db);
+    const pluginService = new chunkQZ2VT2OE_cjs.PluginService(db);
     const plugin2 = await pluginService.getPlugin("security-audit");
     if (plugin2?.settings) {
       const settings = typeof plugin2.settings === "string" ? JSON.parse(plugin2.settings) : plugin2.settings;
@@ -5994,7 +6001,7 @@ function generateFingerprint(ip, userAgent) {
 }
 async function getPluginSettings(db) {
   try {
-    const pluginService = new chunkI6FFGQIT_cjs.PluginService(db);
+    const pluginService = new chunkQZ2VT2OE_cjs.PluginService(db);
     const plugin2 = await pluginService.getPlugin("security-audit");
     if (plugin2?.settings) {
       const settings = typeof plugin2.settings === "string" ? JSON.parse(plugin2.settings) : plugin2.settings;
@@ -6225,7 +6232,7 @@ async function logAuthEvent(c, db, settings, ip, userAgent, countryCode, fingerp
 
 // src/plugins/core-plugins/security-audit-plugin/index.ts
 function createSecurityAuditPlugin() {
-  const builder = chunk6FHNRRJ3_cjs.PluginBuilder.create({
+  const builder = chunk635JAMSE_cjs.PluginBuilder.create({
     name: "security-audit",
     version: "1.0.0-beta.1",
     description: "Security event logging, brute-force detection, and analytics dashboard"
@@ -6266,14 +6273,1447 @@ function createSecurityAuditPlugin() {
 }
 var securityAuditPlugin = createSecurityAuditPlugin();
 
-// src/middleware/plugin-menu.ts
-var MENU_PLUGINS = [
-  securityAuditPlugin
+// src/plugins/core-plugins/stripe-plugin/services/subscription-service.ts
+var SubscriptionService = class {
+  constructor(db) {
+    this.db = db;
+  }
+  /**
+   * Ensure the subscriptions table exists
+   */
+  async ensureTable() {
+    await this.db.prepare(`
+      CREATE TABLE IF NOT EXISTS subscriptions (
+        id TEXT PRIMARY KEY DEFAULT (lower(hex(randomblob(16)))),
+        user_id TEXT NOT NULL,
+        stripe_customer_id TEXT NOT NULL,
+        stripe_subscription_id TEXT NOT NULL UNIQUE,
+        stripe_price_id TEXT NOT NULL,
+        status TEXT NOT NULL DEFAULT 'incomplete',
+        current_period_start INTEGER NOT NULL DEFAULT 0,
+        current_period_end INTEGER NOT NULL DEFAULT 0,
+        cancel_at_period_end INTEGER NOT NULL DEFAULT 0,
+        created_at INTEGER NOT NULL DEFAULT (unixepoch()),
+        updated_at INTEGER NOT NULL DEFAULT (unixepoch())
+      )
+    `).run();
+    await this.db.prepare(`
+      CREATE INDEX IF NOT EXISTS idx_subscriptions_user_id ON subscriptions(user_id)
+    `).run();
+    await this.db.prepare(`
+      CREATE INDEX IF NOT EXISTS idx_subscriptions_stripe_customer_id ON subscriptions(stripe_customer_id)
+    `).run();
+    await this.db.prepare(`
+      CREATE INDEX IF NOT EXISTS idx_subscriptions_stripe_subscription_id ON subscriptions(stripe_subscription_id)
+    `).run();
+    await this.db.prepare(`
+      CREATE INDEX IF NOT EXISTS idx_subscriptions_status ON subscriptions(status)
+    `).run();
+  }
+  /**
+   * Create a new subscription record
+   */
+  async create(data) {
+    const result = await this.db.prepare(`
+      INSERT INTO subscriptions (user_id, stripe_customer_id, stripe_subscription_id, stripe_price_id, status, current_period_start, current_period_end, cancel_at_period_end)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      RETURNING *
+    `).bind(
+      data.userId,
+      data.stripeCustomerId,
+      data.stripeSubscriptionId,
+      data.stripePriceId,
+      data.status,
+      data.currentPeriodStart,
+      data.currentPeriodEnd,
+      data.cancelAtPeriodEnd ? 1 : 0
+    ).first();
+    return this.mapRow(result);
+  }
+  /**
+   * Upsert a subscription by stripe_subscription_id (INSERT or UPDATE on conflict)
+   */
+  async upsert(data) {
+    const result = await this.db.prepare(`
+      INSERT INTO subscriptions (user_id, stripe_customer_id, stripe_subscription_id, stripe_price_id, status, current_period_start, current_period_end, cancel_at_period_end)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      ON CONFLICT(stripe_subscription_id) DO UPDATE SET
+        status = excluded.status,
+        stripe_price_id = excluded.stripe_price_id,
+        current_period_start = excluded.current_period_start,
+        current_period_end = excluded.current_period_end,
+        cancel_at_period_end = excluded.cancel_at_period_end,
+        updated_at = unixepoch()
+      RETURNING *
+    `).bind(
+      data.userId,
+      data.stripeCustomerId,
+      data.stripeSubscriptionId,
+      data.stripePriceId,
+      data.status,
+      data.currentPeriodStart,
+      data.currentPeriodEnd,
+      data.cancelAtPeriodEnd ? 1 : 0
+    ).first();
+    return this.mapRow(result);
+  }
+  /**
+   * Update a subscription by its Stripe subscription ID
+   */
+  async updateByStripeId(stripeSubscriptionId, data) {
+    const sets = [];
+    const values = [];
+    if (data.status !== void 0) {
+      sets.push("status = ?");
+      values.push(data.status);
+    }
+    if (data.stripePriceId !== void 0) {
+      sets.push("stripe_price_id = ?");
+      values.push(data.stripePriceId);
+    }
+    if (data.currentPeriodStart !== void 0) {
+      sets.push("current_period_start = ?");
+      values.push(data.currentPeriodStart);
+    }
+    if (data.currentPeriodEnd !== void 0) {
+      sets.push("current_period_end = ?");
+      values.push(data.currentPeriodEnd);
+    }
+    if (data.cancelAtPeriodEnd !== void 0) {
+      sets.push("cancel_at_period_end = ?");
+      values.push(data.cancelAtPeriodEnd ? 1 : 0);
+    }
+    if (sets.length === 0) return this.getByStripeSubscriptionId(stripeSubscriptionId);
+    sets.push("updated_at = unixepoch()");
+    values.push(stripeSubscriptionId);
+    const result = await this.db.prepare(`
+      UPDATE subscriptions SET ${sets.join(", ")} WHERE stripe_subscription_id = ? RETURNING *
+    `).bind(...values).first();
+    return result ? this.mapRow(result) : null;
+  }
+  /**
+   * Get subscription by Stripe subscription ID
+   */
+  async getByStripeSubscriptionId(stripeSubscriptionId) {
+    const result = await this.db.prepare(
+      "SELECT * FROM subscriptions WHERE stripe_subscription_id = ?"
+    ).bind(stripeSubscriptionId).first();
+    return result ? this.mapRow(result) : null;
+  }
+  /**
+   * Get the active subscription for a user
+   */
+  async getByUserId(userId) {
+    const result = await this.db.prepare(
+      "SELECT * FROM subscriptions WHERE user_id = ? ORDER BY CASE WHEN status = 'active' THEN 0 WHEN status = 'trialing' THEN 1 ELSE 2 END, updated_at DESC LIMIT 1"
+    ).bind(userId).first();
+    return result ? this.mapRow(result) : null;
+  }
+  /**
+   * Get subscription by Stripe customer ID
+   */
+  async getByStripeCustomerId(stripeCustomerId) {
+    const result = await this.db.prepare(
+      "SELECT * FROM subscriptions WHERE stripe_customer_id = ? ORDER BY updated_at DESC LIMIT 1"
+    ).bind(stripeCustomerId).first();
+    return result ? this.mapRow(result) : null;
+  }
+  /**
+   * Find the userId linked to a Stripe customer ID
+   */
+  async getUserIdByStripeCustomer(stripeCustomerId) {
+    const result = await this.db.prepare(
+      "SELECT user_id FROM subscriptions WHERE stripe_customer_id = ? LIMIT 1"
+    ).bind(stripeCustomerId).first();
+    return result?.user_id ?? null;
+  }
+  /**
+   * List subscriptions with filters and pagination
+   */
+  async list(filters = {}) {
+    const where = [];
+    const values = [];
+    if (filters.status) {
+      where.push("status = ?");
+      values.push(filters.status);
+    }
+    if (filters.userId) {
+      where.push("user_id = ?");
+      values.push(filters.userId);
+    }
+    if (filters.stripeCustomerId) {
+      where.push("stripe_customer_id = ?");
+      values.push(filters.stripeCustomerId);
+    }
+    const whereClause = where.length > 0 ? `WHERE ${where.join(" AND ")}` : "";
+    const sortBy = filters.sortBy || "created_at";
+    const sortOrder = filters.sortOrder || "desc";
+    const limit = Math.min(filters.limit || 50, 100);
+    const page = filters.page || 1;
+    const offset = (page - 1) * limit;
+    const countResult = await this.db.prepare(
+      `SELECT COUNT(*) as count FROM subscriptions ${whereClause}`
+    ).bind(...values).first();
+    const results = await this.db.prepare(
+      `SELECT s.*, u.email as user_email FROM subscriptions s LEFT JOIN users u ON s.user_id = u.id ${whereClause} ORDER BY ${sortBy} ${sortOrder} LIMIT ? OFFSET ?`
+    ).bind(...values, limit, offset).all();
+    return {
+      subscriptions: (results.results || []).map((r) => this.mapRow(r)),
+      total: countResult?.count || 0
+    };
+  }
+  /**
+   * Get subscription stats
+   */
+  async getStats() {
+    const result = await this.db.prepare(`
+      SELECT
+        COUNT(*) as total,
+        SUM(CASE WHEN status = 'active' THEN 1 ELSE 0 END) as active,
+        SUM(CASE WHEN status = 'canceled' THEN 1 ELSE 0 END) as canceled,
+        SUM(CASE WHEN status = 'past_due' THEN 1 ELSE 0 END) as past_due,
+        SUM(CASE WHEN status = 'trialing' THEN 1 ELSE 0 END) as trialing
+      FROM subscriptions
+    `).first();
+    return {
+      total: result?.total || 0,
+      active: result?.active || 0,
+      canceled: result?.canceled || 0,
+      pastDue: result?.past_due || 0,
+      trialing: result?.trialing || 0
+    };
+  }
+  /**
+   * Delete a subscription record by Stripe subscription ID
+   */
+  async deleteByStripeId(stripeSubscriptionId) {
+    const result = await this.db.prepare(
+      "DELETE FROM subscriptions WHERE stripe_subscription_id = ?"
+    ).bind(stripeSubscriptionId).run();
+    return (result.meta?.changes || 0) > 0;
+  }
+  mapRow(row) {
+    return {
+      id: row.id,
+      userId: row.user_id,
+      stripeCustomerId: row.stripe_customer_id,
+      stripeSubscriptionId: row.stripe_subscription_id,
+      stripePriceId: row.stripe_price_id,
+      status: row.status,
+      currentPeriodStart: row.current_period_start,
+      currentPeriodEnd: row.current_period_end,
+      cancelAtPeriodEnd: !!row.cancel_at_period_end,
+      createdAt: row.created_at,
+      updatedAt: row.updated_at,
+      // Attach email if joined
+      ...row.user_email ? { userEmail: row.user_email } : {}
+    };
+  }
+};
+
+// src/plugins/core-plugins/stripe-plugin/services/stripe-event-service.ts
+var StripeEventService = class {
+  constructor(db) {
+    this.db = db;
+  }
+  async ensureTable() {
+    await this.db.prepare(`
+      CREATE TABLE IF NOT EXISTS stripe_events (
+        id TEXT PRIMARY KEY DEFAULT (lower(hex(randomblob(16)))),
+        stripe_event_id TEXT NOT NULL UNIQUE,
+        type TEXT NOT NULL,
+        object_id TEXT NOT NULL DEFAULT '',
+        object_type TEXT NOT NULL DEFAULT '',
+        data TEXT NOT NULL DEFAULT '{}',
+        processed_at INTEGER NOT NULL DEFAULT (unixepoch()),
+        status TEXT NOT NULL DEFAULT 'processed',
+        error TEXT
+      )
+    `).run();
+    await this.db.prepare(`
+      CREATE INDEX IF NOT EXISTS idx_stripe_events_type ON stripe_events(type)
+    `).run();
+    await this.db.prepare(`
+      CREATE INDEX IF NOT EXISTS idx_stripe_events_status ON stripe_events(status)
+    `).run();
+    await this.db.prepare(`
+      CREATE INDEX IF NOT EXISTS idx_stripe_events_processed_at ON stripe_events(processed_at DESC)
+    `).run();
+  }
+  async log(event) {
+    await this.db.prepare(`
+      INSERT INTO stripe_events (stripe_event_id, type, object_id, object_type, data, status, error)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
+      ON CONFLICT(stripe_event_id) DO UPDATE SET
+        status = excluded.status,
+        error = excluded.error,
+        processed_at = unixepoch()
+    `).bind(
+      event.stripeEventId,
+      event.type,
+      event.objectId,
+      event.objectType,
+      JSON.stringify(event.data),
+      event.status,
+      event.error || null
+    ).run();
+  }
+  async list(filters = {}) {
+    const where = [];
+    const values = [];
+    if (filters.type) {
+      where.push("type = ?");
+      values.push(filters.type);
+    }
+    if (filters.status) {
+      where.push("status = ?");
+      values.push(filters.status);
+    }
+    if (filters.objectId) {
+      where.push("object_id = ?");
+      values.push(filters.objectId);
+    }
+    const whereClause = where.length > 0 ? `WHERE ${where.join(" AND ")}` : "";
+    const limit = Math.min(filters.limit || 50, 100);
+    const page = filters.page || 1;
+    const offset = (page - 1) * limit;
+    const countResult = await this.db.prepare(
+      `SELECT COUNT(*) as count FROM stripe_events ${whereClause}`
+    ).bind(...values).first();
+    const results = await this.db.prepare(
+      `SELECT * FROM stripe_events ${whereClause} ORDER BY processed_at DESC LIMIT ? OFFSET ?`
+    ).bind(...values, limit, offset).all();
+    return {
+      events: (results.results || []).map((r) => this.mapRow(r)),
+      total: countResult?.count || 0
+    };
+  }
+  async getStats() {
+    const result = await this.db.prepare(`
+      SELECT
+        COUNT(*) as total,
+        SUM(CASE WHEN status = 'processed' THEN 1 ELSE 0 END) as processed,
+        SUM(CASE WHEN status = 'failed' THEN 1 ELSE 0 END) as failed,
+        SUM(CASE WHEN status = 'ignored' THEN 1 ELSE 0 END) as ignored
+      FROM stripe_events
+    `).first();
+    return {
+      total: result?.total || 0,
+      processed: result?.processed || 0,
+      failed: result?.failed || 0,
+      ignored: result?.ignored || 0
+    };
+  }
+  async getDistinctTypes() {
+    const results = await this.db.prepare(
+      "SELECT DISTINCT type FROM stripe_events ORDER BY type"
+    ).all();
+    return (results.results || []).map((r) => r.type);
+  }
+  mapRow(row) {
+    return {
+      id: row.id,
+      stripeEventId: row.stripe_event_id,
+      type: row.type,
+      objectId: row.object_id,
+      objectType: row.object_type,
+      data: row.data,
+      processedAt: row.processed_at,
+      status: row.status,
+      error: row.error || void 0
+    };
+  }
+};
+
+// src/plugins/core-plugins/stripe-plugin/components/subscriptions-page.ts
+chunkUYJ6TJHX_cjs.init_admin_layout_catalyst_template();
+
+// src/plugins/core-plugins/stripe-plugin/components/tab-bar.ts
+var TABS = [
+  { label: "Subscriptions", path: "/admin/plugins/stripe" },
+  { label: "Events", path: "/admin/plugins/stripe/events" },
+  { label: "Settings", path: "/admin/plugins/stripe/settings" }
 ];
+function renderStripeTabBar(currentPath) {
+  const tabs = TABS.map((tab) => {
+    const isActive = currentPath === tab.path || tab.path === "/admin/plugins/stripe" && currentPath === "/admin/plugins/stripe/";
+    return `
+      <a href="${tab.path}"
+        class="${isActive ? "border-cyan-500 text-zinc-950 dark:text-white" : "border-transparent text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300 hover:border-zinc-300 dark:hover:border-zinc-600"} whitespace-nowrap border-b-2 px-4 py-3 text-sm font-medium transition-colors">
+        ${tab.label}
+      </a>`;
+  }).join("");
+  return `
+    <div class="border-b border-zinc-950/5 dark:border-white/10 mb-6">
+      <nav class="-mb-px flex gap-x-2" aria-label="Stripe tabs">
+        ${tabs}
+      </nav>
+    </div>
+  `;
+}
+
+// src/plugins/core-plugins/stripe-plugin/components/subscriptions-page.ts
+function renderSubscriptionsPage(data) {
+  const { subscriptions, stats, filters, user, version, dynamicMenuItems } = data;
+  const content2 = `
+    <div>
+      <div class="sm:flex sm:items-center sm:justify-between mb-6">
+        <div class="sm:flex-auto">
+          <h1 class="text-2xl/8 font-semibold text-zinc-950 dark:text-white sm:text-xl/8">Stripe</h1>
+          <p class="mt-2 text-sm/6 text-zinc-500 dark:text-zinc-400">
+            Manage subscriptions, view billing status, and monitor payment events.
+          </p>
+        </div>
+        <div class="mt-4 sm:mt-0 sm:ml-16">
+          <button id="sync-btn" onclick="syncSubscriptions()"
+            class="inline-flex items-center justify-center rounded-lg bg-zinc-950 dark:bg-white px-3.5 py-2.5 text-sm font-semibold text-white dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors shadow-sm">
+            Sync from Stripe
+          </button>
+        </div>
+      </div>
+
+      ${renderStripeTabBar("/admin/plugins/stripe")}
+
+      <!-- Stats Cards -->
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5 mb-6">
+        ${statsCard("Total", stats.total, "text-zinc-950 dark:text-white")}
+        ${statsCard("Active", stats.active, "text-emerald-600 dark:text-emerald-400")}
+        ${statsCard("Trialing", stats.trialing, "text-blue-600 dark:text-blue-400")}
+        ${statsCard("Past Due", stats.pastDue, "text-amber-600 dark:text-amber-400")}
+        ${statsCard("Canceled", stats.canceled, "text-red-600 dark:text-red-400")}
+      </div>
+
+      <!-- Filters -->
+      <div class="rounded-xl bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl p-4 ring-1 ring-zinc-950/5 dark:ring-white/10 shadow-sm mb-6">
+        <form method="GET" class="flex items-center gap-4">
+          <label class="text-sm font-medium text-zinc-500 dark:text-zinc-400">Status:</label>
+          <select name="status" class="rounded-lg border-0 bg-white dark:bg-zinc-800 px-3 py-1.5 text-sm text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10" onchange="this.form.submit()">
+            <option value="">All</option>
+            ${statusOption("active", filters.status)}
+            ${statusOption("trialing", filters.status)}
+            ${statusOption("past_due", filters.status)}
+            ${statusOption("canceled", filters.status)}
+            ${statusOption("unpaid", filters.status)}
+            ${statusOption("paused", filters.status)}
+          </select>
+        </form>
+      </div>
+
+      <!-- Subscriptions Table -->
+      <div class="rounded-xl bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl ring-1 ring-zinc-950/5 dark:ring-white/10 shadow-sm overflow-hidden">
+        <table class="min-w-full divide-y divide-zinc-950/5 dark:divide-white/5">
+          <thead>
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">User</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Status</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Price ID</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Current Period</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Cancel at End</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Stripe</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-zinc-950/5 dark:divide-white/5">
+            ${subscriptions.length === 0 ? '<tr><td colspan="6" class="px-6 py-8 text-center text-zinc-500 dark:text-zinc-400">No subscriptions found</td></tr>' : subscriptions.map(renderRow).join("")}
+          </tbody>
+        </table>
+
+        ${renderPagination2(filters.page, filters.totalPages, filters.status)}
+      </div>
+
+      <div id="sync-message" class="hidden mt-4 rounded-lg p-4 text-sm"></div>
+    </div>
+
+    <script>
+      async function syncSubscriptions() {
+        const btn = document.getElementById('sync-btn')
+        const msg = document.getElementById('sync-message')
+        btn.disabled = true
+        btn.textContent = 'Syncing...'
+        msg.className = 'hidden mt-4 rounded-lg p-4 text-sm'
+        try {
+          const res = await fetch('/api/stripe/sync-subscriptions', { method: 'POST' })
+          const result = await res.json()
+          if (result.success) {
+            msg.className = 'mt-4 rounded-lg p-4 text-sm bg-emerald-400/10 text-emerald-500 dark:text-emerald-400 ring-1 ring-inset ring-emerald-400/20'
+            msg.textContent = 'Synced ' + result.synced + ' of ' + result.total + ' subscriptions from Stripe.' + (result.errors > 0 ? ' (' + result.errors + ' errors)' : '')
+            setTimeout(() => location.reload(), 1500)
+          } else {
+            msg.className = 'mt-4 rounded-lg p-4 text-sm bg-red-400/10 text-red-500 dark:text-red-400 ring-1 ring-inset ring-red-400/20'
+            msg.textContent = result.error || 'Sync failed.'
+          }
+        } catch {
+          msg.className = 'mt-4 rounded-lg p-4 text-sm bg-red-400/10 text-red-500 dark:text-red-400 ring-1 ring-inset ring-red-400/20'
+          msg.textContent = 'Network error. Please try again.'
+        }
+        btn.disabled = false
+        btn.textContent = 'Sync from Stripe'
+      }
+    </script>
+  `;
+  const layoutData = {
+    title: "Stripe Subscriptions",
+    pageTitle: "Stripe Subscriptions",
+    currentPath: "/admin/plugins/stripe",
+    user,
+    content: content2,
+    version,
+    dynamicMenuItems
+  };
+  return chunkUYJ6TJHX_cjs.renderAdminLayoutCatalyst(layoutData);
+}
+function statsCard(label, value, colorClass) {
+  return `
+    <div class="rounded-xl bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl p-5 ring-1 ring-zinc-950/5 dark:ring-white/10 shadow-sm">
+      <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400">${label}</p>
+      <p class="mt-2 text-3xl font-bold ${colorClass}">${value}</p>
+    </div>
+  `;
+}
+function statusOption(value, current) {
+  const selected = value === current ? "selected" : "";
+  const label = value.replace("_", " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  return `<option value="${value}" ${selected}>${label}</option>`;
+}
+function statusBadge(status) {
+  const colors = {
+    active: "bg-emerald-400/10 text-emerald-500 dark:text-emerald-400 ring-emerald-400/20",
+    trialing: "bg-blue-400/10 text-blue-500 dark:text-blue-400 ring-blue-400/20",
+    past_due: "bg-amber-400/10 text-amber-500 dark:text-amber-400 ring-amber-400/20",
+    canceled: "bg-red-400/10 text-red-500 dark:text-red-400 ring-red-400/20",
+    unpaid: "bg-orange-400/10 text-orange-500 dark:text-orange-400 ring-orange-400/20",
+    paused: "bg-zinc-400/10 text-zinc-500 dark:text-zinc-400 ring-zinc-400/20",
+    incomplete: "bg-zinc-400/10 text-zinc-500 dark:text-zinc-400 ring-zinc-400/20",
+    incomplete_expired: "bg-red-400/10 text-red-500 dark:text-red-400 ring-red-400/20"
+  };
+  const color = colors[status] || "bg-zinc-400/10 text-zinc-500 ring-zinc-400/20";
+  const label = status.replace("_", " ");
+  return `<span class="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset ${color}">${label}</span>`;
+}
+function formatDate(timestamp) {
+  if (!timestamp) return "-";
+  return new Date(timestamp * 1e3).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  });
+}
+function renderRow(sub) {
+  return `
+    <tr class="hover:bg-zinc-950/[0.025] dark:hover:bg-white/[0.025]">
+      <td class="px-6 py-4 whitespace-nowrap">
+        <div class="text-sm font-medium text-zinc-950 dark:text-white">${sub.userEmail || sub.userId}</div>
+        <div class="text-xs text-zinc-500 dark:text-zinc-400">${sub.stripeCustomerId}</div>
+      </td>
+      <td class="px-6 py-4 whitespace-nowrap">${statusBadge(sub.status)}</td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm text-zinc-500 dark:text-zinc-400">${sub.stripePriceId}</td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm text-zinc-500 dark:text-zinc-400">
+        ${formatDate(sub.currentPeriodStart)} - ${formatDate(sub.currentPeriodEnd)}
+      </td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm">
+        ${sub.cancelAtPeriodEnd ? '<span class="text-amber-500 dark:text-amber-400 font-medium">Yes</span>' : '<span class="text-zinc-400 dark:text-zinc-500">No</span>'}
+      </td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm">
+        <a href="https://dashboard.stripe.com/subscriptions/${sub.stripeSubscriptionId}"
+           target="_blank" rel="noopener noreferrer"
+           class="text-cyan-600 dark:text-cyan-400 hover:text-cyan-500 dark:hover:text-cyan-300">
+          View in Stripe
+        </a>
+      </td>
+    </tr>
+  `;
+}
+function renderPagination2(page, totalPages, status) {
+  if (totalPages <= 1) return "";
+  const params = status ? `&status=${status}` : "";
+  return `
+    <div class="px-6 py-3 flex items-center justify-between border-t border-zinc-950/5 dark:border-white/5">
+      <div class="text-sm text-zinc-500 dark:text-zinc-400">
+        Page ${page} of ${totalPages}
+      </div>
+      <div class="flex gap-2">
+        ${page > 1 ? `<a href="?page=${page - 1}${params}" class="px-3 py-1 rounded-lg text-sm text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 hover:bg-zinc-50 dark:hover:bg-zinc-800">Previous</a>` : ""}
+        ${page < totalPages ? `<a href="?page=${page + 1}${params}" class="px-3 py-1 rounded-lg text-sm text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 hover:bg-zinc-50 dark:hover:bg-zinc-800">Next</a>` : ""}
+      </div>
+    </div>
+  `;
+}
+
+// src/plugins/core-plugins/stripe-plugin/components/events-page.ts
+chunkUYJ6TJHX_cjs.init_admin_layout_catalyst_template();
+function renderEventsPage(data) {
+  const { events, stats, types, filters, user, version, dynamicMenuItems } = data;
+  const content2 = `
+    <div>
+      <div class="sm:flex sm:items-center sm:justify-between mb-6">
+        <div class="sm:flex-auto">
+          <h1 class="text-2xl/8 font-semibold text-zinc-950 dark:text-white sm:text-xl/8">Stripe</h1>
+          <p class="mt-2 text-sm/6 text-zinc-500 dark:text-zinc-400">
+            Webhook event log showing all processed, failed, and ignored Stripe events.
+          </p>
+        </div>
+      </div>
+
+      ${renderStripeTabBar("/admin/plugins/stripe/events")}
+
+      <!-- Stats Cards -->
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-6">
+        ${eventStatsCard("Total Events", stats.total, "text-zinc-950 dark:text-white")}
+        ${eventStatsCard("Processed", stats.processed, "text-emerald-600 dark:text-emerald-400")}
+        ${eventStatsCard("Failed", stats.failed, "text-red-600 dark:text-red-400")}
+        ${eventStatsCard("Ignored", stats.ignored, "text-zinc-500 dark:text-zinc-400")}
+      </div>
+
+      <!-- Filters -->
+      <div class="rounded-xl bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl p-4 ring-1 ring-zinc-950/5 dark:ring-white/10 shadow-sm mb-6">
+        <form method="GET" class="flex items-center gap-4 flex-wrap">
+          <label class="text-sm font-medium text-zinc-500 dark:text-zinc-400">Type:</label>
+          <select name="type" class="rounded-lg border-0 bg-white dark:bg-zinc-800 px-3 py-1.5 text-sm text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10" onchange="this.form.submit()">
+            <option value="">All</option>
+            ${types.map((t) => `<option value="${t}" ${t === filters.type ? "selected" : ""}>${t}</option>`).join("")}
+          </select>
+
+          <label class="text-sm font-medium text-zinc-500 dark:text-zinc-400">Status:</label>
+          <select name="status" class="rounded-lg border-0 bg-white dark:bg-zinc-800 px-3 py-1.5 text-sm text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10" onchange="this.form.submit()">
+            <option value="">All</option>
+            ${eventStatusOption("processed", filters.status)}
+            ${eventStatusOption("failed", filters.status)}
+            ${eventStatusOption("ignored", filters.status)}
+          </select>
+        </form>
+      </div>
+
+      <!-- Events Table -->
+      <div class="rounded-xl bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl ring-1 ring-zinc-950/5 dark:ring-white/10 shadow-sm overflow-hidden">
+        <table class="min-w-full divide-y divide-zinc-950/5 dark:divide-white/5">
+          <thead>
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Time</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Type</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Object / User</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Status</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Event ID</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-zinc-950/5 dark:divide-white/5">
+            ${events.length === 0 ? '<tr><td colspan="5" class="px-6 py-8 text-center text-zinc-500 dark:text-zinc-400">No events recorded yet</td></tr>' : events.map(renderEventRow).join("")}
+          </tbody>
+        </table>
+
+        ${renderEventPagination(filters.page, filters.totalPages, filters.type, filters.status)}
+      </div>
+    </div>
+  `;
+  const layoutData = {
+    title: "Stripe Events",
+    pageTitle: "Stripe Events",
+    currentPath: "/admin/plugins/stripe",
+    user,
+    content: content2,
+    version,
+    dynamicMenuItems
+  };
+  return chunkUYJ6TJHX_cjs.renderAdminLayoutCatalyst(layoutData);
+}
+function eventStatsCard(label, value, colorClass) {
+  return `
+    <div class="rounded-xl bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl p-5 ring-1 ring-zinc-950/5 dark:ring-white/10 shadow-sm">
+      <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400">${label}</p>
+      <p class="mt-2 text-3xl font-bold ${colorClass}">${value}</p>
+    </div>
+  `;
+}
+function eventStatusOption(value, current) {
+  const selected = value === current ? "selected" : "";
+  const label = value.charAt(0).toUpperCase() + value.slice(1);
+  return `<option value="${value}" ${selected}>${label}</option>`;
+}
+function eventStatusBadge(status) {
+  const colors = {
+    processed: "bg-emerald-400/10 text-emerald-500 dark:text-emerald-400 ring-emerald-400/20",
+    failed: "bg-red-400/10 text-red-500 dark:text-red-400 ring-red-400/20",
+    ignored: "bg-zinc-400/10 text-zinc-500 dark:text-zinc-400 ring-zinc-400/20"
+  };
+  const color = colors[status] || "bg-zinc-400/10 text-zinc-500 ring-zinc-400/20";
+  return `<span class="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset ${color}">${status}</span>`;
+}
+function formatTimestamp3(timestamp) {
+  if (!timestamp) return "-";
+  const d = new Date(timestamp * 1e3);
+  return d.toLocaleString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit"
+  });
+}
+function extractUserInfo(event) {
+  try {
+    const data = typeof event.data === "string" ? JSON.parse(event.data) : event.data;
+    const userId = data?.metadata?.sonicjs_user_id || data?.sonicjs_user_id;
+    const email = data?.customer_email || data?.customerEmail || data?.receipt_email;
+    return { userId: userId || void 0, email: email || void 0 };
+  } catch {
+    return {};
+  }
+}
+function renderEventRow(event) {
+  const errorTooltip = event.error ? ` title="${event.error.replace(/"/g, "&quot;")}"` : "";
+  const userInfo = extractUserInfo(event);
+  const userLink = userInfo.userId ? `<a href="/admin/users/${userInfo.userId}" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">${userInfo.email || userInfo.userId}</a>` : userInfo.email ? `<span class="text-sm text-zinc-500 dark:text-zinc-400">${userInfo.email}</span>` : "";
+  return `
+    <tr class="hover:bg-zinc-950/[0.025] dark:hover:bg-white/[0.025]"${errorTooltip}>
+      <td class="px-6 py-4 whitespace-nowrap text-sm text-zinc-500 dark:text-zinc-400">
+        ${formatTimestamp3(event.processedAt)}
+      </td>
+      <td class="px-6 py-4 whitespace-nowrap">
+        <span class="text-sm font-mono text-zinc-950 dark:text-white">${event.type}</span>
+      </td>
+      <td class="px-6 py-4 whitespace-nowrap">
+        <div class="text-sm font-mono text-zinc-500 dark:text-zinc-400">${event.objectId || "-"}</div>
+        <div class="text-xs text-zinc-400 dark:text-zinc-500">${event.objectType}</div>
+        ${userLink ? `<div class="mt-1">${userLink}</div>` : ""}
+      </td>
+      <td class="px-6 py-4 whitespace-nowrap">${eventStatusBadge(event.status)}</td>
+      <td class="px-6 py-4 whitespace-nowrap text-xs font-mono text-zinc-400 dark:text-zinc-500">${event.stripeEventId}</td>
+    </tr>
+  `;
+}
+function renderEventPagination(page, totalPages, type, status) {
+  if (totalPages <= 1) return "";
+  const params = [];
+  if (type) params.push(`type=${type}`);
+  if (status) params.push(`status=${status}`);
+  const extra = params.length > 0 ? `&${params.join("&")}` : "";
+  return `
+    <div class="px-6 py-3 flex items-center justify-between border-t border-zinc-950/5 dark:border-white/5">
+      <div class="text-sm text-zinc-500 dark:text-zinc-400">
+        Page ${page} of ${totalPages}
+      </div>
+      <div class="flex gap-2">
+        ${page > 1 ? `<a href="?page=${page - 1}${extra}" class="px-3 py-1 rounded-lg text-sm text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 hover:bg-zinc-50 dark:hover:bg-zinc-800">Previous</a>` : ""}
+        ${page < totalPages ? `<a href="?page=${page + 1}${extra}" class="px-3 py-1 rounded-lg text-sm text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 hover:bg-zinc-50 dark:hover:bg-zinc-800">Next</a>` : ""}
+      </div>
+    </div>
+  `;
+}
+
+// src/plugins/core-plugins/stripe-plugin/types.ts
+var DEFAULT_SETTINGS3 = {
+  stripePublishableKey: "",
+  stripeSecretKey: "",
+  stripeWebhookSecret: "",
+  stripePriceId: "",
+  successUrl: "/admin/dashboard",
+  cancelUrl: "/admin/dashboard"
+};
+
+// src/plugins/core-plugins/stripe-plugin/routes/admin.ts
+var adminRoutes3 = new hono.Hono();
+adminRoutes3.use("*", chunk63NHQEG3_cjs.requireAuth());
+adminRoutes3.use("*", async (c, next) => {
+  const user = c.get("user");
+  if (user?.role !== "admin") {
+    return c.text("Access denied", 403);
+  }
+  return next();
+});
+async function getSettings3(db) {
+  try {
+    const pluginService = new chunkQZ2VT2OE_cjs.PluginService(db);
+    const plugin2 = await pluginService.getPlugin("stripe");
+    if (plugin2?.settings) {
+      const settings = typeof plugin2.settings === "string" ? JSON.parse(plugin2.settings) : plugin2.settings;
+      return { ...DEFAULT_SETTINGS3, ...settings };
+    }
+  } catch {
+  }
+  return DEFAULT_SETTINGS3;
+}
+adminRoutes3.get("/", async (c) => {
+  const db = c.env.DB;
+  const user = c.get("user");
+  const subscriptionService = new SubscriptionService(db);
+  await subscriptionService.ensureTable();
+  const page = parseInt(c.req.query("page") || "1");
+  const limit = 50;
+  const statusFilter = c.req.query("status");
+  const [{ subscriptions, total }, stats] = await Promise.all([
+    subscriptionService.list({ status: statusFilter, page, limit }),
+    subscriptionService.getStats()
+  ]);
+  const totalPages = Math.ceil(total / limit);
+  const html = renderSubscriptionsPage({
+    subscriptions,
+    stats,
+    filters: { status: statusFilter, page, totalPages },
+    user: user ? { name: user.email, email: user.email, role: user.role } : void 0,
+    version: c.get("appVersion"),
+    dynamicMenuItems: c.get("pluginMenuItems")
+  });
+  return c.html(html);
+});
+adminRoutes3.get("/events", async (c) => {
+  const db = c.env.DB;
+  const user = c.get("user");
+  const eventService = new StripeEventService(db);
+  await eventService.ensureTable();
+  const page = parseInt(c.req.query("page") || "1");
+  const limit = 50;
+  const typeFilter = c.req.query("type") || void 0;
+  const statusFilter = c.req.query("status");
+  const [{ events, total }, stats, types] = await Promise.all([
+    eventService.list({ type: typeFilter, status: statusFilter, page, limit }),
+    eventService.getStats(),
+    eventService.getDistinctTypes()
+  ]);
+  const totalPages = Math.ceil(total / limit);
+  const html = renderEventsPage({
+    events,
+    stats,
+    types,
+    filters: { type: typeFilter, status: statusFilter, page, totalPages },
+    user: user ? { name: user.email, email: user.email, role: user.role } : void 0,
+    version: c.get("appVersion"),
+    dynamicMenuItems: c.get("pluginMenuItems")
+  });
+  return c.html(html);
+});
+adminRoutes3.get("/settings", async (c) => {
+  const db = c.env.DB;
+  const user = c.get("user");
+  const settings = await getSettings3(db);
+  const { renderAdminLayoutCatalyst: renderAdminLayoutCatalyst2 } = await import('./admin-layout-catalyst.template-HFD37TY5.cjs');
+  const content2 = `
+    <div>
+      <div class="mb-6">
+        <h1 class="text-2xl/8 font-semibold text-zinc-950 dark:text-white sm:text-xl/8">Stripe</h1>
+        <p class="mt-2 text-sm/6 text-zinc-500 dark:text-zinc-400">
+          Configure your Stripe API keys and checkout options.
+        </p>
+      </div>
+
+      ${renderStripeTabBar("/admin/plugins/stripe/settings")}
+
+      <div id="settings-message" class="hidden mb-4 rounded-lg p-4 text-sm"></div>
+
+      <form id="stripe-settings-form" class="rounded-xl bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl ring-1 ring-zinc-950/5 dark:ring-white/10 shadow-sm divide-y divide-zinc-950/5 dark:divide-white/5">
+        <div class="p-6 space-y-5">
+          <div>
+            <label class="block text-sm font-medium text-zinc-950 dark:text-white mb-1.5">Publishable Key</label>
+            <input type="text" name="stripePublishableKey" value="${settings.stripePublishableKey}"
+              placeholder="pk_..."
+              class="w-full rounded-lg border-0 bg-white dark:bg-zinc-800 px-3.5 py-2 text-sm text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:ring-2 focus:ring-cyan-500" />
+            <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">Your Stripe publishable key (starts with pk_)</p>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-zinc-950 dark:text-white mb-1.5">Secret Key</label>
+            <input type="password" name="stripeSecretKey" value="${settings.stripeSecretKey}"
+              placeholder="sk_..."
+              class="w-full rounded-lg border-0 bg-white dark:bg-zinc-800 px-3.5 py-2 text-sm text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:ring-2 focus:ring-cyan-500" />
+            <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">Your Stripe secret API key (starts with sk_)</p>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-zinc-950 dark:text-white mb-1.5">Webhook Signing Secret</label>
+            <input type="password" name="stripeWebhookSecret" value="${settings.stripeWebhookSecret}"
+              placeholder="whsec_..."
+              class="w-full rounded-lg border-0 bg-white dark:bg-zinc-800 px-3.5 py-2 text-sm text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:ring-2 focus:ring-cyan-500" />
+            <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">Stripe webhook endpoint signing secret (starts with whsec_)</p>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-zinc-950 dark:text-white mb-1.5">Default Price ID</label>
+            <input type="text" name="stripePriceId" value="${settings.stripePriceId || ""}"
+              placeholder="price_..."
+              class="w-full rounded-lg border-0 bg-white dark:bg-zinc-800 px-3.5 py-2 text-sm text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:ring-2 focus:ring-cyan-500" />
+            <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">Default Stripe Price ID for checkout sessions (optional)</p>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-zinc-950 dark:text-white mb-1.5">Checkout Success URL</label>
+            <input type="text" name="successUrl" value="${settings.successUrl}"
+              class="w-full rounded-lg border-0 bg-white dark:bg-zinc-800 px-3.5 py-2 text-sm text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:ring-2 focus:ring-cyan-500" />
+            <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">Redirect URL after successful checkout</p>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-zinc-950 dark:text-white mb-1.5">Checkout Cancel URL</label>
+            <input type="text" name="cancelUrl" value="${settings.cancelUrl}"
+              class="w-full rounded-lg border-0 bg-white dark:bg-zinc-800 px-3.5 py-2 text-sm text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:ring-2 focus:ring-cyan-500" />
+            <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">Redirect URL if checkout is cancelled</p>
+          </div>
+        </div>
+
+        <div class="px-6 py-4 flex justify-end">
+          <button type="submit"
+            class="inline-flex items-center justify-center rounded-lg bg-zinc-950 dark:bg-white px-3.5 py-2.5 text-sm font-semibold text-white dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors shadow-sm">
+            Save Settings
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      document.getElementById('stripe-settings-form').addEventListener('submit', async (e) => {
+        e.preventDefault()
+        const form = e.target
+        const data = Object.fromEntries(new FormData(form))
+        const msg = document.getElementById('settings-message')
+        try {
+          const res = await fetch('/admin/plugins/stripe/settings', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          })
+          const result = await res.json()
+          msg.className = result.success
+            ? 'mb-4 rounded-lg p-4 text-sm bg-emerald-400/10 text-emerald-500 dark:text-emerald-400 ring-1 ring-inset ring-emerald-400/20'
+            : 'mb-4 rounded-lg p-4 text-sm bg-red-400/10 text-red-500 dark:text-red-400 ring-1 ring-inset ring-red-400/20'
+          msg.textContent = result.success ? 'Settings saved successfully.' : (result.error || 'Failed to save settings.')
+        } catch {
+          msg.className = 'mb-4 rounded-lg p-4 text-sm bg-red-400/10 text-red-500 dark:text-red-400 ring-1 ring-inset ring-red-400/20'
+          msg.textContent = 'Network error. Please try again.'
+        }
+      })
+    </script>
+  `;
+  return c.html(renderAdminLayoutCatalyst2({
+    title: "Stripe Settings",
+    pageTitle: "Stripe Settings",
+    currentPath: "/admin/plugins/stripe",
+    user: user ? { name: user.email, email: user.email, role: user.role } : void 0,
+    content: content2,
+    version: c.get("appVersion"),
+    dynamicMenuItems: c.get("pluginMenuItems")
+  }));
+});
+adminRoutes3.post("/settings", async (c) => {
+  try {
+    const body = await c.req.json();
+    const db = c.env.DB;
+    await db.prepare(`
+      UPDATE plugins
+      SET settings = ?,
+          updated_at = unixepoch()
+      WHERE id = 'stripe'
+    `).bind(JSON.stringify(body)).run();
+    return c.json({ success: true });
+  } catch (error) {
+    console.error("Error saving Stripe settings:", error);
+    return c.json({ success: false, error: "Failed to save settings" }, 500);
+  }
+});
+
+// src/plugins/core-plugins/stripe-plugin/services/stripe-api.ts
+var StripeAPI = class {
+  constructor(secretKey) {
+    this.secretKey = secretKey;
+  }
+  baseUrl = "https://api.stripe.com/v1";
+  /**
+   * Verify a webhook signature
+   * Implements Stripe's v1 signature scheme using Web Crypto API
+   */
+  async verifyWebhookSignature(payload, sigHeader, secret) {
+    const parts = sigHeader.split(",");
+    const timestamp = parts.find((p) => p.startsWith("t="))?.split("=")[1];
+    const signatures = parts.filter((p) => p.startsWith("v1=")).map((p) => p.substring(3));
+    if (!timestamp || signatures.length === 0) return false;
+    const now = Math.floor(Date.now() / 1e3);
+    if (Math.abs(now - parseInt(timestamp)) > 300) return false;
+    const signedPayload = `${timestamp}.${payload}`;
+    const encoder = new TextEncoder();
+    const key = await crypto.subtle.importKey(
+      "raw",
+      encoder.encode(secret),
+      { name: "HMAC", hash: "SHA-256" },
+      false,
+      ["sign"]
+    );
+    const signatureBuffer = await crypto.subtle.sign("HMAC", key, encoder.encode(signedPayload));
+    const expectedSignature = Array.from(new Uint8Array(signatureBuffer)).map((b) => b.toString(16).padStart(2, "0")).join("");
+    return signatures.some((sig) => timingSafeEqual(sig, expectedSignature));
+  }
+  /**
+   * Create a Checkout Session
+   */
+  async createCheckoutSession(params) {
+    const body = new URLSearchParams();
+    body.append("mode", "subscription");
+    body.append("line_items[0][price]", params.priceId);
+    body.append("line_items[0][quantity]", "1");
+    body.append("success_url", params.successUrl);
+    body.append("cancel_url", params.cancelUrl);
+    if (params.customerId) {
+      body.append("customer", params.customerId);
+    } else if (params.customerEmail) {
+      body.append("customer_email", params.customerEmail);
+    }
+    if (params.metadata) {
+      for (const [key, value] of Object.entries(params.metadata)) {
+        body.append(`metadata[${key}]`, value);
+      }
+    }
+    const response = await this.request("POST", "/checkout/sessions", body);
+    return { id: response.id, url: response.url };
+  }
+  /**
+   * Retrieve a Stripe subscription
+   */
+  async getSubscription(subscriptionId) {
+    return this.request("GET", `/subscriptions/${subscriptionId}`);
+  }
+  /**
+   * Create a Stripe customer
+   */
+  async createCustomer(params) {
+    const body = new URLSearchParams();
+    body.append("email", params.email);
+    if (params.metadata) {
+      for (const [key, value] of Object.entries(params.metadata)) {
+        body.append(`metadata[${key}]`, value);
+      }
+    }
+    return this.request("POST", "/customers", body);
+  }
+  /**
+   * List subscriptions with pagination (auto-expands across pages)
+   */
+  async listSubscriptions(params) {
+    const qs = new URLSearchParams();
+    qs.append("limit", String(params?.limit || 100));
+    if (params?.status) qs.append("status", params.status);
+    if (params?.startingAfter) qs.append("starting_after", params.startingAfter);
+    return this.request("GET", `/subscriptions?${qs.toString()}`);
+  }
+  /**
+   * Fetch ALL subscriptions from Stripe (handles pagination automatically)
+   */
+  async listAllSubscriptions() {
+    const all = [];
+    let startingAfter;
+    while (true) {
+      const result = await this.listSubscriptions({ limit: 100, startingAfter });
+      all.push(...result.data);
+      if (!result.has_more || result.data.length === 0) break;
+      startingAfter = result.data[result.data.length - 1].id;
+    }
+    return all;
+  }
+  /**
+   * Search for a customer by email
+   */
+  async findCustomerByEmail(email) {
+    const params = new URLSearchParams();
+    params.append("query", `email:'${email}'`);
+    params.append("limit", "1");
+    const result = await this.request("GET", `/customers/search?${params.toString()}`);
+    return result.data?.[0] || null;
+  }
+  async request(method, path, body) {
+    const url = path.startsWith("http") ? path : `${this.baseUrl}${path}`;
+    const response = await fetch(url, {
+      method,
+      headers: {
+        "Authorization": `Bearer ${this.secretKey}`,
+        ...body ? { "Content-Type": "application/x-www-form-urlencoded" } : {}
+      },
+      ...body ? { body: body.toString() } : {}
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(`Stripe API error: ${data.error?.message || response.statusText}`);
+    }
+    return data;
+  }
+};
+function timingSafeEqual(a, b) {
+  if (a.length !== b.length) return false;
+  let result = 0;
+  for (let i = 0; i < a.length; i++) {
+    result |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  }
+  return result === 0;
+}
+
+// src/plugins/core-plugins/stripe-plugin/routes/api.ts
+var apiRoutes3 = new hono.Hono();
+async function getSettings4(db) {
+  try {
+    const pluginService = new chunkQZ2VT2OE_cjs.PluginService(db);
+    const plugin2 = await pluginService.getPlugin("stripe");
+    if (plugin2?.settings) {
+      const settings = typeof plugin2.settings === "string" ? JSON.parse(plugin2.settings) : plugin2.settings;
+      return { ...DEFAULT_SETTINGS3, ...settings };
+    }
+  } catch {
+  }
+  return DEFAULT_SETTINGS3;
+}
+function mapStripeStatus(status) {
+  const map = {
+    active: "active",
+    canceled: "canceled",
+    past_due: "past_due",
+    trialing: "trialing",
+    unpaid: "unpaid",
+    paused: "paused",
+    incomplete: "incomplete",
+    incomplete_expired: "incomplete_expired"
+  };
+  return map[status] || "incomplete";
+}
+apiRoutes3.post("/webhook", async (c) => {
+  const db = c.env.DB;
+  const settings = await getSettings4(db);
+  if (!settings.stripeWebhookSecret) {
+    return c.json({ error: "Webhook secret not configured" }, 500);
+  }
+  const rawBody = await c.req.text();
+  const sigHeader = c.req.header("stripe-signature") || "";
+  const stripeApi = new StripeAPI(settings.stripeSecretKey);
+  const isValid = await stripeApi.verifyWebhookSignature(rawBody, sigHeader, settings.stripeWebhookSecret);
+  if (!isValid) {
+    return c.json({ error: "Invalid signature" }, 400);
+  }
+  const event = JSON.parse(rawBody);
+  const subscriptionService = new SubscriptionService(db);
+  const eventService = new StripeEventService(db);
+  await Promise.all([subscriptionService.ensureTable(), eventService.ensureTable()]);
+  const obj = event.data.object;
+  const objectId = obj?.id || "";
+  const objectType = obj?.object || event.type.split(".")[0] || "";
+  try {
+    switch (event.type) {
+      case "customer.subscription.created": {
+        const sub = event.data.object;
+        const userId = sub.metadata?.sonicjs_user_id || await subscriptionService.getUserIdByStripeCustomer(sub.customer) || "";
+        await subscriptionService.create({
+          userId,
+          stripeCustomerId: sub.customer,
+          stripeSubscriptionId: sub.id,
+          stripePriceId: sub.items.data[0]?.price.id || "",
+          status: mapStripeStatus(sub.status),
+          currentPeriodStart: sub.current_period_start,
+          currentPeriodEnd: sub.current_period_end,
+          cancelAtPeriodEnd: sub.cancel_at_period_end
+        });
+        console.log(`[Stripe] Subscription created: ${sub.id}`);
+        break;
+      }
+      case "customer.subscription.updated": {
+        const sub = event.data.object;
+        await subscriptionService.updateByStripeId(sub.id, {
+          status: mapStripeStatus(sub.status),
+          stripePriceId: sub.items.data[0]?.price.id || void 0,
+          currentPeriodStart: sub.current_period_start,
+          currentPeriodEnd: sub.current_period_end,
+          cancelAtPeriodEnd: sub.cancel_at_period_end
+        });
+        console.log(`[Stripe] Subscription updated: ${sub.id} -> ${sub.status}`);
+        break;
+      }
+      case "customer.subscription.deleted": {
+        const sub = event.data.object;
+        await subscriptionService.updateByStripeId(sub.id, {
+          status: "canceled"
+        });
+        console.log(`[Stripe] Subscription deleted: ${sub.id}`);
+        break;
+      }
+      case "checkout.session.completed": {
+        const session = event.data.object;
+        const userId = session.metadata?.sonicjs_user_id;
+        if (userId && session.subscription) {
+          const existing = await subscriptionService.getByStripeSubscriptionId(session.subscription);
+          if (existing && !existing.userId) {
+            await subscriptionService.updateByStripeId(session.subscription, {
+              userId
+            });
+          }
+        }
+        console.log(`[Stripe] Checkout completed: ${session.id}`);
+        break;
+      }
+      case "invoice.payment_succeeded": {
+        const invoice = event.data.object;
+        if (invoice.subscription) {
+          await subscriptionService.updateByStripeId(invoice.subscription, {
+            status: "active"
+          });
+        }
+        console.log(`[Stripe] Payment succeeded for invoice: ${invoice.id}`);
+        break;
+      }
+      case "invoice.payment_failed": {
+        const invoice = event.data.object;
+        if (invoice.subscription) {
+          await subscriptionService.updateByStripeId(invoice.subscription, {
+            status: "past_due"
+          });
+        }
+        console.log(`[Stripe] Payment failed for invoice: ${invoice.id}`);
+        break;
+      }
+      default:
+        console.log(`[Stripe] Unhandled event type: ${event.type}`);
+        await eventService.log({
+          stripeEventId: event.id,
+          type: event.type,
+          objectId,
+          objectType,
+          data: event.data.object,
+          status: "ignored"
+        });
+        return c.json({ received: true });
+    }
+    await eventService.log({
+      stripeEventId: event.id,
+      type: event.type,
+      objectId,
+      objectType,
+      data: event.data.object,
+      status: "processed"
+    });
+  } catch (error) {
+    await eventService.log({
+      stripeEventId: event.id,
+      type: event.type,
+      objectId,
+      objectType,
+      data: event.data.object,
+      status: "failed",
+      error: error instanceof Error ? error.message : String(error)
+    }).catch(() => {
+    });
+    console.error(`[Stripe] Error processing webhook event ${event.type}:`, error);
+    return c.json({ error: "Webhook processing failed" }, 500);
+  }
+  return c.json({ received: true });
+});
+apiRoutes3.post("/create-checkout-session", chunk63NHQEG3_cjs.requireAuth(), async (c) => {
+  const db = c.env.DB;
+  const user = c.get("user");
+  if (!user) return c.json({ error: "Unauthorized" }, 401);
+  const settings = await getSettings4(db);
+  if (!settings.stripeSecretKey) {
+    return c.json({ error: "Stripe not configured" }, 500);
+  }
+  const body = await c.req.json().catch(() => ({}));
+  const priceId = body.priceId || settings.stripePriceId;
+  if (!priceId) {
+    return c.json({ error: "No price ID specified" }, 400);
+  }
+  const stripeApi = new StripeAPI(settings.stripeSecretKey);
+  const subscriptionService = new SubscriptionService(db);
+  await subscriptionService.ensureTable();
+  const existingSub = await subscriptionService.getByUserId(user.userId);
+  let customerId = existingSub?.stripeCustomerId;
+  if (!customerId) {
+    const existing = await stripeApi.findCustomerByEmail(user.email);
+    if (existing) {
+      customerId = existing.id;
+    } else {
+      const customer = await stripeApi.createCustomer({
+        email: user.email,
+        metadata: { sonicjs_user_id: user.userId }
+      });
+      customerId = customer.id;
+    }
+  }
+  const origin = new URL(c.req.url).origin;
+  const session = await stripeApi.createCheckoutSession({
+    priceId,
+    customerId,
+    successUrl: `${origin}${settings.successUrl}?session_id={CHECKOUT_SESSION_ID}`,
+    cancelUrl: `${origin}${settings.cancelUrl}`,
+    metadata: { sonicjs_user_id: user.userId }
+  });
+  return c.json({ sessionId: session.id, url: session.url });
+});
+apiRoutes3.get("/subscription", chunk63NHQEG3_cjs.requireAuth(), async (c) => {
+  const user = c.get("user");
+  if (!user) return c.json({ error: "Unauthorized" }, 401);
+  const db = c.env.DB;
+  const subscriptionService = new SubscriptionService(db);
+  await subscriptionService.ensureTable();
+  const subscription = await subscriptionService.getByUserId(user.userId);
+  if (!subscription) {
+    return c.json({ subscription: null });
+  }
+  return c.json({ subscription });
+});
+apiRoutes3.get("/subscriptions", chunk63NHQEG3_cjs.requireAuth(), async (c) => {
+  const user = c.get("user");
+  if (user?.role !== "admin") return c.json({ error: "Access denied" }, 403);
+  const db = c.env.DB;
+  const subscriptionService = new SubscriptionService(db);
+  await subscriptionService.ensureTable();
+  const filters = {
+    status: c.req.query("status"),
+    page: c.req.query("page") ? parseInt(c.req.query("page")) : 1,
+    limit: c.req.query("limit") ? parseInt(c.req.query("limit")) : 50,
+    sortBy: c.req.query("sortBy") || "created_at",
+    sortOrder: c.req.query("sortOrder") || "desc"
+  };
+  const result = await subscriptionService.list(filters);
+  return c.json(result);
+});
+apiRoutes3.get("/stats", chunk63NHQEG3_cjs.requireAuth(), async (c) => {
+  const user = c.get("user");
+  if (user?.role !== "admin") return c.json({ error: "Access denied" }, 403);
+  const db = c.env.DB;
+  const subscriptionService = new SubscriptionService(db);
+  await subscriptionService.ensureTable();
+  const stats = await subscriptionService.getStats();
+  return c.json(stats);
+});
+apiRoutes3.post("/sync-subscriptions", chunk63NHQEG3_cjs.requireAuth(), async (c) => {
+  const user = c.get("user");
+  if (user?.role !== "admin") return c.json({ error: "Access denied" }, 403);
+  const db = c.env.DB;
+  const settings = await getSettings4(db);
+  if (!settings.stripeSecretKey) {
+    return c.json({ error: "Stripe secret key not configured" }, 400);
+  }
+  const stripeApi = new StripeAPI(settings.stripeSecretKey);
+  const subscriptionService = new SubscriptionService(db);
+  await subscriptionService.ensureTable();
+  try {
+    const allSubs = await stripeApi.listAllSubscriptions();
+    let synced = 0;
+    let errors = 0;
+    for (const sub of allSubs) {
+      try {
+        const userId = sub.metadata?.sonicjs_user_id || await subscriptionService.getUserIdByStripeCustomer(sub.customer) || "";
+        await subscriptionService.upsert({
+          userId,
+          stripeCustomerId: typeof sub.customer === "string" ? sub.customer : sub.customer.id,
+          stripeSubscriptionId: sub.id,
+          stripePriceId: sub.items?.data?.[0]?.price?.id || "",
+          status: mapStripeStatus(sub.status),
+          currentPeriodStart: sub.current_period_start,
+          currentPeriodEnd: sub.current_period_end,
+          cancelAtPeriodEnd: sub.cancel_at_period_end
+        });
+        synced++;
+      } catch (err) {
+        console.error(`[Stripe Sync] Failed to upsert subscription ${sub.id}:`, err);
+        errors++;
+      }
+    }
+    return c.json({
+      success: true,
+      total: allSubs.length,
+      synced,
+      errors
+    });
+  } catch (error) {
+    console.error("[Stripe Sync] Error:", error);
+    return c.json({
+      success: false,
+      error: error instanceof Error ? error.message : "Sync failed"
+    }, 500);
+  }
+});
+apiRoutes3.get("/events", chunk63NHQEG3_cjs.requireAuth(), async (c) => {
+  const user = c.get("user");
+  if (user?.role !== "admin") return c.json({ error: "Access denied" }, 403);
+  const db = c.env.DB;
+  const eventService = new StripeEventService(db);
+  await eventService.ensureTable();
+  const filters = {
+    type: c.req.query("type") || void 0,
+    status: c.req.query("status") || void 0,
+    objectId: c.req.query("objectId") || void 0,
+    page: c.req.query("page") ? parseInt(c.req.query("page")) : 1,
+    limit: c.req.query("limit") ? parseInt(c.req.query("limit")) : 50
+  };
+  const [result, stats, types] = await Promise.all([
+    eventService.list(filters),
+    eventService.getStats(),
+    eventService.getDistinctTypes()
+  ]);
+  return c.json({ ...result, stats, types });
+});
+
+// src/plugins/core-plugins/stripe-plugin/index.ts
+function createStripePlugin() {
+  const builder = chunk635JAMSE_cjs.PluginBuilder.create({
+    name: "stripe",
+    version: "1.0.0-beta.1",
+    description: "Stripe subscription management with webhook handling, checkout sessions, and subscription gating"
+  });
+  builder.metadata({
+    author: { name: "SonicJS Team" },
+    license: "MIT"
+  });
+  builder.addRoute("/admin/plugins/stripe", adminRoutes3, {
+    description: "Stripe subscriptions admin dashboard",
+    requiresAuth: true,
+    priority: 50
+  });
+  builder.addRoute("/api/stripe", apiRoutes3, {
+    description: "Stripe API endpoints (webhook, checkout, subscription)",
+    requiresAuth: false,
+    // Webhook route handles its own auth via signature
+    priority: 50
+  });
+  builder.addMenuItem("Stripe", "/admin/plugins/stripe", {
+    icon: `<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>`,
+    order: 75
+  });
+  builder.lifecycle({
+    install: async () => {
+      console.log("[Stripe] Plugin installed");
+    },
+    activate: async () => {
+      console.log("[Stripe] Plugin activated");
+    },
+    deactivate: async () => {
+      console.log("[Stripe] Plugin deactivated");
+    },
+    uninstall: async () => {
+      console.log("[Stripe] Plugin uninstalled");
+    }
+  });
+  return builder.build();
+}
+var stripePlugin = createStripePlugin();
+
+// src/middleware/plugin-menu.ts
+var REGISTRY_MENU_PLUGINS = Object.values(chunkQZ2VT2OE_cjs.PLUGIN_REGISTRY).filter((p) => p.adminMenu !== null).map((p) => ({
+  codeName: p.codeName,
+  label: p.adminMenu.label,
+  path: p.adminMenu.path,
+  icon: p.adminMenu.icon,
+  order: p.adminMenu.order
+}));
+var ICON_SVG = {
+  "magnifying-glass": '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg>',
+  "chart-bar": '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>',
+  "image": '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/></svg>',
+  "palette": '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.098 19.902a3.75 3.75 0 0 0 5.304 0l6.401-6.402M6.75 21A3.75 3.75 0 0 1 3 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 0 0 3.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008Z"/></svg>',
+  "envelope": '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>',
+  "hand-raised": '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.05 4.575a1.575 1.575 0 1 0-3.15 0v3m3.15-3v-1.5a1.575 1.575 0 0 1 3.15 0v1.5m-3.15 0 .075 5.925m3.075-5.925v2.925m0-2.925a1.575 1.575 0 0 1 3.15 0V9.9m-3.15-2.4v5.325M16.5 9.9a1.575 1.575 0 0 1 3.15 0V15a6.15 6.15 0 0 1-6.15 6.15H12A6.15 6.15 0 0 1 5.85 15V9.525"/></svg>',
+  "key": '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z"/></svg>',
+  "arrow-right": '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>',
+  "shield-check": '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>',
+  "credit-card": '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z"/></svg>'
+};
+function resolveIcon(iconName) {
+  if (!iconName) return "";
+  if (iconName.startsWith("<svg") || iconName.startsWith("<")) return iconName;
+  return ICON_SVG[iconName] || "";
+}
 var MARKER = "<!-- DYNAMIC_PLUGIN_MENU -->";
 function renderMenuItem(item, currentPath) {
   const isActive = currentPath === item.path || currentPath.startsWith(item.path);
   const fallbackIcon = `<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`;
+  const resolvedIcon = resolveIcon(item.icon) || fallbackIcon;
   return `
     <span class="relative">
       ${isActive ? '<span class="absolute inset-y-2 -left-4 w-0.5 rounded-full bg-cyan-500 dark:bg-cyan-400"></span>' : ""}
@@ -6283,7 +7723,7 @@ function renderMenuItem(item, currentPath) {
         ${isActive ? 'data-current="true"' : ""}
       >
         <span class="shrink-0 ${isActive ? "fill-zinc-950 dark:fill-white" : "fill-zinc-500 dark:fill-zinc-400"}">
-          ${item.icon || fallbackIcon}
+          ${resolvedIcon}
         </span>
         <span class="truncate">${item.label}</span>
       </a>
@@ -6298,23 +7738,28 @@ function pluginMenuMiddleware() {
     let activeMenuItems = [];
     try {
       const db = c.env.DB;
-      const pluginNames = MENU_PLUGINS.map((p) => p.name);
-      if (pluginNames.length > 0) {
-        const placeholders = pluginNames.map(() => "?").join(",");
+      const pluginCodeNames = REGISTRY_MENU_PLUGINS.map((p) => p.codeName);
+      if (pluginCodeNames.length > 0) {
+        const placeholders = pluginCodeNames.map(() => "?").join(",");
         const result = await db.prepare(
           `SELECT name FROM plugins WHERE name IN (${placeholders}) AND status = 'active'`
-        ).bind(...pluginNames).all();
+        ).bind(...pluginCodeNames).all();
         const activeNames = new Set((result.results || []).map((r) => r.name));
-        for (const plugin2 of MENU_PLUGINS) {
-          if (activeNames.has(plugin2.name) && plugin2.menuItems) {
-            activeMenuItems.push(...plugin2.menuItems);
+        for (const plugin2 of REGISTRY_MENU_PLUGINS) {
+          if (activeNames.has(plugin2.codeName)) {
+            activeMenuItems.push({
+              label: plugin2.label,
+              path: plugin2.path,
+              icon: plugin2.icon,
+              order: plugin2.order
+            });
           }
         }
-        activeMenuItems.sort((a, b) => (a.order || 0) - (b.order || 0));
+        activeMenuItems.sort((a, b) => a.order - b.order);
       }
     } catch {
     }
-    c.set("pluginMenuItems", activeMenuItems.map((m) => ({ label: m.label, path: m.path, icon: m.icon || "" })));
+    c.set("pluginMenuItems", activeMenuItems.map((m) => ({ label: m.label, path: m.path, icon: resolveIcon(m.icon) || "" })));
     await next();
     if (activeMenuItems.length > 0 && c.res.headers.get("content-type")?.includes("text/html")) {
       const status = c.res.status;
@@ -6330,6 +7775,672 @@ function pluginMenuMiddleware() {
     }
   };
 }
+
+// src/plugins/types.ts
+var HOOKS2 = {
+  // Request lifecycle
+  REQUEST_START: "request:start",
+  REQUEST_END: "request:end",
+  USER_LOGIN: "user:login"};
+chunkUYJ6TJHX_cjs.init_admin_layout_catalyst_template();
+var adminRoutes4 = new hono.Hono();
+adminRoutes4.use("*", chunk63NHQEG3_cjs.requireAuth());
+adminRoutes4.use("*", async (c, next) => {
+  const user = c.get("user");
+  if (user?.role !== "admin") {
+    return c.text("Access denied", 403);
+  }
+  return next();
+});
+adminRoutes4.get("/", async (c) => {
+  const user = c.get("user");
+  const db = c.env.DB;
+  let totalRequests = 0;
+  let uniqueIPs = 0;
+  let avgDuration = 0;
+  let errorCount = 0;
+  let topPages = [];
+  let recentActivity = [];
+  try {
+    const now = Math.floor(Date.now() / 1e3);
+    const dayAgo = now - 86400;
+    const [requestsResult, ipsResult, durationResult, errorsResult, pagesResult, activityResult] = await Promise.all([
+      db.prepare("SELECT COUNT(*) as count FROM system_logs WHERE category = ? AND created_at > ?").bind("api", dayAgo).first(),
+      db.prepare("SELECT COUNT(DISTINCT ip_address) as count FROM system_logs WHERE category = ? AND created_at > ?").bind("api", dayAgo).first(),
+      db.prepare("SELECT AVG(duration) as avg FROM system_logs WHERE category = ? AND created_at > ? AND duration IS NOT NULL").bind("api", dayAgo).first(),
+      db.prepare("SELECT COUNT(*) as count FROM system_logs WHERE level IN (?, ?) AND created_at > ?").bind("error", "fatal", dayAgo).first(),
+      db.prepare("SELECT url, COUNT(*) as views FROM system_logs WHERE category = ? AND created_at > ? AND url IS NOT NULL GROUP BY url ORDER BY views DESC LIMIT 10").bind("api", dayAgo).all(),
+      db.prepare("SELECT url, method, status_code, duration, created_at FROM system_logs WHERE category = ? ORDER BY created_at DESC LIMIT 20").bind("api").all()
+    ]);
+    totalRequests = requestsResult?.count || 0;
+    uniqueIPs = ipsResult?.count || 0;
+    avgDuration = Math.round(durationResult?.avg || 0);
+    errorCount = errorsResult?.count || 0;
+    topPages = (pagesResult.results || []).map((r) => ({ path: r.url, views: r.views }));
+    recentActivity = activityResult.results || [];
+  } catch {
+  }
+  const content2 = `
+    <div class="space-y-8">
+      <div>
+        <h1 class="text-2xl font-semibold text-zinc-950 dark:text-white">Analytics Dashboard</h1>
+        <p class="mt-1 text-sm text-zinc-500 dark:text-zinc-400">Last 24 hours overview from system logs</p>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-lg bg-white dark:bg-zinc-800 p-6 ring-1 ring-zinc-950/5 dark:ring-white/10">
+          <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400">Total Requests</p>
+          <p class="mt-2 text-3xl font-semibold text-zinc-950 dark:text-white">${totalRequests.toLocaleString()}</p>
+        </div>
+        <div class="rounded-lg bg-white dark:bg-zinc-800 p-6 ring-1 ring-zinc-950/5 dark:ring-white/10">
+          <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400">Unique Visitors</p>
+          <p class="mt-2 text-3xl font-semibold text-zinc-950 dark:text-white">${uniqueIPs.toLocaleString()}</p>
+        </div>
+        <div class="rounded-lg bg-white dark:bg-zinc-800 p-6 ring-1 ring-zinc-950/5 dark:ring-white/10">
+          <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400">Avg Response Time</p>
+          <p class="mt-2 text-3xl font-semibold text-zinc-950 dark:text-white">${avgDuration}ms</p>
+        </div>
+        <div class="rounded-lg bg-white dark:bg-zinc-800 p-6 ring-1 ring-zinc-950/5 dark:ring-white/10">
+          <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400">Errors</p>
+          <p class="mt-2 text-3xl font-semibold ${errorCount > 0 ? "text-red-600 dark:text-red-400" : "text-zinc-950 dark:text-white"}">${errorCount.toLocaleString()}</p>
+        </div>
+      </div>
+
+      <!-- Top Pages -->
+      <div class="rounded-lg bg-white dark:bg-zinc-800 ring-1 ring-zinc-950/5 dark:ring-white/10">
+        <div class="px-6 py-4 border-b border-zinc-950/5 dark:border-white/10">
+          <h2 class="text-lg font-semibold text-zinc-950 dark:text-white">Top Pages</h2>
+        </div>
+        <div class="divide-y divide-zinc-950/5 dark:divide-white/10">
+          ${topPages.length > 0 ? topPages.map((p) => `
+            <div class="flex items-center justify-between px-6 py-3">
+              <span class="text-sm text-zinc-700 dark:text-zinc-300 font-mono truncate">${escapeHtml3(p.path)}</span>
+              <span class="text-sm font-medium text-zinc-500 dark:text-zinc-400">${p.views}</span>
+            </div>
+          `).join("") : `
+            <div class="px-6 py-8 text-center text-sm text-zinc-500 dark:text-zinc-400">
+              No page views recorded yet. Analytics data will appear once requests are logged.
+            </div>
+          `}
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="rounded-lg bg-white dark:bg-zinc-800 ring-1 ring-zinc-950/5 dark:ring-white/10">
+        <div class="px-6 py-4 border-b border-zinc-950/5 dark:border-white/10">
+          <h2 class="text-lg font-semibold text-zinc-950 dark:text-white">Recent Activity</h2>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead class="bg-zinc-50 dark:bg-zinc-800/50">
+              <tr>
+                <th class="px-6 py-2 text-left font-medium text-zinc-500 dark:text-zinc-400">Path</th>
+                <th class="px-6 py-2 text-left font-medium text-zinc-500 dark:text-zinc-400">Method</th>
+                <th class="px-6 py-2 text-left font-medium text-zinc-500 dark:text-zinc-400">Status</th>
+                <th class="px-6 py-2 text-left font-medium text-zinc-500 dark:text-zinc-400">Duration</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-zinc-950/5 dark:divide-white/10">
+              ${recentActivity.length > 0 ? recentActivity.map((a) => `
+                <tr>
+                  <td class="px-6 py-2 font-mono text-zinc-700 dark:text-zinc-300 truncate max-w-xs">${escapeHtml3(a.url || "")}</td>
+                  <td class="px-6 py-2"><span class="inline-flex items-center rounded px-1.5 py-0.5 text-xs font-medium ${a.method === "GET" ? "bg-green-50 text-green-700 dark:bg-green-900/30 dark:text-green-400" : "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"}">${a.method || ""}</span></td>
+                  <td class="px-6 py-2"><span class="inline-flex items-center rounded px-1.5 py-0.5 text-xs font-medium ${(a.status_code || 0) >= 400 ? "bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-400" : "bg-green-50 text-green-700 dark:bg-green-900/30 dark:text-green-400"}">${a.status_code || ""}</span></td>
+                  <td class="px-6 py-2 text-zinc-500 dark:text-zinc-400">${a.duration || 0}ms</td>
+                </tr>
+              `).join("") : `
+                <tr>
+                  <td colspan="4" class="px-6 py-8 text-center text-zinc-500 dark:text-zinc-400">No activity recorded yet.</td>
+                </tr>
+              `}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  `;
+  return c.html(chunkUYJ6TJHX_cjs.renderAdminLayoutCatalyst({
+    title: "Analytics",
+    pageTitle: "Analytics Dashboard",
+    currentPath: "/admin/analytics",
+    version: c.get("appVersion"),
+    user: user ? {
+      name: user.email.split("@")[0] || "Admin",
+      email: user.email,
+      role: user.role
+    } : void 0,
+    content: content2,
+    dynamicMenuItems: c.get("pluginMenuItems")
+  }));
+});
+function escapeHtml3(str) {
+  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+// src/plugins/core-plugins/analytics/index.ts
+function createAnalyticsPlugin() {
+  const builder = chunk635JAMSE_cjs.PluginBuilder.create({
+    name: "core-analytics",
+    version: "1.0.0-beta.1",
+    description: "Core analytics tracking and reporting plugin"
+  });
+  builder.metadata({
+    author: {
+      name: "SonicJS Team",
+      email: "team@sonicjs.com"
+    },
+    license: "MIT",
+    compatibility: "^0.1.0",
+    dependencies: ["core-auth"]
+    // Requires auth for admin access
+  });
+  const analyticsAPI = new hono.Hono();
+  analyticsAPI.get("/stats", async (c) => {
+    const timeRange = c.req.query("range") || "7d";
+    c.req.query("metric") || "all";
+    return c.json({
+      message: "Analytics stats",
+      data: {
+        pageviews: 12500,
+        uniqueVisitors: 3200,
+        sessions: 4800,
+        avgSessionDuration: 245,
+        bounceRate: 0.35,
+        topPages: [
+          { path: "/", views: 3200 },
+          { path: "/about", views: 1800 },
+          { path: "/contact", views: 950 }
+        ],
+        timeRange
+      }
+    });
+  });
+  analyticsAPI.post("/track", async (c) => {
+    const event = await c.req.json();
+    console.info("Analytics event tracked:", event);
+    return c.json({
+      message: "Event tracked successfully",
+      eventId: `event-${Date.now()}`
+    });
+  });
+  analyticsAPI.get("/reports", async (c) => {
+    const reportType = c.req.query("type") || "traffic";
+    const startDate = c.req.query("start");
+    const endDate = c.req.query("end");
+    return c.json({
+      message: "Analytics report",
+      data: {
+        reportType,
+        dateRange: { start: startDate, end: endDate },
+        data: []
+      }
+    });
+  });
+  analyticsAPI.get("/realtime", async (c) => {
+    return c.json({
+      message: "Real-time analytics",
+      data: {
+        activeUsers: 23,
+        activePages: [
+          { path: "/", users: 8 },
+          { path: "/blog", users: 5 },
+          { path: "/products", users: 4 }
+        ],
+        recentEvents: []
+      }
+    });
+  });
+  builder.addRoute("/api/analytics", analyticsAPI, {
+    description: "Analytics tracking and reporting API",
+    requiresAuth: true,
+    roles: ["admin", "analytics:read"],
+    priority: 3
+  });
+  builder.addRoute("/admin/analytics", adminRoutes4, {
+    description: "Analytics admin dashboard",
+    requiresAuth: true,
+    priority: 50
+  });
+  builder.addSingleMiddleware("analytics-tracker", async (c, next) => {
+    const start = Date.now();
+    const path = c.req.path;
+    const method = c.req.method;
+    const userAgent = c.req.header("user-agent");
+    const referer = c.req.header("referer");
+    const ip = c.req.header("CF-Connecting-IP") || c.req.header("x-forwarded-for");
+    await next();
+    const duration = Date.now() - start;
+    const status = c.res.status;
+    const analyticsData = {
+      timestamp: (/* @__PURE__ */ new Date()).toISOString(),
+      path,
+      method,
+      status,
+      duration,
+      userAgent,
+      referer,
+      ip,
+      responseSize: c.res.headers.get("content-length") || 0
+    };
+    console.debug("Analytics tracking:", analyticsData);
+  }, {
+    description: "Track page views and request analytics",
+    global: true,
+    priority: 99
+    // Run last to capture response data
+  });
+  builder.addService("analyticsService", {
+    trackEvent: async (event) => {
+      console.info("Tracking event:", event);
+      return { eventId: `event-${Date.now()}` };
+    },
+    trackPageView: async (data) => {
+      console.info("Tracking pageview:", data.path);
+      return { viewId: `view-${Date.now()}` };
+    },
+    getStats: async (_timeRange) => {
+      return {
+        pageviews: 12500,
+        sessions: 4800,
+        uniqueVisitors: 3200
+      };
+    },
+    generateReport: async (type, options) => {
+      console.info(`Generating ${type} report with options:`, options);
+      return { reportId: `report-${Date.now()}` };
+    }
+  }, {
+    description: "Core analytics tracking service",
+    singleton: true
+  });
+  const pageViewSchema = chunk635JAMSE_cjs.PluginHelpers.createSchema([
+    { name: "path", type: "string", optional: false },
+    { name: "title", type: "string", optional: true },
+    { name: "referrer", type: "string", optional: true },
+    { name: "userAgent", type: "string", optional: true },
+    { name: "ipAddress", type: "string", optional: true },
+    { name: "sessionId", type: "string", optional: true },
+    { name: "userId", type: "number", optional: true },
+    { name: "duration", type: "number", optional: true }
+  ]);
+  const eventSchema = chunk635JAMSE_cjs.PluginHelpers.createSchema([
+    { name: "eventType", type: "string", optional: false },
+    { name: "eventName", type: "string", optional: false },
+    { name: "eventData", type: "object", optional: true },
+    { name: "path", type: "string", optional: true },
+    { name: "sessionId", type: "string", optional: true },
+    { name: "userId", type: "number", optional: true }
+  ]);
+  const pageViewMigration = chunk635JAMSE_cjs.PluginHelpers.createMigration("analytics_pageviews", [
+    { name: "id", type: "INTEGER", primaryKey: true },
+    { name: "path", type: "TEXT", nullable: false },
+    { name: "title", type: "TEXT", nullable: true },
+    { name: "referrer", type: "TEXT", nullable: true },
+    { name: "user_agent", type: "TEXT", nullable: true },
+    { name: "ip_address", type: "TEXT", nullable: true },
+    { name: "session_id", type: "TEXT", nullable: true },
+    { name: "user_id", type: "INTEGER", nullable: true },
+    { name: "duration", type: "INTEGER", nullable: true }
+  ]);
+  const eventMigration = chunk635JAMSE_cjs.PluginHelpers.createMigration("analytics_events", [
+    { name: "id", type: "INTEGER", primaryKey: true },
+    { name: "event_type", type: "TEXT", nullable: false },
+    { name: "event_name", type: "TEXT", nullable: false },
+    { name: "event_data", type: "TEXT", nullable: true },
+    { name: "path", type: "TEXT", nullable: true },
+    { name: "session_id", type: "TEXT", nullable: true },
+    { name: "user_id", type: "INTEGER", nullable: true }
+  ]);
+  builder.addModel("PageView", {
+    tableName: "analytics_pageviews",
+    schema: pageViewSchema,
+    migrations: [pageViewMigration]
+  });
+  builder.addModel("AnalyticsEvent", {
+    tableName: "analytics_events",
+    schema: eventSchema,
+    migrations: [eventMigration]
+  });
+  builder.addHook(HOOKS2.REQUEST_START, async (data, _context) => {
+    data.analytics = {
+      startTime: Date.now(),
+      sessionId: `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+    };
+    return data;
+  }, {
+    priority: 1,
+    description: "Initialize analytics tracking for requests"
+  });
+  builder.addHook(HOOKS2.REQUEST_END, async (data, _context) => {
+    if (data.analytics) {
+      const duration = Date.now() - data.analytics.startTime;
+      console.debug(`Request completed in ${duration}ms`);
+    }
+    return data;
+  }, {
+    priority: 1,
+    description: "Complete analytics tracking for requests"
+  });
+  builder.addHook(HOOKS2.USER_LOGIN, async (data, context) => {
+    await context.services?.analyticsService?.trackEvent({
+      eventType: "auth",
+      eventName: "user_login",
+      userId: data.userId,
+      eventData: { loginMethod: data.method }
+    });
+    return data;
+  }, {
+    priority: 8,
+    description: "Track user login events"
+  });
+  builder.addHook("content:view", async (data, context) => {
+    await context.services?.analyticsService?.trackEvent({
+      eventType: "content",
+      eventName: "content_view",
+      eventData: {
+        contentId: data.id,
+        contentType: data.type,
+        title: data.title
+      }
+    });
+    return data;
+  }, {
+    priority: 8,
+    description: "Track content view events"
+  });
+  builder.addAdminPage(
+    "/analytics",
+    "Analytics Dashboard",
+    "AnalyticsDashboardView",
+    {
+      description: "View analytics overview and key metrics",
+      permissions: ["admin", "analytics:read"],
+      icon: "chart-bar"
+    }
+  );
+  builder.addAdminPage(
+    "/analytics/reports",
+    "Analytics Reports",
+    "AnalyticsReportsView",
+    {
+      description: "Generate and view detailed analytics reports",
+      permissions: ["admin", "analytics:read"],
+      icon: "document-report"
+    }
+  );
+  builder.addAdminPage(
+    "/analytics/realtime",
+    "Real-time Analytics",
+    "AnalyticsRealtimeView",
+    {
+      description: "View real-time visitor activity",
+      permissions: ["admin", "analytics:read"],
+      icon: "lightning-bolt"
+    }
+  );
+  builder.addAdminPage(
+    "/analytics/settings",
+    "Analytics Settings",
+    "AnalyticsSettingsView",
+    {
+      description: "Configure analytics tracking and data collection",
+      permissions: ["admin", "analytics:configure"],
+      icon: "cog"
+    }
+  );
+  builder.addMenuItem("Analytics", "/admin/analytics", {
+    icon: "chart-bar",
+    order: 40,
+    permissions: ["admin", "analytics:read"]
+  });
+  builder.addMenuItem("Dashboard", "/admin/analytics", {
+    icon: "chart-bar",
+    parent: "Analytics",
+    order: 1,
+    permissions: ["admin", "analytics:read"]
+  });
+  builder.addMenuItem("Reports", "/admin/analytics/reports", {
+    icon: "document-report",
+    parent: "Analytics",
+    order: 2,
+    permissions: ["admin", "analytics:read"]
+  });
+  builder.addMenuItem("Real-time", "/admin/analytics/realtime", {
+    icon: "lightning-bolt",
+    parent: "Analytics",
+    order: 3,
+    permissions: ["admin", "analytics:read"]
+  });
+  builder.addMenuItem("Settings", "/admin/analytics/settings", {
+    icon: "cog",
+    parent: "Analytics",
+    order: 4,
+    permissions: ["admin", "analytics:configure"]
+  });
+  builder.lifecycle({
+    install: async () => {
+      console.info("Installing analytics plugin...");
+    },
+    activate: async () => {
+      console.info("Activating analytics plugin...");
+    },
+    deactivate: async () => {
+      console.info("Deactivating analytics plugin...");
+    },
+    configure: async (config) => {
+      console.info("Configuring analytics plugin...", config);
+    }
+  });
+  return builder.build();
+}
+var analyticsPlugin = createAnalyticsPlugin();
+
+// src/plugins/core-plugins/analytics/services/event-tracking-service.ts
+var EventTrackingService = class {
+  constructor(db) {
+    this.db = db;
+  }
+  async trackEvent(input) {
+    const id = crypto.randomUUID();
+    const category = input.category || "user-activity";
+    await this.db.prepare(`
+      INSERT INTO analytics_events (id, event, category, properties, user_id, session_id, ip_address, user_agent, path)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `).bind(
+      id,
+      input.event,
+      category,
+      input.properties ? JSON.stringify(input.properties) : null,
+      input.userId || null,
+      input.sessionId || null,
+      input.ipAddress || null,
+      input.userAgent || null,
+      input.path || null
+    ).run();
+    return id;
+  }
+  async trackBatch(events) {
+    const ids = [];
+    const stmts = events.map((input) => {
+      const id = crypto.randomUUID();
+      ids.push(id);
+      const category = input.category || "user-activity";
+      return this.db.prepare(`
+        INSERT INTO analytics_events (id, event, category, properties, user_id, session_id, ip_address, user_agent, path)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `).bind(
+        id,
+        input.event,
+        category,
+        input.properties ? JSON.stringify(input.properties) : null,
+        input.userId || null,
+        input.sessionId || null,
+        input.ipAddress || null,
+        input.userAgent || null,
+        input.path || null
+      );
+    });
+    await this.db.batch(stmts);
+    return ids;
+  }
+  async queryEvents(filters = {}) {
+    const conditions = [];
+    const params = [];
+    if (filters.event) {
+      conditions.push("event = ?");
+      params.push(filters.event);
+    }
+    if (filters.category) {
+      conditions.push("category = ?");
+      params.push(filters.category);
+    }
+    if (filters.userId) {
+      conditions.push("user_id = ?");
+      params.push(filters.userId);
+    }
+    if (filters.sessionId) {
+      conditions.push("session_id = ?");
+      params.push(filters.sessionId);
+    }
+    if (filters.startDate) {
+      conditions.push("created_at >= ?");
+      params.push(filters.startDate);
+    }
+    if (filters.endDate) {
+      conditions.push("created_at <= ?");
+      params.push(filters.endDate);
+    }
+    const where = conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
+    const limit = filters.limit || 50;
+    const offset = filters.offset || 0;
+    const [countResult, eventsResult] = await Promise.all([
+      this.db.prepare(`SELECT COUNT(*) as total FROM analytics_events ${where}`).bind(...params).first(),
+      this.db.prepare(`SELECT * FROM analytics_events ${where} ORDER BY created_at DESC LIMIT ? OFFSET ?`).bind(...params, limit, offset).all()
+    ]);
+    const events = (eventsResult.results || []).map((e) => ({
+      ...e,
+      properties: e.properties ? JSON.parse(e.properties) : null
+    }));
+    return { events, total: countResult?.total || 0 };
+  }
+  async getStats(startDate, endDate) {
+    const conditions = [];
+    const params = [];
+    if (startDate) {
+      conditions.push("created_at >= ?");
+      params.push(startDate);
+    }
+    if (endDate) {
+      conditions.push("created_at <= ?");
+      params.push(endDate);
+    }
+    const where = conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
+    const [totals, topEvents] = await Promise.all([
+      this.db.prepare(`
+        SELECT
+          COUNT(*) as total_events,
+          COUNT(DISTINCT user_id) as unique_users,
+          COUNT(DISTINCT session_id) as unique_sessions
+        FROM analytics_events ${where}
+      `).bind(...params).first(),
+      this.db.prepare(`
+        SELECT event, COUNT(*) as count
+        FROM analytics_events ${where}
+        GROUP BY event ORDER BY count DESC LIMIT 20
+      `).bind(...params).all()
+    ]);
+    return {
+      totalEvents: totals?.total_events || 0,
+      uniqueUsers: totals?.unique_users || 0,
+      uniqueSessions: totals?.unique_sessions || 0,
+      topEvents: (topEvents.results || []).map((r) => ({ event: r.event, count: r.count }))
+    };
+  }
+};
+
+// src/plugins/core-plugins/analytics/routes/api.ts
+var apiRoutes4 = new hono.Hono();
+apiRoutes4.post("/", async (c) => {
+  const db = c.env.DB;
+  const service = new EventTrackingService(db);
+  const ip = c.req.header("cf-connecting-ip") || c.req.header("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  const userAgent = c.req.header("user-agent") || "";
+  const user = c.get("user");
+  let body;
+  try {
+    body = await c.req.json();
+  } catch {
+    return c.json({ error: "Invalid JSON body" }, 400);
+  }
+  if (Array.isArray(body)) {
+    if (body.length > 100) {
+      return c.json({ error: "Batch size limit is 100 events" }, 400);
+    }
+    const events = body.map((e) => ({
+      event: e.event,
+      category: e.category || "user-activity",
+      properties: e.properties,
+      userId: user?.userId || e.userId,
+      sessionId: e.sessionId,
+      ipAddress: ip,
+      userAgent,
+      path: e.path
+    }));
+    const invalid = events.find((e) => !e.event || typeof e.event !== "string");
+    if (invalid) {
+      return c.json({ error: 'Each event must have an "event" string field' }, 400);
+    }
+    const ids = await service.trackBatch(events);
+    return c.json({ success: true, eventIds: ids, count: ids.length });
+  }
+  if (!body.event || typeof body.event !== "string") {
+    return c.json({ error: '"event" field is required and must be a string' }, 400);
+  }
+  const eventId = await service.trackEvent({
+    event: body.event,
+    category: body.category || "user-activity",
+    properties: body.properties,
+    userId: user?.userId || body.userId,
+    sessionId: body.sessionId,
+    ipAddress: ip,
+    userAgent,
+    path: body.path
+  });
+  return c.json({ success: true, eventId });
+});
+apiRoutes4.get("/", async (c) => {
+  const user = c.get("user");
+  if (!user || user.role !== "admin") {
+    return c.json({ error: "Admin access required" }, 403);
+  }
+  const db = c.env.DB;
+  const service = new EventTrackingService(db);
+  const filters = {
+    event: c.req.query("event") || void 0,
+    category: c.req.query("category") || void 0,
+    userId: c.req.query("userId") || void 0,
+    sessionId: c.req.query("sessionId") || void 0,
+    startDate: c.req.query("startDate") ? parseInt(c.req.query("startDate")) : void 0,
+    endDate: c.req.query("endDate") ? parseInt(c.req.query("endDate")) : void 0,
+    limit: c.req.query("limit") ? parseInt(c.req.query("limit")) : 50,
+    offset: c.req.query("offset") ? parseInt(c.req.query("offset")) : 0
+  };
+  const result = await service.queryEvents(filters);
+  return c.json(result);
+});
+apiRoutes4.get("/stats", async (c) => {
+  const user = c.get("user");
+  if (!user || user.role !== "admin") {
+    return c.json({ error: "Admin access required" }, 403);
+  }
+  const db = c.env.DB;
+  const service = new EventTrackingService(db);
+  const startDate = c.req.query("startDate") ? parseInt(c.req.query("startDate")) : void 0;
+  const endDate = c.req.query("endDate") ? parseInt(c.req.query("endDate")) : void 0;
+  const stats = await service.getStats(startDate, endDate);
+  return c.json(stats);
+});
 
 // src/plugins/cache/services/cache-config.ts
 var CACHE_CONFIGS = {
@@ -7293,7 +9404,7 @@ async function warmNamespace(namespace, entries) {
 }
 
 // src/templates/pages/admin-cache.template.ts
-chunkQP3OHHON_cjs.init_admin_layout_catalyst_template();
+chunkUYJ6TJHX_cjs.init_admin_layout_catalyst_template();
 function renderCacheDashboard(data) {
   const pageContent = `
     <div class="space-y-6">
@@ -7472,7 +9583,7 @@ function renderCacheDashboard(data) {
     </script>
 
     <!-- Confirmation Dialogs -->
-    ${chunkR33KR5P6_cjs.renderConfirmationDialog({
+    ${chunkUOZP2H5X_cjs.renderConfirmationDialog({
     id: "clear-all-cache-confirm",
     title: "Clear All Cache",
     message: "Are you sure you want to clear all cache entries? This cannot be undone.",
@@ -7483,7 +9594,7 @@ function renderCacheDashboard(data) {
     onConfirm: "performClearAllCaches()"
   })}
 
-    ${chunkR33KR5P6_cjs.renderConfirmationDialog({
+    ${chunkUOZP2H5X_cjs.renderConfirmationDialog({
     id: "clear-namespace-cache-confirm",
     title: "Clear Namespace Cache",
     message: "Clear cache for this namespace?",
@@ -7494,7 +9605,7 @@ function renderCacheDashboard(data) {
     onConfirm: "performClearNamespaceCache()"
   })}
 
-    ${chunkR33KR5P6_cjs.getConfirmationDialogScript()}
+    ${chunkUOZP2H5X_cjs.getConfirmationDialogScript()}
   `;
   const layoutData = {
     title: "Cache System",
@@ -7504,7 +9615,7 @@ function renderCacheDashboard(data) {
     version: data.version,
     content: pageContent
   };
-  return chunkQP3OHHON_cjs.renderAdminLayoutCatalyst(layoutData);
+  return chunkUYJ6TJHX_cjs.renderAdminLayoutCatalyst(layoutData);
 }
 function renderStatCard(label, value, color, icon, colorOverride) {
   const finalColor = colorOverride || color;
@@ -8180,14 +10291,14 @@ var faviconSvg = `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 // src/app.ts
 function createSonicJSApp(config = {}) {
   const app2 = new hono.Hono();
-  const appVersion = config.version || chunkFNEL5LER_cjs.getCoreVersion();
+  const appVersion = config.version || chunkV76ERLX6_cjs.getCoreVersion();
   const appName = config.name || "SonicJS AI";
   app2.use("*", async (c, next) => {
     c.set("appVersion", appVersion);
     await next();
   });
-  app2.use("*", chunkCMDLULU2_cjs.metricsMiddleware());
-  app2.use("*", chunkCMDLULU2_cjs.bootstrapMiddleware(config));
+  app2.use("*", chunk63NHQEG3_cjs.metricsMiddleware());
+  app2.use("*", chunk63NHQEG3_cjs.bootstrapMiddleware(config));
   if (config.middleware?.beforeAuth) {
     for (const middleware of config.middleware.beforeAuth) {
       app2.use("*", middleware);
@@ -8196,29 +10307,32 @@ function createSonicJSApp(config = {}) {
   app2.use("*", async (_c, next) => {
     await next();
   });
-  app2.use("*", chunkCMDLULU2_cjs.securityHeadersMiddleware());
-  app2.use("*", chunkCMDLULU2_cjs.csrfProtection());
+  app2.use("*", chunk63NHQEG3_cjs.securityHeadersMiddleware());
+  app2.use("*", chunk63NHQEG3_cjs.csrfProtection());
   if (config.middleware?.afterAuth) {
     for (const middleware of config.middleware.afterAuth) {
       app2.use("*", middleware);
     }
   }
+  const adminRoles = config.adminAccessRoles || ["admin"];
+  app2.use("/admin/*", chunk63NHQEG3_cjs.requireAuth());
+  app2.use("/admin/*", chunk63NHQEG3_cjs.requireRole(adminRoles));
   app2.use("/admin/*", pluginMenuMiddleware());
-  app2.route("/api", chunkR33KR5P6_cjs.api_default);
-  app2.route("/api/media", chunkR33KR5P6_cjs.api_media_default);
-  app2.route("/api/system", chunkR33KR5P6_cjs.api_system_default);
-  app2.route("/admin/api", chunkR33KR5P6_cjs.admin_api_default);
-  app2.route("/admin/dashboard", chunkR33KR5P6_cjs.router);
-  app2.route("/admin/collections", chunkR33KR5P6_cjs.adminCollectionsRoutes);
-  app2.route("/admin/forms", chunkR33KR5P6_cjs.adminFormsRoutes);
-  app2.route("/admin/settings", chunkR33KR5P6_cjs.adminSettingsRoutes);
-  app2.route("/forms", chunkR33KR5P6_cjs.public_forms_default);
-  app2.route("/api/forms", chunkR33KR5P6_cjs.public_forms_default);
-  app2.route("/admin/api-reference", chunkR33KR5P6_cjs.router2);
+  app2.route("/api", chunkUOZP2H5X_cjs.api_default);
+  app2.route("/api/media", chunkUOZP2H5X_cjs.api_media_default);
+  app2.route("/api/system", chunkUOZP2H5X_cjs.api_system_default);
+  app2.route("/admin/api", chunkUOZP2H5X_cjs.admin_api_default);
+  app2.route("/admin/dashboard", chunkUOZP2H5X_cjs.router);
+  app2.route("/admin/collections", chunkUOZP2H5X_cjs.adminCollectionsRoutes);
+  app2.route("/admin/forms", chunkUOZP2H5X_cjs.adminFormsRoutes);
+  app2.route("/admin/settings", chunkUOZP2H5X_cjs.adminSettingsRoutes);
+  app2.route("/forms", chunkUOZP2H5X_cjs.public_forms_default);
+  app2.route("/api/forms", chunkUOZP2H5X_cjs.public_forms_default);
+  app2.route("/admin/api-reference", chunkUOZP2H5X_cjs.router2);
   app2.route("/admin/database-tools", createDatabaseToolsAdminRoutes());
   app2.route("/admin/seed-data", createSeedDataAdminRoutes());
-  app2.route("/admin/content", chunkR33KR5P6_cjs.admin_content_default);
-  app2.route("/admin/media", chunkR33KR5P6_cjs.adminMediaRoutes);
+  app2.route("/admin/content", chunkUOZP2H5X_cjs.admin_content_default);
+  app2.route("/admin/media", chunkUOZP2H5X_cjs.adminMediaRoutes);
   app2.use("/auth/*", securityAuditMiddleware());
   if (securityAuditPlugin.routes && securityAuditPlugin.routes.length > 0) {
     for (const route of securityAuditPlugin.routes) {
@@ -8236,8 +10350,8 @@ function createSonicJSApp(config = {}) {
       app2.route(route.path, route.handler);
     }
   }
-  if (chunkR33KR5P6_cjs.userProfilesPlugin.routes && chunkR33KR5P6_cjs.userProfilesPlugin.routes.length > 0) {
-    for (const route of chunkR33KR5P6_cjs.userProfilesPlugin.routes) {
+  if (chunkUOZP2H5X_cjs.userProfilesPlugin.routes && chunkUOZP2H5X_cjs.userProfilesPlugin.routes.length > 0) {
+    for (const route of chunkUOZP2H5X_cjs.userProfilesPlugin.routes) {
       app2.route(route.path, route.handler);
     }
   }
@@ -8246,11 +10360,22 @@ function createSonicJSApp(config = {}) {
       app2.route(route.path, route.handler);
     }
   }
-  app2.route("/admin/plugins", chunkR33KR5P6_cjs.adminPluginRoutes);
-  app2.route("/admin/logs", chunkR33KR5P6_cjs.adminLogsRoutes);
-  app2.route("/admin", chunkR33KR5P6_cjs.userRoutes);
-  app2.route("/auth", chunkR33KR5P6_cjs.auth_default);
-  app2.route("/", chunkR33KR5P6_cjs.test_cleanup_default);
+  if (analyticsPlugin.routes && analyticsPlugin.routes.length > 0) {
+    for (const route of analyticsPlugin.routes) {
+      app2.route(route.path, route.handler);
+    }
+  }
+  app2.route("/api/events", apiRoutes4);
+  if (stripePlugin.routes && stripePlugin.routes.length > 0) {
+    for (const route of stripePlugin.routes) {
+      app2.route(route.path, route.handler);
+    }
+  }
+  app2.route("/admin/plugins", chunkUOZP2H5X_cjs.adminPluginRoutes);
+  app2.route("/admin/logs", chunkUOZP2H5X_cjs.adminLogsRoutes);
+  app2.route("/admin", chunkUOZP2H5X_cjs.userRoutes);
+  app2.route("/auth", chunkUOZP2H5X_cjs.auth_default);
+  app2.route("/", chunkUOZP2H5X_cjs.test_cleanup_default);
   if (emailPlugin.routes && emailPlugin.routes.length > 0) {
     for (const route of emailPlugin.routes) {
       app2.route(route.path, route.handler);
@@ -8313,7 +10438,7 @@ function createSonicJSApp(config = {}) {
       timestamp: (/* @__PURE__ */ new Date()).toISOString()
     });
   });
-  chunkXV6CY3IV_cjs.setAppInstance(app2);
+  chunkNZWFCUDA_cjs.setAppInstance(app2);
   app2.notFound((c) => {
     return c.json({ error: "Not Found", status: 404 }, 404);
   });
@@ -8330,523 +10455,523 @@ function setupCoreRoutes(_app) {
   console.warn("setupCoreRoutes is deprecated. Use createSonicJSApp() instead.");
 }
 function createDb(d1$1) {
-  return d1.drizzle(d1$1, { schema: chunkXV6CY3IV_cjs.schema_exports });
+  return d1.drizzle(d1$1, { schema: chunkNZWFCUDA_cjs.schema_exports });
 }
 
 // src/index.ts
-var VERSION = chunkFNEL5LER_cjs.package_default.version;
+var VERSION = chunkV76ERLX6_cjs.package_default.version;
 
 Object.defineProperty(exports, "ROUTES_INFO", {
   enumerable: true,
-  get: function () { return chunkR33KR5P6_cjs.ROUTES_INFO; }
+  get: function () { return chunkUOZP2H5X_cjs.ROUTES_INFO; }
 });
 Object.defineProperty(exports, "adminApiRoutes", {
   enumerable: true,
-  get: function () { return chunkR33KR5P6_cjs.admin_api_default; }
+  get: function () { return chunkUOZP2H5X_cjs.admin_api_default; }
 });
 Object.defineProperty(exports, "adminCheckboxRoutes", {
   enumerable: true,
-  get: function () { return chunkR33KR5P6_cjs.adminCheckboxRoutes; }
+  get: function () { return chunkUOZP2H5X_cjs.adminCheckboxRoutes; }
 });
 Object.defineProperty(exports, "adminCodeExamplesRoutes", {
   enumerable: true,
-  get: function () { return chunkR33KR5P6_cjs.admin_code_examples_default; }
+  get: function () { return chunkUOZP2H5X_cjs.admin_code_examples_default; }
 });
 Object.defineProperty(exports, "adminCollectionsRoutes", {
   enumerable: true,
-  get: function () { return chunkR33KR5P6_cjs.adminCollectionsRoutes; }
+  get: function () { return chunkUOZP2H5X_cjs.adminCollectionsRoutes; }
 });
 Object.defineProperty(exports, "adminContentRoutes", {
   enumerable: true,
-  get: function () { return chunkR33KR5P6_cjs.admin_content_default; }
+  get: function () { return chunkUOZP2H5X_cjs.admin_content_default; }
 });
 Object.defineProperty(exports, "adminDashboardRoutes", {
   enumerable: true,
-  get: function () { return chunkR33KR5P6_cjs.router; }
+  get: function () { return chunkUOZP2H5X_cjs.router; }
 });
 Object.defineProperty(exports, "adminDesignRoutes", {
   enumerable: true,
-  get: function () { return chunkR33KR5P6_cjs.adminDesignRoutes; }
+  get: function () { return chunkUOZP2H5X_cjs.adminDesignRoutes; }
 });
 Object.defineProperty(exports, "adminLogsRoutes", {
   enumerable: true,
-  get: function () { return chunkR33KR5P6_cjs.adminLogsRoutes; }
+  get: function () { return chunkUOZP2H5X_cjs.adminLogsRoutes; }
 });
 Object.defineProperty(exports, "adminMediaRoutes", {
   enumerable: true,
-  get: function () { return chunkR33KR5P6_cjs.adminMediaRoutes; }
+  get: function () { return chunkUOZP2H5X_cjs.adminMediaRoutes; }
 });
 Object.defineProperty(exports, "adminPluginRoutes", {
   enumerable: true,
-  get: function () { return chunkR33KR5P6_cjs.adminPluginRoutes; }
+  get: function () { return chunkUOZP2H5X_cjs.adminPluginRoutes; }
 });
 Object.defineProperty(exports, "adminSettingsRoutes", {
   enumerable: true,
-  get: function () { return chunkR33KR5P6_cjs.adminSettingsRoutes; }
+  get: function () { return chunkUOZP2H5X_cjs.adminSettingsRoutes; }
 });
 Object.defineProperty(exports, "adminTestimonialsRoutes", {
   enumerable: true,
-  get: function () { return chunkR33KR5P6_cjs.admin_testimonials_default; }
+  get: function () { return chunkUOZP2H5X_cjs.admin_testimonials_default; }
 });
 Object.defineProperty(exports, "adminUsersRoutes", {
   enumerable: true,
-  get: function () { return chunkR33KR5P6_cjs.userRoutes; }
+  get: function () { return chunkUOZP2H5X_cjs.userRoutes; }
 });
 Object.defineProperty(exports, "apiContentCrudRoutes", {
   enumerable: true,
-  get: function () { return chunkR33KR5P6_cjs.api_content_crud_default; }
+  get: function () { return chunkUOZP2H5X_cjs.api_content_crud_default; }
 });
 Object.defineProperty(exports, "apiMediaRoutes", {
   enumerable: true,
-  get: function () { return chunkR33KR5P6_cjs.api_media_default; }
+  get: function () { return chunkUOZP2H5X_cjs.api_media_default; }
 });
 Object.defineProperty(exports, "apiRoutes", {
   enumerable: true,
-  get: function () { return chunkR33KR5P6_cjs.api_default; }
+  get: function () { return chunkUOZP2H5X_cjs.api_default; }
 });
 Object.defineProperty(exports, "apiSystemRoutes", {
   enumerable: true,
-  get: function () { return chunkR33KR5P6_cjs.api_system_default; }
+  get: function () { return chunkUOZP2H5X_cjs.api_system_default; }
 });
 Object.defineProperty(exports, "authRoutes", {
   enumerable: true,
-  get: function () { return chunkR33KR5P6_cjs.auth_default; }
+  get: function () { return chunkUOZP2H5X_cjs.auth_default; }
 });
 Object.defineProperty(exports, "createUserProfilesPlugin", {
   enumerable: true,
-  get: function () { return chunkR33KR5P6_cjs.createUserProfilesPlugin; }
+  get: function () { return chunkUOZP2H5X_cjs.createUserProfilesPlugin; }
 });
 Object.defineProperty(exports, "defineUserProfile", {
   enumerable: true,
-  get: function () { return chunkR33KR5P6_cjs.defineUserProfile; }
+  get: function () { return chunkUOZP2H5X_cjs.defineUserProfile; }
 });
 Object.defineProperty(exports, "getUserProfileConfig", {
   enumerable: true,
-  get: function () { return chunkR33KR5P6_cjs.getUserProfileConfig; }
+  get: function () { return chunkUOZP2H5X_cjs.getUserProfileConfig; }
 });
 Object.defineProperty(exports, "userProfilesPlugin", {
   enumerable: true,
-  get: function () { return chunkR33KR5P6_cjs.userProfilesPlugin; }
+  get: function () { return chunkUOZP2H5X_cjs.userProfilesPlugin; }
 });
 Object.defineProperty(exports, "Logger", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.Logger; }
+  get: function () { return chunkNZWFCUDA_cjs.Logger; }
 });
 Object.defineProperty(exports, "apiTokens", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.apiTokens; }
+  get: function () { return chunkNZWFCUDA_cjs.apiTokens; }
 });
 Object.defineProperty(exports, "collections", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.collections; }
+  get: function () { return chunkNZWFCUDA_cjs.collections; }
 });
 Object.defineProperty(exports, "content", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.content; }
+  get: function () { return chunkNZWFCUDA_cjs.content; }
 });
 Object.defineProperty(exports, "contentVersions", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.contentVersions; }
+  get: function () { return chunkNZWFCUDA_cjs.contentVersions; }
 });
 Object.defineProperty(exports, "getLogger", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.getLogger; }
+  get: function () { return chunkNZWFCUDA_cjs.getLogger; }
 });
 Object.defineProperty(exports, "initLogger", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.initLogger; }
+  get: function () { return chunkNZWFCUDA_cjs.initLogger; }
 });
 Object.defineProperty(exports, "insertCollectionSchema", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.insertCollectionSchema; }
+  get: function () { return chunkNZWFCUDA_cjs.insertCollectionSchema; }
 });
 Object.defineProperty(exports, "insertContentSchema", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.insertContentSchema; }
+  get: function () { return chunkNZWFCUDA_cjs.insertContentSchema; }
 });
 Object.defineProperty(exports, "insertLogConfigSchema", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.insertLogConfigSchema; }
+  get: function () { return chunkNZWFCUDA_cjs.insertLogConfigSchema; }
 });
 Object.defineProperty(exports, "insertMediaSchema", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.insertMediaSchema; }
+  get: function () { return chunkNZWFCUDA_cjs.insertMediaSchema; }
 });
 Object.defineProperty(exports, "insertPluginActivityLogSchema", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.insertPluginActivityLogSchema; }
+  get: function () { return chunkNZWFCUDA_cjs.insertPluginActivityLogSchema; }
 });
 Object.defineProperty(exports, "insertPluginAssetSchema", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.insertPluginAssetSchema; }
+  get: function () { return chunkNZWFCUDA_cjs.insertPluginAssetSchema; }
 });
 Object.defineProperty(exports, "insertPluginHookSchema", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.insertPluginHookSchema; }
+  get: function () { return chunkNZWFCUDA_cjs.insertPluginHookSchema; }
 });
 Object.defineProperty(exports, "insertPluginRouteSchema", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.insertPluginRouteSchema; }
+  get: function () { return chunkNZWFCUDA_cjs.insertPluginRouteSchema; }
 });
 Object.defineProperty(exports, "insertPluginSchema", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.insertPluginSchema; }
+  get: function () { return chunkNZWFCUDA_cjs.insertPluginSchema; }
 });
 Object.defineProperty(exports, "insertSystemLogSchema", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.insertSystemLogSchema; }
+  get: function () { return chunkNZWFCUDA_cjs.insertSystemLogSchema; }
 });
 Object.defineProperty(exports, "insertUserSchema", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.insertUserSchema; }
+  get: function () { return chunkNZWFCUDA_cjs.insertUserSchema; }
 });
 Object.defineProperty(exports, "insertWorkflowHistorySchema", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.insertWorkflowHistorySchema; }
+  get: function () { return chunkNZWFCUDA_cjs.insertWorkflowHistorySchema; }
 });
 Object.defineProperty(exports, "logConfig", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.logConfig; }
+  get: function () { return chunkNZWFCUDA_cjs.logConfig; }
 });
 Object.defineProperty(exports, "media", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.media; }
+  get: function () { return chunkNZWFCUDA_cjs.media; }
 });
 Object.defineProperty(exports, "pluginActivityLog", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.pluginActivityLog; }
+  get: function () { return chunkNZWFCUDA_cjs.pluginActivityLog; }
 });
 Object.defineProperty(exports, "pluginAssets", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.pluginAssets; }
+  get: function () { return chunkNZWFCUDA_cjs.pluginAssets; }
 });
 Object.defineProperty(exports, "pluginHooks", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.pluginHooks; }
+  get: function () { return chunkNZWFCUDA_cjs.pluginHooks; }
 });
 Object.defineProperty(exports, "pluginRoutes", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.pluginRoutes; }
+  get: function () { return chunkNZWFCUDA_cjs.pluginRoutes; }
 });
 Object.defineProperty(exports, "plugins", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.plugins; }
+  get: function () { return chunkNZWFCUDA_cjs.plugins; }
 });
 Object.defineProperty(exports, "selectCollectionSchema", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.selectCollectionSchema; }
+  get: function () { return chunkNZWFCUDA_cjs.selectCollectionSchema; }
 });
 Object.defineProperty(exports, "selectContentSchema", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.selectContentSchema; }
+  get: function () { return chunkNZWFCUDA_cjs.selectContentSchema; }
 });
 Object.defineProperty(exports, "selectLogConfigSchema", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.selectLogConfigSchema; }
+  get: function () { return chunkNZWFCUDA_cjs.selectLogConfigSchema; }
 });
 Object.defineProperty(exports, "selectMediaSchema", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.selectMediaSchema; }
+  get: function () { return chunkNZWFCUDA_cjs.selectMediaSchema; }
 });
 Object.defineProperty(exports, "selectPluginActivityLogSchema", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.selectPluginActivityLogSchema; }
+  get: function () { return chunkNZWFCUDA_cjs.selectPluginActivityLogSchema; }
 });
 Object.defineProperty(exports, "selectPluginAssetSchema", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.selectPluginAssetSchema; }
+  get: function () { return chunkNZWFCUDA_cjs.selectPluginAssetSchema; }
 });
 Object.defineProperty(exports, "selectPluginHookSchema", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.selectPluginHookSchema; }
+  get: function () { return chunkNZWFCUDA_cjs.selectPluginHookSchema; }
 });
 Object.defineProperty(exports, "selectPluginRouteSchema", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.selectPluginRouteSchema; }
+  get: function () { return chunkNZWFCUDA_cjs.selectPluginRouteSchema; }
 });
 Object.defineProperty(exports, "selectPluginSchema", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.selectPluginSchema; }
+  get: function () { return chunkNZWFCUDA_cjs.selectPluginSchema; }
 });
 Object.defineProperty(exports, "selectSystemLogSchema", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.selectSystemLogSchema; }
+  get: function () { return chunkNZWFCUDA_cjs.selectSystemLogSchema; }
 });
 Object.defineProperty(exports, "selectUserSchema", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.selectUserSchema; }
+  get: function () { return chunkNZWFCUDA_cjs.selectUserSchema; }
 });
 Object.defineProperty(exports, "selectWorkflowHistorySchema", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.selectWorkflowHistorySchema; }
+  get: function () { return chunkNZWFCUDA_cjs.selectWorkflowHistorySchema; }
 });
 Object.defineProperty(exports, "systemLogs", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.systemLogs; }
+  get: function () { return chunkNZWFCUDA_cjs.systemLogs; }
 });
 Object.defineProperty(exports, "users", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.users; }
+  get: function () { return chunkNZWFCUDA_cjs.users; }
 });
 Object.defineProperty(exports, "workflowHistory", {
   enumerable: true,
-  get: function () { return chunkXV6CY3IV_cjs.workflowHistory; }
+  get: function () { return chunkNZWFCUDA_cjs.workflowHistory; }
 });
 Object.defineProperty(exports, "AuthManager", {
   enumerable: true,
-  get: function () { return chunkCMDLULU2_cjs.AuthManager; }
+  get: function () { return chunk63NHQEG3_cjs.AuthManager; }
 });
 Object.defineProperty(exports, "PermissionManager", {
   enumerable: true,
-  get: function () { return chunkCMDLULU2_cjs.PermissionManager; }
+  get: function () { return chunk63NHQEG3_cjs.PermissionManager; }
 });
 Object.defineProperty(exports, "bootstrapMiddleware", {
   enumerable: true,
-  get: function () { return chunkCMDLULU2_cjs.bootstrapMiddleware; }
+  get: function () { return chunk63NHQEG3_cjs.bootstrapMiddleware; }
 });
 Object.defineProperty(exports, "cacheHeaders", {
   enumerable: true,
-  get: function () { return chunkCMDLULU2_cjs.cacheHeaders; }
+  get: function () { return chunk63NHQEG3_cjs.cacheHeaders; }
 });
 Object.defineProperty(exports, "compressionMiddleware", {
   enumerable: true,
-  get: function () { return chunkCMDLULU2_cjs.compressionMiddleware; }
+  get: function () { return chunk63NHQEG3_cjs.compressionMiddleware; }
 });
 Object.defineProperty(exports, "detailedLoggingMiddleware", {
   enumerable: true,
-  get: function () { return chunkCMDLULU2_cjs.detailedLoggingMiddleware; }
+  get: function () { return chunk63NHQEG3_cjs.detailedLoggingMiddleware; }
 });
 Object.defineProperty(exports, "getActivePlugins", {
   enumerable: true,
-  get: function () { return chunkCMDLULU2_cjs.getActivePlugins; }
+  get: function () { return chunk63NHQEG3_cjs.getActivePlugins; }
 });
 Object.defineProperty(exports, "isPluginActive", {
   enumerable: true,
-  get: function () { return chunkCMDLULU2_cjs.isPluginActive; }
+  get: function () { return chunk63NHQEG3_cjs.isPluginActive; }
 });
 Object.defineProperty(exports, "logActivity", {
   enumerable: true,
-  get: function () { return chunkCMDLULU2_cjs.logActivity; }
+  get: function () { return chunk63NHQEG3_cjs.logActivity; }
 });
 Object.defineProperty(exports, "loggingMiddleware", {
   enumerable: true,
-  get: function () { return chunkCMDLULU2_cjs.loggingMiddleware; }
+  get: function () { return chunk63NHQEG3_cjs.loggingMiddleware; }
 });
 Object.defineProperty(exports, "optionalAuth", {
   enumerable: true,
-  get: function () { return chunkCMDLULU2_cjs.optionalAuth; }
+  get: function () { return chunk63NHQEG3_cjs.optionalAuth; }
 });
 Object.defineProperty(exports, "performanceLoggingMiddleware", {
   enumerable: true,
-  get: function () { return chunkCMDLULU2_cjs.performanceLoggingMiddleware; }
+  get: function () { return chunk63NHQEG3_cjs.performanceLoggingMiddleware; }
 });
 Object.defineProperty(exports, "requireActivePlugin", {
   enumerable: true,
-  get: function () { return chunkCMDLULU2_cjs.requireActivePlugin; }
+  get: function () { return chunk63NHQEG3_cjs.requireActivePlugin; }
 });
 Object.defineProperty(exports, "requireActivePlugins", {
   enumerable: true,
-  get: function () { return chunkCMDLULU2_cjs.requireActivePlugins; }
+  get: function () { return chunk63NHQEG3_cjs.requireActivePlugins; }
 });
 Object.defineProperty(exports, "requireAnyPermission", {
   enumerable: true,
-  get: function () { return chunkCMDLULU2_cjs.requireAnyPermission; }
+  get: function () { return chunk63NHQEG3_cjs.requireAnyPermission; }
 });
 Object.defineProperty(exports, "requireAuth", {
   enumerable: true,
-  get: function () { return chunkCMDLULU2_cjs.requireAuth; }
+  get: function () { return chunk63NHQEG3_cjs.requireAuth; }
 });
 Object.defineProperty(exports, "requirePermission", {
   enumerable: true,
-  get: function () { return chunkCMDLULU2_cjs.requirePermission; }
+  get: function () { return chunk63NHQEG3_cjs.requirePermission; }
 });
 Object.defineProperty(exports, "requireRole", {
   enumerable: true,
-  get: function () { return chunkCMDLULU2_cjs.requireRole; }
+  get: function () { return chunk63NHQEG3_cjs.requireRole; }
 });
 Object.defineProperty(exports, "securityHeaders", {
   enumerable: true,
-  get: function () { return chunkCMDLULU2_cjs.securityHeadersMiddleware; }
+  get: function () { return chunk63NHQEG3_cjs.securityHeadersMiddleware; }
 });
 Object.defineProperty(exports, "securityLoggingMiddleware", {
   enumerable: true,
-  get: function () { return chunkCMDLULU2_cjs.securityLoggingMiddleware; }
+  get: function () { return chunk63NHQEG3_cjs.securityLoggingMiddleware; }
 });
 Object.defineProperty(exports, "PluginBootstrapService", {
   enumerable: true,
-  get: function () { return chunkI6FFGQIT_cjs.PluginBootstrapService; }
+  get: function () { return chunkQZ2VT2OE_cjs.PluginBootstrapService; }
 });
 Object.defineProperty(exports, "PluginServiceClass", {
   enumerable: true,
-  get: function () { return chunkI6FFGQIT_cjs.PluginService; }
+  get: function () { return chunkQZ2VT2OE_cjs.PluginService; }
 });
 Object.defineProperty(exports, "backfillFormSubmissions", {
   enumerable: true,
-  get: function () { return chunkI6FFGQIT_cjs.backfillFormSubmissions; }
+  get: function () { return chunkQZ2VT2OE_cjs.backfillFormSubmissions; }
 });
 Object.defineProperty(exports, "cleanupRemovedCollections", {
   enumerable: true,
-  get: function () { return chunkI6FFGQIT_cjs.cleanupRemovedCollections; }
+  get: function () { return chunkQZ2VT2OE_cjs.cleanupRemovedCollections; }
 });
 Object.defineProperty(exports, "createContentFromSubmission", {
   enumerable: true,
-  get: function () { return chunkI6FFGQIT_cjs.createContentFromSubmission; }
+  get: function () { return chunkQZ2VT2OE_cjs.createContentFromSubmission; }
 });
 Object.defineProperty(exports, "deriveCollectionSchemaFromFormio", {
   enumerable: true,
-  get: function () { return chunkI6FFGQIT_cjs.deriveCollectionSchemaFromFormio; }
+  get: function () { return chunkQZ2VT2OE_cjs.deriveCollectionSchemaFromFormio; }
 });
 Object.defineProperty(exports, "deriveSubmissionTitle", {
   enumerable: true,
-  get: function () { return chunkI6FFGQIT_cjs.deriveSubmissionTitle; }
+  get: function () { return chunkQZ2VT2OE_cjs.deriveSubmissionTitle; }
 });
 Object.defineProperty(exports, "fullCollectionSync", {
   enumerable: true,
-  get: function () { return chunkI6FFGQIT_cjs.fullCollectionSync; }
+  get: function () { return chunkQZ2VT2OE_cjs.fullCollectionSync; }
 });
 Object.defineProperty(exports, "getAvailableCollectionNames", {
   enumerable: true,
-  get: function () { return chunkI6FFGQIT_cjs.getAvailableCollectionNames; }
+  get: function () { return chunkQZ2VT2OE_cjs.getAvailableCollectionNames; }
 });
 Object.defineProperty(exports, "getManagedCollections", {
   enumerable: true,
-  get: function () { return chunkI6FFGQIT_cjs.getManagedCollections; }
+  get: function () { return chunkQZ2VT2OE_cjs.getManagedCollections; }
 });
 Object.defineProperty(exports, "isCollectionManaged", {
   enumerable: true,
-  get: function () { return chunkI6FFGQIT_cjs.isCollectionManaged; }
+  get: function () { return chunkQZ2VT2OE_cjs.isCollectionManaged; }
 });
 Object.defineProperty(exports, "loadCollectionConfig", {
   enumerable: true,
-  get: function () { return chunkI6FFGQIT_cjs.loadCollectionConfig; }
+  get: function () { return chunkQZ2VT2OE_cjs.loadCollectionConfig; }
 });
 Object.defineProperty(exports, "loadCollectionConfigs", {
   enumerable: true,
-  get: function () { return chunkI6FFGQIT_cjs.loadCollectionConfigs; }
+  get: function () { return chunkQZ2VT2OE_cjs.loadCollectionConfigs; }
 });
 Object.defineProperty(exports, "mapFormStatusToContentStatus", {
   enumerable: true,
-  get: function () { return chunkI6FFGQIT_cjs.mapFormStatusToContentStatus; }
+  get: function () { return chunkQZ2VT2OE_cjs.mapFormStatusToContentStatus; }
 });
 Object.defineProperty(exports, "registerCollections", {
   enumerable: true,
-  get: function () { return chunkI6FFGQIT_cjs.registerCollections; }
+  get: function () { return chunkQZ2VT2OE_cjs.registerCollections; }
 });
 Object.defineProperty(exports, "syncAllFormCollections", {
   enumerable: true,
-  get: function () { return chunkI6FFGQIT_cjs.syncAllFormCollections; }
+  get: function () { return chunkQZ2VT2OE_cjs.syncAllFormCollections; }
 });
 Object.defineProperty(exports, "syncCollection", {
   enumerable: true,
-  get: function () { return chunkI6FFGQIT_cjs.syncCollection; }
+  get: function () { return chunkQZ2VT2OE_cjs.syncCollection; }
 });
 Object.defineProperty(exports, "syncCollections", {
   enumerable: true,
-  get: function () { return chunkI6FFGQIT_cjs.syncCollections; }
+  get: function () { return chunkQZ2VT2OE_cjs.syncCollections; }
 });
 Object.defineProperty(exports, "syncFormCollection", {
   enumerable: true,
-  get: function () { return chunkI6FFGQIT_cjs.syncFormCollection; }
+  get: function () { return chunkQZ2VT2OE_cjs.syncFormCollection; }
 });
 Object.defineProperty(exports, "validateCollectionConfig", {
   enumerable: true,
-  get: function () { return chunkI6FFGQIT_cjs.validateCollectionConfig; }
+  get: function () { return chunkQZ2VT2OE_cjs.validateCollectionConfig; }
 });
 Object.defineProperty(exports, "MigrationService", {
   enumerable: true,
-  get: function () { return chunkJUJ7XHGM_cjs.MigrationService; }
+  get: function () { return chunkHLOJ4N7Q_cjs.MigrationService; }
 });
 Object.defineProperty(exports, "renderFilterBar", {
   enumerable: true,
-  get: function () { return chunk3QCEYJLK_cjs.renderFilterBar; }
+  get: function () { return chunk4ZSNJDLS_cjs.renderFilterBar; }
 });
 Object.defineProperty(exports, "getConfirmationDialogScript", {
   enumerable: true,
-  get: function () { return chunkQP3OHHON_cjs.getConfirmationDialogScript; }
+  get: function () { return chunkOHYBNCVL_cjs.getConfirmationDialogScript; }
 });
 Object.defineProperty(exports, "renderAlert", {
   enumerable: true,
-  get: function () { return chunkQP3OHHON_cjs.renderAlert; }
+  get: function () { return chunkOHYBNCVL_cjs.renderAlert; }
 });
 Object.defineProperty(exports, "renderConfirmationDialog", {
   enumerable: true,
-  get: function () { return chunkQP3OHHON_cjs.renderConfirmationDialog; }
+  get: function () { return chunkOHYBNCVL_cjs.renderConfirmationDialog; }
 });
 Object.defineProperty(exports, "renderForm", {
   enumerable: true,
-  get: function () { return chunkQP3OHHON_cjs.renderForm; }
+  get: function () { return chunkOHYBNCVL_cjs.renderForm; }
 });
 Object.defineProperty(exports, "renderFormField", {
   enumerable: true,
-  get: function () { return chunkQP3OHHON_cjs.renderFormField; }
+  get: function () { return chunkOHYBNCVL_cjs.renderFormField; }
 });
 Object.defineProperty(exports, "renderPagination", {
   enumerable: true,
-  get: function () { return chunkQP3OHHON_cjs.renderPagination; }
+  get: function () { return chunkOHYBNCVL_cjs.renderPagination; }
 });
 Object.defineProperty(exports, "renderTable", {
   enumerable: true,
-  get: function () { return chunkQP3OHHON_cjs.renderTable; }
+  get: function () { return chunkOHYBNCVL_cjs.renderTable; }
 });
 Object.defineProperty(exports, "HookSystemImpl", {
   enumerable: true,
-  get: function () { return chunkNJ2J53RY_cjs.HookSystemImpl; }
+  get: function () { return chunkABB34XUS_cjs.HookSystemImpl; }
 });
 Object.defineProperty(exports, "HookUtils", {
   enumerable: true,
-  get: function () { return chunkNJ2J53RY_cjs.HookUtils; }
+  get: function () { return chunkABB34XUS_cjs.HookUtils; }
 });
 Object.defineProperty(exports, "PluginManagerClass", {
   enumerable: true,
-  get: function () { return chunkNJ2J53RY_cjs.PluginManager; }
+  get: function () { return chunkABB34XUS_cjs.PluginManager; }
 });
 Object.defineProperty(exports, "PluginRegistryImpl", {
   enumerable: true,
-  get: function () { return chunkNJ2J53RY_cjs.PluginRegistryImpl; }
+  get: function () { return chunkABB34XUS_cjs.PluginRegistryImpl; }
 });
 Object.defineProperty(exports, "PluginValidatorClass", {
   enumerable: true,
-  get: function () { return chunkNJ2J53RY_cjs.PluginValidator; }
+  get: function () { return chunkABB34XUS_cjs.PluginValidator; }
 });
 Object.defineProperty(exports, "ScopedHookSystemClass", {
   enumerable: true,
-  get: function () { return chunkNJ2J53RY_cjs.ScopedHookSystem; }
+  get: function () { return chunkABB34XUS_cjs.ScopedHookSystem; }
 });
 Object.defineProperty(exports, "PluginBuilder", {
   enumerable: true,
-  get: function () { return chunk6FHNRRJ3_cjs.PluginBuilder; }
+  get: function () { return chunk635JAMSE_cjs.PluginBuilder; }
 });
 Object.defineProperty(exports, "PluginHelpers", {
   enumerable: true,
-  get: function () { return chunk6FHNRRJ3_cjs.PluginHelpers; }
+  get: function () { return chunk635JAMSE_cjs.PluginHelpers; }
 });
 Object.defineProperty(exports, "QueryFilterBuilder", {
   enumerable: true,
-  get: function () { return chunkFNEL5LER_cjs.QueryFilterBuilder; }
+  get: function () { return chunkV76ERLX6_cjs.QueryFilterBuilder; }
 });
 Object.defineProperty(exports, "SONICJS_VERSION", {
   enumerable: true,
-  get: function () { return chunkFNEL5LER_cjs.SONICJS_VERSION; }
+  get: function () { return chunkV76ERLX6_cjs.SONICJS_VERSION; }
 });
 Object.defineProperty(exports, "TemplateRenderer", {
   enumerable: true,
-  get: function () { return chunkFNEL5LER_cjs.TemplateRenderer; }
+  get: function () { return chunkV76ERLX6_cjs.TemplateRenderer; }
 });
 Object.defineProperty(exports, "buildQuery", {
   enumerable: true,
-  get: function () { return chunkFNEL5LER_cjs.buildQuery; }
+  get: function () { return chunkV76ERLX6_cjs.buildQuery; }
 });
 Object.defineProperty(exports, "getCoreVersion", {
   enumerable: true,
-  get: function () { return chunkFNEL5LER_cjs.getCoreVersion; }
+  get: function () { return chunkV76ERLX6_cjs.getCoreVersion; }
 });
 Object.defineProperty(exports, "renderTemplate", {
   enumerable: true,
-  get: function () { return chunkFNEL5LER_cjs.renderTemplate; }
+  get: function () { return chunkV76ERLX6_cjs.renderTemplate; }
 });
 Object.defineProperty(exports, "templateRenderer", {
   enumerable: true,
-  get: function () { return chunkFNEL5LER_cjs.templateRenderer; }
+  get: function () { return chunkV76ERLX6_cjs.templateRenderer; }
 });
 Object.defineProperty(exports, "metricsTracker", {
   enumerable: true,
