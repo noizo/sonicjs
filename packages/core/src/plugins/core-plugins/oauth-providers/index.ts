@@ -23,6 +23,7 @@ import {
   type OAuthProviderConfig
 } from './oauth-service'
 import { AuthManager } from '../../../middleware'
+import { getJwtExpirySecondsFromDb } from '../../../middleware/auth'
 
 const STATE_COOKIE_NAME = 'oauth_state'
 const STATE_COOKIE_MAX_AGE = 600 // 10 minutes
@@ -217,12 +218,13 @@ export function createOAuthProvidersPlugin(): Plugin {
           return c.redirect('/auth/login?error=Account is deactivated')
         }
 
+        const tokenTtl = await getJwtExpirySecondsFromDb((c.env as any).DB, c.env as any)
         const jwt = await AuthManager.generateToken(
           user.id, user.email, user.role,
-          (c.env as any).JWT_SECRET
+          (c.env as any).JWT_SECRET, tokenTtl
         )
 
-        AuthManager.setAuthCookie(c, jwt, { sameSite: 'Lax' })
+        AuthManager.setAuthCookie(c, jwt, { sameSite: 'Lax', maxAge: tokenTtl })
         return c.redirect('/admin')
       }
 
@@ -245,12 +247,13 @@ export function createOAuthProvidersPlugin(): Plugin {
           profileData: JSON.stringify(profile)
         })
 
+        const tokenTtl = await getJwtExpirySecondsFromDb((c.env as any).DB, c.env as any)
         const jwt = await AuthManager.generateToken(
           existingUser.id, existingUser.email, existingUser.role,
-          (c.env as any).JWT_SECRET
+          (c.env as any).JWT_SECRET, tokenTtl
         )
 
-        AuthManager.setAuthCookie(c, jwt, { sameSite: 'Lax' })
+        AuthManager.setAuthCookie(c, jwt, { sameSite: 'Lax', maxAge: tokenTtl })
         return c.redirect('/admin')
       }
 
@@ -267,12 +270,13 @@ export function createOAuthProvidersPlugin(): Plugin {
         profileData: JSON.stringify(profile)
       })
 
+      const tokenTtl = await getJwtExpirySecondsFromDb((c.env as any).DB, c.env as any)
       const jwt = await AuthManager.generateToken(
         newUserId, profile.email.toLowerCase(), 'viewer',
-        (c.env as any).JWT_SECRET
+        (c.env as any).JWT_SECRET, tokenTtl
       )
 
-      AuthManager.setAuthCookie(c, jwt, { sameSite: 'Lax' })
+      AuthManager.setAuthCookie(c, jwt, { sameSite: 'Lax', maxAge: tokenTtl })
       return c.redirect('/admin')
 
     } catch (error) {

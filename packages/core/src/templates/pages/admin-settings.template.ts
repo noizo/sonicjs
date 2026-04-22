@@ -47,6 +47,8 @@ export interface SecuritySettings {
     requireSymbols: boolean
   }
   ipWhitelist: string[]
+  jwtExpiresIn?: string
+  jwtRefreshGraceSeconds?: number
 }
 
 export interface NotificationSettings {
@@ -172,6 +174,43 @@ export function renderSettingsPage(data: SettingsPageData): string {
           saveBtn.disabled = false;
         }
       }
+
+      async function saveSecuritySettings() {
+        const formData = new FormData();
+        const expiry = document.getElementById('jwtExpiresIn');
+        const grace = document.getElementById('jwtRefreshGraceSeconds');
+        if (expiry) formData.append('jwtExpiresIn', expiry.value);
+        if (grace) formData.append('jwtRefreshGraceSeconds', grace.value);
+
+        const saveBtn = document.querySelector('button[onclick="saveSecuritySettings()"]');
+        const originalText = saveBtn ? saveBtn.innerHTML : '';
+        if (saveBtn) {
+          saveBtn.innerHTML = '<svg class="animate-spin -ml-0.5 mr-1.5 h-5 w-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>Saving...';
+          saveBtn.disabled = true;
+        }
+
+        try {
+          const response = await fetch('/admin/settings/security', {
+            method: 'POST',
+            body: formData
+          });
+          const result = await response.json();
+          if (result.success) {
+            showNotification(result.message || 'Security settings saved successfully!', 'success');
+          } else {
+            showNotification(result.error || 'Failed to save security settings', 'error');
+          }
+        } catch (error) {
+          console.error('Error saving security settings:', error);
+          showNotification('Failed to save security settings. Please try again.', 'error');
+        } finally {
+          if (saveBtn) {
+            saveBtn.innerHTML = originalText;
+            saveBtn.disabled = false;
+          }
+        }
+      }
+      window.saveSecuritySettings = saveSecuritySettings;
 
       // Migration functions
       window.refreshMigrationStatus = async function() {
@@ -765,9 +804,75 @@ function renderAppearanceSettings(settings?: AppearanceSettings): string {
 }
 
 function renderSecuritySettings(settings?: SecuritySettings): string {
+  const jwtExpiresIn = settings?.jwtExpiresIn ?? '30d'
+  const jwtRefreshGraceSeconds =
+    typeof settings?.jwtRefreshGraceSeconds === 'number'
+      ? settings.jwtRefreshGraceSeconds
+      : 60 * 60 * 24 * 7
+
   return `
     <div class="space-y-6">
-      <!-- WIP Notice -->
+      <!-- Session / JWT card (live) -->
+      <div class="rounded-lg bg-white dark:bg-white/5 p-6 ring-1 ring-inset ring-zinc-950/5 dark:ring-white/10">
+        <h3 class="text-lg/7 font-semibold text-zinc-950 dark:text-white">Session / JWT</h3>
+        <p class="mt-1 text-sm/6 text-zinc-500 dark:text-zinc-400">
+          Configure how long a signed-in session lasts and how long an expired token can still be refreshed.
+          The <code class="text-xs">JWT_EXPIRES_IN</code> and <code class="text-xs">JWT_REFRESH_GRACE_SECONDS</code>
+          environment variables, when set, override the values below.
+        </p>
+
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label for="jwtExpiresIn" class="block text-sm/6 font-medium text-zinc-950 dark:text-white mb-2">
+              JWT Expiration
+            </label>
+            <input
+              type="text"
+              id="jwtExpiresIn"
+              name="jwtExpiresIn"
+              value="${jwtExpiresIn}"
+              placeholder="30d"
+              class="w-full rounded-lg bg-white dark:bg-white/5 px-3 py-2 text-sm/6 text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 placeholder:text-zinc-500 dark:placeholder:text-zinc-400 focus:ring-2 focus:ring-inset focus:ring-indigo-500 dark:focus:ring-indigo-400"
+            />
+            <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
+              Accepts <code>30d</code>, <code>12h</code>, <code>3600s</code>, or bare seconds. Default: 30 days.
+            </p>
+          </div>
+
+          <div>
+            <label for="jwtRefreshGraceSeconds" class="block text-sm/6 font-medium text-zinc-950 dark:text-white mb-2">
+              Refresh Grace Window (seconds)
+            </label>
+            <input
+              type="number"
+              id="jwtRefreshGraceSeconds"
+              name="jwtRefreshGraceSeconds"
+              value="${jwtRefreshGraceSeconds}"
+              min="0"
+              max="7776000"
+              class="w-full rounded-lg bg-white dark:bg-white/5 px-3 py-2 text-sm/6 text-zinc-950 dark:text-white ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 placeholder:text-zinc-500 dark:placeholder:text-zinc-400 focus:ring-2 focus:ring-inset focus:ring-indigo-500 dark:focus:ring-indigo-400"
+            />
+            <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
+              How long an expired token can still be exchanged at <code>/auth/refresh</code>. Default: 604800 (7 days).
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-zinc-950/5 dark:border-white/10 flex justify-end">
+          <button
+            type="button"
+            onclick="saveSecuritySettings()"
+            class="inline-flex items-center justify-center rounded-lg bg-zinc-950 dark:bg-white px-3.5 py-2.5 text-sm font-semibold text-white dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors shadow-sm"
+          >
+            <svg class="-ml-0.5 mr-1.5 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            Save Session Settings
+          </button>
+        </div>
+      </div>
+
+      <!-- WIP Notice for remaining fields -->
       <div class="rounded-lg bg-blue-50 dark:bg-blue-950/20 p-6 ring-1 ring-inset ring-blue-600/20 dark:ring-blue-500/30">
         <div class="flex items-start space-x-3">
           <svg class="w-6 h-6 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -776,7 +881,7 @@ function renderSecuritySettings(settings?: SecuritySettings): string {
           <div class="flex-1">
             <h4 class="text-base/7 font-semibold text-blue-900 dark:text-blue-300">Work in Progress</h4>
             <p class="mt-1 text-sm/6 text-blue-700 dark:text-blue-200">
-              This settings section is currently under development and provided for reference and design feedback only. Changes made here will not be saved.
+              The fields below are under development and provided for reference and design feedback only. Changes made here will not be saved.
             </p>
           </div>
         </div>

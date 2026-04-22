@@ -55,6 +55,18 @@ Settings available in Admin → Plugins → OTP Login → Settings:
 - **Rate Limit**: 3-20 requests/hour (default: 5)
 - **Allow Registration**: Enable new user signup (default: false)
 
+### Session / JWT TTL
+
+The JWT issued by `/auth/otp/verify` uses the core SonicJS session config:
+
+- `JWT_EXPIRES_IN` — TTL for the issued JWT and cookie. Accepts seconds or a
+  duration string like `30d`, `12h`, `3600s`. Defaults to **30 days**.
+- `JWT_REFRESH_GRACE_SECONDS` — how long after expiration a token may still
+  be exchanged at `POST /auth/refresh` for a fresh one (default 7 days).
+
+Use `POST /auth/refresh` for sliding-session renewal instead of forcing the
+user back through OTP on every JWT expiration.
+
 ## Security
 
 - Crypto-secure random generation

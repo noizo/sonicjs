@@ -16,6 +16,11 @@ export interface GeneralSettings {
   maintenanceMode: boolean
 }
 
+export interface SecuritySettings {
+  jwtExpiresIn: string
+  jwtRefreshGraceSeconds: number
+}
+
 export class SettingsService {
   constructor(private db: D1Database) {}
 
@@ -149,5 +154,33 @@ export class SettingsService {
     if (settings.maintenanceMode !== undefined) settingsToSave.maintenanceMode = settings.maintenanceMode
 
     return await this.setMultipleSettings('general', settingsToSave)
+  }
+
+  /**
+   * Get security settings with defaults
+   */
+  async getSecuritySettings(): Promise<SecuritySettings> {
+    const settings = await this.getCategorySettings('security')
+
+    return {
+      jwtExpiresIn: settings.jwtExpiresIn || '30d',
+      jwtRefreshGraceSeconds:
+        typeof settings.jwtRefreshGraceSeconds === 'number'
+          ? settings.jwtRefreshGraceSeconds
+          : 60 * 60 * 24 * 7
+    }
+  }
+
+  /**
+   * Save security settings
+   */
+  async saveSecuritySettings(settings: Partial<SecuritySettings>): Promise<boolean> {
+    const settingsToSave: Record<string, any> = {}
+
+    if (settings.jwtExpiresIn !== undefined) settingsToSave.jwtExpiresIn = settings.jwtExpiresIn
+    if (settings.jwtRefreshGraceSeconds !== undefined)
+      settingsToSave.jwtRefreshGraceSeconds = settings.jwtRefreshGraceSeconds
+
+    return await this.setMultipleSettings('security', settingsToSave)
   }
 }

@@ -11,7 +11,15 @@
 export { bootstrapMiddleware, verifySecurityConfig } from './bootstrap'
 
 // Auth middleware
-export { AuthManager, requireAuth, requireRole, optionalAuth } from './auth'
+export {
+  AuthManager,
+  requireAuth,
+  requireRole,
+  optionalAuth,
+  getJwtExpirySeconds,
+  getJwtExpirySecondsFromDb,
+  getJwtRefreshGraceSecondsFromDb,
+} from './auth'
 
 // Metrics middleware
 export { metricsMiddleware } from './metrics'

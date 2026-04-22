@@ -9,7 +9,7 @@ import { Hono } from 'hono'
 import { z } from 'zod'
 import type { Plugin, PluginContext } from '../../types'
 import type { D1Database } from '@cloudflare/workers-types'
-import { AuthManager } from '../../../middleware/auth'
+import { AuthManager, getJwtExpirySecondsFromDb } from '../../../middleware/auth'
 
 const magicLinkRequestSchema = z.object({
   email: z.string().email('Valid email is required')
@@ -201,15 +201,17 @@ export function createMagicLinkAuthPlugin(): Plugin {
       `).bind(Date.now(), magicLink.id).run()
 
       // Generate JWT token
+      const tokenTtl = await getJwtExpirySecondsFromDb((c.env as any).DB, c.env as any)
       const jwtToken = await AuthManager.generateToken(
         user.id,
         user.email,
         user.role,
-        (c.env as any).JWT_SECRET
+        (c.env as any).JWT_SECRET,
+        tokenTtl
       )
 
       // Set auth cookie
-      AuthManager.setAuthCookie(c, jwtToken)
+      AuthManager.setAuthCookie(c, jwtToken, { maxAge: tokenTtl })
 
       // Update last login
       await db.prepare(`
