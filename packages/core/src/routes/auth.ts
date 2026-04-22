@@ -403,7 +403,7 @@ authRoutes.post('/refresh',
     if (!token) token = getCookie(c, 'auth_token')
 
     if (!token) {
-      return c.json({ error: 'Not authenticated' }, 401)
+      return c.json({ error: 'Authentication required' }, 401)
     }
 
     const db = c.env.DB
