@@ -67,6 +67,8 @@ export interface Bindings {
   ENVIRONMENT?: string
   CORS_ORIGINS?: string
   JWT_SECRET?: string
+  JWT_EXPIRES_IN?: string
+  JWT_REFRESH_GRACE_SECONDS?: string
   BUCKET_NAME?: string
   GOOGLE_MAPS_API_KEY?: string
 }

@@ -17,7 +17,8 @@ Secure your SonicJS application with JWT authentication and role-based access co
 
 SonicJS uses JWT (JSON Web Tokens) for authentication with:
 
-- **24-hour token expiration**
+- **Configurable token expiration** (default: 30 days, via env var or admin settings)
+- **Refresh endpoint with grace window** for seamless long-lived sessions
 - **HTTP-only cookie storage** for web clients
 - **Bearer token support** for API clients
 - **KV-based token caching** (5-minute TTL)
@@ -122,6 +123,52 @@ const response = await fetch('http://localhost:8787/admin/content', {
 </CodeGroup>
 
 For browser-based applications, the token is automatically stored as an HTTP-only cookie named `auth_token`.
+
+### Refreshing Tokens
+
+<ApiEndpoint method="POST" path="/auth/refresh" description="Exchange a valid or recently-expired token for a fresh one" auth={false} />
+
+`/auth/refresh` accepts a token from either the `Authorization: Bearer <token>` header or the `auth_token` cookie. A valid token is always accepted; an expired token is accepted if it expired within the configured refresh grace window. The signature is re-verified in both cases, and the user is re-validated against the database (active + existing) before a new token is issued.
+
+<CodeGroup title="Refresh Request">
+
+```bash {{title:'cURL'}}
+curl -X POST http://localhost:8787/auth/refresh \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+```
+
+```javascript
+const response = await fetch('http://localhost:8787/auth/refresh', {
+  method: 'POST',
+  credentials: 'include' // sends the auth_token cookie
+});
+
+const { token, expiresIn } = await response.json();
+```
+
+</CodeGroup>
+
+**Response (200 OK):**
+
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "expiresIn": 2592000
+}
+```
+
+The new token is also set as an `auth_token` cookie. If the token is beyond the grace window, deactivated, or invalid, the endpoint returns `401 Unauthorized`.
+
+### Session Configuration
+
+JWT expiration and the refresh grace window are resolved in the order **environment variable → admin setting → default**. Environment variables act as a ceiling and are recommended for production:
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `JWT_EXPIRES_IN` | Token lifetime. Accepts `30d`, `12h`, `3600s`, or bare seconds. | `30d` (2,592,000 seconds) |
+| `JWT_REFRESH_GRACE_SECONDS` | How long after expiration a token can still be refreshed. | `604800` (7 days) |
+
+Admins can also configure both values under **Admin → Settings → Security** in the **Session / JWT** card. Values set in the admin UI are used only when the corresponding environment variable is not set.
 
 ---
 
@@ -669,7 +716,7 @@ SonicJS implements a **signed double-submit cookie pattern** for CSRF protection
 - Tokens are HMAC-SHA256 signed using the `JWT_SECRET`
 - Validation checks the `X-CSRF-Token` header against the `csrf_token` cookie
 - Falls back to reading `_csrf` from form body for traditional form submissions
-- Cookie settings: `sameSite: 'Strict'`, `secure: true` in production, 24-hour expiry
+- Cookie settings: `sameSite: 'Strict'`, `secure: true` in production; expiry matches the configured JWT lifetime (see [Session Configuration](#jwt-authentication))
 
 **Exempt paths:** Login, registration, public form submissions, and API-key-only requests are exempt from CSRF validation.
 

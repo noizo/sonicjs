@@ -1,9 +1,10 @@
 import { Hono } from 'hono'
 // import { zValidator } from '@hono/zod-validator'
 import { z } from 'zod'
-import { setCookie } from 'hono/cookie'
+import { getCookie, setCookie } from 'hono/cookie'
 import { html } from 'hono/html'
 import { AuthManager, requireAuth, generateCsrfToken, rateLimit } from '../middleware'
+import { getJwtExpirySecondsFromDb, getJwtRefreshGraceSecondsFromDb } from '../middleware/auth'
 import { renderLoginPage, LoginPageData } from '../templates/pages/auth-login.template'
 import { renderRegisterPage, RegisterPageData } from '../templates/pages/auth-register.template'
 import { getCacheService, CACHE_CONFIGS } from '../services'
@@ -15,16 +16,17 @@ import { getUserProfileConfig, getRegistrationFields, getProfileFieldDefaults, s
 const JWT_SECRET_FALLBACK = 'your-super-secret-jwt-key-change-in-production'
 
 /** Set a signed CSRF cookie alongside the auth cookie on login/register. */
-async function setCsrfCookie(c: any): Promise<void> {
+async function setCsrfCookie(c: any, maxAge?: number): Promise<void> {
   const secret = c.env?.JWT_SECRET || JWT_SECRET_FALLBACK
   const isDev = c.env?.ENVIRONMENT === 'development' || !c.env?.ENVIRONMENT
   const csrfToken = await generateCsrfToken(secret)
+  const cookieMaxAge = maxAge ?? (await getJwtExpirySecondsFromDb(c.env?.DB, c.env))
   setCookie(c, 'csrf_token', csrfToken, {
     httpOnly: false,
     secure: !isDev,
     sameSite: 'Strict',
     path: '/',
-    maxAge: 86400,
+    maxAge: cookieMaxAge,
   })
 }
 
@@ -195,14 +197,15 @@ authRoutes.post('/register',
       }
 
       // Generate JWT token
-      const token = await AuthManager.generateToken(userId, normalizedEmail, 'viewer', c.env.JWT_SECRET)
+      const tokenTtl = await getJwtExpirySecondsFromDb(c.env.DB, c.env)
+      const token = await AuthManager.generateToken(userId, normalizedEmail, 'viewer', c.env.JWT_SECRET, tokenTtl)
 
       // Set HTTP-only cookie
       setCookie(c, 'auth_token', token, {
         httpOnly: true,
         secure: true,
         sameSite: 'Strict',
-        maxAge: 60 * 60 * 24 // 24 hours
+        maxAge: tokenTtl
       })
 
       // Set CSRF cookie for browser sessions
@@ -288,14 +291,15 @@ authRoutes.post('/login',
       }
 
       // Generate JWT token
-      const token = await AuthManager.generateToken(user.id, user.email, user.role, c.env.JWT_SECRET)
+      const tokenTtl = await getJwtExpirySecondsFromDb(c.env.DB, c.env)
+      const token = await AuthManager.generateToken(user.id, user.email, user.role, c.env.JWT_SECRET, tokenTtl)
 
       // Set HTTP-only cookie
       setCookie(c, 'auth_token', token, {
         httpOnly: true,
         secure: true,
         sameSite: 'Strict',
-        maxAge: 60 * 60 * 24 // 24 hours
+        maxAge: tokenTtl
       })
 
       // Set CSRF cookie for browser sessions
@@ -380,30 +384,64 @@ authRoutes.get('/me', requireAuth(), async (c) => {
   }
 })
 
-// Refresh token
-authRoutes.post('/refresh', requireAuth(), async (c) => {
+// Refresh token (sliding session)
+//
+// Accepts a valid JWT — or one that has expired within the grace window
+// (`JWT_REFRESH_GRACE_SECONDS`, default 7 days) — and issues a fresh JWT
+// with a new `exp`. This lets a long-lived session cookie keep a user
+// logged in across JWT expirations without forcing a full re-login.
+//
+// Security: the caller must still present a valid-signature token that
+// recently belonged to an active user. Fully forged or long-expired tokens
+// are rejected.
+authRoutes.post('/refresh',
+  rateLimit({ max: 60, windowMs: 60 * 1000, keyPrefix: 'refresh' }),
+  async (c) => {
   try {
-    const user = c.get('user')
-    
-    if (!user) {
-      return c.json({ error: 'Not authenticated' }, 401)
+    // Accept token from Authorization header or cookie
+    let token = c.req.header('Authorization')?.replace('Bearer ', '')
+    if (!token) token = getCookie(c, 'auth_token')
+
+    if (!token) {
+      return c.json({ error: 'Authentication required' }, 401)
     }
-    
-    // Generate new token
-    const token = await AuthManager.generateToken(user.userId, user.email, user.role, c.env.JWT_SECRET)
-    
+
+    const db = c.env.DB
+    const grace = await getJwtRefreshGraceSecondsFromDb(db, c.env)
+
+    const payload = await AuthManager.verifyToken(token, c.env.JWT_SECRET, grace)
+    if (!payload) {
+      return c.json({ error: 'Invalid or expired token' }, 401)
+    }
+
+    // Re-validate the user is still active, and pick up any role changes.
+    const row = await db.prepare('SELECT id, email, role, is_active FROM users WHERE id = ?')
+      .bind(payload.userId)
+      .first() as any
+
+    if (!row || !row.is_active) {
+      return c.json({ error: 'User is not active' }, 401)
+    }
+
+    // Generate new token with a fresh exp
+    const tokenTtl = await getJwtExpirySecondsFromDb(db, c.env)
+    const newToken = await AuthManager.generateToken(row.id, row.email, row.role, c.env.JWT_SECRET, tokenTtl)
+
     // Set new cookie
-    setCookie(c, 'auth_token', token, {
+    setCookie(c, 'auth_token', newToken, {
       httpOnly: true,
       secure: true,
       sameSite: 'Strict',
-      maxAge: 60 * 60 * 24 // 24 hours
+      maxAge: tokenTtl
     })
 
     // Set CSRF cookie for browser sessions
     await setCsrfCookie(c)
 
-    return c.json({ token })
+    return c.json({
+      token: newToken,
+      expiresIn: tokenTtl
+    })
   } catch (error) {
     console.error('Token refresh error:', error)
     return c.json({ error: 'Token refresh failed' }, 500)
@@ -525,14 +563,15 @@ authRoutes.post('/register/form',
     }
 
     // Generate JWT token
-    const token = await AuthManager.generateToken(userId, normalizedEmail, role, c.env.JWT_SECRET)
+    const tokenTtl = await getJwtExpirySecondsFromDb(c.env.DB, c.env)
+    const token = await AuthManager.generateToken(userId, normalizedEmail, role, c.env.JWT_SECRET, tokenTtl)
 
     // Set HTTP-only cookie
     setCookie(c, 'auth_token', token, {
       httpOnly: true,
       secure: false, // Set to true in production with HTTPS
       sameSite: 'Strict',
-      maxAge: 60 * 60 * 24 // 24 hours
+      maxAge: tokenTtl
     })
 
     // Set CSRF cookie for browser sessions
@@ -622,14 +661,15 @@ authRoutes.post('/login/form',
     }
 
     // Generate JWT token
-    const token = await AuthManager.generateToken(user.id, user.email, user.role, c.env.JWT_SECRET)
+    const tokenTtl = await getJwtExpirySecondsFromDb(c.env.DB, c.env)
+    const token = await AuthManager.generateToken(user.id, user.email, user.role, c.env.JWT_SECRET, tokenTtl)
 
     // Set HTTP-only cookie
     setCookie(c, 'auth_token', token, {
       httpOnly: true,
       secure: false, // Set to true in production with HTTPS
       sameSite: 'Strict',
-      maxAge: 60 * 60 * 24 // 24 hours
+      maxAge: tokenTtl
     })
 
     // Set CSRF cookie for browser sessions
@@ -995,14 +1035,15 @@ authRoutes.post('/accept-invitation', async (c) => {
     ).run()
 
     // Generate JWT token for auto-login
-    const authToken = await AuthManager.generateToken(invitedUser.id, invitedUser.email, invitedUser.role, c.env.JWT_SECRET)
-    
+    const tokenTtl = await getJwtExpirySecondsFromDb(c.env.DB, c.env)
+    const authToken = await AuthManager.generateToken(invitedUser.id, invitedUser.email, invitedUser.role, c.env.JWT_SECRET, tokenTtl)
+
     // Set HTTP-only cookie
     setCookie(c, 'auth_token', authToken, {
       httpOnly: true,
       secure: true,
       sameSite: 'Strict',
-      maxAge: 60 * 60 * 24 // 24 hours
+      maxAge: tokenTtl
     })
 
     // Set CSRF cookie for browser sessions

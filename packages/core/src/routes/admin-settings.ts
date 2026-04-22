@@ -143,15 +143,28 @@ adminSettingsRoutes.get('/appearance', (c) => {
 })
 
 // Security settings
-adminSettingsRoutes.get('/security', (c) => {
+adminSettingsRoutes.get('/security', async (c) => {
   const user = c.get('user')
+  const db = c.env.DB
+  const settingsService = new SettingsService(db)
+
+  // Load persisted security settings (JWT TTL + refresh grace)
+  const persisted = await settingsService.getSecuritySettings()
+
+  const mockSettings = getMockSettings(user)
+  mockSettings.security = {
+    ...mockSettings.security,
+    jwtExpiresIn: persisted.jwtExpiresIn,
+    jwtRefreshGraceSeconds: persisted.jwtRefreshGraceSeconds
+  } as any
+
   const pageData: SettingsPageData = {
     user: user ? {
       name: user.email,
       email: user.email,
       role: user.role
     } : undefined,
-    settings: getMockSettings(user),
+    settings: mockSettings,
     activeTab: 'security',
     version: c.get('appVersion')
   }
@@ -521,6 +534,65 @@ adminSettingsRoutes.post('/general', async (c) => {
     }
   } catch (error) {
     console.error('Error saving general settings:', error)
+    return c.json({
+      success: false,
+      error: 'Failed to save settings. Please try again.'
+    }, 500)
+  }
+})
+
+// Save security settings (JWT TTL + refresh grace)
+adminSettingsRoutes.post('/security', async (c) => {
+  try {
+    const user = c.get('user')
+
+    if (!user || user.role !== 'admin') {
+      return c.json({
+        success: false,
+        error: 'Unauthorized. Admin access required.'
+      }, 403)
+    }
+
+    const formData = await c.req.formData()
+    const db = c.env.DB
+    const settingsService = new SettingsService(db)
+
+    const jwtExpiresInRaw = (formData.get('jwtExpiresIn') as string | null)?.trim() || ''
+    const graceRaw = (formData.get('jwtRefreshGraceSeconds') as string | null)?.trim() || ''
+
+    // Validate jwtExpiresIn: bare seconds or <num><s|m|h|d>
+    if (!/^\d+(?:s|m|h|d)?$/i.test(jwtExpiresInRaw)) {
+      return c.json({
+        success: false,
+        error: 'JWT expiration must be a number optionally suffixed with s/m/h/d (e.g. 30d, 12h, 3600).'
+      }, 400)
+    }
+
+    const graceSeconds = Number.parseInt(graceRaw, 10)
+    if (!Number.isFinite(graceSeconds) || graceSeconds < 0 || graceSeconds > 60 * 60 * 24 * 90) {
+      return c.json({
+        success: false,
+        error: 'Refresh grace must be an integer between 0 and 7776000 seconds (90 days).'
+      }, 400)
+    }
+
+    const success = await settingsService.saveSecuritySettings({
+      jwtExpiresIn: jwtExpiresInRaw,
+      jwtRefreshGraceSeconds: graceSeconds
+    })
+
+    if (success) {
+      return c.json({
+        success: true,
+        message: 'Security settings saved successfully!'
+      })
+    }
+    return c.json({
+      success: false,
+      error: 'Failed to save settings'
+    }, 500)
+  } catch (error) {
+    console.error('Error saving security settings:', error)
     return c.json({
       success: false,
       error: 'Failed to save settings. Please try again.'

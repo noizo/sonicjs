@@ -13,6 +13,7 @@ import type { Plugin } from '@sonicjs-cms/core'
 import { OTPService, type OTPSettings } from './otp-service'
 import { renderOTPEmail } from './email-templates'
 import { AuthManager } from '../../../middleware'
+import { getJwtExpirySecondsFromDb } from '../../../middleware/auth'
 import { SettingsService } from '../../../services/settings'
 
 // Validation schemas
@@ -299,14 +300,15 @@ export function createOTPLoginPlugin(): Plugin {
       }
 
       // Generate JWT token
-      const token = await AuthManager.generateToken(user.id, user.email, user.role, (c.env as any).JWT_SECRET)
+      const tokenTtl = await getJwtExpirySecondsFromDb(db, c.env as any)
+      const token = await AuthManager.generateToken(user.id, user.email, user.role, (c.env as any).JWT_SECRET, tokenTtl)
 
       // Set HTTP-only cookie
       setCookie(c, 'auth_token', token, {
         httpOnly: true,
         secure: true,
         sameSite: 'Strict',
-        maxAge: 60 * 60 * 24 // 24 hours
+        maxAge: tokenTtl
       })
 
       return c.json({

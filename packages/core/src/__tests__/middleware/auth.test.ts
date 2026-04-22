@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { AuthManager, requireAuth, requireRole, optionalAuth } from '../../middleware/auth'
+import { AuthManager, requireAuth, requireRole, optionalAuth, getJwtExpirySeconds } from '../../middleware/auth'
 import { Context, Next } from 'hono'
+import { sign } from 'hono/jwt'
 
 describe('AuthManager', () => {
   describe('generateToken', () => {
@@ -59,6 +60,101 @@ describe('AuthManager', () => {
 
       expect(payload?.iat).toBeTruthy()
       expect(payload?.iat).toBeLessThanOrEqual(Math.floor(Date.now() / 1000))
+    })
+
+    it('should honor custom expiresIn and default to 30 days', async () => {
+      // Default TTL is 30 days
+      const defaultToken = await AuthManager.generateToken('u', 'a@b.c', 'viewer')
+      const defaultPayload = await AuthManager.verifyToken(defaultToken)
+      const now = Math.floor(Date.now() / 1000)
+      const thirtyDays = 60 * 60 * 24 * 30
+      expect(defaultPayload?.exp).toBeGreaterThan(now + thirtyDays - 60)
+      expect(defaultPayload?.exp).toBeLessThanOrEqual(now + thirtyDays + 5)
+
+      // Custom TTL
+      const shortToken = await AuthManager.generateToken('u', 'a@b.c', 'viewer', undefined, 3600)
+      const shortPayload = await AuthManager.verifyToken(shortToken)
+      expect(shortPayload?.exp).toBeLessThanOrEqual(now + 3605)
+    })
+
+    it('should accept a recently-expired token when grace window is set', async () => {
+      const secret = 'test-grace-secret'
+      const now = Math.floor(Date.now() / 1000)
+      // Token that expired 60 seconds ago
+      const expiredPayload = {
+        userId: 'u1',
+        email: 'u1@test',
+        role: 'admin',
+        iat: now - 120,
+        exp: now - 60
+      }
+      const expiredToken = await sign(expiredPayload, secret, 'HS256')
+
+      // Without grace window, expired token is rejected
+      const strict = await AuthManager.verifyToken(expiredToken, secret)
+      expect(strict).toBeNull()
+
+      // With grace window of 300s, expired token is accepted
+      const lenient = await AuthManager.verifyToken(expiredToken, secret, 300)
+      expect(lenient).toBeTruthy()
+      expect(lenient?.userId).toBe('u1')
+    })
+
+    it('should reject tokens expired beyond grace window', async () => {
+      const secret = 'test-grace-secret'
+      const now = Math.floor(Date.now() / 1000)
+      const expiredPayload = {
+        userId: 'u1',
+        email: 'u1@test',
+        role: 'admin',
+        iat: now - 7200,
+        exp: now - 3600
+      }
+      const expiredToken = await sign(expiredPayload, secret, 'HS256')
+      // Grace window smaller than how long it has been expired
+      const result = await AuthManager.verifyToken(expiredToken, secret, 60)
+      expect(result).toBeNull()
+    })
+
+    it('should reject tokens with bad signature even within grace window', async () => {
+      const now = Math.floor(Date.now() / 1000)
+      const expiredPayload = {
+        userId: 'u1',
+        email: 'u1@test',
+        role: 'admin',
+        iat: now - 120,
+        exp: now - 60
+      }
+      const tokenWithOneSecret = await sign(expiredPayload, 'secret-A', 'HS256')
+      // Verify with a different secret — signature check must fail
+      const result = await AuthManager.verifyToken(tokenWithOneSecret, 'secret-B', 3600)
+      expect(result).toBeNull()
+    })
+  })
+
+  describe('getJwtExpirySeconds', () => {
+    it('defaults to 30 days when env is empty', () => {
+      expect(getJwtExpirySeconds({})).toBe(60 * 60 * 24 * 30)
+      expect(getJwtExpirySeconds(null)).toBe(60 * 60 * 24 * 30)
+      expect(getJwtExpirySeconds(undefined)).toBe(60 * 60 * 24 * 30)
+    })
+
+    it('parses duration strings', () => {
+      expect(getJwtExpirySeconds({ JWT_EXPIRES_IN: '30d' })).toBe(60 * 60 * 24 * 30)
+      expect(getJwtExpirySeconds({ JWT_EXPIRES_IN: '12h' })).toBe(60 * 60 * 12)
+      expect(getJwtExpirySeconds({ JWT_EXPIRES_IN: '3600s' })).toBe(3600)
+      expect(getJwtExpirySeconds({ JWT_EXPIRES_IN: '15m' })).toBe(900)
+    })
+
+    it('parses bare seconds values', () => {
+      expect(getJwtExpirySeconds({ JWT_EXPIRES_IN: '7200' })).toBe(7200)
+      expect(getJwtExpirySeconds({ JWT_EXPIRES_IN: 7200 as any })).toBe(7200)
+    })
+
+    it('falls back to default on garbage input', () => {
+      expect(getJwtExpirySeconds({ JWT_EXPIRES_IN: 'nonsense' })).toBe(60 * 60 * 24 * 30)
+      expect(getJwtExpirySeconds({ JWT_EXPIRES_IN: '0' })).toBe(60 * 60 * 24 * 30)
+      expect(getJwtExpirySeconds({ JWT_EXPIRES_IN: '-5d' })).toBe(60 * 60 * 24 * 30)
     })
   })
 

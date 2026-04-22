@@ -66,7 +66,7 @@ SonicJS AI uses a modern authentication architecture built on:
 2. Check for duplicate email/username
 3. Password hashed with SHA-256 + salt
 4. User created with default role: `viewer`
-5. JWT token generated (24-hour expiration)
+5. JWT token generated (TTL from `JWT_EXPIRES_IN`, default 30 days)
 6. HTTP-only cookie set
 7. Token returned in response
 
@@ -100,7 +100,7 @@ SonicJS AI uses a modern authentication architecture built on:
 2. User lookup with KV caching
 3. Password verification with SHA-256
 4. JWT token generation
-5. HTTP-only cookie set (24-hour expiration)
+5. HTTP-only cookie set (TTL from `JWT_EXPIRES_IN`, default 30 days)
 6. `last_login_at` timestamp updated
 7. User cache invalidated to ensure fresh data
 
@@ -109,14 +109,21 @@ SonicJS AI uses a modern authentication architecture built on:
 **Endpoint:** `POST /auth/refresh`
 
 ```typescript
-// Headers
-Authorization: Bearer <current_token>
+// Headers (or cookie)
+Authorization: Bearer <current_or_recently_expired_token>
 
 // Response
 {
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "expiresIn": 2592000
 }
 ```
+
+Accepts a JWT that is either still valid or has expired within the grace
+window (`JWT_REFRESH_GRACE_SECONDS`, default 7 days). Re-validates the user
+in the database and issues a freshly-signed token — no password/OTP required.
+This supports sliding-session auth so a long-lived session cookie can keep
+a user logged in across JWT rotations.
 
 ## JWT Implementation
 
@@ -137,36 +144,36 @@ interface JWTPayload {
 ### Token Generation
 
 ```typescript
-import { AuthManager } from '../middleware/auth'
+import { AuthManager, getJwtExpirySeconds } from '../middleware/auth'
 
-// Generate a token
+// Generate a token with the environment-configured TTL
+const ttl = getJwtExpirySeconds(env)
 const token = await AuthManager.generateToken(
   userId,
   email,
-  role
+  role,
+  env.JWT_SECRET,
+  ttl
 )
-
-// Token expires in 24 hours
-// exp = Math.floor(Date.now() / 1000) + (60 * 60 * 24)
 ```
 
-**Implementation (`src/middleware/auth.ts`):**
+### Configuring JWT Expiration
 
-```typescript
-export class AuthManager {
-  static async generateToken(userId: string, email: string, role: string): Promise<string> {
-    const payload: JWTPayload = {
-      userId,
-      email,
-      role,
-      exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24), // 24 hours
-      iat: Math.floor(Date.now() / 1000)
-    }
+JWT TTL is controlled by the `JWT_EXPIRES_IN` environment variable. It accepts
+a plain number of seconds or a duration string:
 
-    return await sign(payload, JWT_SECRET, 'HS256')
-  }
-}
-```
+| Example value | Meaning      |
+| ------------- | ------------ |
+| `2592000`     | 30 days (default) |
+| `30d`         | 30 days      |
+| `12h`         | 12 hours     |
+| `3600s`       | 1 hour       |
+
+If `JWT_EXPIRES_IN` is not set, SonicJS defaults to **30 days**.
+
+The refresh endpoint also honors `JWT_REFRESH_GRACE_SECONDS` (default 7 days),
+which controls how long after expiration a token can still be used to obtain a
+fresh one via `POST /auth/refresh`.
 
 ### Token Verification
 
