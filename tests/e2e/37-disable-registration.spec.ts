@@ -58,6 +58,31 @@ test.describe('Disable User Registration', () => {
   });
 
   test.describe('Registration when enabled (default)', () => {
+    // Ensure registration is enabled before these tests run. Without this, a
+    // prior test run that died before its `finally` could leave the shared
+    // preview DB with registration disabled, causing these defaults-assuming
+    // tests to fail permanently.
+    test.beforeAll(async ({ browser }) => {
+      const context = await browser.newContext();
+      const page = await context.newPage();
+      try {
+        await loginAsAdmin(page);
+        await page.request.post('/admin/plugins/core-auth/settings', {
+          data: {
+            registration: {
+              enabled: true,
+              requireEmailVerification: false,
+              defaultRole: 'viewer'
+            }
+          },
+          timeout: 10000
+        });
+        await logout(page);
+      } finally {
+        await context.close();
+      }
+    });
+
     test('should allow API registration when registration is enabled', async ({ request }) => {
       const uniqueUser = {
         ...testUser,
