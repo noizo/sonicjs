@@ -26,5 +26,8 @@
 # Website and marketing site
 /www/                               @lane711
 
+# E2E and integration tests — project lead sign-off sufficient
+/tests/                             @lane711
+
 # Example app
 /my-sonicjs-app/                    @lane711 @mmcintosh
