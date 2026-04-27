@@ -964,10 +964,10 @@ userRoutes.put('/users/:id', async (c) => {
     }
 
     // Validate required fields
-    if (!firstName || !lastName || !username || !email) {
+    if (!username || !email) {
       return c.html(renderAlert({
         type: 'error',
-        message: 'First name, last name, username, and email are required.',
+        message: 'Username and email are required.',
         dismissible: true
       }))
     }
