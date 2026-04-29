@@ -6,10 +6,10 @@
 # See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
 # Default owners for everything in the repo
-*                                   @lane711 @mmcintosh
+*                                   @lane711
 
-# Core package — both maintainers must approve
-/packages/core/                     @lane711 @mmcintosh
+# Core package
+/packages/core/                     @lane711
 
 # Governance, licensing, and contribution docs — project lead sign-off required
 /LICENSE                            @lane711
@@ -21,7 +21,7 @@
 # Release and publishing workflows — project lead sign-off required
 /PUBLISHING.md                      @lane711
 /.github/workflows/                 @lane711
-/scripts/                           @lane711 @mmcintosh
+/scripts/                           @lane711
 
 # Website and marketing site
 /www/                               @lane711
@@ -30,4 +30,4 @@
 /tests/                             @lane711
 
 # Example app
-/my-sonicjs-app/                    @lane711 @mmcintosh
+/my-sonicjs-app/                    @lane711
