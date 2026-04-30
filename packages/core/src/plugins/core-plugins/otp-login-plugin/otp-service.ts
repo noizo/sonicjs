@@ -12,6 +12,11 @@ export interface OTPSettings {
   rateLimitPerHour: number
   allowNewUserRegistration: boolean
   logoUrl?: string
+  logoWidth?: number
+  logoBorderWidth?: number
+  logoBorderColor?: string
+  loginUrl?: string
+  loginButtonText?: string
 }
 
 export interface OTPCode {

@@ -718,6 +718,15 @@ function renderOTPLoginSettingsContent(plugin: any, settings: PluginSettings): s
   const rateLimitPerHour = settings.rateLimitPerHour || 5
   const allowNewUserRegistration = settings.allowNewUserRegistration || false
   const logoUrl = settings.logoUrl || ''
+  const logoWidth = Number(settings.logoWidth) || 150
+  const logoBorderWidth = Number(settings.logoBorderWidth) || 0
+  const logoBorderColor = settings.logoBorderColor || '#ffffff'
+  const loginUrl = settings.loginUrl || ''
+  const loginButtonText = settings.loginButtonText || ''
+  const previewButtonText = loginButtonText.trim() || `Sign in to ${siteName}`
+  const previewLogoBorder = logoBorderWidth > 0 && logoBorderColor
+    ? `border: ${logoBorderWidth}px solid ${escapeHtmlAttr(logoBorderColor)}; border-radius: 8px;`
+    : ''
 
   return `
     <div class="space-y-6">
@@ -809,6 +818,109 @@ function renderOTPLoginSettingsContent(plugin: any, settings: PluginSettings): s
         <h3 class="text-lg font-semibold text-white mb-4">Code Settings</h3>
 
         <form id="settings-form" class="space-y-4">
+          <div>
+            <label for="setting_logoUrl" class="block text-sm font-medium text-gray-300 mb-2">
+              Logo URL
+            </label>
+            <input
+              type="url"
+              id="setting_logoUrl"
+              name="setting_logoUrl"
+              value="${escapeHtmlAttr(logoUrl)}"
+              placeholder="https://yourdomain.com/logo.png"
+              class="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none text-white"
+            />
+            <p class="text-xs text-gray-500 mt-1">Optional. Displayed at the top of the OTP email.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label for="setting_logoWidth" class="block text-sm font-medium text-gray-300 mb-2">
+                Logo Width (px)
+              </label>
+              <input
+                type="number"
+                id="setting_logoWidth"
+                name="setting_logoWidth"
+                min="20"
+                max="600"
+                value="${logoWidth}"
+                class="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none text-white"
+              />
+              <p class="text-xs text-gray-500 mt-1">Max width of the logo (20-600).</p>
+            </div>
+
+            <div>
+              <label for="setting_logoBorderWidth" class="block text-sm font-medium text-gray-300 mb-2">
+                Border Thickness (px)
+              </label>
+              <input
+                type="number"
+                id="setting_logoBorderWidth"
+                name="setting_logoBorderWidth"
+                min="0"
+                max="20"
+                value="${logoBorderWidth}"
+                class="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none text-white"
+              />
+              <p class="text-xs text-gray-500 mt-1">0 disables the border.</p>
+            </div>
+
+            <div>
+              <label for="setting_logoBorderColor" class="block text-sm font-medium text-gray-300 mb-2">
+                Border Color
+              </label>
+              <div class="flex gap-2">
+                <input
+                  type="color"
+                  id="setting_logoBorderColor_picker"
+                  value="${escapeHtmlAttr(/^#[0-9a-fA-F]{6}$/.test(logoBorderColor) ? logoBorderColor : '#ffffff')}"
+                  oninput="document.getElementById('setting_logoBorderColor').value = this.value"
+                  class="w-12 h-10 rounded-lg bg-white/5 border border-white/10 cursor-pointer"
+                />
+                <input
+                  type="text"
+                  id="setting_logoBorderColor"
+                  name="setting_logoBorderColor"
+                  value="${escapeHtmlAttr(logoBorderColor)}"
+                  placeholder="#ffffff"
+                  class="flex-1 px-3 py-2 rounded-lg bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none text-white"
+                />
+              </div>
+              <p class="text-xs text-gray-500 mt-1">Hex, rgb(), or named color.</p>
+            </div>
+          </div>
+
+          <div>
+            <label for="setting_loginUrl" class="block text-sm font-medium text-gray-300 mb-2">
+              Login URL
+            </label>
+            <input
+              type="url"
+              id="setting_loginUrl"
+              name="setting_loginUrl"
+              value="${escapeHtmlAttr(loginUrl)}"
+              placeholder="https://yourdomain.com/login"
+              class="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none text-white"
+            />
+            <p class="text-xs text-gray-500 mt-1">Optional. If set, a "Sign in" button is added to the email.</p>
+          </div>
+
+          <div>
+            <label for="setting_loginButtonText" class="block text-sm font-medium text-gray-300 mb-2">
+              Login Button Text
+            </label>
+            <input
+              type="text"
+              id="setting_loginButtonText"
+              name="setting_loginButtonText"
+              value="${escapeHtmlAttr(loginButtonText)}"
+              placeholder="Sign in to ${escapeHtmlAttr(siteName)}"
+              class="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none text-white"
+            />
+            <p class="text-xs text-gray-500 mt-1">Optional. Defaults to "Sign in to ${siteName}".</p>
+          </div>
+
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label for="setting_codeLength" class="block text-sm font-medium text-gray-300 mb-2">
@@ -902,7 +1014,7 @@ function renderOTPLoginSettingsContent(plugin: any, settings: PluginSettings): s
 
         <div class="bg-white rounded-lg overflow-hidden shadow-lg">
           <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px 20px; text-align: center;">
-            ${logoUrl ? `<img src="${logoUrl}" alt="Logo" style="max-width: 150px; height: auto; margin: 0 auto 16px;">` : ''}
+            ${logoUrl ? `<img src="${escapeHtmlAttr(logoUrl)}" alt="Logo" style="max-width: ${logoWidth}px; width: 100%; height: auto; margin: 0 auto 16px; ${previewLogoBorder}">` : ''}
             <h3 style="margin: 0 0 8px 0; font-size: 24px; font-weight: 600;">Your Login Code</h3>
             <p style="margin: 0; opacity: 0.95; font-size: 14px;">Enter this code to sign in to ${siteName}</p>
           </div>
@@ -913,6 +1025,14 @@ function renderOTPLoginSettingsContent(plugin: any, settings: PluginSettings): s
                 123456
               </div>
             </div>
+
+            ${loginUrl ? `
+            <div style="text-align: center; margin: 0 0 20px 0;">
+              <a href="${escapeHtmlAttr(loginUrl)}" style="display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; padding: 12px 28px; border-radius: 6px; font-weight: 600; font-size: 14px;">
+                ${escapeHtmlAttr(previewButtonText)}
+              </a>
+            </div>
+            ` : ''}
 
             <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px 16px; margin: 0 0 20px 0; border-radius: 4px;">
               <p style="margin: 0; font-size: 13px; color: #856404;">
