@@ -1,6 +1,6 @@
 import * as hono from 'hono';
 import { Context, Next, MiddlewareHandler } from 'hono';
-import { S as SonicJSConfig } from './app-D9L3mrC-.js';
+import { S as SonicJSConfig } from './app-C9esKLmh.js';
 import '@cloudflare/workers-types';
 
 type Bindings = {
@@ -31,9 +31,43 @@ type JWTPayload = {
     exp: number;
     iat: number;
 };
+/**
+ * Resolve the JWT expiry in seconds from the environment.
+ * Honors `JWT_EXPIRES_IN` (seconds or "30d"/"12h"/"3600s") with a 30-day default.
+ */
+declare function getJwtExpirySeconds(env?: Record<string, any> | null): number;
+/**
+ * Resolve the JWT expiry in seconds. Precedence: `JWT_EXPIRES_IN` env var
+ * (authoritative ceiling) → `settings.security.jwtExpiresIn` DB value
+ * (admin-configurable) → 30-day default.
+ *
+ * The env var wins so operators can cap runtime overrides — admins can adjust
+ * the TTL from /admin/settings/security, but an env var, if set, always wins.
+ * DB failures fall back to env/default so auth never breaks if the settings
+ * table is unreachable.
+ */
+declare function getJwtExpirySecondsFromDb(db: {
+    prepare: (query: string) => any;
+} | null | undefined, env?: Record<string, any> | null): Promise<number>;
+/**
+ * Resolve the refresh grace window (seconds) for `/auth/refresh`. Precedence:
+ * `JWT_REFRESH_GRACE_SECONDS` env var → `settings.security.jwtRefreshGraceSeconds`
+ * DB value → 7-day default.
+ */
+declare function getJwtRefreshGraceSecondsFromDb(db: {
+    prepare: (query: string) => any;
+} | null | undefined, env?: Record<string, any> | null): Promise<number>;
 declare class AuthManager {
-    static generateToken(userId: string, email: string, role: string, secret?: string): Promise<string>;
-    static verifyToken(token: string, secret?: string): Promise<JWTPayload | null>;
+    static generateToken(userId: string, email: string, role: string, secret?: string, expiresInSeconds?: number): Promise<string>;
+    /**
+     * Verify a token's signature and expiration.
+     *
+     * If `graceSeconds` > 0, tokens whose `exp` is within the grace window
+     * (i.e. expired by no more than `graceSeconds`) are still returned. This
+     * supports a sliding-session refresh endpoint that accepts recently-expired
+     * tokens. Signature failures always return null.
+     */
+    static verifyToken(token: string, secret?: string, graceSeconds?: number): Promise<JWTPayload | null>;
     static hashPassword(password: string): Promise<string>;
     static hashPasswordLegacy(password: string): Promise<string>;
     static verifyPassword(password: string, storedHash: string): Promise<boolean>;
@@ -166,4 +200,4 @@ declare const requireActivePlugins: any;
 declare const getActivePlugins: any;
 declare const isPluginActive: any;
 
-export { AuthManager, type Permission, PermissionManager, type UserPermissions, bootstrapMiddleware, cacheHeaders, compressionMiddleware, csrfProtection, detailedLoggingMiddleware, generateCsrfToken, getActivePlugins, isPluginActive, logActivity, loggingMiddleware, metricsMiddleware, optionalAuth, performanceLoggingMiddleware, rateLimit, requireActivePlugin, requireActivePlugins, requireAnyPermission, requireAuth, requirePermission, requireRole, securityHeadersMiddleware as securityHeaders, securityLoggingMiddleware, validateCsrfToken, verifySecurityConfig };
+export { AuthManager, type Permission, PermissionManager, type UserPermissions, bootstrapMiddleware, cacheHeaders, compressionMiddleware, csrfProtection, detailedLoggingMiddleware, generateCsrfToken, getActivePlugins, getJwtExpirySeconds, getJwtExpirySecondsFromDb, getJwtRefreshGraceSecondsFromDb, isPluginActive, logActivity, loggingMiddleware, metricsMiddleware, optionalAuth, performanceLoggingMiddleware, rateLimit, requireActivePlugin, requireActivePlugins, requireAnyPermission, requireAuth, requirePermission, requireRole, securityHeadersMiddleware as securityHeaders, securityLoggingMiddleware, validateCsrfToken, verifySecurityConfig };

@@ -1,12 +1,12 @@
-import { renderConfirmationDialog, getConfirmationDialogScript, api_default, api_media_default, api_system_default, admin_api_default, router, adminCollectionsRoutes, adminFormsRoutes, adminSettingsRoutes, public_forms_default, router2, admin_content_default, adminMediaRoutes, userProfilesPlugin, adminPluginRoutes, adminLogsRoutes, userRoutes, auth_default, test_cleanup_default } from './chunk-CNX4TXSR.js';
-export { ROUTES_INFO, admin_api_default as adminApiRoutes, adminCheckboxRoutes, admin_code_examples_default as adminCodeExamplesRoutes, adminCollectionsRoutes, admin_content_default as adminContentRoutes, router as adminDashboardRoutes, adminDesignRoutes, adminLogsRoutes, adminMediaRoutes, adminPluginRoutes, adminSettingsRoutes, admin_testimonials_default as adminTestimonialsRoutes, userRoutes as adminUsersRoutes, api_content_crud_default as apiContentCrudRoutes, api_media_default as apiMediaRoutes, api_default as apiRoutes, api_system_default as apiSystemRoutes, auth_default as authRoutes, createUserProfilesPlugin, defineUserProfile, getUserProfileConfig, userProfilesPlugin } from './chunk-CNX4TXSR.js';
-import { SettingsService, setAppInstance, schema_exports } from './chunk-TBJY2FF7.js';
-export { Logger, apiTokens, collections, content, contentVersions, getLogger, initLogger, insertCollectionSchema, insertContentSchema, insertLogConfigSchema, insertMediaSchema, insertPluginActivityLogSchema, insertPluginAssetSchema, insertPluginHookSchema, insertPluginRouteSchema, insertPluginSchema, insertSystemLogSchema, insertUserSchema, insertWorkflowHistorySchema, logConfig, media, pluginActivityLog, pluginAssets, pluginHooks, pluginRoutes, plugins, selectCollectionSchema, selectContentSchema, selectLogConfigSchema, selectMediaSchema, selectPluginActivityLogSchema, selectPluginAssetSchema, selectPluginHookSchema, selectPluginRouteSchema, selectPluginSchema, selectSystemLogSchema, selectUserSchema, selectWorkflowHistorySchema, systemLogs, users, workflowHistory } from './chunk-TBJY2FF7.js';
-import { requireAuth, AuthManager, metricsMiddleware, bootstrapMiddleware, securityHeadersMiddleware, csrfProtection, requireRole } from './chunk-WXVH75BR.js';
-export { AuthManager, PermissionManager, bootstrapMiddleware, cacheHeaders, compressionMiddleware, detailedLoggingMiddleware, getActivePlugins, isPluginActive, logActivity, loggingMiddleware, optionalAuth, performanceLoggingMiddleware, requireActivePlugin, requireActivePlugins, requireAnyPermission, requireAuth, requirePermission, requireRole, securityHeadersMiddleware as securityHeaders, securityLoggingMiddleware } from './chunk-WXVH75BR.js';
-import { PluginService, PLUGIN_REGISTRY } from './chunk-B5YTIKWK.js';
-export { PluginBootstrapService, PluginService as PluginServiceClass, backfillFormSubmissions, cleanupRemovedCollections, createContentFromSubmission, deriveCollectionSchemaFromFormio, deriveSubmissionTitle, fullCollectionSync, getAvailableCollectionNames, getManagedCollections, isCollectionManaged, loadCollectionConfig, loadCollectionConfigs, mapFormStatusToContentStatus, registerCollections, syncAllFormCollections, syncCollection, syncCollections, syncFormCollection, validateCollectionConfig } from './chunk-B5YTIKWK.js';
-export { MigrationService } from './chunk-SEMH3REK.js';
+import { renderConfirmationDialog, getConfirmationDialogScript, api_default, api_media_default, api_system_default, admin_api_default, router, adminCollectionsRoutes, adminFormsRoutes, adminSettingsRoutes, public_forms_default, router2, admin_content_default, adminMediaRoutes, userProfilesPlugin, adminPluginRoutes, adminLogsRoutes, userRoutes, auth_default, test_cleanup_default } from './chunk-RYRNZYND.js';
+export { ROUTES_INFO, admin_api_default as adminApiRoutes, adminCheckboxRoutes, admin_code_examples_default as adminCodeExamplesRoutes, adminCollectionsRoutes, admin_content_default as adminContentRoutes, router as adminDashboardRoutes, adminDesignRoutes, adminLogsRoutes, adminMediaRoutes, adminPluginRoutes, adminSettingsRoutes, admin_testimonials_default as adminTestimonialsRoutes, userRoutes as adminUsersRoutes, api_content_crud_default as apiContentCrudRoutes, api_media_default as apiMediaRoutes, api_default as apiRoutes, api_system_default as apiSystemRoutes, auth_default as authRoutes, createUserProfilesPlugin, defineUserProfile, getUserProfileConfig, userProfilesPlugin } from './chunk-RYRNZYND.js';
+import { SettingsService, setAppInstance, schema_exports } from './chunk-QFWHAFEO.js';
+export { Logger, apiTokens, collections, content, contentVersions, getLogger, initLogger, insertCollectionSchema, insertContentSchema, insertLogConfigSchema, insertMediaSchema, insertPluginActivityLogSchema, insertPluginAssetSchema, insertPluginHookSchema, insertPluginRouteSchema, insertPluginSchema, insertSystemLogSchema, insertUserSchema, insertWorkflowHistorySchema, logConfig, media, pluginActivityLog, pluginAssets, pluginHooks, pluginRoutes, plugins, selectCollectionSchema, selectContentSchema, selectLogConfigSchema, selectMediaSchema, selectPluginActivityLogSchema, selectPluginAssetSchema, selectPluginHookSchema, selectPluginRouteSchema, selectPluginSchema, selectSystemLogSchema, selectUserSchema, selectWorkflowHistorySchema, systemLogs, users, workflowHistory } from './chunk-QFWHAFEO.js';
+import { requireAuth, getJwtExpirySecondsFromDb, AuthManager, metricsMiddleware, bootstrapMiddleware, securityHeadersMiddleware, csrfProtection, requireRole } from './chunk-GH3HYA7D.js';
+export { AuthManager, PermissionManager, bootstrapMiddleware, cacheHeaders, compressionMiddleware, detailedLoggingMiddleware, getActivePlugins, isPluginActive, logActivity, loggingMiddleware, optionalAuth, performanceLoggingMiddleware, requireActivePlugin, requireActivePlugins, requireAnyPermission, requireAuth, requirePermission, requireRole, securityHeadersMiddleware as securityHeaders, securityLoggingMiddleware } from './chunk-GH3HYA7D.js';
+import { PluginService, PLUGIN_REGISTRY } from './chunk-YK5IEGQZ.js';
+export { PluginBootstrapService, PluginService as PluginServiceClass, backfillFormSubmissions, cleanupRemovedCollections, createContentFromSubmission, deriveCollectionSchemaFromFormio, deriveSubmissionTitle, fullCollectionSync, getAvailableCollectionNames, getManagedCollections, isCollectionManaged, loadCollectionConfig, loadCollectionConfigs, mapFormStatusToContentStatus, registerCollections, syncAllFormCollections, syncCollection, syncCollections, syncFormCollection, validateCollectionConfig } from './chunk-YK5IEGQZ.js';
+export { MigrationService } from './chunk-OWJPOVFW.js';
 export { renderFilterBar } from './chunk-ON5ZMSU4.js';
 import { renderAdminLayout } from './chunk-XWIA3HVX.js';
 export { getConfirmationDialogScript, renderAlert, renderConfirmationDialog, renderForm, renderFormField, renderPagination, renderTable } from './chunk-XWIA3HVX.js';
@@ -14,8 +14,8 @@ import { init_admin_layout_catalyst_template, renderAdminLayoutCatalyst } from '
 export { HookSystemImpl, HookUtils, PluginManager as PluginManagerClass, PluginRegistryImpl, PluginValidator as PluginValidatorClass, ScopedHookSystem as ScopedHookSystemClass } from './chunk-TFNTM3OA.js';
 import { PluginBuilder, PluginHelpers } from './chunk-EXNEW5US.js';
 export { PluginBuilder, PluginHelpers } from './chunk-EXNEW5US.js';
-import { package_default, getCoreVersion } from './chunk-JF5RQXPN.js';
-export { QueryFilterBuilder, SONICJS_VERSION, TemplateRenderer, buildQuery, getCoreVersion, renderTemplate, templateRenderer } from './chunk-JF5RQXPN.js';
+import { package_default, getCoreVersion } from './chunk-NDS4S4AG.js';
+export { QueryFilterBuilder, SONICJS_VERSION, TemplateRenderer, buildQuery, getCoreVersion, renderTemplate, templateRenderer } from './chunk-NDS4S4AG.js';
 import './chunk-X7ZAEI5S.js';
 export { metricsTracker } from './chunk-FICTAGD4.js';
 export { escapeHtml, sanitizeInput, sanitizeObject } from './chunk-TQABQWOP.js';
@@ -1613,7 +1613,27 @@ var OTPService = class {
 };
 
 // src/plugins/core-plugins/otp-login-plugin/email-templates.ts
+function sanitizeColor(value) {
+  if (!value) return "";
+  if (/^#[0-9a-fA-F]{3,8}$/.test(value)) return value;
+  if (/^[a-zA-Z]+$/.test(value)) return value;
+  if (/^(rgb|rgba|hsl|hsla)\([0-9.,\s%]+\)$/.test(value)) return value;
+  return "";
+}
+function escapeHtml3(value) {
+  return value.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#39;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
 function renderOTPEmailHTML(data) {
+  const logoUrl = data.logoUrl ? escapeHtml3(data.logoUrl) : "";
+  const loginUrl = data.loginUrl ? escapeHtml3(data.loginUrl) : "";
+  const appName = escapeHtml3(data.appName);
+  const loginButtonText = escapeHtml3(
+    data.loginButtonText && data.loginButtonText.trim() || `Sign in to ${data.appName}`
+  );
+  const logoWidth = Math.max(20, Math.min(600, Number(data.logoWidth) || 150));
+  const logoBorderWidth = Math.max(0, Math.min(20, Number(data.logoBorderWidth) || 0));
+  const logoBorderColor = sanitizeColor(data.logoBorderColor);
+  const logoBorderStyle = logoBorderWidth > 0 && logoBorderColor ? `border: ${logoBorderWidth}px solid ${logoBorderColor}; border-radius: 8px;` : "";
   return `<!DOCTYPE html>
 <html>
 <head>
@@ -1625,15 +1645,15 @@ function renderOTPEmailHTML(data) {
 
   <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
 
-    ${data.logoUrl ? `
+    ${logoUrl ? `
     <div style="text-align: center; padding: 30px 20px 20px;">
-      <img src="${data.logoUrl}" alt="Logo" style="max-width: 150px; height: auto;">
+      <img src="${logoUrl}" alt="${appName}" style="max-width: ${logoWidth}px; width: 100%; height: auto; ${logoBorderStyle}">
     </div>
     ` : ""}
 
     <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px 30px; text-align: center;">
       <h1 style="margin: 0 0 10px 0; font-size: 32px; font-weight: 600;">Your Login Code</h1>
-      <p style="margin: 0; opacity: 0.95; font-size: 16px;">Enter this code to sign in to ${data.appName}</p>
+      <p style="margin: 0; opacity: 0.95; font-size: 16px;">Enter this code to sign in to ${appName}</p>
     </div>
 
     <div style="padding: 40px 30px;">
@@ -1642,6 +1662,14 @@ function renderOTPEmailHTML(data) {
           ${data.code}
         </div>
       </div>
+
+      ${loginUrl ? `
+      <div style="text-align: center; margin: 0 0 30px 0;">
+        <a href="${loginUrl}" style="display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 16px;">
+          ${loginButtonText}
+        </a>
+      </div>
+      ` : ""}
 
       <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 16px 20px; margin: 0 0 30px 0; border-radius: 6px;">
         <p style="margin: 0; font-size: 14px; color: #856404;">
@@ -1664,7 +1692,7 @@ function renderOTPEmailHTML(data) {
           \u{1F512} Security Notice
         </p>
         <p style="margin: 0; font-size: 13px; color: #004080; line-height: 1.6;">
-          Never share this code with anyone. ${data.appName} will never ask you for this code via phone, email, or social media.
+          Never share this code with anyone. ${appName} will never ask you for this code via phone, email, or social media.
         </p>
       </div>
     </div>
@@ -1676,22 +1704,23 @@ function renderOTPEmailHTML(data) {
       </p>
 
       <div style="text-align: center; color: #999; font-size: 12px; line-height: 1.6;">
-        <p style="margin: 5px 0;">This email was sent to ${data.email}</p>
-        ${data.ipAddress ? `<p style="margin: 5px 0;">IP Address: ${data.ipAddress}</p>` : ""}
-        <p style="margin: 5px 0;">Time: ${data.timestamp}</p>
+        <p style="margin: 5px 0;">This email was sent to ${escapeHtml3(data.email)}</p>
+        ${data.ipAddress ? `<p style="margin: 5px 0;">IP Address: ${escapeHtml3(data.ipAddress)}</p>` : ""}
+        <p style="margin: 5px 0;">Time: ${escapeHtml3(data.timestamp)}</p>
       </div>
     </div>
 
   </div>
 
   <div style="text-align: center; padding: 20px; color: #999; font-size: 12px;">
-    <p style="margin: 0;">&copy; ${(/* @__PURE__ */ new Date()).getFullYear()} ${data.appName}. All rights reserved.</p>
+    <p style="margin: 0;">&copy; ${(/* @__PURE__ */ new Date()).getFullYear()} ${appName}. All rights reserved.</p>
   </div>
 
 </body>
 </html>`;
 }
 function renderOTPEmailText(data) {
+  const ctaLabel = data.loginButtonText && data.loginButtonText.trim() || `Sign in to ${data.appName}`;
   return `Your Login Code for ${data.appName}
 
 Your one-time verification code is:
@@ -1699,6 +1728,9 @@ Your one-time verification code is:
 ${data.code}
 
 This code expires in ${data.expiryMinutes} minutes.
+${data.loginUrl ? `
+${ctaLabel}: ${data.loginUrl}
+` : ""}
 
 Quick Tips:
 \u2022 Enter the code exactly as shown (${data.codeLength} digits)
@@ -1739,7 +1771,13 @@ var DEFAULT_SETTINGS = {
   codeExpiryMinutes: 10,
   maxAttempts: 3,
   rateLimitPerHour: 5,
-  allowNewUserRegistration: false
+  allowNewUserRegistration: false,
+  logoUrl: "",
+  logoWidth: 150,
+  logoBorderWidth: 0,
+  logoBorderColor: "#ffffff",
+  loginUrl: "",
+  loginButtonText: ""
 };
 function createOTPLoginPlugin() {
   const builder = PluginBuilder.create({
@@ -1829,7 +1867,12 @@ function createOTPLoginPlugin() {
           ipAddress,
           timestamp: (/* @__PURE__ */ new Date()).toISOString(),
           appName: siteName,
-          logoUrl: settings.logoUrl || ""
+          logoUrl: settings.logoUrl || "",
+          logoWidth: settings.logoWidth,
+          logoBorderWidth: settings.logoBorderWidth,
+          logoBorderColor: settings.logoBorderColor || "",
+          loginUrl: settings.loginUrl || "",
+          loginButtonText: settings.loginButtonText || ""
         });
         const emailPlugin2 = await db.prepare(`
           SELECT settings FROM plugins WHERE id = 'email'
@@ -1944,13 +1987,13 @@ function createOTPLoginPlugin() {
           error: "Account is deactivated"
         }, 403);
       }
-      const token = await AuthManager.generateToken(user.id, user.email, user.role, c.env.JWT_SECRET);
+      const tokenTtl = await getJwtExpirySecondsFromDb(db, c.env);
+      const token = await AuthManager.generateToken(user.id, user.email, user.role, c.env.JWT_SECRET, tokenTtl);
       setCookie(c, "auth_token", token, {
         httpOnly: true,
         secure: true,
         sameSite: "Strict",
-        maxAge: 60 * 60 * 24
-        // 24 hours
+        maxAge: tokenTtl
       });
       return c.json({
         success: true,
@@ -2414,13 +2457,15 @@ function createOAuthProvidersPlugin() {
         if (!user || !user.is_active) {
           return c.redirect("/auth/login?error=Account is deactivated");
         }
+        const tokenTtl2 = await getJwtExpirySecondsFromDb(c.env.DB, c.env);
         const jwt2 = await AuthManager.generateToken(
           user.id,
           user.email,
           user.role,
-          c.env.JWT_SECRET
+          c.env.JWT_SECRET,
+          tokenTtl2
         );
-        AuthManager.setAuthCookie(c, jwt2, { sameSite: "Lax" });
+        AuthManager.setAuthCookie(c, jwt2, { sameSite: "Lax", maxAge: tokenTtl2 });
         return c.redirect("/admin");
       }
       const existingUser = await oauthService.findUserByEmail(profile.email);
@@ -2437,13 +2482,15 @@ function createOAuthProvidersPlugin() {
           tokenExpiresAt: tokenExpiresAt ?? void 0,
           profileData: JSON.stringify(profile)
         });
+        const tokenTtl2 = await getJwtExpirySecondsFromDb(c.env.DB, c.env);
         const jwt2 = await AuthManager.generateToken(
           existingUser.id,
           existingUser.email,
           existingUser.role,
-          c.env.JWT_SECRET
+          c.env.JWT_SECRET,
+          tokenTtl2
         );
-        AuthManager.setAuthCookie(c, jwt2, { sameSite: "Lax" });
+        AuthManager.setAuthCookie(c, jwt2, { sameSite: "Lax", maxAge: tokenTtl2 });
         return c.redirect("/admin");
       }
       const newUserId = await oauthService.createUserFromOAuth(profile);
@@ -2456,13 +2503,15 @@ function createOAuthProvidersPlugin() {
         tokenExpiresAt: tokenExpiresAt ?? void 0,
         profileData: JSON.stringify(profile)
       });
+      const tokenTtl = await getJwtExpirySecondsFromDb(c.env.DB, c.env);
       const jwt = await AuthManager.generateToken(
         newUserId,
         profile.email.toLowerCase(),
         "viewer",
-        c.env.JWT_SECRET
+        c.env.JWT_SECRET,
+        tokenTtl
       );
-      AuthManager.setAuthCookie(c, jwt, { sameSite: "Lax" });
+      AuthManager.setAuthCookie(c, jwt, { sameSite: "Lax", maxAge: tokenTtl });
       return c.redirect("/admin");
     } catch (error) {
       console.error("OAuth callback error:", error);
@@ -4556,13 +4605,15 @@ function createMagicLinkAuthPlugin() {
         SET used = 1, used_at = ?
         WHERE id = ?
       `).bind(Date.now(), magicLink.id).run();
+      const tokenTtl = await getJwtExpirySecondsFromDb(c.env.DB, c.env);
       const jwtToken = await AuthManager.generateToken(
         user.id,
         user.email,
         user.role,
-        c.env.JWT_SECRET
+        c.env.JWT_SECRET,
+        tokenTtl
       );
-      AuthManager.setAuthCookie(c, jwtToken);
+      AuthManager.setAuthCookie(c, jwtToken, { maxAge: tokenTtl });
       await db.prepare(`
         UPDATE users SET last_login_at = ? WHERE id = ?
       `).bind(Date.now(), user.id).run();
@@ -7860,7 +7911,7 @@ adminRoutes4.get("/", async (c) => {
         <div class="divide-y divide-zinc-950/5 dark:divide-white/10">
           ${topPages.length > 0 ? topPages.map((p) => `
             <div class="flex items-center justify-between px-6 py-3">
-              <span class="text-sm text-zinc-700 dark:text-zinc-300 font-mono truncate">${escapeHtml3(p.path)}</span>
+              <span class="text-sm text-zinc-700 dark:text-zinc-300 font-mono truncate">${escapeHtml4(p.path)}</span>
               <span class="text-sm font-medium text-zinc-500 dark:text-zinc-400">${p.views}</span>
             </div>
           `).join("") : `
@@ -7889,7 +7940,7 @@ adminRoutes4.get("/", async (c) => {
             <tbody class="divide-y divide-zinc-950/5 dark:divide-white/10">
               ${recentActivity.length > 0 ? recentActivity.map((a) => `
                 <tr>
-                  <td class="px-6 py-2 font-mono text-zinc-700 dark:text-zinc-300 truncate max-w-xs">${escapeHtml3(a.url || "")}</td>
+                  <td class="px-6 py-2 font-mono text-zinc-700 dark:text-zinc-300 truncate max-w-xs">${escapeHtml4(a.url || "")}</td>
                   <td class="px-6 py-2"><span class="inline-flex items-center rounded px-1.5 py-0.5 text-xs font-medium ${a.method === "GET" ? "bg-green-50 text-green-700 dark:bg-green-900/30 dark:text-green-400" : "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"}">${a.method || ""}</span></td>
                   <td class="px-6 py-2"><span class="inline-flex items-center rounded px-1.5 py-0.5 text-xs font-medium ${(a.status_code || 0) >= 400 ? "bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-400" : "bg-green-50 text-green-700 dark:bg-green-900/30 dark:text-green-400"}">${a.status_code || ""}</span></td>
                   <td class="px-6 py-2 text-zinc-500 dark:text-zinc-400">${a.duration || 0}ms</td>
@@ -7919,7 +7970,7 @@ adminRoutes4.get("/", async (c) => {
     dynamicMenuItems: c.get("pluginMenuItems")
   }));
 });
-function escapeHtml3(str) {
+function escapeHtml4(str) {
   return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 

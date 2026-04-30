@@ -100,6 +100,10 @@ interface GeneralSettings {
     language: string;
     maintenanceMode: boolean;
 }
+interface SecuritySettings {
+    jwtExpiresIn: string;
+    jwtRefreshGraceSeconds: number;
+}
 declare class SettingsService {
     private db;
     constructor(db: D1Database);
@@ -127,6 +131,14 @@ declare class SettingsService {
      * Save general settings
      */
     saveGeneralSettings(settings: Partial<GeneralSettings>): Promise<boolean>;
+    /**
+     * Get security settings with defaults
+     */
+    getSecuritySettings(): Promise<SecuritySettings>;
+    /**
+     * Save security settings
+     */
+    saveSecuritySettings(settings: Partial<SecuritySettings>): Promise<boolean>;
 }
 
 /**
