@@ -176,12 +176,29 @@ export async function getReleaseInfo() {
 
   const corePackageJson = JSON.parse(fs.readFileSync(corePackageJsonPath, 'utf8'))
   const version = corePackageJson.version
+  const tagName = `v${version}`
+
+  // For local runs (no RELEASE_BODY env), try to pull the release body from
+  // GitHub via the gh CLI so highlights aren't extracted from an empty string.
+  let body = process.env.RELEASE_BODY || ''
+  if (!body) {
+    try {
+      const { execSync } = await import('child_process')
+      const out = execSync(`gh release view ${tagName} --json body -q .body`, {
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'ignore']
+      })
+      body = out.trim()
+    } catch {
+      // gh not available, not authenticated, or release not yet created — use empty body
+    }
+  }
 
   return {
     version,
-    tagName: `v${version}`,
-    body: process.env.RELEASE_BODY || '',
-    url: `https://github.com/lane711/sonicjs/releases/tag/v${version}`,
+    tagName,
+    body,
+    url: `https://github.com/lane711/sonicjs/releases/tag/${tagName}`,
     publishedAt: new Date().toISOString()
   }
 }
