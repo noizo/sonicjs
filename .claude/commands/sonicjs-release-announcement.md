@@ -4,7 +4,7 @@ You are a specialized agent that creates compelling release announcements for So
 
 1. **Generate release content** - Create engaging, platform-specific announcement content
 2. **Post to Discord** - Send rich embeds to the SonicJS Discord community
-3. **Post to Twitter/X** - Create announcement threads with appropriate hashtags
+3. **Post to Twitter/X** - Send a single long-form announcement post with appropriate hashtags
 4. **Update website** - Prepare changelog and home page updates
 
 ## Background
@@ -27,10 +27,13 @@ Target audience: JavaScript/TypeScript developers, Cloudflare users, CMS enthusi
 - Tone: Friendly, community-focused, technical
 
 ### Twitter/X Content
-- Main tweet: Under 280 chars, catchy, includes version
+- Single long-form post (X Premium supports up to 25,000 chars)
+- `text` is the lead hook (catchy, includes version)
 - Hashtags: #SonicJS #CloudflareWorkers #HeadlessCMS #OpenSource
-- Thread: Break down key features, include call-to-action
-- Include GitHub stars request in final tweet
+- `thread` array (optional) holds additional sections — features, upgrade
+  steps, stars request — and is concatenated into the same post (one
+  section per blank line). It is **not** posted as a multi-tweet thread.
+- Include a GitHub stars request as the final section
 
 ### Website Content
 - Home changelog: Brief one-line summary
@@ -77,7 +80,7 @@ Create a `.release-content.json` file in the project root with this structure:
     ]
   },
   "twitter": {
-    "text": "🚀 SonicJS v{VERSION} is now available! Brief exciting hook under 280 chars.",
+    "text": "🚀 SonicJS v{VERSION} is now available! Brief exciting hook.",
     "hashtags": ["SonicJS", "CloudflareWorkers", "HeadlessCMS", "OpenSource"],
     "thread": [
       "✨ What's new:\n\n1. Feature one\n2. Feature two\n3. Feature three",
@@ -221,7 +224,7 @@ DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/...
 TWITTER_API_KEY=your_api_key
 TWITTER_API_SECRET=your_api_secret
 TWITTER_ACCESS_TOKEN=your_access_token
-TWITTER_ACCESS_SECRET=your_access_secret
+TWITTER_ACCESS_TOKEN_SECRET=your_access_token_secret
 ```
 
 ## Usage Examples
@@ -243,8 +246,9 @@ TWITTER_ACCESS_SECRET=your_access_secret
 
 ### Twitter Errors
 - **401 Unauthorized**: Verify all 4 Twitter credentials are correct
-- **403 Forbidden**: App may lack write permissions
-- **Tweet too long**: Ensure all tweets are under 280 characters
+- **402 CreditsDepleted**: API account has no credits — top up at developer.x.com
+- **403 Forbidden**: App may lack write permissions; long-form posts also require X Premium
+- **Post too long**: The combined post exceeds 25,000 chars — trim sections
 - **Rate limited**: Wait 15 minutes and retry
 
 ### Content Errors
@@ -255,7 +259,7 @@ TWITTER_ACCESS_SECRET=your_access_secret
 ## Important Notes
 
 1. **Always preview first**: Use `--dry-run` before posting to verify content
-2. **Check character limits**: Twitter has strict 280 char limit
+2. **Long-form post**: The script sends one combined post (X Premium, up to 25,000 chars). The `thread` array is concatenated into the same post — there is no multi-tweet thread.
 3. **Credentials in .env**: Never commit credentials to git
 4. **Content quality**: Take time to write compelling announcements
 5. **Community engagement**: End Twitter threads with GitHub star request
@@ -271,7 +275,7 @@ After posting announcements, verify:
    - Links are clickable
 
 2. **Twitter/X**
-   - Thread is properly connected
+   - Long-form post is published (single post, not a thread)
    - Hashtags are visible
    - Links expand correctly
 

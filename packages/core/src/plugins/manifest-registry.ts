@@ -471,7 +471,13 @@ export const PLUGIN_REGISTRY: Record<string, PluginRegistryEntry> = {
       "codeExpiryMinutes": 10,
       "maxAttempts": 3,
       "rateLimitPerHour": 5,
-      "allowNewUserRegistration": false
+      "allowNewUserRegistration": false,
+      "logoUrl": "",
+      "logoWidth": 150,
+      "logoBorderWidth": 0,
+      "logoBorderColor": "#ffffff",
+      "loginUrl": "",
+      "loginButtonText": ""
     },
     "adminMenu": {
       "label": "OTP Login",

@@ -32,7 +32,13 @@ const DEFAULT_SETTINGS: OTPSettings = {
   codeExpiryMinutes: 10,
   maxAttempts: 3,
   rateLimitPerHour: 5,
-  allowNewUserRegistration: false
+  allowNewUserRegistration: false,
+  logoUrl: '',
+  logoWidth: 150,
+  logoBorderWidth: 0,
+  logoBorderColor: '#ffffff',
+  loginUrl: '',
+  loginButtonText: ''
 }
 
 export function createOTPLoginPlugin(): Plugin {
@@ -151,7 +157,12 @@ export function createOTPLoginPlugin(): Plugin {
           ipAddress,
           timestamp: new Date().toISOString(),
           appName: siteName,
-          logoUrl: settings.logoUrl || ''
+          logoUrl: settings.logoUrl || '',
+          logoWidth: settings.logoWidth,
+          logoBorderWidth: settings.logoBorderWidth,
+          logoBorderColor: settings.logoBorderColor || '',
+          loginUrl: settings.loginUrl || '',
+          loginButtonText: settings.loginButtonText || ''
         })
 
         // Load email plugin settings from database
