@@ -476,20 +476,42 @@ Join thousands of developers building the future of web APIs
   </div>
 
   <div className="space-y-6">
-    {/* v2.17.2 - Latest Release */}
+    {/* v2.18.0 - Latest Release */}
     <div className="border-l-4 border-emerald-500 dark:border-emerald-400 pl-4 py-1">
       <div className="flex items-center gap-2 mb-2">
-        <span className="text-xs font-bold px-2 py-1 rounded bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">v2.17.2</span>
+        <span className="text-xs font-bold px-2 py-1 rounded bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">v2.18.0</span>
         <span className="text-xs px-2 py-1 rounded bg-gradient-to-r from-orange-100 to-red-100 dark:from-orange-900/30 dark:to-red-900/30 border border-orange-300 dark:border-orange-700 text-orange-800 dark:text-orange-300 font-bold">LATEST</span>
-        <span className="text-sm text-gray-500 dark:text-gray-400">2026-04-29</span>
+        <span className="text-sm text-gray-500 dark:text-gray-400">2026-04-30</span>
       </div>
       <div className="text-sm space-y-1">
         <div className="flex items-start gap-2">
           <span className="text-emerald-600 dark:text-emerald-400 mt-0.5">✓</span>
-          <span className="text-gray-700 dark:text-gray-300"><strong>API Filter Bracket Syntax Fix</strong> - <code>filter[field][operator]=value</code> on the public content and collections endpoints now correctly applies WHERE conditions instead of silently returning unfiltered data</span>
+          <span className="text-gray-700 dark:text-gray-300"><strong>Configurable OTP Email Branding</strong> - Customize the OTP login email with your logo, login URL, button text, and logo border styling — all from the OTP plugin's admin settings page</span>
         </div>
         <div className="flex items-start gap-2">
           <span className="text-emerald-600 dark:text-emerald-400 mt-0.5">✓</span>
+          <span className="text-gray-700 dark:text-gray-300"><strong>Sign-in Button in OTP Email</strong> - When a Login URL is set, a styled sign-in button is rendered under the OTP code; label is overridable</span>
+        </div>
+        <div className="flex items-start gap-2">
+          <span className="text-emerald-600 dark:text-emerald-400 mt-0.5">✓</span>
+          <span className="text-gray-700 dark:text-gray-300"><strong>Live Email Preview</strong> - The OTP plugin settings page reflects every branding change immediately</span>
+        </div>
+      </div>
+    </div>
+
+    {/* v2.17.2 */}
+    <div className="border-l-4 border-blue-500 dark:border-blue-400 pl-4 py-1">
+      <div className="flex items-center gap-2 mb-2">
+        <span className="text-xs font-bold px-2 py-1 rounded bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">v2.17.2</span>
+        <span className="text-sm text-gray-500 dark:text-gray-400">2026-04-29</span>
+      </div>
+      <div className="text-sm space-y-1">
+        <div className="flex items-start gap-2">
+          <span className="text-blue-600 dark:text-blue-400 mt-0.5">✓</span>
+          <span className="text-gray-700 dark:text-gray-300"><strong>API Filter Bracket Syntax Fix</strong> - <code>filter[field][operator]=value</code> on the public content and collections endpoints now correctly applies WHERE conditions instead of silently returning unfiltered data</span>
+        </div>
+        <div className="flex items-start gap-2">
+          <span className="text-blue-600 dark:text-blue-400 mt-0.5">✓</span>
           <span className="text-gray-700 dark:text-gray-300"><strong>New Filter Operators</strong> - Adds <code>starts_with</code> and <code>ends_with</code> alongside existing <code>equals</code>, <code>contains</code>, <code>like</code>, <code>in</code>, etc.</span>
         </div>
       </div>
