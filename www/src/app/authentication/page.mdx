@@ -186,18 +186,29 @@ The **OTP (One-Time Password) Login Plugin** provides email-based authentication
 - Rate limiting (default: 5 codes per hour)
 - Max verification attempts (default: 3)
 - Optional new user registration support
+- Customizable email branding: logo, sign-in button, button text, and logo border styling
+- Live email preview on the settings page
 
 **Installation:**
 
 1. Navigate to **Admin** → **Plugins**
 2. Find **OTP Login** plugin
 3. Click **Activate**
-4. Configure settings:
+4. Configure code settings:
    - **Code Length**: 4-8 digits (default: 6)
    - **Code Expiration**: 5-60 minutes (default: 10)
    - **Max Attempts**: 3-10 (default: 3)
    - **Rate Limit**: Codes per hour (default: 5)
    - **Allow Registration**: Enable if you want new users to register via OTP
+5. Configure email branding (all optional):
+   - **Logo URL**: image shown at the top of the email
+   - **Logo Width (px)**: rendered logo size, 20–600 (default: 150)
+   - **Logo Border Thickness (px)**: 0–20; `0` disables the border (default: 0)
+   - **Logo Border Color**: hex / rgb / named color, with picker swatch (default: `#ffffff`); the logo gets a matching `border-radius` when both thickness and color are set
+   - **Login URL**: when set, a styled **Sign in to {site name}** button is rendered under the OTP code in the email
+   - **Login Button Text**: override the default button label
+
+The settings page renders a live preview of the email so you can verify branding before sending.
 
 **API Usage:**
 
