@@ -624,6 +624,15 @@ Every user profile includes these standard fields out of the box:
 
 Custom fields defined via `defineUserProfile()` extend these — they do not replace them.
 
+### Auth Endpoint Responses
+
+Custom fields defined via `defineUserProfile()` are merged into the user object on:
+
+- `GET /auth/me` — returns `{ user: { ...standardFields, ...customFields } }`
+- `POST /auth/otp/verify` — returns `{ user: { ...standardFields, ...customFields }, token, ... }`
+
+This lets apps gate UI on subscription plan, tier, feature flags, etc. without a second roundtrip.
+
 ---
 
 ## RBAC

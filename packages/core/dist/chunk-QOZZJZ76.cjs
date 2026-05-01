@@ -1802,5 +1802,5 @@ exports.syncCollection = syncCollection;
 exports.syncCollections = syncCollections;
 exports.syncFormCollection = syncFormCollection;
 exports.validateCollectionConfig = validateCollectionConfig;
-//# sourceMappingURL=chunk-56PLLVDG.cjs.map
-//# sourceMappingURL=chunk-56PLLVDG.cjs.map
+//# sourceMappingURL=chunk-QOZZJZ76.cjs.map
+//# sourceMappingURL=chunk-QOZZJZ76.cjs.map
