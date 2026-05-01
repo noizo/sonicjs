@@ -11,7 +11,7 @@ import { getCacheService, CACHE_CONFIGS } from '../services'
 import { authValidationService, isRegistrationEnabled, isFirstUserRegistration } from '../services/auth-validation'
 import type { RegistrationData } from '../services/auth-validation'
 import type { Bindings, Variables } from '../app'
-import { getUserProfileConfig, getRegistrationFields, getProfileFieldDefaults, sanitizeCustomData, saveCustomData } from '../plugins/core-plugins/user-profiles'
+import { getUserProfileConfig, getRegistrationFields, getProfileFieldDefaults, sanitizeCustomData, saveCustomData, getCustomData } from '../plugins/core-plugins/user-profiles'
 
 const JWT_SECRET_FALLBACK = 'your-super-secret-jwt-key-change-in-production'
 
@@ -371,13 +371,14 @@ authRoutes.get('/me', requireAuth(), async (c) => {
     const db = c.env.DB
     const userData = await db.prepare('SELECT id, email, username, first_name, last_name, role, created_at FROM users WHERE id = ?')
       .bind(user.userId)
-      .first()
-    
+      .first() as Record<string, any> | null
+
     if (!userData) {
       return c.json({ error: 'User not found' }, 404)
     }
-    
-    return c.json({ user: userData })
+
+    const customData = await getCustomData(db, user.userId)
+    return c.json({ user: { ...userData, ...customData } })
   } catch (error) {
     console.error('Get user error:', error)
     return c.json({ error: 'Failed to get user' }, 500)

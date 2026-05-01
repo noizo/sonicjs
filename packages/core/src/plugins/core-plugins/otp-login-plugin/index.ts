@@ -15,6 +15,7 @@ import { renderOTPEmail } from './email-templates'
 import { AuthManager } from '../../../middleware'
 import { getJwtExpirySecondsFromDb } from '../../../middleware/auth'
 import { SettingsService } from '../../../services/settings'
+import { getCustomData } from '../user-profiles'
 
 // Validation schemas
 const otpRequestSchema = z.object({
@@ -277,7 +278,7 @@ export function createOTPLoginPlugin(): Plugin {
 
       // Code is valid - get user
       let user = await db.prepare(`
-        SELECT id, email, role, is_active
+        SELECT id, email, username, first_name, last_name, role, is_active, created_at
         FROM users
         WHERE email = ?
       `).bind(normalizedEmail).first() as any
@@ -295,7 +296,16 @@ export function createOTPLoginPlugin(): Plugin {
           ) VALUES (?, ?, ?, '', '', NULL, 'viewer', 1, 1, ?, ?)
         `).bind(userId, normalizedEmail, username, now, now).run()
 
-        user = { id: userId, email: normalizedEmail, role: 'viewer', is_active: 1 }
+        user = {
+          id: userId,
+          email: normalizedEmail,
+          username,
+          first_name: '',
+          last_name: '',
+          role: 'viewer',
+          is_active: 1,
+          created_at: now,
+        }
       }
 
       if (!user) {
@@ -322,12 +332,14 @@ export function createOTPLoginPlugin(): Plugin {
         maxAge: tokenTtl
       })
 
+      const customData = await getCustomData(db, user.id)
+      const { is_active, ...publicUser } = user
+
       return c.json({
         success: true,
         user: {
-          id: user.id,
-          email: user.email,
-          role: user.role
+          ...publicUser,
+          ...customData,
         },
         token,
         message: 'Authentication successful'
