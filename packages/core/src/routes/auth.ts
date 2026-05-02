@@ -53,7 +53,8 @@ authRoutes.get('/login', async (c) => {
   const pageData: LoginPageData = {
     error: error || undefined,
     message: message || undefined,
-    version: c.get('appVersion')
+    version: c.get('appVersion'),
+    socialCtasHeading: 'Or login with'
   }
 
   // Check if demo login plugin is active
@@ -102,7 +103,8 @@ authRoutes.get('/register', async (c) => {
   const error = c.req.query('error')
 
   const pageData: RegisterPageData = {
-    error: error || undefined
+    error: error || undefined,
+    socialCtasHeading: 'Or register with'
   }
 
   // Collect social CTA HTML from AUTH_FORM_RENDER hook handlers.

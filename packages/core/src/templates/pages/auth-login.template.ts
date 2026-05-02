@@ -6,6 +6,8 @@ export interface LoginPageData {
   version?: string
   /** HTML string injected by AUTH_FORM_RENDER hook handlers (e.g. social sign-in buttons). */
   socialCtas?: string
+  /** Optional heading shown above the CTA row. Defaults to "Or sign in another way". */
+  socialCtasHeading?: string
 }
 
 export function renderLoginPage(data: LoginPageData, demoLoginActive: boolean = false): string {
@@ -135,7 +137,7 @@ export function renderLoginPage(data: LoginPageData, demoLoginActive: boolean = 
                   <div class="w-full border-t border-white/10"></div>
                 </div>
                 <div class="relative flex justify-center text-sm">
-                  <span class="bg-zinc-900 px-2 text-zinc-400">Or sign in another way</span>
+                  <span class="bg-zinc-900 px-2 text-zinc-400">${data.socialCtasHeading ?? 'Or sign in another way'}</span>
                 </div>
               </div>
               <div class="mt-4 flex justify-center gap-3 flex-wrap">
