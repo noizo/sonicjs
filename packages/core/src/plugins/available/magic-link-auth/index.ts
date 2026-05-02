@@ -27,12 +27,20 @@ const magicLinkRequestSchema = z.object({
  * Renders a "Sign in with email link" button + a minimal inline popover with a
  * vanilla-JS submit handler (`window.__sendMagicLink`).
  *
- * Returns null when the `email` plugin dependency is not active in the DB,
- * or when the DB is not available (table missing / not initialised).
+ * Magic-link is a sign-in-only flow (existing user gets an email-link to log
+ * in). It is not a registration method — new users cannot register via
+ * magic-link. The handler therefore returns null when invoked for the
+ * registration form, suppressing the magic-link tile on /auth/register.
  *
- * @param data - `{ db }` — the D1 database instance
+ * Returns null also when the `email` plugin dependency is not active in the
+ * DB, or when the DB is not available (table missing / not initialised).
+ *
+ * @param data - `{ db, formType }` — D1 + 'login' | 'register'
  */
 export const authFormRenderHandler: HookHandler = async (data: any, _ctx: any): Promise<string | null> => {
+  // Sign-in-only — skip the register form entirely.
+  if (data?.formType === 'register') return null
+
   try {
     if (data?.db) {
       const row = await data.db.prepare(
@@ -115,6 +123,35 @@ export const authFormRenderHandler: HookHandler = async (data: any, _ctx: any): 
     </script>`
 }
 
+interface MagicLinkSettings {
+  linkExpiryMinutes: number
+  rateLimitPerHour: number
+  allowNewUsers: boolean
+}
+
+const DEFAULT_MAGIC_LINK_SETTINGS: MagicLinkSettings = {
+  linkExpiryMinutes: 15,
+  rateLimitPerHour: 5,
+  allowNewUsers: false,
+}
+
+async function loadMagicLinkSettings(db: D1Database): Promise<MagicLinkSettings> {
+  try {
+    const row = await db
+      .prepare(`SELECT settings FROM plugins WHERE id = 'magic-link-auth'`)
+      .first() as { settings: string | null } | null
+    if (!row?.settings) return DEFAULT_MAGIC_LINK_SETTINGS
+    const parsed = JSON.parse(row.settings)
+    return {
+      linkExpiryMinutes: typeof parsed.linkExpiryMinutes === 'number' ? parsed.linkExpiryMinutes : DEFAULT_MAGIC_LINK_SETTINGS.linkExpiryMinutes,
+      rateLimitPerHour: typeof parsed.rateLimitPerHour === 'number' ? parsed.rateLimitPerHour : DEFAULT_MAGIC_LINK_SETTINGS.rateLimitPerHour,
+      allowNewUsers: typeof parsed.allowNewUsers === 'boolean' ? parsed.allowNewUsers : DEFAULT_MAGIC_LINK_SETTINGS.allowNewUsers,
+    }
+  } catch {
+    return DEFAULT_MAGIC_LINK_SETTINGS
+  }
+}
+
 export function createMagicLinkAuthPlugin(): Plugin {
   const magicLinkRoutes = new Hono()
 
@@ -135,6 +172,9 @@ export function createMagicLinkAuthPlugin(): Plugin {
       const normalizedEmail = email.toLowerCase()
       const db = c.env.DB as D1Database
 
+      // Load settings once per request (admin-configurable via plugins.settings).
+      const settings = await loadMagicLinkSettings(db)
+
       // Check rate limiting
       const oneHourAgo = Date.now() - (60 * 60 * 1000)
       const recentLinks = await db.prepare(`
@@ -143,7 +183,7 @@ export function createMagicLinkAuthPlugin(): Plugin {
         WHERE user_email = ? AND created_at > ?
       `).bind(normalizedEmail, oneHourAgo).first() as any
 
-      const rateLimitPerHour = 5 // TODO: Get from plugin settings
+      const rateLimitPerHour = settings.rateLimitPerHour
       if (recentLinks && recentLinks.count >= rateLimitPerHour) {
         return c.json({
           error: 'Too many requests. Please try again later.'
@@ -157,7 +197,7 @@ export function createMagicLinkAuthPlugin(): Plugin {
         WHERE email = ?
       `).bind(normalizedEmail).first() as any
 
-      const allowNewUsers = false // TODO: Get from plugin settings
+      const allowNewUsers = settings.allowNewUsers
 
       if (!user && !allowNewUsers) {
         // Don't reveal if user exists or not for security
@@ -175,7 +215,7 @@ export function createMagicLinkAuthPlugin(): Plugin {
       // Generate secure token
       const token = crypto.randomUUID() + '-' + crypto.randomUUID()
       const tokenId = crypto.randomUUID()
-      const linkExpiryMinutes = 15 // TODO: Get from plugin settings
+      const linkExpiryMinutes = settings.linkExpiryMinutes
       const expiresAt = Date.now() + (linkExpiryMinutes * 60 * 1000)
 
       // Store magic link
@@ -240,6 +280,9 @@ export function createMagicLinkAuthPlugin(): Plugin {
 
       const db = c.env.DB as D1Database
 
+      // Load settings (admin-configurable via plugins.settings).
+      const settings = await loadMagicLinkSettings(db)
+
       // Find magic link
       const magicLink = await db.prepare(`
         SELECT * FROM magic_links
@@ -260,7 +303,7 @@ export function createMagicLinkAuthPlugin(): Plugin {
         SELECT * FROM users WHERE email = ? AND is_active = 1
       `).bind(magicLink.user_email).first() as any
 
-      const allowNewUsers = false // TODO: Get from plugin settings
+      const allowNewUsers = settings.allowNewUsers
 
       if (!user && allowNewUsers) {
         // Create new user

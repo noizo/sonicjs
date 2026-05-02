@@ -1,12 +1,12 @@
-import { getCustomData, renderConfirmationDialog, getConfirmationDialogScript, api_default, api_media_default, api_system_default, admin_api_default, router, adminCollectionsRoutes, adminFormsRoutes, adminSettingsRoutes, public_forms_default, router2, admin_content_default, adminMediaRoutes, userProfilesPlugin, adminPluginRoutes, adminLogsRoutes, userRoutes, auth_default, test_cleanup_default } from './chunk-EJ3AZGM2.js';
-export { ROUTES_INFO, admin_api_default as adminApiRoutes, adminCheckboxRoutes, admin_code_examples_default as adminCodeExamplesRoutes, adminCollectionsRoutes, admin_content_default as adminContentRoutes, router as adminDashboardRoutes, adminDesignRoutes, adminLogsRoutes, adminMediaRoutes, adminPluginRoutes, adminSettingsRoutes, admin_testimonials_default as adminTestimonialsRoutes, userRoutes as adminUsersRoutes, api_content_crud_default as apiContentCrudRoutes, api_media_default as apiMediaRoutes, api_default as apiRoutes, api_system_default as apiSystemRoutes, auth_default as authRoutes, createUserProfilesPlugin, defineUserProfile, getUserProfileConfig, userProfilesPlugin } from './chunk-EJ3AZGM2.js';
+import { getCustomData, renderConfirmationDialog, getConfirmationDialogScript, api_default, api_media_default, api_system_default, admin_api_default, router, adminCollectionsRoutes, adminFormsRoutes, adminSettingsRoutes, public_forms_default, router2, admin_content_default, adminMediaRoutes, userProfilesPlugin, adminPluginRoutes, adminLogsRoutes, userRoutes, auth_default, test_cleanup_default } from './chunk-TPAE5B6L.js';
+export { ROUTES_INFO, admin_api_default as adminApiRoutes, adminCheckboxRoutes, admin_code_examples_default as adminCodeExamplesRoutes, adminCollectionsRoutes, admin_content_default as adminContentRoutes, router as adminDashboardRoutes, adminDesignRoutes, adminLogsRoutes, adminMediaRoutes, adminPluginRoutes, adminSettingsRoutes, admin_testimonials_default as adminTestimonialsRoutes, userRoutes as adminUsersRoutes, api_content_crud_default as apiContentCrudRoutes, api_media_default as apiMediaRoutes, api_default as apiRoutes, api_system_default as apiSystemRoutes, auth_default as authRoutes, createUserProfilesPlugin, defineUserProfile, getUserProfileConfig, userProfilesPlugin } from './chunk-TPAE5B6L.js';
 import { SettingsService, setAppInstance, schema_exports } from './chunk-YARI3MLM.js';
 export { Logger, apiTokens, collections, content, contentVersions, getLogger, initLogger, insertCollectionSchema, insertContentSchema, insertLogConfigSchema, insertMediaSchema, insertPluginActivityLogSchema, insertPluginAssetSchema, insertPluginHookSchema, insertPluginRouteSchema, insertPluginSchema, insertSystemLogSchema, insertUserSchema, insertWorkflowHistorySchema, logConfig, media, pluginActivityLog, pluginAssets, pluginHooks, pluginRoutes, plugins, selectCollectionSchema, selectContentSchema, selectLogConfigSchema, selectMediaSchema, selectPluginActivityLogSchema, selectPluginAssetSchema, selectPluginHookSchema, selectPluginRouteSchema, selectPluginSchema, selectSystemLogSchema, selectUserSchema, selectWorkflowHistorySchema, systemLogs, users, workflowHistory } from './chunk-YARI3MLM.js';
-import { requireAuth, getJwtExpirySecondsFromDb, AuthManager, metricsMiddleware, bootstrapMiddleware, securityHeadersMiddleware, csrfProtection, requireRole } from './chunk-SVR5QRSJ.js';
-export { AuthManager, PermissionManager, bootstrapMiddleware, cacheHeaders, compressionMiddleware, detailedLoggingMiddleware, getActivePlugins, isPluginActive, logActivity, loggingMiddleware, optionalAuth, performanceLoggingMiddleware, requireActivePlugin, requireActivePlugins, requireAnyPermission, requireAuth, requirePermission, requireRole, securityHeadersMiddleware as securityHeaders, securityLoggingMiddleware } from './chunk-SVR5QRSJ.js';
+import { requireAuth, getJwtExpirySecondsFromDb, AuthManager, metricsMiddleware, bootstrapMiddleware, securityHeadersMiddleware, csrfProtection, requireRole } from './chunk-3SPI22KJ.js';
+export { AuthManager, PermissionManager, bootstrapMiddleware, cacheHeaders, compressionMiddleware, detailedLoggingMiddleware, getActivePlugins, isPluginActive, logActivity, loggingMiddleware, optionalAuth, performanceLoggingMiddleware, requireActivePlugin, requireActivePlugins, requireAnyPermission, requireAuth, requirePermission, requireRole, securityHeadersMiddleware as securityHeaders, securityLoggingMiddleware } from './chunk-3SPI22KJ.js';
 import { PluginService, PLUGIN_REGISTRY } from './chunk-CJOLOONT.js';
 export { PluginBootstrapService, PluginService as PluginServiceClass, backfillFormSubmissions, cleanupRemovedCollections, createContentFromSubmission, deriveCollectionSchemaFromFormio, deriveSubmissionTitle, fullCollectionSync, getAvailableCollectionNames, getManagedCollections, isCollectionManaged, loadCollectionConfig, loadCollectionConfigs, mapFormStatusToContentStatus, registerCollections, syncAllFormCollections, syncCollection, syncCollections, syncFormCollection, validateCollectionConfig } from './chunk-CJOLOONT.js';
-export { MigrationService } from './chunk-RJCLWR42.js';
+export { MigrationService } from './chunk-PIHE5EK6.js';
 export { renderFilterBar } from './chunk-ON5ZMSU4.js';
 import { renderAdminLayout } from './chunk-XWIA3HVX.js';
 export { getConfirmationDialogScript, renderAlert, renderConfirmationDialog, renderForm, renderFormField, renderPagination, renderTable } from './chunk-XWIA3HVX.js';
@@ -4532,6 +4532,7 @@ var magicLinkRequestSchema = z.object({
   email: z.string().email("Valid email is required")
 });
 var authFormRenderHandler2 = async (data, _ctx) => {
+  if (data?.formType === "register") return null;
   try {
     if (data?.db) {
       const row = await data.db.prepare(
@@ -4606,6 +4607,25 @@ var authFormRenderHandler2 = async (data, _ctx) => {
       })();
     </script>`;
 };
+var DEFAULT_MAGIC_LINK_SETTINGS = {
+  linkExpiryMinutes: 15,
+  rateLimitPerHour: 5,
+  allowNewUsers: false
+};
+async function loadMagicLinkSettings(db) {
+  try {
+    const row = await db.prepare(`SELECT settings FROM plugins WHERE id = 'magic-link-auth'`).first();
+    if (!row?.settings) return DEFAULT_MAGIC_LINK_SETTINGS;
+    const parsed = JSON.parse(row.settings);
+    return {
+      linkExpiryMinutes: typeof parsed.linkExpiryMinutes === "number" ? parsed.linkExpiryMinutes : DEFAULT_MAGIC_LINK_SETTINGS.linkExpiryMinutes,
+      rateLimitPerHour: typeof parsed.rateLimitPerHour === "number" ? parsed.rateLimitPerHour : DEFAULT_MAGIC_LINK_SETTINGS.rateLimitPerHour,
+      allowNewUsers: typeof parsed.allowNewUsers === "boolean" ? parsed.allowNewUsers : DEFAULT_MAGIC_LINK_SETTINGS.allowNewUsers
+    };
+  } catch {
+    return DEFAULT_MAGIC_LINK_SETTINGS;
+  }
+}
 function createMagicLinkAuthPlugin() {
   const magicLinkRoutes = new Hono();
   magicLinkRoutes.post("/request", async (c) => {
@@ -4621,13 +4641,14 @@ function createMagicLinkAuthPlugin() {
       const { email } = validation.data;
       const normalizedEmail = email.toLowerCase();
       const db = c.env.DB;
+      const settings = await loadMagicLinkSettings(db);
       const oneHourAgo = Date.now() - 60 * 60 * 1e3;
       const recentLinks = await db.prepare(`
         SELECT COUNT(*) as count
         FROM magic_links
         WHERE user_email = ? AND created_at > ?
       `).bind(normalizedEmail, oneHourAgo).first();
-      const rateLimitPerHour = 5;
+      const rateLimitPerHour = settings.rateLimitPerHour;
       if (recentLinks && recentLinks.count >= rateLimitPerHour) {
         return c.json({
           error: "Too many requests. Please try again later."
@@ -4638,7 +4659,7 @@ function createMagicLinkAuthPlugin() {
         FROM users
         WHERE email = ?
       `).bind(normalizedEmail).first();
-      const allowNewUsers = false;
+      const allowNewUsers = settings.allowNewUsers;
       if (!user && !allowNewUsers) {
         return c.json({
           message: "If an account exists for this email, you will receive a magic link shortly."
@@ -4651,7 +4672,7 @@ function createMagicLinkAuthPlugin() {
       }
       const token = crypto.randomUUID() + "-" + crypto.randomUUID();
       const tokenId = crypto.randomUUID();
-      const linkExpiryMinutes = 15;
+      const linkExpiryMinutes = settings.linkExpiryMinutes;
       const expiresAt = Date.now() + linkExpiryMinutes * 60 * 1e3;
       await db.prepare(`
         INSERT INTO magic_links (
@@ -4703,6 +4724,7 @@ function createMagicLinkAuthPlugin() {
         return c.redirect("/auth/login?error=Invalid magic link");
       }
       const db = c.env.DB;
+      const settings = await loadMagicLinkSettings(db);
       const magicLink = await db.prepare(`
         SELECT * FROM magic_links
         WHERE token = ? AND used = 0
@@ -4716,7 +4738,7 @@ function createMagicLinkAuthPlugin() {
       let user = await db.prepare(`
         SELECT * FROM users WHERE email = ? AND is_active = 1
       `).bind(magicLink.user_email).first();
-      const allowNewUsers = false;
+      const allowNewUsers = settings.allowNewUsers;
       if (!user && allowNewUsers) {
         const userId = crypto.randomUUID();
         const username = magicLink.user_email.split("@")[0];

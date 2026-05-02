@@ -68,9 +68,11 @@ authRoutes.get('/login', async (c) => {
     // Ignore database errors - plugin system might not be initialized
   }
 
-  // Collect social CTA HTML from AUTH_FORM_RENDER hook handlers
+  // Collect social CTA HTML from AUTH_FORM_RENDER hook handlers.
+  // formType lets handlers gate their CTAs (e.g. magic-link is sign-in-only,
+  // so it returns null for formType='register' to skip the register form).
   const hookCtx = { plugin: '', context: {} as any }
-  const hookData = { db }
+  const hookData = { db, formType: 'login' as const }
   const hookResults = await Promise.all(
     globalHookSystem.getHooks(HOOKS.AUTH_FORM_RENDER).map(h =>
       h.handler(hookData, hookCtx).catch(() => null)
@@ -103,9 +105,11 @@ authRoutes.get('/register', async (c) => {
     error: error || undefined
   }
 
-  // Collect social CTA HTML from AUTH_FORM_RENDER hook handlers
+  // Collect social CTA HTML from AUTH_FORM_RENDER hook handlers.
+  // formType='register' lets handlers skip CTAs that don't apply to registration
+  // (e.g. magic-link is sign-in-only — it returns null here).
   const hookCtx = { plugin: '', context: {} as any }
-  const hookData = { db }
+  const hookData = { db, formType: 'register' as const }
   const hookResults = await Promise.all(
     globalHookSystem.getHooks(HOOKS.AUTH_FORM_RENDER).map(h =>
       h.handler(hookData, hookCtx).catch(() => null)
