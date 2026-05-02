@@ -1,10 +1,10 @@
 'use strict';
 
 var chunkWELAJALJ_cjs = require('./chunk-WELAJALJ.cjs');
-var chunk5T6VSJUK_cjs = require('./chunk-5T6VSJUK.cjs');
+var chunkW5WXUVLG_cjs = require('./chunk-W5WXUVLG.cjs');
 var chunkQOZZJZ76_cjs = require('./chunk-QOZZJZ76.cjs');
-var chunk6YUNQLR3_cjs = require('./chunk-6YUNQLR3.cjs');
-var chunkOHYBNCVL_cjs = require('./chunk-OHYBNCVL.cjs');
+var chunkB4DQOQ2G_cjs = require('./chunk-B4DQOQ2G.cjs');
+var chunkL3IKU2XF_cjs = require('./chunk-L3IKU2XF.cjs');
 var chunkUYJ6TJHX_cjs = require('./chunk-UYJ6TJHX.cjs');
 var chunkYV6UEWTX_cjs = require('./chunk-YV6UEWTX.cjs');
 var chunkNWGIE4LP_cjs = require('./chunk-NWGIE4LP.cjs');
@@ -190,7 +190,7 @@ apiContentCrudRoutes.get("/:id", async (c) => {
     }, 500);
   }
 });
-apiContentCrudRoutes.post("/", chunk5T6VSJUK_cjs.requireAuth(), chunk5T6VSJUK_cjs.requireRole(["admin", "editor", "author"]), async (c) => {
+apiContentCrudRoutes.post("/", chunkW5WXUVLG_cjs.requireAuth(), chunkW5WXUVLG_cjs.requireRole(["admin", "editor", "author"]), async (c) => {
   try {
     const db = c.env.DB;
     const user = c.get("user");
@@ -256,7 +256,7 @@ apiContentCrudRoutes.post("/", chunk5T6VSJUK_cjs.requireAuth(), chunk5T6VSJUK_cj
     }, 500);
   }
 });
-apiContentCrudRoutes.put("/:id", chunk5T6VSJUK_cjs.requireAuth(), chunk5T6VSJUK_cjs.requireRole(["admin", "editor", "author"]), async (c) => {
+apiContentCrudRoutes.put("/:id", chunkW5WXUVLG_cjs.requireAuth(), chunkW5WXUVLG_cjs.requireRole(["admin", "editor", "author"]), async (c) => {
   try {
     const id = c.req.param("id");
     const db = c.env.DB;
@@ -320,7 +320,7 @@ apiContentCrudRoutes.put("/:id", chunk5T6VSJUK_cjs.requireAuth(), chunk5T6VSJUK_
     }, 500);
   }
 });
-apiContentCrudRoutes.delete("/:id", chunk5T6VSJUK_cjs.requireAuth(), chunk5T6VSJUK_cjs.requireRole(["admin", "editor", "author"]), async (c) => {
+apiContentCrudRoutes.delete("/:id", chunkW5WXUVLG_cjs.requireAuth(), chunkW5WXUVLG_cjs.requireRole(["admin", "editor", "author"]), async (c) => {
   try {
     const id = c.req.param("id");
     const db = c.env.DB;
@@ -356,7 +356,7 @@ apiRoutes.use("*", async (c, next) => {
   c.header("X-Response-Time", `${totalTime}ms`);
 });
 apiRoutes.use("*", async (c, next) => {
-  const cacheEnabled = await chunk5T6VSJUK_cjs.isPluginActive(c.env.DB, "core-cache");
+  const cacheEnabled = await chunkW5WXUVLG_cjs.isPluginActive(c.env.DB, "core-cache");
   c.set("cacheEnabled", cacheEnabled);
   await next();
 });
@@ -847,7 +847,7 @@ apiRoutes.get("/collections", async (c) => {
     return c.json({ error: "Failed to fetch collections" }, 500);
   }
 });
-apiRoutes.get("/content", chunk5T6VSJUK_cjs.optionalAuth(), async (c) => {
+apiRoutes.get("/content", chunkW5WXUVLG_cjs.optionalAuth(), async (c) => {
   const executionStart = Date.now();
   try {
     const db = c.env.DB;
@@ -948,7 +948,7 @@ apiRoutes.get("/content", chunk5T6VSJUK_cjs.optionalAuth(), async (c) => {
     }, 500);
   }
 });
-apiRoutes.get("/collections/:collection/content", chunk5T6VSJUK_cjs.optionalAuth(), async (c) => {
+apiRoutes.get("/collections/:collection/content", chunkW5WXUVLG_cjs.optionalAuth(), async (c) => {
   const executionStart = Date.now();
   try {
     const collection = c.req.param("collection");
@@ -1097,7 +1097,7 @@ var fileValidationSchema = zod.z.object({
   // 50MB max
 });
 var apiMediaRoutes = new hono.Hono();
-apiMediaRoutes.use("*", chunk5T6VSJUK_cjs.requireAuth());
+apiMediaRoutes.use("*", chunkW5WXUVLG_cjs.requireAuth());
 apiMediaRoutes.post("/upload", async (c) => {
   try {
     const user = c.get("user");
@@ -1841,8 +1841,8 @@ apiSystemRoutes.get("/env", (c) => {
 });
 var api_system_default = apiSystemRoutes;
 var adminApiRoutes = new hono.Hono();
-adminApiRoutes.use("*", chunk5T6VSJUK_cjs.requireAuth());
-adminApiRoutes.use("*", chunk5T6VSJUK_cjs.requireRole(["admin", "editor"]));
+adminApiRoutes.use("*", chunkW5WXUVLG_cjs.requireAuth());
+adminApiRoutes.use("*", chunkW5WXUVLG_cjs.requireRole(["admin", "editor"]));
 adminApiRoutes.get("/stats", async (c) => {
   try {
     const db = c.env.DB;
@@ -2354,7 +2354,7 @@ adminApiRoutes.delete("/collections/:id", async (c) => {
 });
 adminApiRoutes.get("/migrations/status", async (c) => {
   try {
-    const { MigrationService: MigrationService2 } = await import('./migrations-DRVGDQ7R.cjs');
+    const { MigrationService: MigrationService2 } = await import('./migrations-RA7PNNG6.cjs');
     const db = c.env.DB;
     const migrationService = new MigrationService2(db);
     const status = await migrationService.getMigrationStatus();
@@ -2379,7 +2379,7 @@ adminApiRoutes.post("/migrations/run", async (c) => {
         error: "Unauthorized. Admin access required."
       }, 403);
     }
-    const { MigrationService: MigrationService2 } = await import('./migrations-DRVGDQ7R.cjs');
+    const { MigrationService: MigrationService2 } = await import('./migrations-RA7PNNG6.cjs');
     const db = c.env.DB;
     const migrationService = new MigrationService2(db);
     const result = await migrationService.runPendingMigrations();
@@ -2401,7 +2401,7 @@ adminApiRoutes.post("/migrations/run", async (c) => {
 });
 adminApiRoutes.get("/migrations/validate", async (c) => {
   try {
-    const { MigrationService: MigrationService2 } = await import('./migrations-DRVGDQ7R.cjs');
+    const { MigrationService: MigrationService2 } = await import('./migrations-RA7PNNG6.cjs');
     const db = c.env.DB;
     const migrationService = new MigrationService2(db);
     const validation = await migrationService.validateSchema();
@@ -2476,8 +2476,8 @@ function renderLoginPage(data, demoLoginActive = false) {
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div class="bg-zinc-900 shadow-sm ring-1 ring-white/10 rounded-xl px-6 py-8 sm:px-10">
             <!-- Alerts -->
-            ${data.error ? `<div class="mb-6">${chunkOHYBNCVL_cjs.renderAlert({ type: "error", message: data.error })}</div>` : ""}
-            ${data.message ? `<div class="mb-6">${chunkOHYBNCVL_cjs.renderAlert({ type: "success", message: data.message })}</div>` : ""}
+            ${data.error ? `<div class="mb-6">${chunkL3IKU2XF_cjs.renderAlert({ type: "error", message: data.error })}</div>` : ""}
+            ${data.message ? `<div class="mb-6">${chunkL3IKU2XF_cjs.renderAlert({ type: "success", message: data.message })}</div>` : ""}
 
             <!-- Form Response (HTMX target) -->
             <div id="form-response" class="mb-6"></div>
@@ -2658,7 +2658,7 @@ function renderRegisterPage(data) {
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div class="bg-zinc-900 shadow-sm ring-1 ring-white/10 rounded-xl px-6 py-8 sm:px-10">
             <!-- Alerts -->
-            ${data.error ? `<div class="mb-6">${chunkOHYBNCVL_cjs.renderAlert({ type: "error", message: data.error })}</div>` : ""}
+            ${data.error ? `<div class="mb-6">${chunkL3IKU2XF_cjs.renderAlert({ type: "error", message: data.error })}</div>` : ""}
 
             <!-- Form -->
             <form
@@ -5188,8 +5188,8 @@ var JWT_SECRET_FALLBACK = "your-super-secret-jwt-key-change-in-production";
 async function setCsrfCookie(c, maxAge) {
   const secret = c.env?.JWT_SECRET || JWT_SECRET_FALLBACK;
   const isDev = c.env?.ENVIRONMENT === "development" || !c.env?.ENVIRONMENT;
-  const csrfToken = await chunk5T6VSJUK_cjs.generateCsrfToken(secret);
-  const cookieMaxAge = await chunk5T6VSJUK_cjs.getJwtExpirySecondsFromDb(c.env?.DB, c.env);
+  const csrfToken = await chunkW5WXUVLG_cjs.generateCsrfToken(secret);
+  const cookieMaxAge = await chunkW5WXUVLG_cjs.getJwtExpirySecondsFromDb(c.env?.DB, c.env);
   cookie.setCookie(c, "csrf_token", csrfToken, {
     httpOnly: false,
     secure: !isDev,
@@ -5266,7 +5266,7 @@ var loginSchema = zod.z.object({
 });
 authRoutes.post(
   "/register",
-  chunk5T6VSJUK_cjs.rateLimit({ max: 30, windowMs: 60 * 1e3, keyPrefix: "register" }),
+  chunkW5WXUVLG_cjs.rateLimit({ max: 30, windowMs: 60 * 1e3, keyPrefix: "register" }),
   async (c) => {
     try {
       const db = c.env.DB;
@@ -5303,7 +5303,7 @@ authRoutes.post(
       if (existingUser) {
         return c.json({ error: "User with this email or username already exists" }, 400);
       }
-      const passwordHash = await chunk5T6VSJUK_cjs.AuthManager.hashPassword(password);
+      const passwordHash = await chunkW5WXUVLG_cjs.AuthManager.hashPassword(password);
       const userId = crypto.randomUUID();
       const now = /* @__PURE__ */ new Date();
       await db.prepare(`
@@ -5337,8 +5337,8 @@ authRoutes.post(
           await saveCustomData(db, userId, sanitized);
         }
       }
-      const tokenTtl = await chunk5T6VSJUK_cjs.getJwtExpirySecondsFromDb(c.env.DB, c.env);
-      const token = await chunk5T6VSJUK_cjs.AuthManager.generateToken(userId, normalizedEmail, "viewer", c.env.JWT_SECRET, tokenTtl);
+      const tokenTtl = await chunkW5WXUVLG_cjs.getJwtExpirySecondsFromDb(c.env.DB, c.env);
+      const token = await chunkW5WXUVLG_cjs.AuthManager.generateToken(userId, normalizedEmail, "viewer", c.env.JWT_SECRET, tokenTtl);
       cookie.setCookie(c, "auth_token", token, {
         httpOnly: true,
         secure: true,
@@ -5371,7 +5371,7 @@ authRoutes.post(
 );
 authRoutes.post(
   "/login",
-  chunk5T6VSJUK_cjs.rateLimit({ max: 30, windowMs: 60 * 1e3, keyPrefix: "login" }),
+  chunkW5WXUVLG_cjs.rateLimit({ max: 30, windowMs: 60 * 1e3, keyPrefix: "login" }),
   async (c) => {
     try {
       const body = await c.req.json();
@@ -5394,20 +5394,20 @@ authRoutes.post(
       if (!user) {
         return c.json({ error: "Invalid email or password" }, 401);
       }
-      const isValidPassword = await chunk5T6VSJUK_cjs.AuthManager.verifyPassword(password, user.password_hash);
+      const isValidPassword = await chunkW5WXUVLG_cjs.AuthManager.verifyPassword(password, user.password_hash);
       if (!isValidPassword) {
         return c.json({ error: "Invalid email or password" }, 401);
       }
-      if (chunk5T6VSJUK_cjs.AuthManager.isLegacyHash(user.password_hash)) {
+      if (chunkW5WXUVLG_cjs.AuthManager.isLegacyHash(user.password_hash)) {
         try {
-          const newHash = await chunk5T6VSJUK_cjs.AuthManager.hashPassword(password);
+          const newHash = await chunkW5WXUVLG_cjs.AuthManager.hashPassword(password);
           await db.prepare("UPDATE users SET password_hash = ?, updated_at = ? WHERE id = ?").bind(newHash, Date.now(), user.id).run();
         } catch (rehashError) {
           console.error("Password rehash failed (non-fatal):", rehashError);
         }
       }
-      const tokenTtl = await chunk5T6VSJUK_cjs.getJwtExpirySecondsFromDb(c.env.DB, c.env);
-      const token = await chunk5T6VSJUK_cjs.AuthManager.generateToken(user.id, user.email, user.role, c.env.JWT_SECRET, tokenTtl);
+      const tokenTtl = await chunkW5WXUVLG_cjs.getJwtExpirySecondsFromDb(c.env.DB, c.env);
+      const token = await chunkW5WXUVLG_cjs.AuthManager.generateToken(user.id, user.email, user.role, c.env.JWT_SECRET, tokenTtl);
       cookie.setCookie(c, "auth_token", token, {
         httpOnly: true,
         secure: true,
@@ -5459,7 +5459,7 @@ authRoutes.get("/logout", (c) => {
   clearCsrfCookie(c);
   return c.redirect("/auth/login?message=You have been logged out successfully");
 });
-authRoutes.get("/me", chunk5T6VSJUK_cjs.requireAuth(), async (c) => {
+authRoutes.get("/me", chunkW5WXUVLG_cjs.requireAuth(), async (c) => {
   try {
     const user = c.get("user");
     if (!user) {
@@ -5479,7 +5479,7 @@ authRoutes.get("/me", chunk5T6VSJUK_cjs.requireAuth(), async (c) => {
 });
 authRoutes.post(
   "/refresh",
-  chunk5T6VSJUK_cjs.rateLimit({ max: 60, windowMs: 60 * 1e3, keyPrefix: "refresh" }),
+  chunkW5WXUVLG_cjs.rateLimit({ max: 60, windowMs: 60 * 1e3, keyPrefix: "refresh" }),
   async (c) => {
     try {
       let token = c.req.header("Authorization")?.replace("Bearer ", "");
@@ -5488,8 +5488,8 @@ authRoutes.post(
         return c.json({ error: "Authentication required" }, 401);
       }
       const db = c.env.DB;
-      const grace = await chunk5T6VSJUK_cjs.getJwtRefreshGraceSecondsFromDb(db, c.env);
-      const payload = await chunk5T6VSJUK_cjs.AuthManager.verifyToken(token, c.env.JWT_SECRET, grace);
+      const grace = await chunkW5WXUVLG_cjs.getJwtRefreshGraceSecondsFromDb(db, c.env);
+      const payload = await chunkW5WXUVLG_cjs.AuthManager.verifyToken(token, c.env.JWT_SECRET, grace);
       if (!payload) {
         return c.json({ error: "Invalid or expired token" }, 401);
       }
@@ -5497,8 +5497,8 @@ authRoutes.post(
       if (!row || !row.is_active) {
         return c.json({ error: "User is not active" }, 401);
       }
-      const tokenTtl = await chunk5T6VSJUK_cjs.getJwtExpirySecondsFromDb(db, c.env);
-      const newToken = await chunk5T6VSJUK_cjs.AuthManager.generateToken(row.id, row.email, row.role, c.env.JWT_SECRET, tokenTtl);
+      const tokenTtl = await chunkW5WXUVLG_cjs.getJwtExpirySecondsFromDb(db, c.env);
+      const newToken = await chunkW5WXUVLG_cjs.AuthManager.generateToken(row.id, row.email, row.role, c.env.JWT_SECRET, tokenTtl);
       cookie.setCookie(c, "auth_token", newToken, {
         httpOnly: true,
         secure: true,
@@ -5518,7 +5518,7 @@ authRoutes.post(
 );
 authRoutes.post(
   "/register/form",
-  chunk5T6VSJUK_cjs.rateLimit({ max: 30, windowMs: 60 * 1e3, keyPrefix: "register" }),
+  chunkW5WXUVLG_cjs.rateLimit({ max: 30, windowMs: 60 * 1e3, keyPrefix: "register" }),
   async (c) => {
     try {
       const db = c.env.DB;
@@ -5565,7 +5565,7 @@ authRoutes.post(
         </div>
       `);
       }
-      const passwordHash = await chunk5T6VSJUK_cjs.AuthManager.hashPassword(password);
+      const passwordHash = await chunkW5WXUVLG_cjs.AuthManager.hashPassword(password);
       const role = isFirstUser ? "admin" : "viewer";
       const userId = crypto.randomUUID();
       const now = /* @__PURE__ */ new Date();
@@ -5600,8 +5600,8 @@ authRoutes.post(
           await saveCustomData(db, userId, sanitized);
         }
       }
-      const tokenTtl = await chunk5T6VSJUK_cjs.getJwtExpirySecondsFromDb(c.env.DB, c.env);
-      const token = await chunk5T6VSJUK_cjs.AuthManager.generateToken(userId, normalizedEmail, role, c.env.JWT_SECRET, tokenTtl);
+      const tokenTtl = await chunkW5WXUVLG_cjs.getJwtExpirySecondsFromDb(c.env.DB, c.env);
+      const token = await chunkW5WXUVLG_cjs.AuthManager.generateToken(userId, normalizedEmail, role, c.env.JWT_SECRET, tokenTtl);
       cookie.setCookie(c, "auth_token", token, {
         httpOnly: true,
         secure: false,
@@ -5633,7 +5633,7 @@ authRoutes.post(
 );
 authRoutes.post(
   "/login/form",
-  chunk5T6VSJUK_cjs.rateLimit({ max: 30, windowMs: 60 * 1e3, keyPrefix: "login" }),
+  chunkW5WXUVLG_cjs.rateLimit({ max: 30, windowMs: 60 * 1e3, keyPrefix: "login" }),
   async (c) => {
     try {
       const formData = await c.req.formData();
@@ -5657,7 +5657,7 @@ authRoutes.post(
         </div>
       `);
       }
-      const isValidPassword = await chunk5T6VSJUK_cjs.AuthManager.verifyPassword(password, user.password_hash);
+      const isValidPassword = await chunkW5WXUVLG_cjs.AuthManager.verifyPassword(password, user.password_hash);
       if (!isValidPassword) {
         return c.html(html.html`
         <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
@@ -5665,16 +5665,16 @@ authRoutes.post(
         </div>
       `);
       }
-      if (chunk5T6VSJUK_cjs.AuthManager.isLegacyHash(user.password_hash)) {
+      if (chunkW5WXUVLG_cjs.AuthManager.isLegacyHash(user.password_hash)) {
         try {
-          const newHash = await chunk5T6VSJUK_cjs.AuthManager.hashPassword(password);
+          const newHash = await chunkW5WXUVLG_cjs.AuthManager.hashPassword(password);
           await db.prepare("UPDATE users SET password_hash = ?, updated_at = ? WHERE id = ?").bind(newHash, Date.now(), user.id).run();
         } catch (rehashError) {
           console.error("Password rehash failed (non-fatal):", rehashError);
         }
       }
-      const tokenTtl = await chunk5T6VSJUK_cjs.getJwtExpirySecondsFromDb(c.env.DB, c.env);
-      const token = await chunk5T6VSJUK_cjs.AuthManager.generateToken(user.id, user.email, user.role, c.env.JWT_SECRET, tokenTtl);
+      const tokenTtl = await chunkW5WXUVLG_cjs.getJwtExpirySecondsFromDb(c.env.DB, c.env);
+      const token = await chunkW5WXUVLG_cjs.AuthManager.generateToken(user.id, user.email, user.role, c.env.JWT_SECRET, tokenTtl);
       cookie.setCookie(c, "auth_token", token, {
         httpOnly: true,
         secure: false,
@@ -5715,7 +5715,7 @@ authRoutes.post(
 );
 authRoutes.post(
   "/seed-admin",
-  chunk5T6VSJUK_cjs.rateLimit({ max: 10, windowMs: 60 * 1e3, keyPrefix: "seed-admin" }),
+  chunkW5WXUVLG_cjs.rateLimit({ max: 10, windowMs: 60 * 1e3, keyPrefix: "seed-admin" }),
   async (c) => {
     try {
       const db = c.env.DB;
@@ -5737,7 +5737,7 @@ authRoutes.post(
     `).run();
       const existingAdmin = await db.prepare("SELECT id FROM users WHERE email = ? OR username = ?").bind("admin@sonicjs.com", "admin").first();
       if (existingAdmin) {
-        const passwordHash2 = await chunk5T6VSJUK_cjs.AuthManager.hashPassword("sonicjs!");
+        const passwordHash2 = await chunkW5WXUVLG_cjs.AuthManager.hashPassword("sonicjs!");
         await db.prepare("UPDATE users SET password_hash = ?, updated_at = ? WHERE id = ?").bind(passwordHash2, Date.now(), existingAdmin.id).run();
         return c.json({
           message: "Admin user already exists (password updated)",
@@ -5749,7 +5749,7 @@ authRoutes.post(
           }
         });
       }
-      const passwordHash = await chunk5T6VSJUK_cjs.AuthManager.hashPassword("sonicjs!");
+      const passwordHash = await chunkW5WXUVLG_cjs.AuthManager.hashPassword("sonicjs!");
       const userId = "admin-user-id";
       const now = Date.now();
       const adminEmail = "admin@sonicjs.com".toLowerCase();
@@ -5970,7 +5970,7 @@ authRoutes.post("/accept-invitation", async (c) => {
     if (existingUsername) {
       return c.json({ error: "Username is already taken" }, 400);
     }
-    const passwordHash = await chunk5T6VSJUK_cjs.AuthManager.hashPassword(password);
+    const passwordHash = await chunkW5WXUVLG_cjs.AuthManager.hashPassword(password);
     const updateStmt = db.prepare(`
       UPDATE users SET 
         username = ?,
@@ -5989,8 +5989,8 @@ authRoutes.post("/accept-invitation", async (c) => {
       Date.now(),
       invitedUser.id
     ).run();
-    const tokenTtl = await chunk5T6VSJUK_cjs.getJwtExpirySecondsFromDb(c.env.DB, c.env);
-    const authToken = await chunk5T6VSJUK_cjs.AuthManager.generateToken(invitedUser.id, invitedUser.email, invitedUser.role, c.env.JWT_SECRET, tokenTtl);
+    const tokenTtl = await chunkW5WXUVLG_cjs.getJwtExpirySecondsFromDb(c.env.DB, c.env);
+    const authToken = await chunkW5WXUVLG_cjs.AuthManager.generateToken(invitedUser.id, invitedUser.email, invitedUser.role, c.env.JWT_SECRET, tokenTtl);
     cookie.setCookie(c, "auth_token", authToken, {
       httpOnly: true,
       secure: true,
@@ -6006,7 +6006,7 @@ authRoutes.post("/accept-invitation", async (c) => {
 });
 authRoutes.post(
   "/request-password-reset",
-  chunk5T6VSJUK_cjs.rateLimit({ max: 3, windowMs: 15 * 60 * 1e3, keyPrefix: "password-reset" }),
+  chunkW5WXUVLG_cjs.rateLimit({ max: 3, windowMs: 15 * 60 * 1e3, keyPrefix: "password-reset" }),
   async (c) => {
     try {
       const formData = await c.req.formData();
@@ -6224,7 +6224,7 @@ authRoutes.post("/reset-password", async (c) => {
     if (Date.now() > user.password_reset_expires) {
       return c.json({ error: "Reset token has expired" }, 400);
     }
-    const newPasswordHash = await chunk5T6VSJUK_cjs.AuthManager.hashPassword(password);
+    const newPasswordHash = await chunkW5WXUVLG_cjs.AuthManager.hashPassword(password);
     try {
       const historyStmt = db.prepare(`
         INSERT INTO password_history (id, user_id, password_hash, created_at)
@@ -7273,8 +7273,8 @@ function renderContentFormPage(data) {
         <!-- Form Content -->
         <div class="px-6 py-6">
           <div id="form-messages">
-            ${data.error ? chunkOHYBNCVL_cjs.renderAlert({ type: "error", message: data.error, dismissible: true }) : ""}
-            ${data.success ? chunkOHYBNCVL_cjs.renderAlert({ type: "success", message: data.success, dismissible: true }) : ""}
+            ${data.error ? chunkL3IKU2XF_cjs.renderAlert({ type: "error", message: data.error, dismissible: true }) : ""}
+            ${data.success ? chunkL3IKU2XF_cjs.renderAlert({ type: "success", message: data.success, dismissible: true }) : ""}
           </div>
 
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -7510,7 +7510,7 @@ function renderContentFormPage(data) {
     </div>
 
     <!-- Confirmation Dialogs -->
-    ${chunkOHYBNCVL_cjs.renderConfirmationDialog({
+    ${chunkL3IKU2XF_cjs.renderConfirmationDialog({
     id: "duplicate-content-confirm",
     title: "Duplicate Content",
     message: "Create a copy of this content?",
@@ -7521,7 +7521,7 @@ function renderContentFormPage(data) {
     onConfirm: "performDuplicateContent()"
   })}
 
-    ${chunkOHYBNCVL_cjs.renderConfirmationDialog({
+    ${chunkL3IKU2XF_cjs.renderConfirmationDialog({
     id: "delete-content-confirm",
     title: "Delete Content",
     message: "Are you sure you want to delete this content? This action cannot be undone.",
@@ -7532,7 +7532,7 @@ function renderContentFormPage(data) {
     onConfirm: `performDeleteContent('${data.id}')`
   })}
 
-    ${chunkOHYBNCVL_cjs.renderConfirmationDialog({
+    ${chunkL3IKU2XF_cjs.renderConfirmationDialog({
     id: "delete-repeater-item-confirm",
     title: "Delete Item",
     message: "Are you sure you want to delete this item? This action cannot be undone.",
@@ -7543,7 +7543,7 @@ function renderContentFormPage(data) {
     onConfirm: "performRepeaterDelete()"
   })}
 
-    ${chunkOHYBNCVL_cjs.renderConfirmationDialog({
+    ${chunkL3IKU2XF_cjs.renderConfirmationDialog({
     id: "delete-block-confirm",
     title: "Delete Block",
     message: "Are you sure you want to delete this block? This action cannot be undone.",
@@ -7554,7 +7554,7 @@ function renderContentFormPage(data) {
     onConfirm: "performRepeaterDelete()"
   })}
 
-    ${chunkOHYBNCVL_cjs.getConfirmationDialogScript()}
+    ${chunkL3IKU2XF_cjs.getConfirmationDialogScript()}
 
     ${data.tinymceEnabled ? getTinyMCEScript(data.tinymceSettings?.apiKey) : "<!-- TinyMCE plugin not active -->"}
 
@@ -9037,8 +9037,8 @@ function renderContentListPage(data) {
       
       <!-- Content List -->
       <div id="content-list">
-        ${chunkOHYBNCVL_cjs.renderTable(tableData)}
-        ${chunkOHYBNCVL_cjs.renderPagination(paginationData)}
+        ${chunkL3IKU2XF_cjs.renderTable(tableData)}
+        ${chunkL3IKU2XF_cjs.renderPagination(paginationData)}
       </div>
       
     </div>
@@ -9248,7 +9248,7 @@ function renderContentListPage(data) {
     </script>
 
     <!-- Confirmation Dialog for Bulk Actions -->
-    ${chunkOHYBNCVL_cjs.renderConfirmationDialog({
+    ${chunkL3IKU2XF_cjs.renderConfirmationDialog({
     id: "bulk-action-confirm",
     title: "Confirm Bulk Action",
     message: "Are you sure you want to perform this action? This operation will affect multiple items.",
@@ -9260,7 +9260,7 @@ function renderContentListPage(data) {
   })}
 
     <!-- Confirmation Dialog Script -->
-    ${chunkOHYBNCVL_cjs.getConfirmationDialogScript()}
+    ${chunkL3IKU2XF_cjs.getConfirmationDialogScript()}
 
     <!-- Advanced Search Modal -->
     <div id="advancedSearchModal" class="hidden fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -9712,7 +9712,7 @@ function extractFieldData(fields, formData, options = {}) {
   }
   return { data, errors };
 }
-adminContentRoutes.use("*", chunk5T6VSJUK_cjs.requireAuth());
+adminContentRoutes.use("*", chunkW5WXUVLG_cjs.requireAuth());
 async function getCollectionFields(db, collectionId) {
   const cache = chunkWELAJALJ_cjs.getCacheService(chunkWELAJALJ_cjs.CACHE_CONFIGS.collection);
   return cache.getOrSet(
@@ -10403,7 +10403,7 @@ adminContentRoutes.put("/:id", async (c) => {
     `);
   }
 });
-adminContentRoutes.post("/preview", chunk5T6VSJUK_cjs.requireRole(["admin", "editor", "author"]), async (c) => {
+adminContentRoutes.post("/preview", chunkW5WXUVLG_cjs.requireRole(["admin", "editor", "author"]), async (c) => {
   try {
     const formData = await c.req.formData();
     const collectionId = formData.get("collection_id");
@@ -10781,7 +10781,7 @@ adminContentRoutes.post("/:id/restore/:version", async (c) => {
     return c.json({ success: false, error: "Failed to restore version" });
   }
 });
-adminContentRoutes.get("/:id/version/:version/preview", chunk5T6VSJUK_cjs.requireRole(["admin", "editor", "author"]), async (c) => {
+adminContentRoutes.get("/:id/version/:version/preview", chunkW5WXUVLG_cjs.requireRole(["admin", "editor", "author"]), async (c) => {
   try {
     const id = c.req.param("id");
     const version = parseInt(c.req.param("version") || "0");
@@ -10847,420 +10847,6 @@ ${chunkMNWKYY5E_cjs.escapeHtml(JSON.stringify(data, null, 2))}
   }
 });
 var admin_content_default = adminContentRoutes;
-
-// src/templates/pages/admin-profile.template.ts
-chunkUYJ6TJHX_cjs.init_admin_layout_catalyst_template();
-function renderAvatarImage(avatarUrl, firstName, lastName) {
-  return `<div id="avatar-image-container" class="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden bg-gradient-to-br from-cyan-400 to-purple-400 flex items-center justify-center ring-4 ring-zinc-950/5 dark:ring-white/10">
-    ${avatarUrl ? `<img src="${avatarUrl}" alt="Profile picture" class="w-full h-full object-cover">` : `<span class="text-2xl font-bold text-white">${firstName.charAt(0)}${lastName.charAt(0)}</span>`}
-  </div>`;
-}
-function renderProfilePage(data) {
-  const pageContent = `
-    <div class="space-y-8">
-      <!-- Header -->
-      <div class="sm:flex sm:items-center sm:justify-between">
-        <div>
-          <h1 class="text-2xl/8 font-semibold text-zinc-950 dark:text-white sm:text-xl/8">User Profile</h1>
-          <p class="mt-2 text-sm/6 text-zinc-500 dark:text-zinc-400">
-            Manage your account settings and preferences
-          </p>
-        </div>
-      </div>
-
-      <!-- Alert Messages -->
-      ${data.error ? chunkOHYBNCVL_cjs.renderAlert({ type: "error", message: data.error, dismissible: true }) : ""}
-      ${data.success ? chunkOHYBNCVL_cjs.renderAlert({ type: "success", message: data.success, dismissible: true }) : ""}
-
-      <!-- Profile Form -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <!-- Main Profile Form -->
-        <div class="lg:col-span-2">
-          <div class="rounded-xl bg-white dark:bg-zinc-900 shadow-sm ring-1 ring-zinc-950/5 dark:ring-white/10">
-            <!-- Form Header -->
-            <div class="px-6 py-5 border-b border-zinc-950/5 dark:border-white/5">
-              <div class="flex items-center gap-x-3">
-                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-950 dark:bg-white">
-                  <svg class="h-5 w-5 text-white dark:text-zinc-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                  </svg>
-                </div>
-                <div>
-                  <h2 class="text-base font-semibold text-zinc-950 dark:text-white">Profile Information</h2>
-                  <p class="text-sm text-zinc-500 dark:text-zinc-400">Update your account details</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Form Content -->
-            <form id="profile-form" hx-put="/admin/profile" hx-target="#form-messages" class="p-6 space-y-6">
-              <div id="form-messages"></div>
-
-              <!-- Basic Information -->
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label class="block text-sm font-medium text-zinc-950 dark:text-white mb-2">First Name</label>
-                  <input
-                    type="text"
-                    name="first_name"
-                    value="${data.profile.first_name}"
-                    required
-                    class="w-full rounded-lg bg-white dark:bg-zinc-800 px-3 py-2 text-sm text-zinc-950 dark:text-white shadow-sm ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-950 dark:focus:ring-white transition-shadow"
-                    placeholder="Enter your first name"
-                  >
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-zinc-950 dark:text-white mb-2">Last Name</label>
-                  <input
-                    type="text"
-                    name="last_name"
-                    value="${data.profile.last_name}"
-                    required
-                    class="w-full rounded-lg bg-white dark:bg-zinc-800 px-3 py-2 text-sm text-zinc-950 dark:text-white shadow-sm ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-950 dark:focus:ring-white transition-shadow"
-                    placeholder="Enter your last name"
-                  >
-                </div>
-              </div>
-
-              <div>
-                <label class="block text-sm font-medium text-zinc-950 dark:text-white mb-2">Username</label>
-                <input
-                  type="text"
-                  name="username"
-                  value="${data.profile.username}"
-                  required
-                  class="w-full rounded-lg bg-white dark:bg-zinc-800 px-3 py-2 text-sm text-zinc-950 dark:text-white shadow-sm ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-950 dark:focus:ring-white transition-shadow"
-                  placeholder="Enter your username"
-                >
-              </div>
-
-              <div>
-                <label class="block text-sm font-medium text-zinc-950 dark:text-white mb-2">Email Address</label>
-                <input
-                  type="email"
-                  name="email"
-                  value="${data.profile.email}"
-                  required
-                  class="w-full rounded-lg bg-white dark:bg-zinc-800 px-3 py-2 text-sm text-zinc-950 dark:text-white shadow-sm ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-950 dark:focus:ring-white transition-shadow"
-                  placeholder="Enter your email address"
-                >
-              </div>
-
-              <div>
-                <label class="block text-sm font-medium text-zinc-950 dark:text-white mb-2">Phone Number</label>
-                <input
-                  type="tel"
-                  name="phone"
-                  value="${data.profile.phone || ""}"
-                  class="w-full rounded-lg bg-white dark:bg-zinc-800 px-3 py-2 text-sm text-zinc-950 dark:text-white shadow-sm ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-950 dark:focus:ring-white transition-shadow"
-                  placeholder="Enter your phone number"
-                >
-              </div>
-
-              <div>
-                <label class="block text-sm font-medium text-zinc-950 dark:text-white mb-2">Bio</label>
-                <textarea
-                  name="bio"
-                  rows="3"
-                  class="w-full rounded-lg bg-white dark:bg-zinc-800 px-3 py-2 text-sm text-zinc-950 dark:text-white shadow-sm ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-950 dark:focus:ring-white transition-shadow resize-none"
-                  placeholder="Tell us about yourself..."
-                >${data.profile.bio || ""}</textarea>
-              </div>
-
-              ${data.customProfileFieldsHtml || ""}
-
-              <!-- Preferences -->
-              <div class="pt-6 border-t border-zinc-950/5 dark:border-white/5">
-                <h3 class="text-base font-semibold text-zinc-950 dark:text-white mb-4">Preferences</h3>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label for="timezone" class="block text-sm/6 font-medium text-zinc-950 dark:text-white mb-2">Timezone</label>
-                    <div class="grid grid-cols-1">
-                      <select id="timezone" name="timezone" class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white/5 dark:bg-white/5 py-1.5 pl-3 pr-8 text-base text-zinc-950 dark:text-white outline outline-1 -outline-offset-1 outline-zinc-500/30 dark:outline-zinc-400/30 *:bg-white dark:*:bg-zinc-800 focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-zinc-500 dark:focus-visible:outline-zinc-400 sm:text-sm/6">
-                        ${data.timezones.map((tz) => `
-                          <option value="${tz.value}" ${tz.value === data.profile.timezone ? "selected" : ""}>${tz.label}</option>
-                        `).join("")}
-                      </select>
-                      <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-zinc-600 dark:text-zinc-400 sm:size-4">
-                        <path d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
-                      </svg>
-                    </div>
-                  </div>
-                  <div>
-                    <label for="language" class="block text-sm/6 font-medium text-zinc-950 dark:text-white mb-2">Language</label>
-                    <div class="grid grid-cols-1">
-                      <select id="language" name="language" class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white/5 dark:bg-white/5 py-1.5 pl-3 pr-8 text-base text-zinc-950 dark:text-white outline outline-1 -outline-offset-1 outline-zinc-500/30 dark:outline-zinc-400/30 *:bg-white dark:*:bg-zinc-800 focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-zinc-500 dark:focus-visible:outline-zinc-400 sm:text-sm/6">
-                        ${data.languages.map((lang) => `
-                          <option value="${lang.value}" ${lang.value === data.profile.language ? "selected" : ""}>${lang.label}</option>
-                        `).join("")}
-                      </select>
-                      <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-zinc-600 dark:text-zinc-400 sm:size-4">
-                        <path d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Notifications -->
-              <div class="pt-6 border-t border-zinc-950/5 dark:border-white/5">
-                <h3 class="text-base font-semibold text-zinc-950 dark:text-white mb-4">Notifications</h3>
-
-                <div class="space-y-5">
-                  <div class="flex gap-3">
-                    <div class="flex h-6 shrink-0 items-center">
-                      <div class="group grid size-4 grid-cols-1">
-                        <input
-                          type="checkbox"
-                          id="email_notifications"
-                          name="email_notifications"
-                          value="1"
-                          ${data.profile.email_notifications ? "checked" : ""}
-                          class="col-start-1 row-start-1 appearance-none rounded border border-zinc-950/10 dark:border-white/10 bg-white dark:bg-white/5 checked:border-indigo-500 checked:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 disabled:border-zinc-950/5 dark:disabled:border-white/5 disabled:bg-zinc-950/10 dark:disabled:bg-white/10 forced-colors:appearance-auto"
-                        />
-                        <svg viewBox="0 0 14 14" fill="none" class="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-[:disabled]:stroke-zinc-950/25 dark:group-has-[:disabled]:stroke-white/25">
-                          <path d="M3 8L6 11L11 3.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-0 group-has-[:checked]:opacity-100" />
-                        </svg>
-                      </div>
-                    </div>
-                    <div class="text-sm/6">
-                      <label for="email_notifications" class="font-medium text-zinc-950 dark:text-white">Email notifications</label>
-                      <p class="text-zinc-500 dark:text-zinc-400">Receive email updates about new features and product announcements.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Submit Button -->
-              <div class="pt-6 border-t border-zinc-950/5 dark:border-white/5">
-                <button
-                  type="submit"
-                  class="inline-flex justify-center items-center gap-x-2 rounded-lg bg-zinc-950 dark:bg-white px-4 py-2.5 text-sm font-semibold text-white dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-zinc-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-950 dark:focus-visible:outline-white transition-colors"
-                >
-                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                  </svg>
-                  Update Profile
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-
-        <!-- Profile Sidebar -->
-        <div class="lg:col-span-1 space-y-6">
-          <!-- Avatar -->
-          <div class="rounded-xl bg-white dark:bg-zinc-900 shadow-sm ring-1 ring-zinc-950/5 dark:ring-white/10 p-6">
-            <h3 class="text-base font-semibold text-zinc-950 dark:text-white mb-4">Profile Picture</h3>
-
-            <div class="text-center">
-              ${renderAvatarImage(data.profile.avatar_url, data.profile.first_name, data.profile.last_name)}
-
-              <form id="avatar-form" hx-post="/admin/profile/avatar" hx-target="#avatar-messages" hx-encoding="multipart/form-data">
-                <input
-                  type="file"
-                  name="avatar"
-                  accept="image/*"
-                  class="hidden"
-                  id="avatar-input"
-                  onchange="document.getElementById('avatar-form').dispatchEvent(new Event('submit'))"
-                >
-                <label
-                  for="avatar-input"
-                  class="inline-flex items-center gap-x-2 rounded-lg bg-white dark:bg-zinc-800 px-4 py-2.5 text-sm font-semibold text-zinc-950 dark:text-white shadow-sm ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer"
-                >
-                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
-                  </svg>
-                  Change Picture
-                </label>
-              </form>
-
-              <div id="avatar-messages" class="mt-3"></div>
-            </div>
-          </div>
-
-          <!-- Account Info -->
-          <div class="rounded-xl bg-white dark:bg-zinc-900 shadow-sm ring-1 ring-zinc-950/5 dark:ring-white/10 p-6">
-            <h3 class="text-base font-semibold text-zinc-950 dark:text-white mb-4">Account Information</h3>
-
-            <dl class="space-y-3 text-sm">
-              <div>
-                <dt class="text-zinc-500 dark:text-zinc-400">Role</dt>
-                <dd class="mt-1">
-                  <span class="inline-flex items-center rounded-md bg-blue-50 dark:bg-blue-500/10 px-2 py-1 text-xs font-medium text-blue-700 dark:text-blue-400 ring-1 ring-inset ring-blue-700/10 dark:ring-blue-400/20 capitalize">
-                    ${data.profile.role}
-                  </span>
-                </dd>
-              </div>
-              <div>
-                <dt class="text-zinc-500 dark:text-zinc-400">Member Since</dt>
-                <dd class="mt-1 text-zinc-950 dark:text-white">${new Date(data.profile.created_at).toLocaleDateString()}</dd>
-              </div>
-              ${data.profile.last_login_at ? `
-                <div>
-                  <dt class="text-zinc-500 dark:text-zinc-400">Last Login</dt>
-                  <dd class="mt-1 text-zinc-950 dark:text-white">${new Date(data.profile.last_login_at).toLocaleDateString()}</dd>
-                </div>
-              ` : ""}
-              <div>
-                <dt class="text-zinc-500 dark:text-zinc-400">Two-Factor Auth</dt>
-                <dd class="mt-1">
-                  ${data.profile.two_factor_enabled ? '<span class="inline-flex items-center rounded-md bg-green-50 dark:bg-green-500/10 px-2 py-1 text-xs font-medium text-green-700 dark:text-green-400 ring-1 ring-inset ring-green-600/20 dark:ring-green-500/20">Enabled</span>' : '<span class="inline-flex items-center rounded-md bg-zinc-50 dark:bg-zinc-800 px-2 py-1 text-xs font-medium text-zinc-600 dark:text-zinc-400 ring-1 ring-inset ring-zinc-500/10 dark:ring-zinc-400/20">Disabled</span>'}
-                </dd>
-              </div>
-            </dl>
-          </div>
-
-          <!-- Security Actions -->
-          <div class="rounded-xl bg-white dark:bg-zinc-900 shadow-sm ring-1 ring-zinc-950/5 dark:ring-white/10 p-6">
-            <h3 class="text-base font-semibold text-zinc-950 dark:text-white mb-4">Security</h3>
-
-            <div class="space-y-2">
-              <button
-                type="button"
-                onclick="showChangePasswordModal()"
-                class="w-full text-left flex items-center gap-x-3 px-3 py-2 text-sm text-zinc-950 dark:text-white hover:bg-zinc-50 dark:hover:bg-zinc-800/50 rounded-lg transition-colors"
-              >
-                <svg class="w-4 h-4 text-zinc-500 dark:text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-3.586l4.293-4.293A6 6 0 0119 9z"/>
-                </svg>
-                <span class="font-medium">Change Password</span>
-              </button>
-
-              <button
-                type="button"
-                onclick="toggle2FA()"
-                class="w-full text-left flex items-center gap-x-3 px-3 py-2 text-sm text-zinc-950 dark:text-white hover:bg-zinc-50 dark:hover:bg-zinc-800/50 rounded-lg transition-colors"
-              >
-                <svg class="w-4 h-4 text-zinc-500 dark:text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-                </svg>
-                <span class="font-medium">${data.profile.two_factor_enabled ? "Disable" : "Enable"} 2FA</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Change Password Modal -->
-    <div id="password-modal" class="fixed inset-0 bg-zinc-950/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
-      <div class="rounded-xl bg-white dark:bg-zinc-900 shadow-2xl ring-1 ring-zinc-950/5 dark:ring-white/10 w-full max-w-md mx-4">
-        <div class="px-6 py-5 border-b border-zinc-950/5 dark:border-white/5">
-          <div class="flex items-center justify-between">
-            <h3 class="text-base font-semibold text-zinc-950 dark:text-white">Change Password</h3>
-            <button onclick="closePasswordModal()" class="text-zinc-500 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white transition-colors">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        <form id="password-form" hx-post="/admin/profile/password" hx-target="#password-messages" class="p-6 space-y-4">
-          <div id="password-messages"></div>
-
-          <div>
-            <label class="block text-sm font-medium text-zinc-950 dark:text-white mb-2">Current Password</label>
-            <input
-              type="password"
-              name="current_password"
-              required
-              class="w-full rounded-lg bg-white dark:bg-zinc-800 px-3 py-2 text-sm text-zinc-950 dark:text-white shadow-sm ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-950 dark:focus:ring-white transition-shadow"
-              placeholder="Enter current password"
-            >
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-zinc-950 dark:text-white mb-2">New Password</label>
-            <input
-              type="password"
-              name="new_password"
-              required
-              minlength="8"
-              class="w-full rounded-lg bg-white dark:bg-zinc-800 px-3 py-2 text-sm text-zinc-950 dark:text-white shadow-sm ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-950 dark:focus:ring-white transition-shadow"
-              placeholder="Enter new password"
-            >
-            <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">Must be at least 8 characters</p>
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-zinc-950 dark:text-white mb-2">Confirm New Password</label>
-            <input
-              type="password"
-              name="confirm_password"
-              required
-              minlength="8"
-              class="w-full rounded-lg bg-white dark:bg-zinc-800 px-3 py-2 text-sm text-zinc-950 dark:text-white shadow-sm ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-950 dark:focus:ring-white transition-shadow"
-              placeholder="Confirm new password"
-            >
-          </div>
-
-          <div class="flex justify-end gap-x-3 pt-4 border-t border-zinc-950/5 dark:border-white/5">
-            <button
-              type="button"
-              onclick="closePasswordModal()"
-              class="rounded-lg bg-white dark:bg-zinc-800 px-4 py-2.5 text-sm font-semibold text-zinc-950 dark:text-white shadow-sm ring-1 ring-inset ring-zinc-950/10 dark:ring-white/10 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              class="inline-flex items-center gap-x-2 rounded-lg bg-zinc-950 dark:bg-white px-4 py-2.5 text-sm font-semibold text-white dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors"
-            >
-              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-              Update Password
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <script>
-      function showChangePasswordModal() {
-        document.getElementById('password-modal').classList.remove('hidden');
-      }
-
-      function closePasswordModal() {
-        document.getElementById('password-modal').classList.add('hidden');
-        document.getElementById('password-form').reset();
-      }
-
-      function toggle2FA() {
-        // TODO: Implement 2FA toggle
-        alert('Two-factor authentication setup coming soon!');
-      }
-
-      // Close modal on escape key
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && !document.getElementById('password-modal').classList.contains('hidden')) {
-          closePasswordModal();
-        }
-      });
-
-      // Close modal on backdrop click
-      document.getElementById('password-modal').addEventListener('click', function(e) {
-        if (e.target === this) {
-          closePasswordModal();
-        }
-      });
-    </script>
-  `;
-  const layoutData = {
-    title: "User Profile",
-    pageTitle: "Profile",
-    currentPath: "/admin/profile",
-    user: data.user,
-    version: data.version,
-    content: pageContent
-  };
-  return chunkUYJ6TJHX_cjs.renderAdminLayoutCatalyst(layoutData);
-}
 
 // src/templates/components/alert.template.ts
 function renderAlert2(data) {
@@ -11542,7 +11128,7 @@ function renderActivityLogsPage(data) {
     user: data.user,
     content: pageContent
   };
-  return chunkOHYBNCVL_cjs.renderAdminLayout(layoutData);
+  return chunkL3IKU2XF_cjs.renderAdminLayout(layoutData);
 }
 function getActionBadgeClass(action) {
   if (action.includes("login") || action.includes("logout")) {
@@ -11683,8 +11269,8 @@ function renderUserEditPage(data) {
 
       <!-- Alert Messages -->
       <div id="form-messages">
-        ${data.error ? chunkOHYBNCVL_cjs.renderAlert({ type: "error", message: data.error, dismissible: true }) : ""}
-        ${data.success ? chunkOHYBNCVL_cjs.renderAlert({ type: "success", message: data.success, dismissible: true }) : ""}
+        ${data.error ? chunkL3IKU2XF_cjs.renderAlert({ type: "error", message: data.error, dismissible: true }) : ""}
+        ${data.success ? chunkL3IKU2XF_cjs.renderAlert({ type: "success", message: data.success, dismissible: true }) : ""}
       </div>
 
       <!-- User Edit Form -->
@@ -12123,8 +11709,8 @@ function renderUserNewPage(data) {
 
       <!-- Alert Messages -->
       <div id="form-messages">
-        ${data.error ? chunkOHYBNCVL_cjs.renderAlert({ type: "error", message: data.error, dismissible: true }) : ""}
-        ${data.success ? chunkOHYBNCVL_cjs.renderAlert({ type: "success", message: data.success, dismissible: true }) : ""}
+        ${data.error ? chunkL3IKU2XF_cjs.renderAlert({ type: "error", message: data.error, dismissible: true }) : ""}
+        ${data.success ? chunkL3IKU2XF_cjs.renderAlert({ type: "success", message: data.success, dismissible: true }) : ""}
       </div>
 
       <!-- User New Form -->
@@ -12523,8 +12109,8 @@ function renderUsersListPage(data) {
       </div>
 
       <!-- Alert Messages -->
-      ${data.error ? chunkOHYBNCVL_cjs.renderAlert({ type: "error", message: data.error, dismissible: true }) : ""}
-      ${data.success ? chunkOHYBNCVL_cjs.renderAlert({ type: "success", message: data.success, dismissible: true }) : ""}
+      ${data.error ? chunkL3IKU2XF_cjs.renderAlert({ type: "error", message: data.error, dismissible: true }) : ""}
+      ${data.success ? chunkL3IKU2XF_cjs.renderAlert({ type: "success", message: data.success, dismissible: true }) : ""}
 
       <!-- Stats -->
       <div class="mb-6">
@@ -12701,10 +12287,10 @@ function renderUsersListPage(data) {
       </div>
 
       <!-- Users Table -->
-      ${chunkOHYBNCVL_cjs.renderTable(tableData)}
+      ${chunkL3IKU2XF_cjs.renderTable(tableData)}
 
       <!-- Pagination -->
-      ${data.pagination ? chunkOHYBNCVL_cjs.renderPagination(data.pagination) : ""}
+      ${data.pagination ? chunkL3IKU2XF_cjs.renderPagination(data.pagination) : ""}
     </div>
 
     <script>
@@ -12780,14 +12366,14 @@ function renderUsersListPage(data) {
 
 // src/routes/admin-users.ts
 var userRoutes = new hono.Hono();
-userRoutes.use("*", chunk5T6VSJUK_cjs.requireAuth());
-userRoutes.use("/users/*", chunk5T6VSJUK_cjs.requireRole(["admin"]));
-userRoutes.use("/users", chunk5T6VSJUK_cjs.requireRole(["admin"]));
-userRoutes.use("/invite-user", chunk5T6VSJUK_cjs.requireRole(["admin"]));
-userRoutes.use("/resend-invitation/*", chunk5T6VSJUK_cjs.requireRole(["admin"]));
-userRoutes.use("/cancel-invitation/*", chunk5T6VSJUK_cjs.requireRole(["admin"]));
-userRoutes.use("/activity-logs", chunk5T6VSJUK_cjs.requireRole(["admin"]));
-userRoutes.use("/activity-logs/*", chunk5T6VSJUK_cjs.requireRole(["admin"]));
+userRoutes.use("*", chunkW5WXUVLG_cjs.requireAuth());
+userRoutes.use("/users/*", chunkW5WXUVLG_cjs.requireRole(["admin"]));
+userRoutes.use("/users", chunkW5WXUVLG_cjs.requireRole(["admin"]));
+userRoutes.use("/invite-user", chunkW5WXUVLG_cjs.requireRole(["admin"]));
+userRoutes.use("/resend-invitation/*", chunkW5WXUVLG_cjs.requireRole(["admin"]));
+userRoutes.use("/cancel-invitation/*", chunkW5WXUVLG_cjs.requireRole(["admin"]));
+userRoutes.use("/activity-logs", chunkW5WXUVLG_cjs.requireRole(["admin"]));
+userRoutes.use("/activity-logs/*", chunkW5WXUVLG_cjs.requireRole(["admin"]));
 userRoutes.get("/", (c) => {
   return c.redirect("/admin/dashboard");
 });
@@ -12868,7 +12454,7 @@ userRoutes.get("/profile", async (c) => {
         role: user.role
       }
     };
-    return c.html(renderProfilePage(pageData));
+    return c.html(chunkL3IKU2XF_cjs.renderProfilePage(pageData));
   } catch (error) {
     console.error("Profile page error:", error);
     const pageData = {
@@ -12882,7 +12468,7 @@ userRoutes.get("/profile", async (c) => {
         role: user.role
       }
     };
-    return c.html(renderProfilePage(pageData));
+    return c.html(chunkL3IKU2XF_cjs.renderProfilePage(pageData));
   }
 });
 userRoutes.put("/profile", async (c) => {
@@ -12957,7 +12543,7 @@ userRoutes.put("/profile", async (c) => {
       }
       await saveCustomData(db, user.userId, sanitized);
     }
-    await chunk5T6VSJUK_cjs.logActivity(
+    await chunkW5WXUVLG_cjs.logActivity(
       db,
       user.userId,
       "profile.update",
@@ -13020,7 +12606,7 @@ userRoutes.post("/profile/avatar", async (c) => {
       SELECT first_name, last_name FROM users WHERE id = ?
     `);
     const userData = await userStmt.bind(user.userId).first();
-    await chunk5T6VSJUK_cjs.logActivity(
+    await chunkW5WXUVLG_cjs.logActivity(
       db,
       user.userId,
       "profile.avatar_update",
@@ -13036,7 +12622,7 @@ userRoutes.post("/profile/avatar", async (c) => {
       dismissible: true
     });
     const avatarUrlWithCache = `${avatarUrl}?t=${Date.now()}`;
-    const avatarImageHtml = renderAvatarImage(avatarUrlWithCache, userData.first_name, userData.last_name);
+    const avatarImageHtml = chunkL3IKU2XF_cjs.renderAvatarImage(avatarUrlWithCache, userData.first_name, userData.last_name);
     const avatarImageWithOob = avatarImageHtml.replace(
       'id="avatar-image-container"',
       'id="avatar-image-container" hx-swap-oob="true"'
@@ -13091,7 +12677,7 @@ userRoutes.post("/profile/password", async (c) => {
         dismissible: true
       }));
     }
-    const validPassword = await chunk5T6VSJUK_cjs.AuthManager.verifyPassword(currentPassword, userData.password_hash);
+    const validPassword = await chunkW5WXUVLG_cjs.AuthManager.verifyPassword(currentPassword, userData.password_hash);
     if (!validPassword) {
       return c.html(renderAlert2({
         type: "error",
@@ -13099,7 +12685,7 @@ userRoutes.post("/profile/password", async (c) => {
         dismissible: true
       }));
     }
-    const newPasswordHash = await chunk5T6VSJUK_cjs.AuthManager.hashPassword(newPassword);
+    const newPasswordHash = await chunkW5WXUVLG_cjs.AuthManager.hashPassword(newPassword);
     const historyStmt = db.prepare(`
       INSERT INTO password_history (id, user_id, password_hash, created_at)
       VALUES (?, ?, ?, ?)
@@ -13115,7 +12701,7 @@ userRoutes.post("/profile/password", async (c) => {
       WHERE id = ?
     `);
     await updateStmt.bind(newPasswordHash, Date.now(), user.userId).run();
-    await chunk5T6VSJUK_cjs.logActivity(
+    await chunkW5WXUVLG_cjs.logActivity(
       db,
       user.userId,
       "profile.password_change",
@@ -13182,7 +12768,7 @@ userRoutes.get("/users", async (c) => {
     `);
     const countResult = await countStmt.bind(...params).first();
     const totalUsers = countResult?.total || 0;
-    await chunk5T6VSJUK_cjs.logActivity(
+    await chunkW5WXUVLG_cjs.logActivity(
       db,
       user.userId,
       "users.list_view",
@@ -13340,7 +12926,7 @@ userRoutes.post("/users/new", async (c) => {
         dismissible: true
       }));
     }
-    const passwordHash = await chunk5T6VSJUK_cjs.AuthManager.hashPassword(password);
+    const passwordHash = await chunkW5WXUVLG_cjs.AuthManager.hashPassword(password);
     const userId = crypto.randomUUID();
     const createStmt = db.prepare(`
       INSERT INTO users (
@@ -13363,7 +12949,7 @@ userRoutes.post("/users/new", async (c) => {
       Date.now(),
       Date.now()
     ).run();
-    await chunk5T6VSJUK_cjs.logActivity(
+    await chunkW5WXUVLG_cjs.logActivity(
       db,
       user.userId,
       "user!.create",
@@ -13402,7 +12988,7 @@ userRoutes.get("/users/:id", async (c) => {
     if (!userRecord) {
       return c.json({ error: "User not found" }, 404);
     }
-    await chunk5T6VSJUK_cjs.logActivity(
+    await chunkW5WXUVLG_cjs.logActivity(
       db,
       user.userId,
       "user!.view",
@@ -13628,7 +13214,7 @@ userRoutes.put("/users/:id", async (c) => {
       userId
     ).run();
     if (newPassword) {
-      const passwordHash = await chunk5T6VSJUK_cjs.AuthManager.hashPassword(newPassword);
+      const passwordHash = await chunkW5WXUVLG_cjs.AuthManager.hashPassword(newPassword);
       const updatePasswordStmt = db.prepare(`
         UPDATE users SET password_hash = ?, updated_at = ? WHERE id = ?
       `);
@@ -13682,7 +13268,7 @@ userRoutes.put("/users/:id", async (c) => {
         ).run();
       }
     }
-    await chunk5T6VSJUK_cjs.logActivity(
+    await chunkW5WXUVLG_cjs.logActivity(
       db,
       user.userId,
       "user.update",
@@ -13727,7 +13313,7 @@ userRoutes.post("/users/:id/toggle", async (c) => {
       UPDATE users SET is_active = ?, updated_at = ? WHERE id = ?
     `);
     await toggleStmt.bind(active ? 1 : 0, Date.now(), userId).run();
-    await chunk5T6VSJUK_cjs.logActivity(
+    await chunkW5WXUVLG_cjs.logActivity(
       db,
       user.userId,
       active ? "user.activate" : "user.deactivate",
@@ -13768,7 +13354,7 @@ userRoutes.delete("/users/:id", async (c) => {
         DELETE FROM users WHERE id = ?
       `);
       await deleteStmt.bind(userId).run();
-      await chunk5T6VSJUK_cjs.logActivity(
+      await chunkW5WXUVLG_cjs.logActivity(
         db,
         user.userId,
         "user!.hard_delete",
@@ -13787,7 +13373,7 @@ userRoutes.delete("/users/:id", async (c) => {
         UPDATE users SET is_active = 0, updated_at = ? WHERE id = ?
       `);
       await deleteStmt.bind(Date.now(), userId).run();
-      await chunk5T6VSJUK_cjs.logActivity(
+      await chunkW5WXUVLG_cjs.logActivity(
         db,
         user.userId,
         "user!.soft_delete",
@@ -13853,7 +13439,7 @@ userRoutes.post("/invite-user", async (c) => {
       Date.now(),
       Date.now()
     ).run();
-    await chunk5T6VSJUK_cjs.logActivity(
+    await chunkW5WXUVLG_cjs.logActivity(
       db,
       user.userId,
       "user!.invite_sent",
@@ -13910,7 +13496,7 @@ userRoutes.post("/resend-invitation/:id", async (c) => {
       Date.now(),
       userId
     ).run();
-    await chunk5T6VSJUK_cjs.logActivity(
+    await chunkW5WXUVLG_cjs.logActivity(
       db,
       user.userId,
       "user!.invitation_resent",
@@ -13946,7 +13532,7 @@ userRoutes.delete("/cancel-invitation/:id", async (c) => {
     }
     const deleteStmt = db.prepare(`DELETE FROM users WHERE id = ?`);
     await deleteStmt.bind(userId).run();
-    await chunk5T6VSJUK_cjs.logActivity(
+    await chunkW5WXUVLG_cjs.logActivity(
       db,
       user.userId,
       "user!.invitation_cancelled",
@@ -14029,7 +13615,7 @@ userRoutes.get("/activity-logs", async (c) => {
       ...log,
       details: log.details ? JSON.parse(log.details) : null
     }));
-    await chunk5T6VSJUK_cjs.logActivity(
+    await chunkW5WXUVLG_cjs.logActivity(
       db,
       user.userId,
       "activity.logs_viewed",
@@ -14136,7 +13722,7 @@ userRoutes.get("/activity-logs/export", async (c) => {
       csvRows.push(row.join(","));
     }
     const csvContent = csvRows.join("\n");
-    await chunk5T6VSJUK_cjs.logActivity(
+    await chunkW5WXUVLG_cjs.logActivity(
       db,
       user.userId,
       "activity.logs_exported",
@@ -15475,7 +15061,7 @@ var fileValidationSchema2 = zod.z.object({
   // 50MB max
 });
 var adminMediaRoutes = new hono.Hono();
-adminMediaRoutes.use("*", chunk5T6VSJUK_cjs.requireAuth());
+adminMediaRoutes.use("*", chunkW5WXUVLG_cjs.requireAuth());
 adminMediaRoutes.get("/", async (c) => {
   try {
     const user = c.get("user");
@@ -16061,7 +15647,7 @@ adminMediaRoutes.put("/:id", async (c) => {
     `);
   }
 });
-adminMediaRoutes.delete("/cleanup", chunk5T6VSJUK_cjs.requireRole("admin"), async (c) => {
+adminMediaRoutes.delete("/cleanup", chunkW5WXUVLG_cjs.requireRole("admin"), async (c) => {
   try {
     const db = c.env.DB;
     const allMediaStmt = db.prepare("SELECT id, r2_key, filename FROM media WHERE deleted_at IS NULL");
@@ -17418,7 +17004,7 @@ function renderPluginSettingsPage(data) {
     user,
     content: pageContent
   };
-  return chunkOHYBNCVL_cjs.renderAdminLayout(layoutData);
+  return chunkL3IKU2XF_cjs.renderAdminLayout(layoutData);
 }
 function renderStatusBadge(status) {
   const statusColors = {
@@ -18404,7 +17990,7 @@ function renderEmailSettingsContent(plugin, settings) {
 
 // src/routes/admin-plugins.ts
 var adminPluginRoutes = new hono.Hono();
-adminPluginRoutes.use("*", chunk5T6VSJUK_cjs.requireAuth());
+adminPluginRoutes.use("*", chunkW5WXUVLG_cjs.requireAuth());
 var AVAILABLE_PLUGINS = Object.values(chunkQOZZJZ76_cjs.PLUGIN_REGISTRY).map((p) => ({
   id: p.id,
   name: p.codeName,
@@ -19215,7 +18801,7 @@ function renderLogDetailsPage(data) {
       </div>
     </div>
   `;
-  return chunkOHYBNCVL_cjs.adminLayoutV2({
+  return chunkL3IKU2XF_cjs.adminLayoutV2({
     title: `Log Details - ${log.id}`,
     user,
     content
@@ -19458,7 +19044,7 @@ function renderLogConfigPage(data) {
 
     <script src="https://unpkg.com/htmx.org@1.9.6"></script>
   `;
-  return chunkOHYBNCVL_cjs.adminLayoutV2({
+  return chunkL3IKU2XF_cjs.adminLayoutV2({
     title: "Log Configuration",
     user,
     content
@@ -19467,7 +19053,7 @@ function renderLogConfigPage(data) {
 
 // src/routes/admin-logs.ts
 var adminLogsRoutes = new hono.Hono();
-adminLogsRoutes.use("*", chunk5T6VSJUK_cjs.requireAuth());
+adminLogsRoutes.use("*", chunkW5WXUVLG_cjs.requireAuth());
 adminLogsRoutes.get("/", async (c) => {
   try {
     const user = c.get("user");
@@ -19839,7 +19425,7 @@ adminDesignRoutes.get("/", (c) => {
       role: user.role
     } : void 0
   };
-  return c.html(chunkOHYBNCVL_cjs.renderDesignPage(pageData));
+  return c.html(chunkL3IKU2XF_cjs.renderDesignPage(pageData));
 });
 var adminCheckboxRoutes = new hono.Hono();
 adminCheckboxRoutes.get("/", (c) => {
@@ -19851,7 +19437,7 @@ adminCheckboxRoutes.get("/", (c) => {
       role: user.role
     } : void 0
   };
-  return c.html(chunkOHYBNCVL_cjs.renderCheckboxPage(pageData));
+  return c.html(chunkL3IKU2XF_cjs.renderCheckboxPage(pageData));
 });
 
 // src/templates/pages/admin-testimonials-form.template.ts
@@ -19879,7 +19465,7 @@ function renderTestimonialsForm(data) {
         </div>
       </div>
 
-      ${message ? chunkOHYBNCVL_cjs.renderAlert({ type: messageType || "info", message, dismissible: true }) : ""}
+      ${message ? chunkL3IKU2XF_cjs.renderAlert({ type: messageType || "info", message, dismissible: true }) : ""}
 
       <!-- Form -->
       <div class="backdrop-blur-xl bg-white/10 rounded-xl border border-white/20 shadow-2xl">
@@ -20108,7 +19694,7 @@ function renderTestimonialsForm(data) {
     user: data.user,
     content: pageContent
   };
-  return chunkOHYBNCVL_cjs.renderAdminLayout(layoutData);
+  return chunkL3IKU2XF_cjs.renderAdminLayout(layoutData);
 }
 function escapeHtml4(unsafe) {
   return unsafe.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
@@ -20134,7 +19720,7 @@ adminTestimonialsRoutes.get("/", async (c) => {
     const offset = (currentPage - 1) * limit;
     const db = c.env?.DB;
     if (!db) {
-      return c.html(chunkOHYBNCVL_cjs.renderTestimonialsList({
+      return c.html(chunkL3IKU2XF_cjs.renderTestimonialsList({
         testimonials: [],
         totalCount: 0,
         currentPage: 1,
@@ -20174,7 +19760,7 @@ adminTestimonialsRoutes.get("/", async (c) => {
     `;
     const { results: testimonials } = await db.prepare(dataQuery).bind(...params, limit, offset).all();
     const totalPages = Math.ceil(totalCount / limit);
-    return c.html(chunkOHYBNCVL_cjs.renderTestimonialsList({
+    return c.html(chunkL3IKU2XF_cjs.renderTestimonialsList({
       testimonials: testimonials || [],
       totalCount,
       currentPage,
@@ -20188,7 +19774,7 @@ adminTestimonialsRoutes.get("/", async (c) => {
   } catch (error) {
     console.error("Error fetching testimonials:", error);
     const user = c.get("user");
-    return c.html(chunkOHYBNCVL_cjs.renderTestimonialsList({
+    return c.html(chunkL3IKU2XF_cjs.renderTestimonialsList({
       testimonials: [],
       totalCount: 0,
       currentPage: 1,
@@ -20507,7 +20093,7 @@ function renderCodeExamplesForm(data) {
         </div>
       </div>
 
-      ${message ? chunkOHYBNCVL_cjs.renderAlert({ type: messageType || "info", message, dismissible: true }) : ""}
+      ${message ? chunkL3IKU2XF_cjs.renderAlert({ type: messageType || "info", message, dismissible: true }) : ""}
 
       <!-- Form -->
       <div class="backdrop-blur-xl bg-white/10 rounded-xl border border-white/20 shadow-2xl">
@@ -20777,7 +20363,7 @@ function renderCodeExamplesForm(data) {
     user: data.user,
     content: pageContent
   };
-  return chunkOHYBNCVL_cjs.renderAdminLayout(layoutData);
+  return chunkL3IKU2XF_cjs.renderAdminLayout(layoutData);
 }
 function escapeHtml5(unsafe) {
   return unsafe.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
@@ -20804,7 +20390,7 @@ adminCodeExamplesRoutes.get("/", async (c) => {
     const offset = (currentPage - 1) * limit;
     const db = c.env?.DB;
     if (!db) {
-      return c.html(chunkOHYBNCVL_cjs.renderCodeExamplesList({
+      return c.html(chunkL3IKU2XF_cjs.renderCodeExamplesList({
         codeExamples: [],
         totalCount: 0,
         currentPage: 1,
@@ -20844,7 +20430,7 @@ adminCodeExamplesRoutes.get("/", async (c) => {
     `;
     const { results: codeExamples } = await db.prepare(dataQuery).bind(...params, limit, offset).all();
     const totalPages = Math.ceil(totalCount / limit);
-    return c.html(chunkOHYBNCVL_cjs.renderCodeExamplesList({
+    return c.html(chunkL3IKU2XF_cjs.renderCodeExamplesList({
       codeExamples: codeExamples || [],
       totalCount,
       currentPage,
@@ -20858,7 +20444,7 @@ adminCodeExamplesRoutes.get("/", async (c) => {
   } catch (error) {
     console.error("Error fetching code examples:", error);
     const user = c.get("user");
-    return c.html(chunkOHYBNCVL_cjs.renderCodeExamplesList({
+    return c.html(chunkL3IKU2XF_cjs.renderCodeExamplesList({
       codeExamples: [],
       totalCount: 0,
       currentPage: 1,
@@ -21247,7 +20833,7 @@ function renderDashboardPage(data) {
     version: data.version,
     content: pageContent
   };
-  return chunkOHYBNCVL_cjs.renderAdminLayout(layoutData);
+  return chunkL3IKU2XF_cjs.renderAdminLayout(layoutData);
 }
 function renderStatsCards(stats) {
   const cards = [
@@ -21797,7 +21383,7 @@ function renderStorageUsage(databaseSizeBytes, mediaSizeBytes) {
 // src/routes/admin-dashboard.ts
 var VERSION = chunkNWGIE4LP_cjs.getCoreVersion();
 var router = new hono.Hono();
-router.use("*", chunk5T6VSJUK_cjs.requireAuth());
+router.use("*", chunkW5WXUVLG_cjs.requireAuth());
 router.get("/", async (c) => {
   const user = c.get("user");
   try {
@@ -22783,7 +22369,7 @@ function renderCollectionFormPage(data) {
             }
           </style>
           
-          ${chunkOHYBNCVL_cjs.renderForm(formData)}
+          ${chunkL3IKU2XF_cjs.renderForm(formData)}
 
           ${isEdit && data.managed ? `
             <!-- Read-Only Fields Display for Managed Collections -->
@@ -23616,10 +23202,10 @@ function renderCollectionFormPage(data) {
 
 // src/routes/admin-collections.ts
 var adminCollectionsRoutes = new hono.Hono();
-adminCollectionsRoutes.use("*", chunk5T6VSJUK_cjs.requireAuth());
-adminCollectionsRoutes.post("*", chunk5T6VSJUK_cjs.requireRole(["admin"]));
-adminCollectionsRoutes.put("*", chunk5T6VSJUK_cjs.requireRole(["admin"]));
-adminCollectionsRoutes.delete("*", chunk5T6VSJUK_cjs.requireRole(["admin"]));
+adminCollectionsRoutes.use("*", chunkW5WXUVLG_cjs.requireAuth());
+adminCollectionsRoutes.post("*", chunkW5WXUVLG_cjs.requireRole(["admin"]));
+adminCollectionsRoutes.put("*", chunkW5WXUVLG_cjs.requireRole(["admin"]));
+adminCollectionsRoutes.delete("*", chunkW5WXUVLG_cjs.requireRole(["admin"]));
 adminCollectionsRoutes.get("/", async (c) => {
   try {
     const user = c.get("user");
@@ -25914,7 +25500,7 @@ function renderDatabaseToolsSettings(settings) {
 
 // src/routes/admin-settings.ts
 var adminSettingsRoutes = new hono.Hono();
-adminSettingsRoutes.use("*", chunk5T6VSJUK_cjs.requireAuth());
+adminSettingsRoutes.use("*", chunkW5WXUVLG_cjs.requireAuth());
 function getMockSettings(user) {
   return {
     general: {
@@ -26091,7 +25677,7 @@ adminSettingsRoutes.get("/database-tools", (c) => {
 adminSettingsRoutes.get("/api/migrations/status", async (c) => {
   try {
     const db = c.env.DB;
-    const migrationService = new chunk6YUNQLR3_cjs.MigrationService(db);
+    const migrationService = new chunkB4DQOQ2G_cjs.MigrationService(db);
     const status = await migrationService.getMigrationStatus();
     return c.json({
       success: true,
@@ -26115,7 +25701,7 @@ adminSettingsRoutes.post("/api/migrations/run", async (c) => {
       }, 403);
     }
     const db = c.env.DB;
-    const migrationService = new chunk6YUNQLR3_cjs.MigrationService(db);
+    const migrationService = new chunkB4DQOQ2G_cjs.MigrationService(db);
     const result = await migrationService.runPendingMigrations();
     return c.json({
       success: result.success,
@@ -26133,7 +25719,7 @@ adminSettingsRoutes.post("/api/migrations/run", async (c) => {
 adminSettingsRoutes.get("/api/migrations/validate", async (c) => {
   try {
     const db = c.env.DB;
-    const migrationService = new chunk6YUNQLR3_cjs.MigrationService(db);
+    const migrationService = new chunkB4DQOQ2G_cjs.MigrationService(db);
     const validation = await migrationService.validateSchema();
     return c.json({
       success: true,
@@ -28072,7 +27658,7 @@ function renderFormCreatePage(data) {
 
 // src/routes/admin-forms.ts
 var adminFormsRoutes = new hono.Hono();
-adminFormsRoutes.use("*", chunk5T6VSJUK_cjs.requireAuth());
+adminFormsRoutes.use("*", chunkW5WXUVLG_cjs.requireAuth());
 adminFormsRoutes.get("/", async (c) => {
   try {
     const user = c.get("user");
@@ -29247,7 +28833,7 @@ function renderAPIReferencePage(data) {
 // src/routes/admin-api-reference.ts
 var VERSION2 = chunkNWGIE4LP_cjs.getCoreVersion();
 var router2 = new hono.Hono();
-router2.use("*", chunk5T6VSJUK_cjs.requireAuth());
+router2.use("*", chunkW5WXUVLG_cjs.requireAuth());
 router2.get("/", async (c) => {
   const user = c.get("user");
   try {
@@ -29309,7 +28895,9 @@ var ROUTES_INFO = {
   reference: "https://github.com/sonicjs/sonicjs"
 };
 
+exports.LANGUAGES = LANGUAGES;
 exports.ROUTES_INFO = ROUTES_INFO;
+exports.TIMEZONES = TIMEZONES;
 exports.adminCheckboxRoutes = adminCheckboxRoutes;
 exports.adminCollectionsRoutes = adminCollectionsRoutes;
 exports.adminDesignRoutes = adminDesignRoutes;
@@ -29339,5 +28927,5 @@ exports.router2 = router2;
 exports.test_cleanup_default = test_cleanup_default;
 exports.userProfilesPlugin = userProfilesPlugin;
 exports.userRoutes = userRoutes;
-//# sourceMappingURL=chunk-VP2VTRLT.cjs.map
-//# sourceMappingURL=chunk-VP2VTRLT.cjs.map
+//# sourceMappingURL=chunk-TWEKM45V.cjs.map
+//# sourceMappingURL=chunk-TWEKM45V.cjs.map

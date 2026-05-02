@@ -48,3 +48,8 @@ export { renderFormsDocsPage } from './pages/admin-forms-docs.template'
 export type { FormsDocsPageData } from './pages/admin-forms-docs.template'
 export { renderFormsExamplesPage } from './pages/admin-forms-examples.template'
 export type { FormsExamplesPageData } from './pages/admin-forms-examples.template'
+
+// Profile editor — exposed so plugins (e.g. customer areas) can mount the
+// same UI at a different path via the `basePath` parameter on ProfilePageData.
+export { renderProfilePage, renderAvatarImage } from './pages/admin-profile.template'
+export type { UserProfile, ProfilePageData } from './pages/admin-profile.template'

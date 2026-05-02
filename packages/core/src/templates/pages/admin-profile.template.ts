@@ -33,6 +33,14 @@ export interface ProfilePageData {
     role: string
   }
   version?: string
+  /**
+   * Base path for the profile form actions (HTMX endpoints + currentPath in
+   * the rendered layout). Defaults to `/admin/profile` for backwards-compat
+   * with the existing admin route. Plugins that mount the profile editor at
+   * a different path (e.g. a customer area at `/my/profile`) override this so
+   * the form PUTs / avatar+password POSTs land on the plugin's own handlers.
+   */
+  basePath?: string
 }
 
 export function renderAvatarImage(avatarUrl: string | undefined, firstName: string, lastName: string): string {
@@ -45,6 +53,7 @@ export function renderAvatarImage(avatarUrl: string | undefined, firstName: stri
 }
 
 export function renderProfilePage(data: ProfilePageData): string {
+  const basePath = data.basePath ?? '/admin/profile'
   const pageContent = `
     <div class="space-y-8">
       <!-- Header -->
@@ -82,7 +91,7 @@ export function renderProfilePage(data: ProfilePageData): string {
             </div>
 
             <!-- Form Content -->
-            <form id="profile-form" hx-put="/admin/profile" hx-target="#form-messages" class="p-6 space-y-6">
+            <form id="profile-form" hx-put="${basePath}" hx-target="#form-messages" class="p-6 space-y-6">
               <div id="form-messages"></div>
 
               <!-- Basic Information -->
@@ -246,7 +255,7 @@ export function renderProfilePage(data: ProfilePageData): string {
             <div class="text-center">
               ${renderAvatarImage(data.profile.avatar_url, data.profile.first_name, data.profile.last_name)}
 
-              <form id="avatar-form" hx-post="/admin/profile/avatar" hx-target="#avatar-messages" hx-encoding="multipart/form-data">
+              <form id="avatar-form" hx-post="${basePath}/avatar" hx-target="#avatar-messages" hx-encoding="multipart/form-data">
                 <input
                   type="file"
                   name="avatar"
@@ -352,7 +361,7 @@ export function renderProfilePage(data: ProfilePageData): string {
           </div>
         </div>
 
-        <form id="password-form" hx-post="/admin/profile/password" hx-target="#password-messages" class="p-6 space-y-4">
+        <form id="password-form" hx-post="${basePath}/password" hx-target="#password-messages" class="p-6 space-y-4">
           <div id="password-messages"></div>
 
           <div>
@@ -447,7 +456,7 @@ export function renderProfilePage(data: ProfilePageData): string {
   const layoutData: AdminLayoutCatalystData = {
     title: 'User Profile',
     pageTitle: 'Profile',
-    currentPath: '/admin/profile',
+    currentPath: basePath,
     user: data.user,
     version: data.version,
     content: pageContent
