@@ -4,7 +4,7 @@ compatibility_date = "2025-05-05"
 compatibility_flags = ["nodejs_compat"]
 
 # Cloudflare account
-account_id = "f9d6328dc3115e621758a741dda3d5c4"
+# account_id = "<set-via-CLOUDFLARE_ACCOUNT_ID-env>"
 
 # Cloudflare Workers settings
 workers_dev = true
@@ -14,7 +14,7 @@ workers_dev = true
 [[d1_databases]]
 binding = "DB"
 database_name = "sonicjs-worktree-main"
-database_id = "b14707c3-a1c5-4565-8ffc-4f22f930d289"
+database_id = "PLACEHOLDER_D1_ID_REPLACE_PER_DEPLOY"
 migrations_dir = "./migrations"
 
 # R2 Bucket for media storage (using CI bucket)
@@ -25,7 +25,7 @@ bucket_name = "sonicjs-ci-media"
 # KV Cache (using CI namespace)
 [[kv_namespaces]]
 binding = "CACHE_KV"
-id = "a16f8246fc294d809c90b0fb2df6d363"
+id = "PLACEHOLDER_KV_ID_REPLACE_PER_DEPLOY"
 
 # Environment variables
 [vars]
