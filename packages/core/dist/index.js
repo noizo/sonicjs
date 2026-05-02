@@ -1,12 +1,12 @@
-import { getCustomData, renderConfirmationDialog, getConfirmationDialogScript, api_default, api_media_default, api_system_default, admin_api_default, router, adminCollectionsRoutes, adminFormsRoutes, adminSettingsRoutes, public_forms_default, router2, admin_content_default, adminMediaRoutes, userProfilesPlugin, adminPluginRoutes, adminLogsRoutes, userRoutes, auth_default, test_cleanup_default } from './chunk-DMWGRGMC.js';
-export { ROUTES_INFO, admin_api_default as adminApiRoutes, adminCheckboxRoutes, admin_code_examples_default as adminCodeExamplesRoutes, adminCollectionsRoutes, admin_content_default as adminContentRoutes, router as adminDashboardRoutes, adminDesignRoutes, adminLogsRoutes, adminMediaRoutes, adminPluginRoutes, adminSettingsRoutes, admin_testimonials_default as adminTestimonialsRoutes, userRoutes as adminUsersRoutes, api_content_crud_default as apiContentCrudRoutes, api_media_default as apiMediaRoutes, api_default as apiRoutes, api_system_default as apiSystemRoutes, auth_default as authRoutes, createUserProfilesPlugin, defineUserProfile, getUserProfileConfig, userProfilesPlugin } from './chunk-DMWGRGMC.js';
+import { getCustomData, renderConfirmationDialog, getConfirmationDialogScript, api_default, api_media_default, api_system_default, admin_api_default, router, adminCollectionsRoutes, adminFormsRoutes, adminSettingsRoutes, public_forms_default, router2, admin_content_default, adminMediaRoutes, userProfilesPlugin, adminPluginRoutes, adminLogsRoutes, userRoutes, auth_default, test_cleanup_default } from './chunk-EJ3AZGM2.js';
+export { ROUTES_INFO, admin_api_default as adminApiRoutes, adminCheckboxRoutes, admin_code_examples_default as adminCodeExamplesRoutes, adminCollectionsRoutes, admin_content_default as adminContentRoutes, router as adminDashboardRoutes, adminDesignRoutes, adminLogsRoutes, adminMediaRoutes, adminPluginRoutes, adminSettingsRoutes, admin_testimonials_default as adminTestimonialsRoutes, userRoutes as adminUsersRoutes, api_content_crud_default as apiContentCrudRoutes, api_media_default as apiMediaRoutes, api_default as apiRoutes, api_system_default as apiSystemRoutes, auth_default as authRoutes, createUserProfilesPlugin, defineUserProfile, getUserProfileConfig, userProfilesPlugin } from './chunk-EJ3AZGM2.js';
 import { SettingsService, setAppInstance, schema_exports } from './chunk-YARI3MLM.js';
 export { Logger, apiTokens, collections, content, contentVersions, getLogger, initLogger, insertCollectionSchema, insertContentSchema, insertLogConfigSchema, insertMediaSchema, insertPluginActivityLogSchema, insertPluginAssetSchema, insertPluginHookSchema, insertPluginRouteSchema, insertPluginSchema, insertSystemLogSchema, insertUserSchema, insertWorkflowHistorySchema, logConfig, media, pluginActivityLog, pluginAssets, pluginHooks, pluginRoutes, plugins, selectCollectionSchema, selectContentSchema, selectLogConfigSchema, selectMediaSchema, selectPluginActivityLogSchema, selectPluginAssetSchema, selectPluginHookSchema, selectPluginRouteSchema, selectPluginSchema, selectSystemLogSchema, selectUserSchema, selectWorkflowHistorySchema, systemLogs, users, workflowHistory } from './chunk-YARI3MLM.js';
-import { requireAuth, getJwtExpirySecondsFromDb, AuthManager, metricsMiddleware, bootstrapMiddleware, securityHeadersMiddleware, csrfProtection, requireRole } from './chunk-J6DDPJJY.js';
-export { AuthManager, PermissionManager, bootstrapMiddleware, cacheHeaders, compressionMiddleware, detailedLoggingMiddleware, getActivePlugins, isPluginActive, logActivity, loggingMiddleware, optionalAuth, performanceLoggingMiddleware, requireActivePlugin, requireActivePlugins, requireAnyPermission, requireAuth, requirePermission, requireRole, securityHeadersMiddleware as securityHeaders, securityLoggingMiddleware } from './chunk-J6DDPJJY.js';
+import { requireAuth, getJwtExpirySecondsFromDb, AuthManager, metricsMiddleware, bootstrapMiddleware, securityHeadersMiddleware, csrfProtection, requireRole } from './chunk-SVR5QRSJ.js';
+export { AuthManager, PermissionManager, bootstrapMiddleware, cacheHeaders, compressionMiddleware, detailedLoggingMiddleware, getActivePlugins, isPluginActive, logActivity, loggingMiddleware, optionalAuth, performanceLoggingMiddleware, requireActivePlugin, requireActivePlugins, requireAnyPermission, requireAuth, requirePermission, requireRole, securityHeadersMiddleware as securityHeaders, securityLoggingMiddleware } from './chunk-SVR5QRSJ.js';
 import { PluginService, PLUGIN_REGISTRY } from './chunk-CJOLOONT.js';
 export { PluginBootstrapService, PluginService as PluginServiceClass, backfillFormSubmissions, cleanupRemovedCollections, createContentFromSubmission, deriveCollectionSchemaFromFormio, deriveSubmissionTitle, fullCollectionSync, getAvailableCollectionNames, getManagedCollections, isCollectionManaged, loadCollectionConfig, loadCollectionConfigs, mapFormStatusToContentStatus, registerCollections, syncAllFormCollections, syncCollection, syncCollections, syncFormCollection, validateCollectionConfig } from './chunk-CJOLOONT.js';
-export { MigrationService } from './chunk-TQPQKTV7.js';
+export { MigrationService } from './chunk-RJCLWR42.js';
 export { renderFilterBar } from './chunk-ON5ZMSU4.js';
 import { renderAdminLayout } from './chunk-XWIA3HVX.js';
 export { getConfirmationDialogScript, renderAlert, renderConfirmationDialog, renderForm, renderFormField, renderPagination, renderTable } from './chunk-XWIA3HVX.js';
@@ -4543,51 +4543,68 @@ var authFormRenderHandler2 = async (data, _ctx) => {
     return null;
   }
   return `
-    <div class="relative inline-block">
-      <button
-        type="button"
-        onclick="document.getElementById('magic-link-popover').classList.toggle('hidden')"
-        class="${AUTH_CTA_BUTTON_CLASSES} bg-teal-600"
-        aria-label="Sign in with email link"
-        title="Sign in with email link"
-      >${EMAIL_SVG}</button>
-      <div id="magic-link-popover" class="hidden absolute z-10 top-14 left-1/2 -translate-x-1/2 w-72 rounded-lg bg-zinc-900 p-4 ring-1 ring-zinc-800 shadow-xl">
+    <button
+      type="button"
+      onclick="document.getElementById('magic-link-modal').classList.remove('hidden'); setTimeout(function(){var i=document.getElementById('magic-link-email'); if(i) i.focus();},10)"
+      class="${AUTH_CTA_BUTTON_CLASSES} bg-teal-600"
+      aria-label="Sign in with email link"
+      title="Sign in with email link"
+    >${EMAIL_SVG}</button>
+    <div id="magic-link-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+         onclick="if(event.target===this) this.classList.add('hidden')"
+         role="dialog" aria-modal="true" aria-labelledby="magic-link-title">
+      <div class="w-full max-w-sm rounded-xl bg-zinc-900 p-6 ring-1 ring-zinc-800 shadow-2xl">
+        <div class="flex items-start justify-between mb-4">
+          <h3 id="magic-link-title" class="text-base font-medium text-white">Sign in with email link</h3>
+          <button type="button"
+                  onclick="document.getElementById('magic-link-modal').classList.add('hidden')"
+                  class="text-zinc-400 hover:text-white transition-colors"
+                  aria-label="Close">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+        <p class="text-sm text-zinc-400 mb-4">We'll email you a one-time link to sign in.</p>
         <label for="magic-link-email" class="block text-xs font-medium text-zinc-300 mb-2">Email address</label>
         <div class="flex gap-2">
-          <input
-            id="magic-link-email"
-            type="email"
-            placeholder="you@example.com"
-            class="flex-1 rounded-lg bg-zinc-950 px-3 py-2 text-sm text-white ring-1 ring-inset ring-white/10 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-white"
-          >
-          <button
-            type="button"
-            onclick="window.__sendMagicLink && window.__sendMagicLink()"
-            class="rounded-lg bg-white px-3 py-2 text-sm font-semibold text-zinc-950 hover:bg-zinc-100 transition-colors"
-          >Send</button>
+          <input id="magic-link-email" type="email" placeholder="you@example.com"
+                 class="flex-1 rounded-lg bg-zinc-950 px-3 py-2 text-sm text-white ring-1 ring-inset ring-white/10 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-white"
+                 onkeydown="if(event.key==='Enter'){event.preventDefault(); window.__sendMagicLink && window.__sendMagicLink()}">
+          <button type="button"
+                  onclick="window.__sendMagicLink && window.__sendMagicLink()"
+                  class="rounded-lg bg-white px-4 py-2 text-sm font-semibold text-zinc-950 hover:bg-zinc-100 transition-colors">Send</button>
         </div>
-        <p id="magic-link-msg" class="mt-2 text-xs text-zinc-400"></p>
-        <script>
-          window.__sendMagicLink = async function() {
-            var email = document.getElementById('magic-link-email').value;
-            var msg = document.getElementById('magic-link-msg');
-            if (!email) { msg.textContent = 'Please enter your email.'; return; }
-            msg.textContent = 'Sending\u2026';
-            try {
-              var res = await fetch('/auth/magic-link/request', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: email })
-              });
-              var json = await res.json();
-              msg.textContent = json.message || json.error || 'Done.';
-            } catch(e) {
-              msg.textContent = 'Request failed. Please try again.';
-            }
-          };
-        </script>
+        <p id="magic-link-msg" class="mt-3 text-xs text-zinc-400 min-h-4"></p>
       </div>
-    </div>`;
+    </div>
+    <script>
+      (function() {
+        if (window.__magicLinkBound) return;
+        window.__magicLinkBound = true;
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') {
+            var modal = document.getElementById('magic-link-modal');
+            if (modal && !modal.classList.contains('hidden')) modal.classList.add('hidden');
+          }
+        });
+        window.__sendMagicLink = async function() {
+          var email = document.getElementById('magic-link-email').value;
+          var msg = document.getElementById('magic-link-msg');
+          if (!email) { msg.textContent = 'Please enter your email.'; return; }
+          msg.textContent = 'Sending\u2026';
+          try {
+            var res = await fetch('/auth/magic-link/request', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email: email })
+            });
+            var json = await res.json();
+            msg.textContent = json.message || json.error || 'Done.';
+          } catch(e) {
+            msg.textContent = 'Request failed. Please try again.';
+          }
+        };
+      })();
+    </script>`;
 };
 function createMagicLinkAuthPlugin() {
   const magicLinkRoutes = new Hono();
