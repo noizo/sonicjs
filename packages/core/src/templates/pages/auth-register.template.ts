@@ -2,6 +2,8 @@ import { renderAlert } from '../alert.template'
 
 export interface RegisterPageData {
   error?: string
+  /** HTML string injected by AUTH_FORM_RENDER hook handlers (e.g. social sign-in buttons). */
+  socialCtas?: string
 }
 
 export function renderRegisterPage(data: RegisterPageData): string {
@@ -152,6 +154,23 @@ export function renderRegisterPage(data: RegisterPageData): string {
                 <a href="/auth/login" class="font-semibold text-white hover:text-zinc-300 transition-colors">Sign in here</a>
               </p>
             </div>
+
+            ${data.socialCtas ? `
+            <!-- Social sign-in CTAs (injected by plugins via AUTH_FORM_RENDER hook) -->
+            <div class="mt-6">
+              <div class="relative">
+                <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                  <div class="w-full border-t border-white/10"></div>
+                </div>
+                <div class="relative flex justify-center text-sm">
+                  <span class="bg-zinc-900 px-2 text-zinc-400">Or continue with</span>
+                </div>
+              </div>
+              <div class="mt-4 space-y-2">
+                ${data.socialCtas}
+              </div>
+            </div>
+            ` : ''}
 
             <div id="form-response"></div>
           </div>

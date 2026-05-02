@@ -7,13 +7,89 @@
 
 import { Hono } from 'hono'
 import { z } from 'zod'
-import type { Plugin, PluginContext } from '../../types'
+import type { Plugin, PluginContext, HookHandler } from '../../types'
 import type { D1Database } from '@cloudflare/workers-types'
 import { AuthManager, getJwtExpirySecondsFromDb } from '../../../middleware/auth'
+import { EMAIL_SVG, AUTH_CTA_BUTTON_CLASSES } from '../../../templates/icons/auth-icons'
+import { globalHookSystem } from '../../hook-system'
+import { HOOKS } from '../../types'
 
 const magicLinkRequestSchema = z.object({
   email: z.string().email('Valid email is required')
 })
+
+/**
+ * AUTH_FORM_RENDER handler for the magic-link-auth plugin.
+ *
+ * Exported as a standalone function so tests can call it directly without
+ * triggering the module-level globalHookSystem.register side-effect.
+ *
+ * Renders a "Sign in with email link" button + a minimal inline popover with a
+ * vanilla-JS submit handler (`window.__sendMagicLink`).
+ *
+ * Returns null when the `email` plugin dependency is not active in the DB,
+ * or when the DB is not available (table missing / not initialised).
+ *
+ * @param data - `{ db }` — the D1 database instance
+ */
+export const authFormRenderHandler: HookHandler = async (data: any, _ctx: any): Promise<string | null> => {
+  try {
+    if (data?.db) {
+      const row = await data.db.prepare(
+        `SELECT status FROM plugins WHERE id = 'email'`
+      ).first() as { status: string } | null
+      if (!row || row.status !== 'active') return null
+    }
+  } catch {
+    // DB not ready or table missing — silently skip
+    return null
+  }
+
+  return `
+    <button
+      type="button"
+      onclick="document.getElementById('magic-link-popover').classList.toggle('hidden')"
+      class="${AUTH_CTA_BUTTON_CLASSES}"
+    >
+      <span class="h-5 w-5 shrink-0">${EMAIL_SVG}</span>
+      <span>Sign in with email link</span>
+    </button>
+    <div id="magic-link-popover" class="hidden mt-2 rounded-lg bg-zinc-800 p-4 ring-1 ring-white/10">
+      <label for="magic-link-email" class="block text-sm font-medium text-white mb-2">Your email address</label>
+      <div class="flex gap-2">
+        <input
+          id="magic-link-email"
+          type="email"
+          placeholder="you@example.com"
+          class="flex-1 rounded-lg bg-zinc-700 px-3 py-2 text-sm text-white ring-1 ring-inset ring-white/10 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-white"
+        >
+        <button
+          type="button"
+          onclick="window.__sendMagicLink && window.__sendMagicLink()"
+          class="rounded-lg bg-white px-3 py-2 text-sm font-semibold text-zinc-950 hover:bg-zinc-100 transition-colors"
+        >Send link</button>
+      </div>
+      <p id="magic-link-msg" class="mt-2 text-xs text-zinc-400"></p>
+      <script>
+        window.__sendMagicLink = async function() {
+          var email = document.getElementById('magic-link-email').value;
+          var msg = document.getElementById('magic-link-msg');
+          if (!email) { msg.textContent = 'Please enter your email.'; return; }
+          try {
+            var res = await fetch('/auth/magic-link/request', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email: email })
+            });
+            var json = await res.json();
+            msg.textContent = json.message || json.error || 'Done.';
+          } catch(e) {
+            msg.textContent = 'Request failed. Please try again.';
+          }
+        };
+      </script>
+    </div>`
+}
 
 export function createMagicLinkAuthPlugin(): Plugin {
   const magicLinkRoutes = new Hono()
@@ -236,6 +312,13 @@ export function createMagicLinkAuthPlugin(): Plugin {
     },
     dependencies: ['email'],
 
+    hooks: [{
+      name: HOOKS.AUTH_FORM_RENDER,
+      handler: authFormRenderHandler,
+      priority: 20,
+      description: 'Renders a magic-link sign-in button on the auth forms'
+    }],
+
     routes: [{
       path: '/auth/magic-link',
       handler: magicLinkRoutes,
@@ -371,5 +454,9 @@ function renderMagicLinkEmail(magicLink: string, expiryMinutes: number): string 
     </html>
   `
 }
+
+// Register with the module-level singleton so auth routes pick up this handler
+// even when PluginManager.install() is not called (the current app.ts pattern).
+globalHookSystem.register(HOOKS.AUTH_FORM_RENDER, authFormRenderHandler, 20)
 
 export default createMagicLinkAuthPlugin()
