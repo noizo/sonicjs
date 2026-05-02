@@ -135,10 +135,10 @@ export function renderLoginPage(data: LoginPageData, demoLoginActive: boolean = 
                   <div class="w-full border-t border-white/10"></div>
                 </div>
                 <div class="relative flex justify-center text-sm">
-                  <span class="bg-zinc-900 px-2 text-zinc-400">Or continue with</span>
+                  <span class="bg-zinc-900 px-2 text-zinc-400">Or sign in another way</span>
                 </div>
               </div>
-              <div class="mt-4 space-y-2">
+              <div class="mt-4 flex justify-center gap-3 flex-wrap">
                 ${data.socialCtas}
               </div>
             </div>

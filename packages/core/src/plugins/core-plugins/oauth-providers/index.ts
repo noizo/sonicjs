@@ -58,22 +58,17 @@ export const authFormRenderHandler: HookHandler = async (data: any, _ctx: any): 
 
   const buttons: string[] = []
 
+  // Brand-square icon-only buttons. Each provider's SVG is the full visible
+  // surface (svgrepo SVGs come pre-styled with brand color + 15% rounded
+  // corners). Aria-label provides the accessible name; title shows on hover.
   const google = settings?.providers?.['google']
   if (google?.enabled && google?.clientId && google?.clientSecret) {
-    buttons.push(`
-      <a href="/auth/oauth/google" class="${AUTH_CTA_BUTTON_CLASSES}">
-        <span class="h-5 w-5 shrink-0">${GOOGLE_SVG}</span>
-        <span>Continue with Google</span>
-      </a>`)
+    buttons.push(`<a href="/auth/oauth/google" class="${AUTH_CTA_BUTTON_CLASSES}" aria-label="Continue with Google" title="Continue with Google">${GOOGLE_SVG}</a>`)
   }
 
   const github = settings?.providers?.['github']
   if (github?.enabled && github?.clientId && github?.clientSecret) {
-    buttons.push(`
-      <a href="/auth/oauth/github" class="${AUTH_CTA_BUTTON_CLASSES}">
-        <span class="h-5 w-5 shrink-0">${GITHUB_SVG}</span>
-        <span>Continue with GitHub</span>
-      </a>`)
+    buttons.push(`<a href="/auth/oauth/github" class="${AUTH_CTA_BUTTON_CLASSES}" aria-label="Continue with GitHub" title="Continue with GitHub">${GITHUB_SVG}</a>`)
   }
 
   return buttons.length > 0 ? buttons.join('\n') : null

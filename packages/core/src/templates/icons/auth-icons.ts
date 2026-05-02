@@ -47,8 +47,11 @@ fill="teal"/><rect width="356" height="256" x="78" y="128" fill="#ffffff" rx="8%
 
 /**
  * Tailwind classes for a social auth CTA button.
- * Renders as a full-width button with an inline icon and label, matching the
- * dark zinc design used in the core auth templates.
+ * Icon-only square buttons. The 5 brand-square SVGs above are designed for
+ * this size — 48×48 box with the SVG filling the inner area; rounded corners
+ * match the SVG's own rx="15%" treatment for a clean tile look. The CTA row
+ * goes in a flex container with horizontal gap, mirroring the layout owners
+ * typically use for social sign-in (4 brand tiles in a single line).
  */
 export const AUTH_CTA_BUTTON_CLASSES =
-  'flex w-full items-center justify-center gap-3 rounded-lg bg-zinc-800 px-3 py-2 text-sm font-medium text-white ring-1 ring-inset ring-white/10 hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-white transition-colors'
+  'inline-flex h-12 w-12 items-center justify-center rounded-xl overflow-hidden ring-1 ring-white/10 hover:ring-white/30 transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white'
