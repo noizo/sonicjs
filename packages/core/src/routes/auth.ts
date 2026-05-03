@@ -7,6 +7,8 @@ import { AuthManager, requireAuth, generateCsrfToken, rateLimit } from '../middl
 import { getJwtExpirySecondsFromDb, getJwtRefreshGraceSecondsFromDb } from '../middleware/auth'
 import { renderLoginPage, LoginPageData } from '../templates/pages/auth-login.template'
 import { renderRegisterPage, RegisterPageData } from '../templates/pages/auth-register.template'
+import { globalHookSystem } from '../plugins/hook-system'
+import { HOOKS } from '../types'
 import { getCacheService, CACHE_CONFIGS } from '../services'
 import { authValidationService, isRegistrationEnabled, isFirstUserRegistration } from '../services/auth-validation'
 import type { RegistrationData } from '../services/auth-validation'
@@ -47,13 +49,14 @@ const authRoutes = new Hono<{ Bindings: Bindings; Variables: Variables }>()
 authRoutes.get('/login', async (c) => {
   const error = c.req.query('error')
   const message = c.req.query('message')
-  
+
   const pageData: LoginPageData = {
     error: error || undefined,
     message: message || undefined,
-    version: c.get('appVersion')
+    version: c.get('appVersion'),
+    socialCtasHeading: 'Or login with'
   }
-  
+
   // Check if demo login plugin is active
   const db = c.env.DB
   let demoLoginActive = false
@@ -65,7 +68,20 @@ authRoutes.get('/login', async (c) => {
   } catch (error) {
     // Ignore database errors - plugin system might not be initialized
   }
-  
+
+  // Collect social CTA HTML from AUTH_FORM_RENDER hook handlers.
+  // formType lets handlers gate their CTAs (e.g. magic-link is sign-in-only,
+  // so it returns null for formType='register' to skip the register form).
+  const hookCtx = { plugin: '', context: {} as any }
+  const hookData = { db, formType: 'login' as const }
+  const hookResults = await Promise.all(
+    globalHookSystem.getHooks(HOOKS.AUTH_FORM_RENDER).map(h =>
+      h.handler(hookData, hookCtx).catch(() => null)
+    )
+  )
+  const socialCtas = hookResults.filter(Boolean).join('\n')
+  if (socialCtas) pageData.socialCtas = socialCtas
+
   return c.html(renderLoginPage(pageData, demoLoginActive))
 })
 
@@ -87,8 +103,22 @@ authRoutes.get('/register', async (c) => {
   const error = c.req.query('error')
 
   const pageData: RegisterPageData = {
-    error: error || undefined
+    error: error || undefined,
+    socialCtasHeading: 'Or register with'
   }
+
+  // Collect social CTA HTML from AUTH_FORM_RENDER hook handlers.
+  // formType='register' lets handlers skip CTAs that don't apply to registration
+  // (e.g. magic-link is sign-in-only — it returns null here).
+  const hookCtx = { plugin: '', context: {} as any }
+  const hookData = { db, formType: 'register' as const }
+  const hookResults = await Promise.all(
+    globalHookSystem.getHooks(HOOKS.AUTH_FORM_RENDER).map(h =>
+      h.handler(hookData, hookCtx).catch(() => null)
+    )
+  )
+  const socialCtas = hookResults.filter(Boolean).join('\n')
+  if (socialCtas) pageData.socialCtas = socialCtas
 
   return c.html(renderRegisterPage(pageData))
 })

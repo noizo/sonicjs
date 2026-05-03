@@ -7,13 +7,150 @@
 
 import { Hono } from 'hono'
 import { z } from 'zod'
-import type { Plugin, PluginContext } from '../../types'
+import type { Plugin, PluginContext, HookHandler } from '../../types'
 import type { D1Database } from '@cloudflare/workers-types'
 import { AuthManager, getJwtExpirySecondsFromDb } from '../../../middleware/auth'
+import { EMAIL_SVG, AUTH_CTA_BUTTON_CLASSES } from '../../../templates/icons/auth-icons'
+import { globalHookSystem } from '../../hook-system'
+import { HOOKS } from '../../types'
 
 const magicLinkRequestSchema = z.object({
   email: z.string().email('Valid email is required')
 })
+
+/**
+ * AUTH_FORM_RENDER handler for the magic-link-auth plugin.
+ *
+ * Exported as a standalone function so tests can call it directly without
+ * triggering the module-level globalHookSystem.register side-effect.
+ *
+ * Renders a "Sign in with email link" button + a minimal inline popover with a
+ * vanilla-JS submit handler (`window.__sendMagicLink`).
+ *
+ * Magic-link is a sign-in-only flow (existing user gets an email-link to log
+ * in). It is not a registration method — new users cannot register via
+ * magic-link. The handler therefore returns null when invoked for the
+ * registration form, suppressing the magic-link tile on /auth/register.
+ *
+ * Returns null also when the `email` plugin dependency is not active in the
+ * DB, or when the DB is not available (table missing / not initialised).
+ *
+ * @param data - `{ db, formType }` — D1 + 'login' | 'register'
+ */
+export const authFormRenderHandler: HookHandler = async (data: any, _ctx: any): Promise<string | null> => {
+  // Sign-in-only — skip the register form entirely.
+  if (data?.formType === 'register') return null
+
+  try {
+    if (data?.db) {
+      const row = await data.db.prepare(
+        `SELECT status FROM plugins WHERE id = 'email'`
+      ).first() as { status: string } | null
+      if (!row || row.status !== 'active') return null
+    }
+  } catch {
+    // DB not ready or table missing — silently skip
+    return null
+  }
+
+  // Brand-square icon button matching the other CTA tiles. Click opens a
+  // viewport-centered modal (position: fixed) so the popover never bleeds out
+  // of the form card or interferes with the row's flex layout, regardless of
+  // which position the email tile occupies (3rd, 4th, etc.). Backdrop click +
+  // Escape key both dismiss; tab focus is trapped inside the dialog while open.
+  return `
+    <button
+      type="button"
+      onclick="document.getElementById('magic-link-modal').classList.remove('hidden'); setTimeout(function(){var i=document.getElementById('magic-link-email'); if(i) i.focus();},10)"
+      class="${AUTH_CTA_BUTTON_CLASSES} bg-teal-600"
+      aria-label="Sign in with email link"
+      title="Sign in with email link"
+    >${EMAIL_SVG}</button>
+    <div id="magic-link-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+         onclick="if(event.target===this) this.classList.add('hidden')"
+         role="dialog" aria-modal="true" aria-labelledby="magic-link-title">
+      <div class="w-full max-w-sm rounded-xl bg-zinc-900 p-6 ring-1 ring-zinc-800 shadow-2xl">
+        <div class="flex items-start justify-between mb-4">
+          <h3 id="magic-link-title" class="text-base font-medium text-white">Sign in with email link</h3>
+          <button type="button"
+                  onclick="document.getElementById('magic-link-modal').classList.add('hidden')"
+                  class="text-zinc-400 hover:text-white transition-colors"
+                  aria-label="Close">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+        <p class="text-sm text-zinc-400 mb-4">We'll email you a one-time link to sign in.</p>
+        <label for="magic-link-email" class="block text-xs font-medium text-zinc-300 mb-2">Email address</label>
+        <div class="flex gap-2">
+          <input id="magic-link-email" type="email" placeholder="you@example.com"
+                 class="flex-1 rounded-lg bg-zinc-950 px-3 py-2 text-sm text-white ring-1 ring-inset ring-white/10 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-white"
+                 onkeydown="if(event.key==='Enter'){event.preventDefault(); window.__sendMagicLink && window.__sendMagicLink()}">
+          <button type="button"
+                  onclick="window.__sendMagicLink && window.__sendMagicLink()"
+                  class="rounded-lg bg-white px-4 py-2 text-sm font-semibold text-zinc-950 hover:bg-zinc-100 transition-colors">Send</button>
+        </div>
+        <p id="magic-link-msg" class="mt-3 text-xs text-zinc-400 min-h-4"></p>
+      </div>
+    </div>
+    <script>
+      (function() {
+        if (window.__magicLinkBound) return;
+        window.__magicLinkBound = true;
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') {
+            var modal = document.getElementById('magic-link-modal');
+            if (modal && !modal.classList.contains('hidden')) modal.classList.add('hidden');
+          }
+        });
+        window.__sendMagicLink = async function() {
+          var email = document.getElementById('magic-link-email').value;
+          var msg = document.getElementById('magic-link-msg');
+          if (!email) { msg.textContent = 'Please enter your email.'; return; }
+          msg.textContent = 'Sending…';
+          try {
+            var res = await fetch('/auth/magic-link/request', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email: email })
+            });
+            var json = await res.json();
+            msg.textContent = json.message || json.error || 'Done.';
+          } catch(e) {
+            msg.textContent = 'Request failed. Please try again.';
+          }
+        };
+      })();
+    </script>`
+}
+
+interface MagicLinkSettings {
+  linkExpiryMinutes: number
+  rateLimitPerHour: number
+  allowNewUsers: boolean
+}
+
+const DEFAULT_MAGIC_LINK_SETTINGS: MagicLinkSettings = {
+  linkExpiryMinutes: 15,
+  rateLimitPerHour: 5,
+  allowNewUsers: false,
+}
+
+async function loadMagicLinkSettings(db: D1Database): Promise<MagicLinkSettings> {
+  try {
+    const row = await db
+      .prepare(`SELECT settings FROM plugins WHERE id = 'magic-link-auth'`)
+      .first() as { settings: string | null } | null
+    if (!row?.settings) return DEFAULT_MAGIC_LINK_SETTINGS
+    const parsed = JSON.parse(row.settings)
+    return {
+      linkExpiryMinutes: typeof parsed.linkExpiryMinutes === 'number' ? parsed.linkExpiryMinutes : DEFAULT_MAGIC_LINK_SETTINGS.linkExpiryMinutes,
+      rateLimitPerHour: typeof parsed.rateLimitPerHour === 'number' ? parsed.rateLimitPerHour : DEFAULT_MAGIC_LINK_SETTINGS.rateLimitPerHour,
+      allowNewUsers: typeof parsed.allowNewUsers === 'boolean' ? parsed.allowNewUsers : DEFAULT_MAGIC_LINK_SETTINGS.allowNewUsers,
+    }
+  } catch {
+    return DEFAULT_MAGIC_LINK_SETTINGS
+  }
+}
 
 export function createMagicLinkAuthPlugin(): Plugin {
   const magicLinkRoutes = new Hono()
@@ -35,6 +172,9 @@ export function createMagicLinkAuthPlugin(): Plugin {
       const normalizedEmail = email.toLowerCase()
       const db = c.env.DB as D1Database
 
+      // Load settings once per request (admin-configurable via plugins.settings).
+      const settings = await loadMagicLinkSettings(db)
+
       // Check rate limiting
       const oneHourAgo = Date.now() - (60 * 60 * 1000)
       const recentLinks = await db.prepare(`
@@ -43,7 +183,7 @@ export function createMagicLinkAuthPlugin(): Plugin {
         WHERE user_email = ? AND created_at > ?
       `).bind(normalizedEmail, oneHourAgo).first() as any
 
-      const rateLimitPerHour = 5 // TODO: Get from plugin settings
+      const rateLimitPerHour = settings.rateLimitPerHour
       if (recentLinks && recentLinks.count >= rateLimitPerHour) {
         return c.json({
           error: 'Too many requests. Please try again later.'
@@ -57,7 +197,7 @@ export function createMagicLinkAuthPlugin(): Plugin {
         WHERE email = ?
       `).bind(normalizedEmail).first() as any
 
-      const allowNewUsers = false // TODO: Get from plugin settings
+      const allowNewUsers = settings.allowNewUsers
 
       if (!user && !allowNewUsers) {
         // Don't reveal if user exists or not for security
@@ -75,7 +215,7 @@ export function createMagicLinkAuthPlugin(): Plugin {
       // Generate secure token
       const token = crypto.randomUUID() + '-' + crypto.randomUUID()
       const tokenId = crypto.randomUUID()
-      const linkExpiryMinutes = 15 // TODO: Get from plugin settings
+      const linkExpiryMinutes = settings.linkExpiryMinutes
       const expiresAt = Date.now() + (linkExpiryMinutes * 60 * 1000)
 
       // Store magic link
@@ -140,6 +280,9 @@ export function createMagicLinkAuthPlugin(): Plugin {
 
       const db = c.env.DB as D1Database
 
+      // Load settings (admin-configurable via plugins.settings).
+      const settings = await loadMagicLinkSettings(db)
+
       // Find magic link
       const magicLink = await db.prepare(`
         SELECT * FROM magic_links
@@ -160,7 +303,7 @@ export function createMagicLinkAuthPlugin(): Plugin {
         SELECT * FROM users WHERE email = ? AND is_active = 1
       `).bind(magicLink.user_email).first() as any
 
-      const allowNewUsers = false // TODO: Get from plugin settings
+      const allowNewUsers = settings.allowNewUsers
 
       if (!user && allowNewUsers) {
         // Create new user
@@ -235,6 +378,13 @@ export function createMagicLinkAuthPlugin(): Plugin {
       email: 'team@sonicjs.com'
     },
     dependencies: ['email'],
+
+    hooks: [{
+      name: HOOKS.AUTH_FORM_RENDER,
+      handler: authFormRenderHandler,
+      priority: 20,
+      description: 'Renders a magic-link sign-in button on the auth forms'
+    }],
 
     routes: [{
       path: '/auth/magic-link',
@@ -371,5 +521,9 @@ function renderMagicLinkEmail(magicLink: string, expiryMinutes: number): string 
     </html>
   `
 }
+
+// Register with the module-level singleton so auth routes pick up this handler
+// even when PluginManager.install() is not called (the current app.ts pattern).
+globalHookSystem.register(HOOKS.AUTH_FORM_RENDER, authFormRenderHandler, 20)
 
 export default createMagicLinkAuthPlugin()

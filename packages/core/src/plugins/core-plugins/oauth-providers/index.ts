@@ -15,7 +15,7 @@
 import { Hono } from 'hono'
 import { setCookie, getCookie } from 'hono/cookie'
 import { PluginBuilder } from '../../sdk/plugin-builder'
-import type { Plugin } from '../../types'
+import type { Plugin, HookHandler } from '../../types'
 import {
   OAuthService,
   BUILT_IN_PROVIDERS,
@@ -24,9 +24,55 @@ import {
 } from './oauth-service'
 import { AuthManager } from '../../../middleware'
 import { getJwtExpirySecondsFromDb } from '../../../middleware/auth'
+import { GOOGLE_SVG, GITHUB_SVG, AUTH_CTA_BUTTON_CLASSES } from '../../../templates/icons/auth-icons'
+import { globalHookSystem } from '../../hook-system'
+import { HOOKS } from '../../types'
 
 const STATE_COOKIE_NAME = 'oauth_state'
 const STATE_COOKIE_MAX_AGE = 600 // 10 minutes
+
+/**
+ * AUTH_FORM_RENDER handler for the oauth-providers plugin.
+ *
+ * Exported as a standalone function so tests can call it directly without
+ * triggering the module-level globalHookSystem.register side-effect.
+ *
+ * @param data - `{ db }` — the D1 database instance
+ * @returns HTML string with enabled provider buttons, or null if none configured
+ */
+export const authFormRenderHandler: HookHandler = async (data: any, _ctx: any): Promise<string | null> => {
+  let settings: OAuthPluginSettings | null = null
+  try {
+    if (data?.db) {
+      const row = await data.db.prepare(
+        `SELECT settings FROM plugins WHERE id = 'oauth-providers'`
+      ).first() as { settings: string | null } | null
+      if (row?.settings) {
+        settings = JSON.parse(row.settings) as OAuthPluginSettings
+      }
+    }
+  } catch {
+    // DB not ready or table missing — silently skip
+    return null
+  }
+
+  const buttons: string[] = []
+
+  // Brand-square icon-only buttons. Each provider's SVG is the full visible
+  // surface (svgrepo SVGs come pre-styled with brand color + 15% rounded
+  // corners). Aria-label provides the accessible name; title shows on hover.
+  const google = settings?.providers?.['google']
+  if (google?.enabled && google?.clientId && google?.clientSecret) {
+    buttons.push(`<a href="/auth/oauth/google" class="${AUTH_CTA_BUTTON_CLASSES}" aria-label="Continue with Google" title="Continue with Google">${GOOGLE_SVG}</a>`)
+  }
+
+  const github = settings?.providers?.['github']
+  if (github?.enabled && github?.clientId && github?.clientSecret) {
+    buttons.push(`<a href="/auth/oauth/github" class="${AUTH_CTA_BUTTON_CLASSES}" aria-label="Continue with GitHub" title="Continue with GitHub">${GITHUB_SVG}</a>`)
+  }
+
+  return buttons.length > 0 ? buttons.join('\n') : null
+}
 
 export function createOAuthProvidersPlugin(): Plugin {
   const builder = PluginBuilder.create({
@@ -408,6 +454,9 @@ export function createOAuthProvidersPlugin(): Plugin {
     permissions: ['oauth:manage']
   })
 
+  // Register AUTH_FORM_RENDER hook so the plugin is wired when loaded via PluginManager
+  builder.addHook(HOOKS.AUTH_FORM_RENDER, authFormRenderHandler, { priority: 10 })
+
   // Lifecycle hooks
   builder.lifecycle({
     activate: async () => {
@@ -422,3 +471,7 @@ export function createOAuthProvidersPlugin(): Plugin {
 }
 
 export const oauthProvidersPlugin = createOAuthProvidersPlugin()
+
+// Register with the module-level singleton so auth routes pick up this handler
+// even when PluginManager.install() is not called (the current app.ts pattern).
+globalHookSystem.register(HOOKS.AUTH_FORM_RENDER, authFormRenderHandler, 10)

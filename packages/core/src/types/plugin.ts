@@ -387,6 +387,7 @@ export const HOOKS = {
   AUTH_LOGIN: 'auth:login',
   AUTH_LOGOUT: 'auth:logout',
   AUTH_REGISTER: 'auth:register',
+  AUTH_FORM_RENDER: 'auth_form:render',
   USER_LOGIN: 'user:login',
   USER_LOGOUT: 'user:logout',
   
