@@ -30,7 +30,7 @@ userRoutes.get('/', (c) => {
 })
 
 // Timezone options for profile form
-const TIMEZONES = [
+export const TIMEZONES = [
   { value: 'UTC', label: 'UTC' },
   { value: 'America/New_York', label: 'Eastern Time' },
   { value: 'America/Chicago', label: 'Central Time' },
@@ -45,7 +45,7 @@ const TIMEZONES = [
 ]
 
 // Language options for profile form
-const LANGUAGES = [
+export const LANGUAGES = [
   { value: 'en', label: 'English' },
   { value: 'es', label: 'Spanish' },
   { value: 'fr', label: 'French' },

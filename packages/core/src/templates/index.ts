@@ -48,3 +48,10 @@ export { renderFormsDocsPage } from './pages/admin-forms-docs.template'
 export type { FormsDocsPageData } from './pages/admin-forms-docs.template'
 export { renderFormsExamplesPage } from './pages/admin-forms-examples.template'
 export type { FormsExamplesPageData } from './pages/admin-forms-examples.template'
+
+// Profile editor — exposed so plugins (e.g. customer areas) can mount the
+// same UI at a different path via the `basePath` parameter on ProfilePageData.
+// renderProfilePage = full admin-shell page; renderProfileContent = inner
+// content fragment only (for plugins embedding in their own chrome).
+export { renderProfilePage, renderProfileContent, renderAvatarImage } from './pages/admin-profile.template'
+export type { UserProfile, ProfilePageData } from './pages/admin-profile.template'

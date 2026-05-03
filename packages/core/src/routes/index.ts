@@ -20,7 +20,7 @@ export { default as testCleanupRoutes } from './test-cleanup'
 
 // Admin UI routes
 export { default as adminContentRoutes } from './admin-content'
-export { userRoutes as adminUsersRoutes } from './admin-users'
+export { userRoutes as adminUsersRoutes, TIMEZONES, LANGUAGES } from './admin-users'
 export { adminMediaRoutes } from './admin-media'
 export { adminPluginRoutes } from './admin-plugins'
 export { adminLogsRoutes } from './admin-logs'
