@@ -1212,7 +1212,7 @@ var PLUGIN_REGISTRY = {
     "adminMenu": {
       "label": "Email",
       "icon": "envelope",
-      "path": "/admin/plugins/email/settings",
+      "path": "/admin/plugins/email",
       "order": 80
     }
   },
@@ -1348,7 +1348,7 @@ var PLUGIN_REGISTRY = {
     "adminMenu": {
       "label": "OTP Login",
       "icon": "key",
-      "path": "/admin/plugins/otp-login/settings",
+      "path": "/admin/plugins/otp-login",
       "order": 85
     }
   },
@@ -1581,7 +1581,7 @@ var PLUGIN_REGISTRY = {
     "adminMenu": {
       "label": "Turnstile",
       "icon": "shield-check",
-      "path": "/admin/plugins/turnstile/settings",
+      "path": "/admin/plugins/turnstile",
       "order": 100
     }
   },
@@ -1802,5 +1802,5 @@ exports.syncCollection = syncCollection;
 exports.syncCollections = syncCollections;
 exports.syncFormCollection = syncFormCollection;
 exports.validateCollectionConfig = validateCollectionConfig;
-//# sourceMappingURL=chunk-EA3WUHVV.cjs.map
-//# sourceMappingURL=chunk-EA3WUHVV.cjs.map
+//# sourceMappingURL=chunk-LY5NYDUI.cjs.map
+//# sourceMappingURL=chunk-LY5NYDUI.cjs.map

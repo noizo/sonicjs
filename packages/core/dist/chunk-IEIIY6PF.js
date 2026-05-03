@@ -1,4 +1,4 @@
-import { PluginBuilder, manifest_default, TurnstileService, HookSystemImpl } from './chunk-5FPLRXCF.js';
+import { PluginBuilder, manifest_default, TurnstileService, HookSystemImpl } from './chunk-6N2FITSX.js';
 import { HOOKS } from './chunk-2V4WTUGZ.js';
 import { __commonJS, __toESM } from './chunk-V4OQ3NZ2.js';
 import { z } from 'zod';
@@ -2936,5 +2936,5 @@ new PluginBuilder({
 }).build();
 
 export { PluginManager, PluginRegistryImpl, PluginValidator, createTurnstileMiddleware, verifyTurnstile };
-//# sourceMappingURL=chunk-E7O6KYTW.js.map
-//# sourceMappingURL=chunk-E7O6KYTW.js.map
+//# sourceMappingURL=chunk-IEIIY6PF.js.map
+//# sourceMappingURL=chunk-IEIIY6PF.js.map

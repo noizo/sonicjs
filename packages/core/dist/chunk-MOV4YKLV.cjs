@@ -1,6 +1,6 @@
 'use strict';
 
-var chunkYV6UEWTX_cjs = require('./chunk-YV6UEWTX.cjs');
+var chunkRVXISGMQ_cjs = require('./chunk-RVXISGMQ.cjs');
 var chunkAHJLHZCD_cjs = require('./chunk-AHJLHZCD.cjs');
 var chunkIGJUBJBW_cjs = require('./chunk-IGJUBJBW.cjs');
 var zod = require('zod');
@@ -2552,7 +2552,7 @@ var PluginManager = class {
   constructor() {
     this.validator = new PluginValidator();
     this.registry = new PluginRegistryImpl(this.validator);
-    this.hooks = new chunkYV6UEWTX_cjs.HookSystemImpl();
+    this.hooks = new chunkRVXISGMQ_cjs.HookSystemImpl();
   }
   /**
    * Initialize plugin system
@@ -2856,7 +2856,7 @@ async function verifyTurnstile(c, next) {
     console.error("Turnstile middleware: Database not available");
     return c.json({ error: "Database not available" }, 500);
   }
-  const turnstileService = new chunkYV6UEWTX_cjs.TurnstileService(db);
+  const turnstileService = new chunkRVXISGMQ_cjs.TurnstileService(db);
   const isEnabled = await turnstileService.isEnabled();
   if (!isEnabled) {
     return next();
@@ -2896,7 +2896,7 @@ function createTurnstileMiddleware(options) {
     if (!db) {
       return options?.onError?.(c, "Database not available") || c.json({ error: "Database not available" }, 500);
     }
-    const turnstileService = new chunkYV6UEWTX_cjs.TurnstileService(db);
+    const turnstileService = new chunkRVXISGMQ_cjs.TurnstileService(db);
     const isEnabled = await turnstileService.isEnabled();
     if (!isEnabled) {
       return next();
@@ -2924,15 +2924,15 @@ function createTurnstileMiddleware(options) {
 }
 
 // src/plugins/core-plugins/turnstile-plugin/index.ts
-new chunkYV6UEWTX_cjs.PluginBuilder({
-  name: chunkYV6UEWTX_cjs.manifest_default.name,
-  version: chunkYV6UEWTX_cjs.manifest_default.version,
-  description: chunkYV6UEWTX_cjs.manifest_default.description,
-  author: { name: chunkYV6UEWTX_cjs.manifest_default.author }
+new chunkRVXISGMQ_cjs.PluginBuilder({
+  name: chunkRVXISGMQ_cjs.manifest_default.name,
+  version: chunkRVXISGMQ_cjs.manifest_default.version,
+  description: chunkRVXISGMQ_cjs.manifest_default.description,
+  author: { name: chunkRVXISGMQ_cjs.manifest_default.author }
 }).metadata({
-  description: chunkYV6UEWTX_cjs.manifest_default.description,
-  author: { name: chunkYV6UEWTX_cjs.manifest_default.author }
-}).addService("turnstile", chunkYV6UEWTX_cjs.TurnstileService).addSingleMiddleware("verifyTurnstile", verifyTurnstile, {
+  description: chunkRVXISGMQ_cjs.manifest_default.description,
+  author: { name: chunkRVXISGMQ_cjs.manifest_default.author }
+}).addService("turnstile", chunkRVXISGMQ_cjs.TurnstileService).addSingleMiddleware("verifyTurnstile", verifyTurnstile, {
   description: "Verify Cloudflare Turnstile token",
   global: false
 }).build();
@@ -2942,5 +2942,5 @@ exports.PluginRegistryImpl = PluginRegistryImpl;
 exports.PluginValidator = PluginValidator;
 exports.createTurnstileMiddleware = createTurnstileMiddleware;
 exports.verifyTurnstile = verifyTurnstile;
-//# sourceMappingURL=chunk-G2RDIU2N.cjs.map
-//# sourceMappingURL=chunk-G2RDIU2N.cjs.map
+//# sourceMappingURL=chunk-MOV4YKLV.cjs.map
+//# sourceMappingURL=chunk-MOV4YKLV.cjs.map

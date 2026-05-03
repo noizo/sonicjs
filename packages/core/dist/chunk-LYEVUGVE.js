@@ -1210,7 +1210,7 @@ var PLUGIN_REGISTRY = {
     "adminMenu": {
       "label": "Email",
       "icon": "envelope",
-      "path": "/admin/plugins/email/settings",
+      "path": "/admin/plugins/email",
       "order": 80
     }
   },
@@ -1346,7 +1346,7 @@ var PLUGIN_REGISTRY = {
     "adminMenu": {
       "label": "OTP Login",
       "icon": "key",
-      "path": "/admin/plugins/otp-login/settings",
+      "path": "/admin/plugins/otp-login",
       "order": 85
     }
   },
@@ -1579,7 +1579,7 @@ var PLUGIN_REGISTRY = {
     "adminMenu": {
       "label": "Turnstile",
       "icon": "shield-check",
-      "path": "/admin/plugins/turnstile/settings",
+      "path": "/admin/plugins/turnstile",
       "order": 100
     }
   },
@@ -1779,5 +1779,5 @@ var PluginBootstrapService = class {
 };
 
 export { PLUGIN_REGISTRY, PluginBootstrapService, PluginService, backfillFormSubmissions, cleanupRemovedCollections, createContentFromSubmission, deriveCollectionSchemaFromFormio, deriveSubmissionTitle, findPluginByCodeName, fullCollectionSync, getAvailableCollectionNames, getManagedCollections, isCollectionManaged, loadCollectionConfig, loadCollectionConfigs, mapFormStatusToContentStatus, registerCollections, syncAllFormCollections, syncCollection, syncCollections, syncFormCollection, validateCollectionConfig };
-//# sourceMappingURL=chunk-L4WQJW65.js.map
-//# sourceMappingURL=chunk-L4WQJW65.js.map
+//# sourceMappingURL=chunk-LYEVUGVE.js.map
+//# sourceMappingURL=chunk-LYEVUGVE.js.map

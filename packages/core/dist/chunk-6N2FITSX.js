@@ -775,7 +775,7 @@ var manifest_default = {
   adminMenu: {
     label: "Turnstile",
     icon: "shield-check",
-    href: "/admin/plugins/turnstile/settings",
+    href: "/admin/plugins/turnstile",
     parentId: "plugins",
     order: 100
   },
@@ -878,5 +878,5 @@ var TurnstileService = class {
 };
 
 export { HookSystemImpl, HookUtils, PluginBuilder, PluginHelpers, ScopedHookSystem, TurnstileService, globalHookSystem, manifest_default };
-//# sourceMappingURL=chunk-5FPLRXCF.js.map
-//# sourceMappingURL=chunk-5FPLRXCF.js.map
+//# sourceMappingURL=chunk-6N2FITSX.js.map
+//# sourceMappingURL=chunk-6N2FITSX.js.map
