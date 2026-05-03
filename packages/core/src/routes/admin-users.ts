@@ -77,8 +77,8 @@ userRoutes.get('/profile', async (c) => {
     const userStmt = db.prepare(`
       SELECT id, email, username, first_name, last_name, phone, bio, avatar_url,
              timezone, language, theme, email_notifications, two_factor_enabled,
-             role, created_at, last_login_at
-      FROM users 
+             role, created_at, last_login_at, password_hash
+      FROM users
       WHERE id = ? AND is_active = 1
     `)
     
@@ -118,6 +118,8 @@ userRoutes.get('/profile', async (c) => {
       timezones: TIMEZONES,
       languages: LANGUAGES,
       customProfileFieldsHtml,
+      hasPassword: userProfile.password_hash != null,
+      canUploadAvatar: true,
       user: {
         name: `${profile.first_name} ${profile.last_name}`.trim() || profile.username || user!.email,
         email: user!.email,
@@ -128,12 +130,14 @@ userRoutes.get('/profile', async (c) => {
     return c.html(renderProfilePage(pageData))
   } catch (error) {
     console.error('Profile page error:', error)
-    
+
     const pageData: ProfilePageData = {
       profile: {} as UserProfile,
       timezones: TIMEZONES,
       languages: LANGUAGES,
       error: 'Failed to load profile. Please try again.',
+      hasPassword: false,
+      canUploadAvatar: false,
       user: {
         name: user!.email,
         email: user!.email,
