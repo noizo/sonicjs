@@ -140,7 +140,7 @@
   "adminMenu": {
     "label": "Turnstile",
     "icon": "shield-check",
-    "href": "/admin/plugins/turnstile/settings",
+    "href": "/admin/plugins/turnstile",
     "parentId": "plugins",
     "order": 100
   },

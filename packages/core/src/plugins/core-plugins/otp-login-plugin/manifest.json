@@ -122,7 +122,7 @@
   "adminMenu": {
     "label": "OTP Login",
     "icon": "key",
-    "path": "/admin/plugins/otp-login/settings",
+    "path": "/admin/plugins/otp-login",
     "order": 85
   },
   "iconEmoji": "🔢",
