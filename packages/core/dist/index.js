@@ -1,25 +1,25 @@
-import { getCustomData, renderConfirmationDialog, getConfirmationDialogScript, api_default, api_media_default, api_system_default, admin_api_default, router, adminCollectionsRoutes, adminFormsRoutes, adminSettingsRoutes, public_forms_default, router2, admin_content_default, adminMediaRoutes, userProfilesPlugin, adminPluginRoutes, adminLogsRoutes, userRoutes, auth_default, test_cleanup_default } from './chunk-M2PKQJ6J.js';
-export { ROUTES_INFO, admin_api_default as adminApiRoutes, adminCheckboxRoutes, admin_code_examples_default as adminCodeExamplesRoutes, adminCollectionsRoutes, admin_content_default as adminContentRoutes, router as adminDashboardRoutes, adminDesignRoutes, adminLogsRoutes, adminMediaRoutes, adminPluginRoutes, adminSettingsRoutes, admin_testimonials_default as adminTestimonialsRoutes, userRoutes as adminUsersRoutes, api_content_crud_default as apiContentCrudRoutes, api_media_default as apiMediaRoutes, api_default as apiRoutes, api_system_default as apiSystemRoutes, auth_default as authRoutes, createUserProfilesPlugin, defineUserProfile, getUserProfileConfig, userProfilesPlugin } from './chunk-M2PKQJ6J.js';
-import { SettingsService, setAppInstance, schema_exports } from './chunk-GQEIPW3L.js';
-export { Logger, apiTokens, collections, content, contentVersions, getLogger, initLogger, insertCollectionSchema, insertContentSchema, insertLogConfigSchema, insertMediaSchema, insertPluginActivityLogSchema, insertPluginAssetSchema, insertPluginHookSchema, insertPluginRouteSchema, insertPluginSchema, insertSystemLogSchema, insertUserSchema, insertWorkflowHistorySchema, logConfig, media, pluginActivityLog, pluginAssets, pluginHooks, pluginRoutes, plugins, selectCollectionSchema, selectContentSchema, selectLogConfigSchema, selectMediaSchema, selectPluginActivityLogSchema, selectPluginAssetSchema, selectPluginHookSchema, selectPluginRouteSchema, selectPluginSchema, selectSystemLogSchema, selectUserSchema, selectWorkflowHistorySchema, systemLogs, users, workflowHistory } from './chunk-GQEIPW3L.js';
-import { requireAuth, getJwtExpirySecondsFromDb, AuthManager, metricsMiddleware, bootstrapMiddleware, securityHeadersMiddleware, csrfProtection, requireRole } from './chunk-5QK3FXKX.js';
-export { AuthManager, PermissionManager, bootstrapMiddleware, cacheHeaders, compressionMiddleware, detailedLoggingMiddleware, getActivePlugins, isPluginActive, logActivity, loggingMiddleware, optionalAuth, performanceLoggingMiddleware, requireActivePlugin, requireActivePlugins, requireAnyPermission, requireAuth, requirePermission, requireRole, securityHeadersMiddleware as securityHeaders, securityLoggingMiddleware } from './chunk-5QK3FXKX.js';
-import { PluginService, PLUGIN_REGISTRY } from './chunk-CJOLOONT.js';
-export { PluginBootstrapService, PluginService as PluginServiceClass, backfillFormSubmissions, cleanupRemovedCollections, createContentFromSubmission, deriveCollectionSchemaFromFormio, deriveSubmissionTitle, fullCollectionSync, getAvailableCollectionNames, getManagedCollections, isCollectionManaged, loadCollectionConfig, loadCollectionConfigs, mapFormStatusToContentStatus, registerCollections, syncAllFormCollections, syncCollection, syncCollections, syncFormCollection, validateCollectionConfig } from './chunk-CJOLOONT.js';
+import { getCustomData, renderConfirmationDialog, getConfirmationDialogScript, api_default, api_media_default, api_system_default, admin_api_default, router, adminCollectionsRoutes, adminFormsRoutes, adminSettingsRoutes, public_forms_default, router2, admin_content_default, adminMediaRoutes, userProfilesPlugin, adminPluginRoutes, adminLogsRoutes, userRoutes, auth_default, test_cleanup_default } from './chunk-ESFDKZPR.js';
+export { ROUTES_INFO, admin_api_default as adminApiRoutes, adminCheckboxRoutes, admin_code_examples_default as adminCodeExamplesRoutes, adminCollectionsRoutes, admin_content_default as adminContentRoutes, router as adminDashboardRoutes, adminDesignRoutes, adminLogsRoutes, adminMediaRoutes, adminPluginRoutes, adminSettingsRoutes, admin_testimonials_default as adminTestimonialsRoutes, userRoutes as adminUsersRoutes, api_content_crud_default as apiContentCrudRoutes, api_media_default as apiMediaRoutes, api_default as apiRoutes, api_system_default as apiSystemRoutes, auth_default as authRoutes, createUserProfilesPlugin, defineUserProfile, getUserProfileConfig, userProfilesPlugin } from './chunk-ESFDKZPR.js';
+import { SettingsService, setAppInstance, schema_exports } from './chunk-YARI3MLM.js';
+export { Logger, apiTokens, collections, content, contentVersions, getLogger, initLogger, insertCollectionSchema, insertContentSchema, insertLogConfigSchema, insertMediaSchema, insertPluginActivityLogSchema, insertPluginAssetSchema, insertPluginHookSchema, insertPluginRouteSchema, insertPluginSchema, insertSystemLogSchema, insertUserSchema, insertWorkflowHistorySchema, logConfig, media, pluginActivityLog, pluginAssets, pluginHooks, pluginRoutes, plugins, selectCollectionSchema, selectContentSchema, selectLogConfigSchema, selectMediaSchema, selectPluginActivityLogSchema, selectPluginAssetSchema, selectPluginHookSchema, selectPluginRouteSchema, selectPluginSchema, selectSystemLogSchema, selectUserSchema, selectWorkflowHistorySchema, systemLogs, users, workflowHistory } from './chunk-YARI3MLM.js';
+import { requireAuth, getJwtExpirySecondsFromDb, AuthManager, metricsMiddleware, bootstrapMiddleware, securityHeadersMiddleware, csrfProtection, requireRole } from './chunk-I7HPMYGH.js';
+export { AuthManager, PermissionManager, bootstrapMiddleware, cacheHeaders, compressionMiddleware, detailedLoggingMiddleware, getActivePlugins, isPluginActive, logActivity, loggingMiddleware, optionalAuth, performanceLoggingMiddleware, requireActivePlugin, requireActivePlugins, requireAnyPermission, requireAuth, requirePermission, requireRole, securityHeadersMiddleware as securityHeaders, securityLoggingMiddleware } from './chunk-I7HPMYGH.js';
+import { PluginService, PLUGIN_REGISTRY } from './chunk-L4WQJW65.js';
+export { PluginBootstrapService, PluginService as PluginServiceClass, backfillFormSubmissions, cleanupRemovedCollections, createContentFromSubmission, deriveCollectionSchemaFromFormio, deriveSubmissionTitle, fullCollectionSync, getAvailableCollectionNames, getManagedCollections, isCollectionManaged, loadCollectionConfig, loadCollectionConfigs, mapFormStatusToContentStatus, registerCollections, syncAllFormCollections, syncCollection, syncCollections, syncFormCollection, validateCollectionConfig } from './chunk-L4WQJW65.js';
 export { MigrationService } from './chunk-CSQWOYGZ.js';
-export { renderFilterBar } from './chunk-ON5ZMSU4.js';
-import { renderAdminLayout } from './chunk-XWIA3HVX.js';
-export { getConfirmationDialogScript, renderAlert, renderConfirmationDialog, renderForm, renderFormField, renderPagination, renderTable } from './chunk-XWIA3HVX.js';
+export { renderFilterBar } from './chunk-AGTZNDNR.js';
+import { renderAdminLayout } from './chunk-VWWCLJ2W.js';
+export { getConfirmationDialogScript, renderAlert, renderConfirmationDialog, renderForm, renderFormField, renderPagination, renderTable } from './chunk-VWWCLJ2W.js';
 import { init_admin_layout_catalyst_template, renderAdminLayoutCatalyst } from './chunk-55RDMDOP.js';
-export { HookSystemImpl, HookUtils, PluginManager as PluginManagerClass, PluginRegistryImpl, PluginValidator as PluginValidatorClass, ScopedHookSystem as ScopedHookSystemClass } from './chunk-NGTBJJXZ.js';
-import { PluginBuilder, PluginHelpers } from './chunk-EXNEW5US.js';
-export { PluginBuilder, PluginHelpers } from './chunk-EXNEW5US.js';
-import { package_default, getCoreVersion } from './chunk-NDS4S4AG.js';
-export { QueryFilterBuilder, SONICJS_VERSION, TemplateRenderer, buildQuery, getCoreVersion, renderTemplate, templateRenderer } from './chunk-NDS4S4AG.js';
+export { PluginManager as PluginManagerClass, PluginRegistryImpl, PluginValidator as PluginValidatorClass } from './chunk-E7O6KYTW.js';
+import { globalHookSystem, PluginBuilder, PluginHelpers } from './chunk-5FPLRXCF.js';
+export { HookSystemImpl, HookUtils, PluginBuilder, PluginHelpers, ScopedHookSystem as ScopedHookSystemClass } from './chunk-5FPLRXCF.js';
+import { package_default, getCoreVersion } from './chunk-BZ6JV2RH.js';
+export { QueryFilterBuilder, SONICJS_VERSION, TemplateRenderer, buildQuery, getCoreVersion, renderTemplate, templateRenderer } from './chunk-BZ6JV2RH.js';
 import './chunk-X7ZAEI5S.js';
 export { metricsTracker } from './chunk-FICTAGD4.js';
 export { escapeHtml, sanitizeInput, sanitizeObject } from './chunk-TQABQWOP.js';
-export { HOOKS } from './chunk-QXOZI5Q2.js';
+export { HOOKS } from './chunk-2V4WTUGZ.js';
 import './chunk-V4OQ3NZ2.js';
 import { Hono } from 'hono';
 import { setCookie, getCookie } from 'hono/cookie';
@@ -2162,10 +2162,12 @@ var OAuthService = class {
   async fetchUserProfile(provider, accessToken) {
     const headers = {
       "Authorization": `Bearer ${accessToken}`,
-      "Accept": "application/json"
+      "Accept": "application/json",
+      "User-Agent": "sonicjs-oauth/1.0 (+https://github.com/SonicJs-Org/sonicjs)"
     };
     if (provider.id === "github") {
       headers["Authorization"] = `token ${accessToken}`;
+      headers["Accept"] = "application/vnd.github+json";
     }
     const response = await fetch(provider.userInfoUrl, { headers });
     if (!response.ok) {
@@ -2176,7 +2178,8 @@ var OAuthService = class {
       const emailResponse = await fetch("https://api.github.com/user/emails", {
         headers: {
           "Authorization": `token ${accessToken}`,
-          "Accept": "application/json"
+          "Accept": "application/vnd.github+json",
+          "User-Agent": "sonicjs-oauth/1.0 (+https://github.com/SonicJs-Org/sonicjs)"
         }
       });
       if (emailResponse.ok) {
@@ -2327,9 +2330,66 @@ var OAuthService = class {
   }
 };
 
+// src/templates/icons/auth-icons.ts
+var GOOGLE_SVG = `<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg xmlns="http://www.w3.org/2000/svg"
+aria-label="Google" role="img"
+viewBox="0 0 512 512"><rect
+width="512" height="512"
+rx="15%"
+fill="#ffffff"/><path fill="#4285f4" d="M386 400c45-42 65-112 53-179H260v74h102c-4 24-18 44-38 57z"/><path fill="#34a853" d="M90 341a192 192 0 0 0 296 59l-62-48c-53 35-141 22-171-60z"/><path fill="#fbbc02" d="M153 292c-8-25-8-48 0-73l-63-49c-23 46-30 111 0 171z"/><path fill="#ea4335" d="M153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55z"/></svg>`;
+var GITHUB_SVG = `<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg xmlns="http://www.w3.org/2000/svg"
+aria-label="GitHub" role="img"
+viewBox="0 0 512 512"><rect
+width="512" height="512"
+rx="15%"
+fill="#1B1817"/><path fill="#ffffff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg>`;
+var EMAIL_SVG = `<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg xmlns="http://www.w3.org/2000/svg"
+aria-label="Email" role="img"
+viewBox="0 0 512 512"><rect
+width="512" height="512"
+rx="15%"
+fill="teal"/><rect width="356" height="256" x="78" y="128" fill="#ffffff" rx="8%"/><path fill="none" stroke="teal" stroke-width="20" d="M434 128L269 292c-7 8-19 8-26 0L78 128m0 256l129-128m227 128L305 256"/></svg>`;
+var AUTH_CTA_BUTTON_CLASSES = "inline-flex h-12 w-12 items-center justify-center rounded-xl overflow-hidden ring-1 ring-white/10 hover:ring-white/30 transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white";
+
+// src/plugins/types.ts
+var HOOKS2 = {
+  // Request lifecycle
+  REQUEST_START: "request:start",
+  REQUEST_END: "request:end",
+  AUTH_FORM_RENDER: "auth_form:render",
+  USER_LOGIN: "user:login"};
+
 // src/plugins/core-plugins/oauth-providers/index.ts
 var STATE_COOKIE_NAME = "oauth_state";
 var STATE_COOKIE_MAX_AGE = 600;
+var authFormRenderHandler = async (data, _ctx) => {
+  let settings = null;
+  try {
+    if (data?.db) {
+      const row = await data.db.prepare(
+        `SELECT settings FROM plugins WHERE id = 'oauth-providers'`
+      ).first();
+      if (row?.settings) {
+        settings = JSON.parse(row.settings);
+      }
+    }
+  } catch {
+    return null;
+  }
+  const buttons = [];
+  const google = settings?.providers?.["google"];
+  if (google?.enabled && google?.clientId && google?.clientSecret) {
+    buttons.push(`<a href="/auth/oauth/google" class="${AUTH_CTA_BUTTON_CLASSES}" aria-label="Continue with Google" title="Continue with Google">${GOOGLE_SVG}</a>`);
+  }
+  const github = settings?.providers?.["github"];
+  if (github?.enabled && github?.clientId && github?.clientSecret) {
+    buttons.push(`<a href="/auth/oauth/github" class="${AUTH_CTA_BUTTON_CLASSES}" aria-label="Continue with GitHub" title="Continue with GitHub">${GITHUB_SVG}</a>`);
+  }
+  return buttons.length > 0 ? buttons.join("\n") : null;
+};
 function createOAuthProvidersPlugin() {
   const builder = PluginBuilder.create({
     name: "oauth-providers",
@@ -2624,6 +2684,7 @@ function createOAuthProvidersPlugin() {
     order: 86,
     permissions: ["oauth:manage"]
   });
+  builder.addHook(HOOKS2.AUTH_FORM_RENDER, authFormRenderHandler, { priority: 10 });
   builder.lifecycle({
     activate: async () => {
       console.info("\u2705 OAuth Providers plugin activated");
@@ -2635,6 +2696,7 @@ function createOAuthProvidersPlugin() {
   return builder.build();
 }
 var oauthProvidersPlugin = createOAuthProvidersPlugin();
+globalHookSystem.register(HOOKS2.AUTH_FORM_RENDER, authFormRenderHandler, 10);
 
 // src/plugins/core-plugins/ai-search-plugin/services/embedding.service.ts
 var EmbeddingService = class {
@@ -4472,6 +4534,101 @@ var aiSearchPlugin = new PluginBuilder({
 var magicLinkRequestSchema = z.object({
   email: z.string().email("Valid email is required")
 });
+var authFormRenderHandler2 = async (data, _ctx) => {
+  if (data?.formType === "register") return null;
+  try {
+    if (data?.db) {
+      const row = await data.db.prepare(
+        `SELECT status FROM plugins WHERE id = 'email'`
+      ).first();
+      if (!row || row.status !== "active") return null;
+    }
+  } catch {
+    return null;
+  }
+  return `
+    <button
+      type="button"
+      onclick="document.getElementById('magic-link-modal').classList.remove('hidden'); setTimeout(function(){var i=document.getElementById('magic-link-email'); if(i) i.focus();},10)"
+      class="${AUTH_CTA_BUTTON_CLASSES} bg-teal-600"
+      aria-label="Sign in with email link"
+      title="Sign in with email link"
+    >${EMAIL_SVG}</button>
+    <div id="magic-link-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+         onclick="if(event.target===this) this.classList.add('hidden')"
+         role="dialog" aria-modal="true" aria-labelledby="magic-link-title">
+      <div class="w-full max-w-sm rounded-xl bg-zinc-900 p-6 ring-1 ring-zinc-800 shadow-2xl">
+        <div class="flex items-start justify-between mb-4">
+          <h3 id="magic-link-title" class="text-base font-medium text-white">Sign in with email link</h3>
+          <button type="button"
+                  onclick="document.getElementById('magic-link-modal').classList.add('hidden')"
+                  class="text-zinc-400 hover:text-white transition-colors"
+                  aria-label="Close">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+        <p class="text-sm text-zinc-400 mb-4">We'll email you a one-time link to sign in.</p>
+        <label for="magic-link-email" class="block text-xs font-medium text-zinc-300 mb-2">Email address</label>
+        <div class="flex gap-2">
+          <input id="magic-link-email" type="email" placeholder="you@example.com"
+                 class="flex-1 rounded-lg bg-zinc-950 px-3 py-2 text-sm text-white ring-1 ring-inset ring-white/10 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-white"
+                 onkeydown="if(event.key==='Enter'){event.preventDefault(); window.__sendMagicLink && window.__sendMagicLink()}">
+          <button type="button"
+                  onclick="window.__sendMagicLink && window.__sendMagicLink()"
+                  class="rounded-lg bg-white px-4 py-2 text-sm font-semibold text-zinc-950 hover:bg-zinc-100 transition-colors">Send</button>
+        </div>
+        <p id="magic-link-msg" class="mt-3 text-xs text-zinc-400 min-h-4"></p>
+      </div>
+    </div>
+    <script>
+      (function() {
+        if (window.__magicLinkBound) return;
+        window.__magicLinkBound = true;
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') {
+            var modal = document.getElementById('magic-link-modal');
+            if (modal && !modal.classList.contains('hidden')) modal.classList.add('hidden');
+          }
+        });
+        window.__sendMagicLink = async function() {
+          var email = document.getElementById('magic-link-email').value;
+          var msg = document.getElementById('magic-link-msg');
+          if (!email) { msg.textContent = 'Please enter your email.'; return; }
+          msg.textContent = 'Sending\u2026';
+          try {
+            var res = await fetch('/auth/magic-link/request', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email: email })
+            });
+            var json = await res.json();
+            msg.textContent = json.message || json.error || 'Done.';
+          } catch(e) {
+            msg.textContent = 'Request failed. Please try again.';
+          }
+        };
+      })();
+    </script>`;
+};
+var DEFAULT_MAGIC_LINK_SETTINGS = {
+  linkExpiryMinutes: 15,
+  rateLimitPerHour: 5,
+  allowNewUsers: false
+};
+async function loadMagicLinkSettings(db) {
+  try {
+    const row = await db.prepare(`SELECT settings FROM plugins WHERE id = 'magic-link-auth'`).first();
+    if (!row?.settings) return DEFAULT_MAGIC_LINK_SETTINGS;
+    const parsed = JSON.parse(row.settings);
+    return {
+      linkExpiryMinutes: typeof parsed.linkExpiryMinutes === "number" ? parsed.linkExpiryMinutes : DEFAULT_MAGIC_LINK_SETTINGS.linkExpiryMinutes,
+      rateLimitPerHour: typeof parsed.rateLimitPerHour === "number" ? parsed.rateLimitPerHour : DEFAULT_MAGIC_LINK_SETTINGS.rateLimitPerHour,
+      allowNewUsers: typeof parsed.allowNewUsers === "boolean" ? parsed.allowNewUsers : DEFAULT_MAGIC_LINK_SETTINGS.allowNewUsers
+    };
+  } catch {
+    return DEFAULT_MAGIC_LINK_SETTINGS;
+  }
+}
 function createMagicLinkAuthPlugin() {
   const magicLinkRoutes = new Hono();
   magicLinkRoutes.post("/request", async (c) => {
@@ -4487,13 +4644,14 @@ function createMagicLinkAuthPlugin() {
       const { email } = validation.data;
       const normalizedEmail = email.toLowerCase();
       const db = c.env.DB;
+      const settings = await loadMagicLinkSettings(db);
       const oneHourAgo = Date.now() - 60 * 60 * 1e3;
       const recentLinks = await db.prepare(`
         SELECT COUNT(*) as count
         FROM magic_links
         WHERE user_email = ? AND created_at > ?
       `).bind(normalizedEmail, oneHourAgo).first();
-      const rateLimitPerHour = 5;
+      const rateLimitPerHour = settings.rateLimitPerHour;
       if (recentLinks && recentLinks.count >= rateLimitPerHour) {
         return c.json({
           error: "Too many requests. Please try again later."
@@ -4504,7 +4662,7 @@ function createMagicLinkAuthPlugin() {
         FROM users
         WHERE email = ?
       `).bind(normalizedEmail).first();
-      const allowNewUsers = false;
+      const allowNewUsers = settings.allowNewUsers;
       if (!user && !allowNewUsers) {
         return c.json({
           message: "If an account exists for this email, you will receive a magic link shortly."
@@ -4517,7 +4675,7 @@ function createMagicLinkAuthPlugin() {
       }
       const token = crypto.randomUUID() + "-" + crypto.randomUUID();
       const tokenId = crypto.randomUUID();
-      const linkExpiryMinutes = 15;
+      const linkExpiryMinutes = settings.linkExpiryMinutes;
       const expiresAt = Date.now() + linkExpiryMinutes * 60 * 1e3;
       await db.prepare(`
         INSERT INTO magic_links (
@@ -4569,6 +4727,7 @@ function createMagicLinkAuthPlugin() {
         return c.redirect("/auth/login?error=Invalid magic link");
       }
       const db = c.env.DB;
+      const settings = await loadMagicLinkSettings(db);
       const magicLink = await db.prepare(`
         SELECT * FROM magic_links
         WHERE token = ? AND used = 0
@@ -4582,7 +4741,7 @@ function createMagicLinkAuthPlugin() {
       let user = await db.prepare(`
         SELECT * FROM users WHERE email = ? AND is_active = 1
       `).bind(magicLink.user_email).first();
-      const allowNewUsers = false;
+      const allowNewUsers = settings.allowNewUsers;
       if (!user && allowNewUsers) {
         const userId = crypto.randomUUID();
         const username = magicLink.user_email.split("@")[0];
@@ -4642,6 +4801,12 @@ function createMagicLinkAuthPlugin() {
       email: "team@sonicjs.com"
     },
     dependencies: ["email"],
+    hooks: [{
+      name: HOOKS2.AUTH_FORM_RENDER,
+      handler: authFormRenderHandler2,
+      priority: 20,
+      description: "Renders a magic-link sign-in button on the auth forms"
+    }],
     routes: [{
       path: "/auth/magic-link",
       handler: magicLinkRoutes,
@@ -4766,6 +4931,7 @@ function renderMagicLinkEmail(magicLink, expiryMinutes) {
     </html>
   `;
 }
+globalHookSystem.register(HOOKS2.AUTH_FORM_RENDER, authFormRenderHandler2, 20);
 createMagicLinkAuthPlugin();
 
 // src/plugins/core-plugins/security-audit-plugin/types.ts
@@ -7841,13 +8007,6 @@ function pluginMenuMiddleware() {
     }
   };
 }
-
-// src/plugins/types.ts
-var HOOKS2 = {
-  // Request lifecycle
-  REQUEST_START: "request:start",
-  REQUEST_END: "request:end",
-  USER_LOGIN: "user:login"};
 init_admin_layout_catalyst_template();
 var adminRoutes4 = new Hono();
 adminRoutes4.use("*", requireAuth());
