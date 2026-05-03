@@ -56,7 +56,7 @@
   "adminMenu": {
     "label": "Email",
     "icon": "envelope",
-    "path": "/admin/plugins/email/settings",
+    "path": "/admin/plugins/email",
     "order": 80
   },
   "iconEmoji": "📧",
