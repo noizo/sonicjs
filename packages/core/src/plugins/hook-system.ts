@@ -203,6 +203,16 @@ export class ScopedHookSystem {
 }
 
 /**
+ * Module-level singleton hook system.
+ *
+ * Used by plugins that are consumed as plain objects (i.e. their routes are
+ * mounted directly without going through PluginManager.install).  Plugins
+ * register their AUTH_FORM_RENDER handlers here at module initialisation time
+ * so that auth routes can collect them without needing a running PluginManager.
+ */
+export const globalHookSystem = new HookSystemImpl()
+
+/**
  * Hook utilities
  */
 export class HookUtils {

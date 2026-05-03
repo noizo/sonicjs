@@ -169,14 +169,20 @@ export class OAuthService {
     provider: OAuthProviderConfig,
     accessToken: string
   ): Promise<OAuthUserProfile> {
+    // GitHub's API rejects requests without a User-Agent header (returns 403).
+    // Cloudflare Workers' fetch does not set a default UA, so we must add one
+    // explicitly. Other providers (Google, etc.) tolerate no-UA but accept it.
     const headers: Record<string, string> = {
       'Authorization': `Bearer ${accessToken}`,
-      'Accept': 'application/json'
+      'Accept': 'application/json',
+      'User-Agent': 'sonicjs-oauth/1.0 (+https://github.com/SonicJs-Org/sonicjs)'
     }
 
-    // GitHub uses a different auth header format
+    // GitHub uses a different auth header format + recommends a specific Accept
+    // value for API stability across versions.
     if (provider.id === 'github') {
       headers['Authorization'] = `token ${accessToken}`
+      headers['Accept'] = 'application/vnd.github+json'
     }
 
     const response = await fetch(provider.userInfoUrl, { headers })
@@ -192,7 +198,8 @@ export class OAuthService {
       const emailResponse = await fetch('https://api.github.com/user/emails', {
         headers: {
           'Authorization': `token ${accessToken}`,
-          'Accept': 'application/json'
+          'Accept': 'application/vnd.github+json',
+          'User-Agent': 'sonicjs-oauth/1.0 (+https://github.com/SonicJs-Org/sonicjs)'
         }
       })
 
