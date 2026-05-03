@@ -41,6 +41,19 @@ export interface ProfilePageData {
    * the form PUTs / avatar+password POSTs land on the plugin's own handlers.
    */
   basePath?: string
+  /**
+   * Whether the user has a password set (i.e. password_hash is not null).
+   * OAuth-only accounts (no native registration) have no current password to
+   * enter, so the "Change Password" button + modal are hidden when this is
+   * `false`. Defaults to `true` for backwards compat.
+   */
+  hasPassword?: boolean
+  /**
+   * Whether the avatar upload endpoint (`${basePath}/avatar`) is wired and
+   * accepting POSTs. The "Change Picture" form is hidden when this is
+   * `false`. Defaults to `true` (matches current /admin/profile behavior).
+   */
+  canUploadAvatar?: boolean
 }
 
 export function renderAvatarImage(avatarUrl: string | undefined, firstName: string, lastName: string): string {
@@ -262,6 +275,7 @@ export function renderProfileContent(data: ProfilePageData): string {
             <div class="text-center">
               ${renderAvatarImage(data.profile.avatar_url, data.profile.first_name, data.profile.last_name)}
 
+              ${(data.canUploadAvatar ?? true) ? `
               <form id="avatar-form" hx-post="${basePath}/avatar" hx-target="#avatar-messages" hx-encoding="multipart/form-data">
                 <input
                   type="file"
@@ -284,6 +298,7 @@ export function renderProfileContent(data: ProfilePageData): string {
               </form>
 
               <div id="avatar-messages" class="mt-3"></div>
+              ` : ''}
             </div>
           </div>
 
@@ -327,6 +342,7 @@ export function renderProfileContent(data: ProfilePageData): string {
             <h3 class="text-base font-semibold text-zinc-950 dark:text-white mb-4">Security</h3>
 
             <div class="space-y-2">
+              ${(data.hasPassword ?? true) ? `
               <button
                 type="button"
                 onclick="showChangePasswordModal()"
@@ -337,6 +353,7 @@ export function renderProfileContent(data: ProfilePageData): string {
                 </svg>
                 <span class="font-medium">Change Password</span>
               </button>
+              ` : ''}
 
               <button
                 type="button"
@@ -354,7 +371,8 @@ export function renderProfileContent(data: ProfilePageData): string {
       </div>
     </div>
 
-    <!-- Change Password Modal -->
+    <!-- Change Password Modal (only when user has a password) -->
+    ${(data.hasPassword ?? true) ? `
     <div id="password-modal" class="fixed inset-0 bg-zinc-950/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
       <div class="rounded-xl bg-white dark:bg-zinc-900 shadow-2xl ring-1 ring-zinc-950/5 dark:ring-white/10 w-full max-w-md mx-4">
         <div class="px-6 py-5 border-b border-zinc-950/5 dark:border-white/5">
@@ -428,6 +446,7 @@ export function renderProfileContent(data: ProfilePageData): string {
         </form>
       </div>
     </div>
+    ` : ''}
 
     <script>
       function showChangePasswordModal() {
