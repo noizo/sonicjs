@@ -741,6 +741,7 @@ function renderProfileContent(data) {
             <div class="text-center">
               ${renderAvatarImage(data.profile.avatar_url, data.profile.first_name, data.profile.last_name)}
 
+              ${data.canUploadAvatar ?? true ? `
               <form id="avatar-form" hx-post="${basePath}/avatar" hx-target="#avatar-messages" hx-encoding="multipart/form-data">
                 <input
                   type="file"
@@ -763,6 +764,7 @@ function renderProfileContent(data) {
               </form>
 
               <div id="avatar-messages" class="mt-3"></div>
+              ` : ""}
             </div>
           </div>
 
@@ -803,6 +805,7 @@ function renderProfileContent(data) {
             <h3 class="text-base font-semibold text-zinc-950 dark:text-white mb-4">Security</h3>
 
             <div class="space-y-2">
+              ${data.hasPassword ?? true ? `
               <button
                 type="button"
                 onclick="showChangePasswordModal()"
@@ -813,6 +816,7 @@ function renderProfileContent(data) {
                 </svg>
                 <span class="font-medium">Change Password</span>
               </button>
+              ` : ""}
 
               <button
                 type="button"
@@ -830,7 +834,8 @@ function renderProfileContent(data) {
       </div>
     </div>
 
-    <!-- Change Password Modal -->
+    <!-- Change Password Modal (only when user has a password) -->
+    ${data.hasPassword ?? true ? `
     <div id="password-modal" class="fixed inset-0 bg-zinc-950/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
       <div class="rounded-xl bg-white dark:bg-zinc-900 shadow-2xl ring-1 ring-zinc-950/5 dark:ring-white/10 w-full max-w-md mx-4">
         <div class="px-6 py-5 border-b border-zinc-950/5 dark:border-white/5">
@@ -904,6 +909,7 @@ function renderProfileContent(data) {
         </form>
       </div>
     </div>
+    ` : ""}
 
     <script>
       function showChangePasswordModal() {
@@ -3367,5 +3373,5 @@ exports.renderProfileContent = renderProfileContent;
 exports.renderProfilePage = renderProfilePage;
 exports.renderTable = renderTable;
 exports.renderTestimonialsList = renderTestimonialsList;
-//# sourceMappingURL=chunk-TD2UDP3Q.cjs.map
-//# sourceMappingURL=chunk-TD2UDP3Q.cjs.map
+//# sourceMappingURL=chunk-LXMZKMBM.cjs.map
+//# sourceMappingURL=chunk-LXMZKMBM.cjs.map

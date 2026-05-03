@@ -1,8 +1,8 @@
 import { getCacheService, CACHE_CONFIGS, SettingsService, getLogger, getAppInstance, buildRouteList, CATEGORY_INFO } from './chunk-YARI3MLM.js';
-import { requireAuth, requireRole, isPluginActive, optionalAuth, rateLimit, AuthManager, getJwtExpirySecondsFromDb, getJwtRefreshGraceSecondsFromDb, logActivity, generateCsrfToken } from './chunk-NZUNDF6T.js';
-import { PluginService, PLUGIN_REGISTRY, findPluginByCodeName, createContentFromSubmission } from './chunk-LYEVUGVE.js';
+import { requireAuth, requireRole, isPluginActive, optionalAuth, rateLimit, AuthManager, getJwtExpirySecondsFromDb, getJwtRefreshGraceSecondsFromDb, logActivity, generateCsrfToken } from './chunk-265N227R.js';
+import { PluginService, PLUGIN_REGISTRY, findPluginByCodeName, createContentFromSubmission } from './chunk-Q5B233EL.js';
 import { MigrationService } from './chunk-CSQWOYGZ.js';
-import { renderProfilePage, renderAvatarImage, renderDesignPage, renderCheckboxPage, renderTestimonialsList, renderCodeExamplesList, renderAlert, renderTable, renderPagination, renderConfirmationDialog, getConfirmationDialogScript, renderAdminLayout, adminLayoutV2, renderForm } from './chunk-VWWCLJ2W.js';
+import { renderProfilePage, renderAvatarImage, renderDesignPage, renderCheckboxPage, renderTestimonialsList, renderCodeExamplesList, renderAlert, renderTable, renderPagination, renderConfirmationDialog, getConfirmationDialogScript, renderAdminLayout, adminLayoutV2, renderForm } from './chunk-RZKM4XZC.js';
 import { init_admin_layout_catalyst_template, renderAdminLayoutCatalyst } from './chunk-55RDMDOP.js';
 import { globalHookSystem, PluginBuilder, TurnstileService } from './chunk-6N2FITSX.js';
 import { QueryFilterBuilder, getCoreVersion, getBlocksFieldConfig, parseBlocksValue } from './chunk-BZ6JV2RH.js';
@@ -12412,8 +12412,8 @@ userRoutes.get("/profile", async (c) => {
     const userStmt = db.prepare(`
       SELECT id, email, username, first_name, last_name, phone, bio, avatar_url,
              timezone, language, theme, email_notifications, two_factor_enabled,
-             role, created_at, last_login_at
-      FROM users 
+             role, created_at, last_login_at, password_hash
+      FROM users
       WHERE id = ? AND is_active = 1
     `);
     const userProfile = await userStmt.bind(user.userId).first();
@@ -12446,6 +12446,8 @@ userRoutes.get("/profile", async (c) => {
       timezones: TIMEZONES,
       languages: LANGUAGES,
       customProfileFieldsHtml,
+      hasPassword: userProfile.password_hash != null,
+      canUploadAvatar: true,
       user: {
         name: `${profile.first_name} ${profile.last_name}`.trim() || profile.username || user.email,
         email: user.email,
@@ -12460,6 +12462,8 @@ userRoutes.get("/profile", async (c) => {
       timezones: TIMEZONES,
       languages: LANGUAGES,
       error: "Failed to load profile. Please try again.",
+      hasPassword: false,
+      canUploadAvatar: false,
       user: {
         name: user.email,
         email: user.email,
@@ -28894,5 +28898,5 @@ var ROUTES_INFO = {
 };
 
 export { LANGUAGES, ROUTES_INFO, TIMEZONES, adminCheckboxRoutes, adminCollectionsRoutes, adminDesignRoutes, adminFormsRoutes, adminLogsRoutes, adminMediaRoutes, adminPluginRoutes, adminSettingsRoutes, admin_api_default, admin_code_examples_default, admin_content_default, admin_testimonials_default, api_content_crud_default, api_default, api_media_default, api_system_default, auth_default, createUserProfilesPlugin, defineUserProfile, getConfirmationDialogScript2 as getConfirmationDialogScript, getCustomData, getUserProfileConfig, public_forms_default, renderConfirmationDialog2 as renderConfirmationDialog, router, router2, test_cleanup_default, userProfilesPlugin, userRoutes };
-//# sourceMappingURL=chunk-SKWB5EBG.js.map
-//# sourceMappingURL=chunk-SKWB5EBG.js.map
+//# sourceMappingURL=chunk-FDA6V7T6.js.map
+//# sourceMappingURL=chunk-FDA6V7T6.js.map
